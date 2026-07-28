@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.2 分布式技术 · 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+  .layer{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.layer{grid-template-columns:1fr}}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip active" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>2.2 分布式技术 · 详细讲解</h1>
+  <p>云计算关键技术（重点 · 掌握）｜ 分布式系统概念、云中应用、常见技术特点、集群技术</p>
+  <span class="badge">考纲要求：掌握</span>
+</header>
+
+<!-- ========== 一、分布式系统概念 ========== -->
+<section>
+  <h2><span class="num">1</span>分布式系统的基本概念</h2>
+  <div class="kv">
+    <b>定义：</b>分布式系统（Distributed System）是由<b>多台通过网络互联的计算机（节点）</b>组成的一个整体，
+    这些节点<b>协同工作、共享资源</b>，对外呈现为<b>一个统一的、单一的逻辑系统</b>，用户无需关心任务具体由哪台机器完成。
+  </div>
+
+  <h3>核心思想</h3>
+  <ul>
+    <li><b>分而治之 + 协同</b>：把一个大任务拆给多台机器并行处理，再汇总结果。</li>
+    <li><b>对用户透明</b>：用户/应用看到的是"一个系统"，节点的分布、故障、迁移都被屏蔽。</li>
+    <li><b>故障独立</b>：单台机器宕机不应导致整个系统崩溃（无单点故障）。</li>
+  </ul>
+
+  <h3>关键特征（掌握，选择题/判断题常考）</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>分布性</h4><p>多节点分散在不同位置，通过网络通信。</p></div>
+    <div class="mini"><h4>透明性</h4><p>位置、迁移、复制、并发对用户不可见。</p></div>
+    <div class="mini"><h4>并发性</h4><p>多个节点同时处理任务，提高吞吐。</p></div>
+    <div class="mini"><h4>可扩展性</h4><p>可通过"加机器"水平扩展（Scale-out）。</p></div>
+    <div class="mini"><h4>高可用性</h4><p>部分节点失效，系统整体仍可服务。</p></div>
+    <div class="mini"><h4>缺乏全局时钟</h4><p>各节点时钟不完全一致，需逻辑时钟/共识。</p></div>
+  </div>
+
+  <h3>易混对比</h3>
+  <table>
+    <tr><th>对比维度</th><th>集中式系统</th><th>分布式系统</th></tr>
+    <tr><td>组成</td><td>单一主机完成全部任务</td><td>多节点协同</td></tr>
+    <tr><td>单点故障</td><td>主机挂 → 全停</td><td>单节点挂 → 整体仍可用</td></tr>
+    <tr><td>扩展方式</td><td>纵向扩展（换更强单机）</td><td>横向扩展（加节点）</td></tr>
+    <tr><td>复杂度</td><td>低（无需处理通信/一致性）</td><td>高（通信、一致性、容错）</td></tr>
+  </table>
+
+  <div class="tip"><b>易混点：</b>① <b>分布式 ≠ 并行计算</b>——并行计算通常指紧耦合、共享内存的多核/多机（如超算），节点间延迟极低；
+  分布式节点通过网络松耦合、故障独立。② <b>集群是分布式的一种典型形态</b>：集群强调"多台同构机器对外像一个整体"，
+  分布式涵盖范围更广（含异构、跨地域）。两者常被并列考查，区别在于侧重点（见第 4 节）。</div>
+</section>
+
+<!-- ========== 二、分布式系统在云计算中的应用 ========== -->
+<section>
+  <h2><span class="num">2</span>分布式系统在云计算中的应用</h2>
+  <div class="kv">
+    <b>本质：</b>现代云计算平台本身就是<b>运行在大规模分布式系统之上</b>的。没有分布式技术，
+    云就无法实现"资源池化、弹性伸缩、高可用、按需计量"这五大特征。云的底层就是把成千上万台廉价服务器
+    组织成一个"虚拟超级计算机"。
+  </div>
+  <div class="safe"><b>对应考纲样题：</b>"云计算可以把普通服务器/PC 连接起来获得超级计算机般的计算存储能力，且成本更低。" → <b>正确</b>。
+  这正是分布式 + 集群技术的核心价值。</div>
+
+  <h3>三大典型应用（考纲明确列举，必背）</h3>
+  <table>
+    <tr><th>应用领域</th><th>代表技术 / 系统</th><th>解决什么问题</th><th>核心思想</th></tr>
+    <tr>
+      <td><b>分布式存储</b></td>
+      <td>GFS（Google）、HDFS（Hadoop）、Ceph、对象存储</td>
+      <td>海量数据存不下、单盘易坏</td>
+      <td>文件<b>分块</b>存储、<b>多副本</b>冗余、跨节点分布，保障容量与可靠性</td>
+    </tr>
+    <tr>
+      <td><b>分布式计算</b></td>
+      <td>MapReduce、Spark、Flink</td>
+      <td>单机算不动 TB/PB 级数据</td>
+      <td><b>分而治之</b>：任务拆分到多节点并行算，再汇总（Map + Reduce）</td>
+    </tr>
+    <tr>
+      <td><b>分布式数据库</b></td>
+      <td>HBase、Cassandra、MongoDB、TiDB</td>
+      <td>单机库容量/并发到顶</td>
+      <td>数据<b>分片（Sharding）</b>到多节点，水平扩展、高并发读写</td>
+    </tr>
+  </table>
+
+  <h3>云中更多分布式支撑技术</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>分布式文件系统</h4><p>如 HDFS，为上层计算/数据库提供统一命名空间与高吞吐读写。</p></div>
+    <div class="mini"><h4>分布式缓存</h4><p>Redis Cluster、Memcached，缓解数据库压力、提升响应速度。</p></div>
+    <div class="mini"><h4>分布式协调</h4><p>ZooKeeper / etcd，提供配置管理、命名服务、分布式锁、选主（一致性协议 Raft/Paxos）。</p></div>
+    <div class="mini"><h4>分布式消息队列</h4><p>Kafka、RabbitMQ，解耦生产/消费、削峰填谷、异步处理。</p></div>
+  </div>
+
+  <div class="tip"><b>考试重点：</b>云计算的"分布式"应用，考纲只明确要求掌握<b>分布式存储（GFS/HDFS）</b>、
+  <b>分布式计算（MapReduce）</b>、<b>分布式数据库</b>三条。其余（缓存/协调/消息队列）作了解，能识别即可。</div>
+</section>
+
+<!-- ========== 三、常见分布式技术的特点 ========== -->
+<section>
+  <h2><span class="num">3</span>常见分布式技术的特点</h2>
+  <p>下面按"存储 / 计算 / 数据库 / 缓存 / 协调 / 消息 / 服务"分类，对比各自的核心特点与适用场景。</p>
+
+  <table>
+    <tr><th>技术类别</th><th>代表</th><th>核心特点</th><th>典型场景</th></tr>
+    <tr>
+      <td><b>分布式存储<br>（文件系统）</b></td>
+      <td>HDFS、GFS、Ceph</td>
+      <td class="vm">数据分块 + 多副本；<b>一次写入、多次读取</b>为主；高吞吐、高容错；适合大文件</td>
+      <td>海量日志、数据仓库底座、大数据存储</td>
+    </tr>
+    <tr>
+      <td><b>分布式计算</b></td>
+      <td>MapReduce、Spark、Flink</td>
+      <td class="ct">任务自动切分并行；<b>Map(映射)+Reduce(归约)</b>；Spark 内存计算更快；Flink 擅长流处理</td>
+      <td>离线批处理、日志分析、实时流计算</td>
+    </tr>
+    <tr>
+      <td><b>分布式数据库</b></td>
+      <td>HBase、Cassandra、MongoDB、TiDB</td>
+      <td class="vm">数据<b>分片</b>跨节点；水平扩展；多为 <b>NoSQL</b> 或 NewSQL；高并发写入</td>
+      <td>高并发 Web 后端、物联网时序数据、海量 KV 存储</td>
+    </tr>
+    <tr>
+      <td><b>分布式缓存</b></td>
+      <td>Redis Cluster、Memcached</td>
+      <td class="ct">内存存储、<b>毫秒级</b>响应；缓存热点数据；集群分片保可用</td>
+      <td>会话共享、排行榜、秒杀、DB 前置缓存</td>
+    </tr>
+    <tr>
+      <td><b>分布式协调</b></td>
+      <td>ZooKeeper、etcd</td>
+      <td class="vm">基于<b>一致性协议</b>（ZAB / Raft）；提供配置、选主、分布式锁；是系统的"神经系统"</td>
+      <td>微服务注册中心、主节点选举、分布式锁</td>
+    </tr>
+    <tr>
+      <td><b>分布式消息队列</b></td>
+      <td>Kafka、RocketMQ</td>
+      <td class="ct">异步解耦、<b>削峰填谷</b>、可靠投递、顺序/重试保证</td>
+      <td>日志收集、事件驱动、系统解耦</td>
+    </tr>
+    <tr>
+      <td><b>分布式服务框架</b></td>
+      <td>Dubbo、Spring Cloud</td>
+      <td class="vm">服务注册发现、负载均衡、容错；支撑<b>微服务</b>架构</td>
+      <td>大型互联网应用的服务化拆分</td>
+    </tr>
+  </table>
+
+  <h3>分布式系统的"灵魂"：一致性与 CAP 理论（重要考点）</h3>
+  <div class="kv">
+    <b>CAP 定理：</b>一个分布式系统<b>无法同时满足</b>以下三者，最多只能满足其中两项：
+    <b>C（一致性）</b>所有节点同时看到相同数据；<b>A（可用性）</b>每个请求都能得到响应；
+    <b>P（分区容错性）</b>网络分区时系统仍能继续工作。
+  </div>
+  <ul>
+    <li>由于<b>网络分区 P 客观上不可避免</b>，实际系统多在 <b>CP</b>（强一致，如 ZooKeeper、HBase）与
+      <b>AP</b>（高可用+最终一致，如 Cassandra、DNS）之间取舍。</li>
+    <li><b>BASE 理论</b>：AP 系统的设计哲学——<b>基本可用（BA）</b>、<b>软状态（S）</b>、<b>最终一致性（E）</b>，
+      即不追求实时强一致，而是经过一段时间后数据达成一致。</li>
+  </ul>
+
+  <div class="tip"><b>考试重点：</b>① CAP 三者名称及含义；② 由于分区不可避免，常见取舍是 CP 或 AP；
+  ③ <b>BASE 是 AP 系统的工程化落地</b>（最终一致性）；④ "最终一致性"是分布式数据库/缓存的典型特征。</div>
+</section>
+
+<!-- ========== 四、集群技术 ========== -->
+<section>
+  <h2><span class="num">4</span>集群技术：特点、类型及应用场景</h2>
+
+  <h3>集群的基本概念</h3>
+  <div class="kv">
+    <b>定义：</b>集群（Cluster）是将<b>多台独立的服务器（节点）通过软硬件连接起来</b>，作为一个<b>统一整体</b>对外提供服务的计算模式。
+    集群中的节点通常<b>同构、位于同一局域网</b>，对外像一个"更强、更稳"的单机。
+  </div>
+
+  <h3>集群的核心特点</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>高可用性（HA）</h4><p>某节点故障，其他节点接管，服务不中断。</p></div>
+    <div class="mini"><h4>负载均衡（LB）</h4><p>请求分散到多节点，避免单点过载。</p></div>
+    <div class="mini"><h4>可扩展性</h4><p>加节点即可提升整体能力（水平扩展）。</p></div>
+    <div class="mini"><h4>并行处理</h4><p>多节点同时算，缩短大任务耗时。</p></div>
+    <div class="mini"><h4>性价比高</h4><p>用多台廉价 PC 替代小型机/大型机。</p></div>
+    <div class="mini"><h4>易管理</h4><p>统一调度、统一对外地址/接口。</p></div>
+  </div>
+
+  <h3>集群的类型（考纲明确三类，必背）</h3>
+  <table>
+    <tr><th>类型</th><th>目标</th><th>工作机制</th><th>代表 / 场景</th></tr>
+    <tr>
+      <td><b>高可用集群<br>（HA Cluster）</b></td>
+      <td class="ct">保障服务<b>不中断</b>，避免单点故障</td>
+      <td>节点间<b>心跳检测</b>；主节点故障，备节点<b>故障转移（Failover）</b>接管</td>
+      <td>双机热备、数据库主备、关键业务系统</td>
+    </tr>
+    <tr>
+      <td><b>负载均衡集群<br>（LB Cluster）</b></td>
+      <td class="ct">提升并发与吞吐，分摊压力</td>
+      <td>前置<b>负载均衡器</b>（如 LVS、Nginx）按策略分发请求到后端多节点</td>
+      <td>Web 服务器集群、API 网关、电商前端</td>
+    </tr>
+    <tr>
+      <td><b>高性能计算集群<br>（HPC Cluster）</b></td>
+      <td class="vm">追求极致<b>计算速度</b></td>
+      <td>多节点<b>并行计算</b>同一任务（MPI 消息传递），适合计算密集型</td>
+      <td>科学计算、气象预报、基因测序、仿真（Beowulf 集群）</td>
+    </tr>
+  </table>
+
+  <h3>应用场景（考纲明确列举）</h3>
+  <div class="map">
+    <div class="safe">
+      <b>Web 服务器集群</b>
+      <ul>
+        <li>用负载均衡集群承载高并发访问</li>
+        <li>节点可水平扩缩，应对流量峰值</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>数据库集群</b>
+      <ul>
+        <li>主从/多主复制，读写分离</li>
+        <li>高可用集群保障数据服务不中断</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>集群 vs 分布式：关系与区别（易考对比）</h3>
+  <div class="layer">
+    <div class="threat">
+      <b>联系：</b>
+      <ul>
+        <li>集群是分布式系统的<b>一种典型实现形态</b>。</li>
+        <li>两者都用"多机协作"来突破单机极限。</li>
+        <li>实际云平台中二者常结合：集群做高可用底座，分布式做存储/计算。</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>区别：</b>
+      <ul>
+        <li><b>集群</b>：节点<b>同构、紧耦合</b>，对外像一个更强单机，强调"整体可用/均衡"。</li>
+        <li><b>分布式</b>：节点可<b>异构、跨地域</b>，强调"任务拆分到不同机器、各管一块"。</li>
+        <li>一句话：<b>集群是"多机合一"，分布式是"一任务多机分"</b>。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip"><b>考试重点：</b>① 集群三类型 = <b>高可用(Hot Standby/Failover) / 负载均衡 / 高性能计算</b>；
+  ② 场景 = <b>Web 服务器集群、数据库集群</b>；③ 集群特点 = 高可用、负载均衡、可扩展、并行、性价比高；
+  ④ 集群是分布式的子集/实现形态。</div>
+</section>
+
+<!-- ========== 速记 ========== -->
+<section>
+  <h2><span class="num">★</span>考试速记清单</h2>
+  <ul>
+    <li><b>分布式系统</b>＝多节点协同、对用户透明、无单点故障；特征含分布性/透明性/并发性/可扩展性/高可用/无全局时钟。</li>
+    <li>云计算=建立在<b>分布式系统</b>之上；三大应用：<b>分布式存储(GFS/HDFS)、分布式计算(MapReduce)、分布式数据库</b>。</li>
+    <li><b>CAP</b>：一致性/可用性/分区容错 三者不可兼得；P 不可避免 → 取舍 CP 或 AP；<b>BASE</b>=最终一致性（AP 的落地）。</li>
+    <li><b>集群</b>＝多台服务器像一个整体；三类型：<b>高可用集群、负载均衡集群、高性能计算(HPC)集群</b>。</li>
+    <li>集群场景：<b>Web 服务器集群、数据库集群</b>；特点：高可用、负载均衡、可扩展、并行、性价比高。</li>
+    <li><b>集群 vs 分布式</b>：集群"多机合一"（同构紧耦合），分布式"任务多机分"（可异构跨域）；集群是分布式的实现形态之一。</li>
+    <li>样题判断：连接普通服务器获得超算能力且成本更低 → <b>正确</b>（分布式+集群的价值）。</li>
+  </ul>
+</section>
+
+<footer>本讲解对应考纲 2.2 分布式技术（掌握）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
+</div>
+<div class="colfoot"><a class="prev" href="2-1.html"><div class="lab">上一章</div><div class="ttl">虚拟化技术</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="2-3.html"><div class="lab">下一章</div><div class="ttl">SDN 与 NFV</div></a></div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.5 典型云平台的选择与比较 · 详解（2025考纲 · 云计算 第3章）</title>
+<style>
+:root{--bg:#f4f6fb;--panel:#fff;--ink:#1f2a44;--ink-soft:#56607a;--line:#e3e8f2;--shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+--cloud:#2563eb;--cloud-soft:#eaf1ff;
+--lv1:#64748b;--lv2:#0d9488;--lv3:#dc2626;
+--key-bg:#fff1f0;--key-bd:#ff9c8a;--key-ink:#b42318;--ex-bg:#eefaf2;--ex-bd:#22a06b;--ex-ink:#0f6b3c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px}
+header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1d4ed8,#3b82f6);color:#fff;padding:13px 24px;box-shadow:var(--shadow)}
+.top h1{margin:0;font-size:18px;font-weight:700}.top .sub{font-size:12.5px;opacity:.92;margin-top:3px}
+main{max-width:1080px;margin:0 auto;padding:20px 26px 80px}
+.sec-hd{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:86px;z-index:20;margin-bottom:18px}
+.sec-hd .num{background:rgba(255,255,255,.22);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+.sec-hd h2{margin:0;font-size:18px}
+.chapter{margin-top:22px;scroll-margin-top:150px}
+.chapter>h3{font-size:16px;margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow)}
+.kp{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;box-shadow:var(--shadow)}
+.kp>h4{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kp>h4 .badge{font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;color:#fff}
+.lv1{background:var(--lv1)}.lv2{background:var(--lv2)}.lv3{background:var(--lv3)}
+.block{margin:8px 0}.block p,.block ul{margin:4px 0;color:var(--ink-soft)}.block ul{padding-left:18px}.block ul li{margin:3px 0}
+.block .t{font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;margin-bottom:3px;color:var(--cloud)}
+.block .t::before{content:"";width:6px;height:6px;border-radius:2px;background:currentColor;display:inline-block}
+.deep{background:#fffdf7;border:1px solid #e8dcc0;border-left:4px solid #b8860b;border-radius:8px;padding:10px 13px;margin:10px 0}
+.deep .dlab{font-weight:700;font-size:12.5px;color:#7a5f2a;margin-bottom:4px}
+.deep p,.deep ul{margin:3px 0;color:#5c4033;line-height:1.7}.deep ul{padding-left:18px}.deep ul li{margin:2px 0}
+.deep table{border-collapse:collapse;width:100%;margin:6px 0;font-size:13px}
+.deep th{background:#f5eed8;color:#6b4f1a;padding:5px 8px;text-align:left;border:1px solid #d4b896}
+.deep td{padding:5px 8px;border:1px solid #d4b896;color:#5c4033;vertical-align:top}
+.key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:3px solid var(--key-ink);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--key-ink);font-size:13px}.key b{color:var(--key-ink)}
+.ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:3px solid var(--ex-bd);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--ex-ink);font-size:13px}
+.ex .lab{font-weight:700;display:block;margin-bottom:3px}.ex .lab::before{content:"💡 示例"}
+.toc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.toc b{color:var(--cloud)}
+footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);margin-top:30px}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip active" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<header class="top"><h1>3.5 典型云平台的选择与比较 · 详解</h1><div class="sub">湖南省数字技术应用能力水平考试（2025考纲）· 云计算 第3章 · 标注「📗 熟悉」（命题重点）</div></header>
+
+<main>
+
+<div class="toc">
+<b>本页目录</b>：一、为什么要“选” · 二、常见云服务平台全景 · 三、平台对比的七大维度 · 四、需求→平台 决策框架 · 五、考试要点与样题
+</div>
+
+<div class="sec-hd"><div class="num">3.5</div><h2>典型云平台的选择与比较</h2></div>
+
+<!-- 一 -->
+<div class="chapter"><h3>一、为什么要“选”——云平台各有基因</h3>
+<div class="kp"><div class="block">
+<p><b>核心认识：</b>云计算不是“千篇一律”的，<b>不同平台的“出身”决定了它的强项</b>。AWS 出自电商、Azure 出自企业软件、华为云出自通信设备、百度智能云出自搜索引擎与 AI。同样的需求（如“做一个政务系统”“做一款游戏”“训练一个大模型”）放在不同平台上，在<b>成本、合规、技术匹配度、开发体验</b>上差别很大。</p>
+<p>因此考纲要求：①知道常见平台的特点与应用场景；②能<b>针对具体需求</b>选到合适的平台。本考点属于“熟悉”级——要能<b>把平台和对的场景对上号</b>，这是命题重点。</p>
+<div class="key"><b>考试重点：</b>不要求背参数，要求<b>建立“平台—强项—场景”的对应关系</b>，并能根据题目给的需求选出最匹配的平台。</div></div></div>
+
+<!-- 二 -->
+<div class="chapter"><h3>二、常见云服务平台全景（特点 + 应用场景）</h3>
+
+<div class="kp"><h4>2.1 国际主流平台<span class="badge lv2">熟悉</span></h4>
+
+<div class="deep"><div class="dlab">① AWS（亚马逊云科技 Amazon Web Services）</div>
+<table>
+<tr><th style="width:120px">特点</th><td>云计算<b>商用先驱</b>（2006 年推 EC2/S3）；<b>全球市场份额第一</b>；服务最全最广；生态最成熟。底层存储架构 <b>Dynamo</b> 采用“最终一致性”哲学——“宁可返回稍旧的数据，也绝不宕机”。</td></tr>
+<tr><th>代表服务</th><td>EC2（计算）、S3（对象存储）、RDS（数据库）、Lambda（Serverless 无服务器）。</td></tr>
+<tr><th>应用场景</th><td>全球化互联网业务、初创公司全栈、企业级应用、跨地域灾备。</td></tr>
+</table></div>
+
+<div class="deep"><div class="dlab">② Microsoft Azure（微软云）</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>企业级基因</b>；与 Windows / Office 365 / Active Directory 无缝集成；<b>混合云能力强</b>（本地数据中心与云打通）；IoT 与 AI 整合好。</td></tr>
+<tr><th>代表服务</th><td>Azure VM、Azure IoT Hub、Entra ID（原 AD 身份）、Azure Arc（混合云管理）。</td></tr>
+<tr><th>应用场景</th><td>已使用微软体系的企业、传统行业上云、混合云、工业/政务。</td></tr>
+</table></div>
+
+<div class="deep"><div class="dlab">③ Google Cloud（GCP）</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>大数据与 AI/ML 强</b>；<b>Kubernetes 发源地</b>（Borg→K8s），容器原生；开源友好；全球骨干网络质量好。</td></tr>
+<tr><th>代表技术</th><td>GFS（分布式文件系统）、MapReduce（批处理）、BigTable（NoSQL）、Borg；上层 BigQuery、Vertex AI。</td></tr>
+<tr><th>应用场景</th><td>数据密集型业务、容器/微服务原生架构、AI/机器学习训练、技术型互联网公司。</td></tr>
+</table></div>
+</div>
+
+<div class="kp"><h4>2.2 国内主流平台（重点，考试常考）<span class="badge lv2">熟悉</span></h4>
+
+<div class="deep"><div class="dlab">④ 阿里云（Alibaba Cloud）</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>国内市场份额第一</b>；历经“双11”海量并发验证；产品线最全；电商/零售/金融生态强；亚太布局广。</td></tr>
+<tr><th>代表服务</th><td>ECS、OSS（对象存储）、PolarDB、MaxCompute（大数据）。</td></tr>
+<tr><th>应用场景</th><td>电商、零售、中小企业上云、政务、出海（亚太）。</td></tr>
+</table></div>
+
+<div class="deep"><div class="dlab">⑤ 腾讯云</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>游戏 / 社交 / 音视频</b>强（直播、点播、实时音视频）；CDN 与网络加速好；<b>微信生态 / 小程序云</b>；性价比突出。</td></tr>
+<tr><th>代表服务</th><td>CVM、COS、云直播、小程序云开发、即时通信 IM。</td></tr>
+<tr><th>应用场景</th><td>游戏、直播、社交、小程序、音视频、在线教育。</td></tr>
+</table></div>
+
+<div class="deep"><div class="dlab">⑥ 华为云</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>政务 / 金融 / 制造强</b>；<b>鲲鹏（ARM）算力 + 昇腾 AI 芯片</b>；ModelArts（AI 开发平台）；<b>HCS 混合云</b>；<b>信创自主可控</b>。</td></tr>
+<tr><th>代表服务</th><td>ECS、ModelArts、HCS 混合云、GaussDB。</td></tr>
+<tr><th>应用场景</th><td>政务云、金融云、工业互联网、信创环境、AI 训练。</td></tr>
+</table></div>
+
+<div class="deep"><div class="dlab">⑦ 百度智能云</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>AI 基因最强</b>；自研深度学习框架 <b>飞桨 PaddlePaddle</b>；AI 开放平台（语音/视觉/NLP）；<b>Apollo 自动驾驶</b>。</td></tr>
+<tr><th>代表服务</th><td>飞桨、AI 开放平台、Apollo、文心大模型。</td></tr>
+<tr><th>应用场景</th><td>AI 应用、智能客服、工业质检、自动驾驶、大模型。</td></tr>
+</table></div>
+
+<div class="deep"><div class="dlab">⑧ 天翼云（中国电信）</div>
+<table>
+<tr><th style="width:120px">特点</th><td><b>运营商云</b>；国企/政务背景；网络与 IDC 资源雄厚；<b>“云网融合”</b>；安全合规优势。</td></tr>
+<tr><th>代表服务</th><td>弹性计算、对象存储、专属云、边缘节点。</td></tr>
+<tr><th>应用场景</th><td>政务、国企、医疗、教育、广域边缘节点。</td></tr>
+</table></div>
+<div class="key"><b>记忆口诀：</b>阿里=电商全；腾讯=游戏音视频；华为=政务金融信创；百度=AI自动驾驶；天翼=运营商国企；AWS=全球全栈；Azure=微软混合；GCP=数据容器。</div>
+</div>
+</div>
+
+<!-- 三 -->
+<div class="chapter"><h3>三、平台对比的七大维度（怎么“比”）</h3>
+<div class="kp"><div class="block"><div class="t">选型时从哪些角度比较</div>
+<ul>
+<li><b>① 成本</b>：计费模式（按量/包年/预留）、单价与性价比。初创和弹性业务看重按需付费。</li>
+<li><b>② 合规与安全</b>：数据本地化、等保合规、<b>信创</b>自主可控要求。政务/金融尤其看重。</li>
+<li><b>③ 技术栈匹配</b>：企业现有生态（如已在用微软 AD/Office → Azure；微信小程序 → 腾讯云）。</li>
+<li><b>④ 生态与服务</b>：第三方市场、技术支持、社区活跃度。</li>
+<li><b>⑤ SLA 与可用性</b>：服务等级协议承诺的可用性（如 99.95%/99.99%）与赔偿。</li>
+<li><b>⑥ 地域覆盖</b>：国内节点 vs 全球节点（出海选 AWS/阿里云国际）。</li>
+<li><b>⑦ 厂商锁定风险</b>：是否依赖专有服务；可考虑多云或基于开源（OpenStack/K8s）降低锁定。</li>
+</ul>
+<div class="ex"><span class="lab"></span>同一套“促销秒杀”系统：用<b>公有云</b>按需扩缩最划算；而银行“核心账务”因合规要求，往往走<b>私有云/混合云</b>（敏感数据私有、前台弹性公有）。</div></div></div>
+
+<!-- 四 -->
+<div class="chapter"><h3>四、需求 → 平台 决策框架（怎么“选”）</h3>
+<div class="kp"><div class="block"><div class="t">按需求直接映射到平台</div>
+<table class="deep" style="border-collapse:collapse;width:100%;font-size:13px">
+<tr><th style="background:#f5eed8;color:#6b4f1a;padding:6px 8px;border:1px solid #d4b896">典型需求 / 场景</th><th style="background:#f5eed8;color:#6b4f1a;padding:6px 8px;border:1px solid #d4b896">首选平台</th><th style="background:#f5eed8;color:#6b4f1a;padding:6px 8px;border:1px solid #d4b896">理由</th></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">政务 / 金融 / 国企 / 信创 / 混合云</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>华为云 / 天翼云</b></td><td style="padding:6px 8px;border:1px solid #d4b896">合规、信创、云网融合、政务背景</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">游戏 / 直播 / 社交 / 小程序</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>腾讯云</b></td><td style="padding:6px 8px;border:1px solid #d4b896">音视频/CDN 强、微信生态</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">AI / 大模型 / 自动驾驶</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>百度智能云 / 华为云</b></td><td style="padding:6px 8px;border:1px solid #d4b896">飞桨、昇腾、ModelArts、Apollo</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">已用微软体系（AD/Office）</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>Azure</b></td><td style="padding:6px 8px;border:1px solid #d4b896">无缝集成、混合云</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">大数据 / 容器 / K8s / 开源</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>GCP</b></td><td style="padding:6px 8px;border:1px solid #d4b896">BigQuery、K8s 原生、开源友好</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">全球化 / 全栈 / 初创公司</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>AWS / 阿里云</b></td><td style="padding:6px 8px;border:1px solid #d4b896">服务最全、全球/亚太节点</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">电商 / 零售 / 中小企业</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>阿里云</b></td><td style="padding:6px 8px;border:1px solid #d4b896">电商验证、生态全</td></tr>
+<tr><td style="padding:6px 8px;border:1px solid #d4b896">敏感数据 + 弹性业务</td><td style="padding:6px 8px;border:1px solid #d4b896"><b>混合云</b></td><td style="padding:6px 8px;border:1px solid #d4b896">核心私有 + 弹性公有</td></tr>
+</table>
+</div>
+<div class="block"><div class="t">五步选型流程</div>
+<ol>
+<li><b>明确需求</b>：业务类型、规模、地域、合规等级。</li>
+<li><b>定部署模式</b>：公有云 / 私有云 / 混合云 / 社区云（见 1.3 章）。</li>
+<li><b>匹配平台强项</b>：按上表映射。</li>
+<li><b>评估成本与 SLA</b>：算总拥有成本、看可用性承诺。</li>
+<li><b>规避锁定</b>：优先标准接口/开源，必要时多云。</li>
+</ol></div>
+<div class="key"><b>考试重点：</b>题目常给一句需求（如“某市政府要建政务云且要求自主可控”），让你选平台 → 答案指向<b>华为云 / 天翼云</b>；给“游戏公司做直播”→ <b>腾讯云</b>。</div>
+</div>
+</div>
+
+<!-- 五 -->
+<div class="chapter"><h3>五、考试要点与样题（贴合考纲自编）</h3>
+<div class="kp"><div class="block"><div class="t">必须记牢的对应关系</div>
+<ul>
+<li>AWS＝全球第一、全栈最全、2006 商用先驱。</li>
+<li>Azure＝微软生态、混合云强、企业级。</li>
+<li>GCP＝大数据、AI、K8s 发源地、开源友好。</li>
+<li>阿里云＝国内第一、电商/双11 验证。</li>
+<li>腾讯云＝游戏、音视频、小程序。</li>
+<li>华为云＝政务金融、鲲鹏昇腾、信创、ModelArts。</li>
+<li>百度智能云＝AI、飞桨、Apollo 自动驾驶。</li>
+<li>天翼云＝运营商、国企政务、云网融合。</li>
+</ul>
+<div class="key"><b>易错点：</b>把平台强项“张冠李戴”——例如误以为“政务信创首选腾讯云”（实际华为云/天翼云）；误以为“游戏直播选阿里云”（实际腾讯云更强）。</div>
+</div>
+
+<div class="block"><div class="t">样题演练（单选 / 多选 / 判断）</div>
+<p><b>【单选】</b>某市政府要建设自主可控的政务云，并需兼顾已有本地数据中心 → 最合适的是：<br>
+A. 腾讯云　B. <b>华为云 / 天翼云（混合云 HCS）</b>　C. GCP　D. 阿里云　<em>答案：B</em></p>
+<p><b>【单选】</b>一家游戏公司计划上线直播功能，对实时音视频和 CDN 要求高 → 首选：<br>
+A. 华为云　B. <b>腾讯云</b>　C. 天翼云　D. 百度智能云　<em>答案：B</em></p>
+<p><b>【多选】</b>下列属于国内主流云平台且具“AI 基因”的有：<br>
+A. 阿里云　B. <b>百度智能云（飞桨/Apollo）</b>　C. <b>华为云（昇腾/ModelArts）</b>　D. 天翼云　<em>答案：BC</em></p>
+<p><b>【判断】</b>“云计算平台都完全相同，选型只需看价格” → <b>❌ 错误</b>。不同平台基因与强项不同，需按需求、合规、技术栈综合选择。</p>
+</div>
+</div>
+</div>
+
+<footer>本页依据《湖南省数字技术应用能力水平考试大纲（2025版）》云计算第3章 3.5 整理 · 与《完整复习手册》《数字技术应用能力复习》配套 · 仅供个人学习使用</footer>
+</main>
+<div class="colfoot"><a class="prev" href="3-3.html"><div class="lab">上一章</div><div class="ttl">华为云</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="4-2.html"><div class="lab">下一章</div><div class="ttl">Web 服务与协议</div></a></div>
+</body>
+</html>

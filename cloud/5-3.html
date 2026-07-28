@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.3 绿色节能技术 · 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#16a34a,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(22,163,74,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f0fdf4;border-left:4px solid var(--ok);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--ok)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#dcfce7;color:#166534;border-radius:6px;padding:1px 8px;margin:0 2px}
+  .formula{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 18px;margin:12px 0;
+    font-family:"SFMono-Regular",Consolas,monospace;font-size:15px;text-align:center}
+  .formula b{color:#7dd3fc}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip active" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>5.3 绿色节能技术 · 详细讲解</h1>
+  <p>云计算数据中心（重点 · 掌握）｜ 能耗指标、配电与空调节能、典型绿色数据中心</p>
+  <span class="badge">考纲要求：掌握</span>
+</header>
+
+<!-- ========== 一、背景与核心指标 ========== -->
+<section>
+  <h2><span class="num">1</span>为什么需要绿色节能技术</h2>
+  <div class="kv">
+    <b>背景：</b>数据中心是云计算的"能耗大户"。一台数据中心的总能耗中，<b>IT 设备（服务器、网络、存储）只约占一半</b>，
+    另一半消耗在<b>供电、制冷等配套系统</b>上。绿色节能技术的目标，就是<b>让更多电能真正用在计算上</b>，减少浪费、降低 PUE。
+  </div>
+  <h3>核心指标：PUE（电能使用效率，Power Usage Effectiveness）</h3>
+  <div class="formula">
+    <b>PUE</b> = 数据中心总能耗 ÷ IT 设备能耗
+  </div>
+  <ul>
+    <li><b>PUE ≥ 1</b>，理论上越接近 1 越节能（意味着配套系统几乎不耗电）。</li>
+    <li>早期传统机房 PUE 约 <b>2.0</b>（一半电被配套系统吃掉）；</li>
+    <li>现代绿色数据中心可做到 <b>1.2 甚至 1.1 以下</b>（如 Google、阿里张北）。</li>
+    <li>与之相关的还有 <b>DCiE = 1 / PUE</b>（数据中心基础设施效率），数值越大越好。</li>
+  </ul>
+  <div class="tip"><b>易考概念：</b>PUE 衡量的是"基础设施能效"，它不直接衡量 IT 设备本身的计算效率，
+  但能直观反映空调、配电等配套系统的节能水平——这正是 5.3 节的主角。</div>
+
+  <h3>绿色数据中心的定义</h3>
+  <p>在保证信息系统安全、稳定、高效运行的前提下，通过<b>节能、减排、可再生能源利用、资源复用</b>等手段，
+  在整个<b>生命周期（规划、设计、建设、运维、报废）</b>内实现最小环境 footprint 的数据中心。</p>
+  <div class="card-grid">
+    <div class="mini"><h4>节能</h4><p>配电、空调、IT 设备全面降耗。</p></div>
+    <div class="mini"><h4>节地</h4><p>高密度部署、模块化、紧凑布局。</p></div>
+    <div class="mini"><h4>节水</h4><p>自然冷却减少冷却水消耗。</p></div>
+    <div class="mini"><h4>环保</h4><p>可再生能源、余热回收、绿色材料。</p></div>
+  </div>
+</section>
+
+<!-- ========== 二、配电系统节能技术 ========== -->
+<section>
+  <h2><span class="num">2</span>配电系统节能技术</h2>
+  <p>配电系统是数据中心的"血管"。电能从市电进入后，要经过多级转换才能到达服务器，<b>每一次转换都有损耗</b>。
+  配电节能的核心是：<b>减少转换环节、提高转换效率、按需供电</b>。</p>
+
+  <h3>① 减少转换环节：市电直供 / 高压直流（HVDC）</h3>
+  <table>
+    <tr><th>技术</th><th>做法</th><th>节能原理</th></tr>
+    <tr>
+      <td><b>高压直流供电<br>(HVDC)</b></td>
+      <td>用 240V/336V 高压直流替代传统交流 UPS，服务器电源内部再做一次 DC-DC 转换</td>
+      <td class="ct">省去"交流→直流→交流"多次逆变；<br>减少转换级数，效率提升至 <b>94%~97%</b></td>
+    </tr>
+    <tr>
+      <td><b>市电直供</b></td>
+      <td>优质市电区域让 IT 设备直接由市电供电，仅在末端加小容量电池保障</td>
+      <td class="ct">省掉 UPS 整段损耗；适合电网稳定场景</td>
+    </tr>
+    <tr>
+      <td><b>去掉"AC/DC 双重转换"</b></td>
+      <td>传统路径：市电 AC→UPS(AC/DC/AC)→PDU→服务器电源(DC/AC/DC)，环节多</td>
+      <td class="vm">每多一级转换约损耗 3%~5%，合并后可显著降低</td>
+    </tr>
+  </table>
+
+  <h3>② 提高转换效率：模块化 / 高频 UPS</h3>
+  <ul>
+    <li><b>模块化 UPS</b>：随负载增长"按需扩容"，避免大机器长期低载运行（低载时效率骤降）。</li>
+    <li><b>高频机替代工频机</b>：去掉笨重变压器，体积更小、效率更高（可达 95%+）。</li>
+    <li><b>ECO 模式（节能模式 / 旁路模式）</b>：电网正常时让电流走旁路，效率接近 99%，仅在异常时切换逆变。</li>
+  </ul>
+
+  <h3>③ 智能配电与能耗监测</h3>
+  <ul>
+    <li><b>智能 PDU / 母线槽</b>：实时监测每条支路电流、功率，发现"僵尸负载"（低利用率高耗电）。</li>
+    <li><b>动态无功补偿</b>：提高功率因数（接近 1），减少线路无功损耗。</li>
+    <li><b>就近供电</b>：变压器、UPS 靠近机柜，缩短供电路径、降低线损。</li>
+  </ul>
+  <div class="safe"><b>记忆口诀：</b>配电节能 = <b>少转换（HVDC/市电直供）＋ 高效率（模块化/高频/ECO）＋ 会监测（智能 PDU）</b></div>
+</section>
+
+<!-- ========== 三、空调系统节能技术 ========== -->
+<section>
+  <h2><span class="num">3</span>空调系统节能技术</h2>
+  <p>制冷是数据中心第二大耗电户（往往占总能耗 30%~40%）。空调节能有两句话：<b>"能借自然风就别开压缩机"</b>，
+  <b>"冷风热风别打架"</b>。</p>
+
+  <h3>① 自然冷却（Free Cooling）—— 节能之王</h3>
+  <p>当室外温度足够低时，直接用自然环境为机房降温，压缩机少开或不开。</p>
+  <table>
+    <tr><th>方式</th><th>原理</th><th>适用</th></tr>
+    <tr>
+      <td><b>风侧自然冷<br>(新风/空气 économiser)</b></td>
+      <td>引入低温室外新风直接冷却，过滤后送入机房</td>
+      <td class="ct">寒冷/干燥地区；需空气处理</td>
+    </tr>
+    <tr>
+      <td><b>水侧自然冷<br>(冷却塔/干冷器)</b></td>
+      <td>低温室外空气冷却循环水，再通过板换给机房降温</td>
+      <td class="ct">北方/过渡季长地区</td>
+    </tr>
+    <tr>
+      <td><b>间接蒸发冷却</b></td>
+      <td>利用水蒸发吸热 + 空气换热，机房内外空气不混合</td>
+      <td class="ct">干旱炎热地区（如华为、AWS 常用）</td>
+    </tr>
+  </table>
+  <div class="tip"><b>考点：</b>"自然冷却小时数 / 自然冷源利用率"越高，PUE 越低。我国北方（张北、贵安、内蒙古）建大型数据中心，
+  正是为了<b>吃自然冷源红利</b>。</div>
+
+  <h3>② 气流组织优化：冷热通道隔离</h3>
+  <ul>
+    <li><b>冷热通道封闭</b>：机柜"面对面、背对背"排列，冷风从正面送、热风从背面回，<b>封闭冷/热通道</b>防止冷热混合。</li>
+    <li><b>下送风 + 穿孔地板</b>：冷风从架空地板下送出，精准到达机柜进风面。</li>
+    <li><b>封闭通道（Containment）</b>：把冷通道或热通道用顶盖/隔帘封起来，回风温度更高、冷机效率更好。</li>
+  </ul>
+
+  <h3>③ 近端制冷：行级空调 / 背板热交换</h3>
+  <ul>
+    <li><b>行级（列间）空调</b>：空调紧挨机柜列，缩短送风距离，制冷更精准。</li>
+    <li><b>背板热交换器</b>：在机柜背面装换热盘管，就近把热风"压"回冷风。</li>
+    <li>相比传统"房间级大空调"，近端制冷可显著降低风机功耗与冷量损耗。</li>
+  </ul>
+
+  <h3>④ 液冷技术（高密场景的终极方案）</h3>
+  <table>
+    <tr><th>类型</th><th>做法</th><th>特点</th></tr>
+    <tr><td><b>冷板式液冷</b></td><td>金属冷板贴住 CPU/GPU，管路循环冷却液带走热量</td><td class="ct">改造小、成熟，单机柜可 20~50kW</td></tr>
+    <tr><td><b>浸没式液冷</b></td><td>服务器整板浸没在绝缘冷却液中（阿里"麒麟"采用）</td><td class="ct">PUE 可逼近 <b>1.1</b>，散热效率极高</td></tr>
+    <tr><td><b>喷淋式液冷</b></td><td>冷却液直接喷淋到发热元件</td><td class="ct">适合超高密度机柜</td></tr>
+  </table>
+
+  <h3>⑤ 运行参数与设备优化</h3>
+  <ul>
+    <li><b>放宽温湿度设定</b>：按 ASHRAE 建议，进风温度提高到 <b>18~27℃</b>（甚至更高允许上限），减少制冷负荷。</li>
+    <li><b>变频技术</b>：变频压缩机 + <b>EC 高效风机</b>，按需调节转速，避免定频"满负荷硬扛"。</li>
+    <li><b>提高冷冻水温</b>：提高冷凝器出水温度，让冷机能效比（COP）上升。</li>
+  </ul>
+  <div class="safe"><b>记忆口诀：</b>空调节能 = <b>自然冷（free cooling）＋ 隔冷热（通道封闭）＋ 就近冷（行级/背板）＋ 上液冷（浸没）＋ 调参数（升温度/变频）</b></div>
+</section>
+
+<!-- ========== 四、其他节能技术 ========== -->
+<section>
+  <h2><span class="num">4</span>其他配套节能技术</h2>
+  <div class="card-grid">
+    <div class="mini"><h4>IT 设备节能</h4><p>虚拟化提高利用率、高能效服务器、CPU 动态调频（DVFS）、闲置部件休眠。</p></div>
+    <div class="mini"><h4>可再生能源</h4><p>风电、光伏、水电直供，购买绿电/绿证，从源头降碳。</p></div>
+    <div class="mini"><h4>余热回收</h4><p>回收服务器废热用于周边供暖（如腾讯天津数据中心供热）。</p></div>
+    <div class="mini"><h4>智能运维 DCIM</h4><p>AI 调优冷却策略、容量预测、3D 热力图定位热点。</p></div>
+  </div>
+  <div class="kv">
+    <b>关键认识：</b>IT 设备利用率本身也是"绿色"核心——<b>虚拟化（见 2.1）让一台服务器干三台的活</b>，
+    等于少买设备、少耗电、少制冷，是绿色节能的"源头活水"。
+  </div>
+</section>
+
+<!-- ========== 五、典型绿色节能云计算数据中心 ========== -->
+<section>
+  <h2><span class="num">5</span>典型的绿色节能云计算数据中心</h2>
+  <p>以下为教材与行业公认的典型代表，考试常考"哪家用了什么节能技术"：</p>
+  <table>
+    <tr><th>厂商 / 项目</th><th>代表性节能举措</th><th>亮点 / PUE</th></tr>
+    <tr>
+      <td><b>Google</b><br>数据中心</td>
+      <td>AI（DeepMind）实时调优冷却；自然冷却 + 高效配电；100% 可再生能源匹配</td>
+      <td class="ct">PUE 约 <b>1.1</b>，全球领先；AI 控冷典范</td>
+    </tr>
+    <tr>
+      <td><b>微软</b><br>Azure / Natick</td>
+      <td>海底数据中心 Project Natick（海水自然冷却）；陆上采用蒸发冷却、自由风冷</td>
+      <td class="ct">海底舱 PUE 极低；"以海代空调"</td>
+    </tr>
+    <tr>
+      <td><b>亚马逊 AWS</b></td>
+      <td>可再生能源承诺（100% 绿电目标）；蒸发冷却、自然风冷；定制化高密服务器</td>
+      <td class="ct">规模大、绿电占比高</td>
+    </tr>
+    <tr>
+      <td><b>阿里云</b><br>张北 / 杭州</td>
+      <td>张北风电+光伏；<b>浸没式液冷"麒麟"</b>；自然冷源丰富</td>
+      <td class="ct">张北 PUE 约 <b>1.1x</b>；液冷标杆</td>
+    </tr>
+    <tr>
+      <td><b>腾讯</b><br>天津 / 贵安</td>
+      <td>天津数据中心<b>余热回收</b>为周边供暖；贵安七星洞库（山洞恒温、天然冷源）</td>
+      <td class="ct">"余热变暖气"；洞库天然节能</td>
+    </tr>
+    <tr>
+      <td><b>华为</b><br>云数据中心</td>
+      <td>预制模块化（FusionModule）；<b>间接蒸发冷却</b>；行级制冷 + AI 调优</td>
+      <td class="ct">建设快、PUE 低至 ~1.2</td>
+    </tr>
+    <tr>
+      <td><b>Facebook<br>(Meta) OCP</b></td>
+      <td>Open Compute 开放设计；自由风冷（北纬高纬地区）；免 UPS 市电直供思路</td>
+      <td class="ct">极简架构、开源节能</td>
+    </tr>
+  </table>
+  <div class="map">
+    <div class="tip"><b>考法一：</b>问"自然冷却适合建在哪？"→ 答：<b>高纬/寒冷/干旱地区</b>（张北、贵安、内蒙古、北欧）。</div>
+    <div class="tip"><b>考法二：</b>问"液冷代表？"→ 答：<b>阿里浸没式液冷</b>；问"AI 调优冷却代表？"→ <b>Google</b>。</div>
+  </div>
+</section>
+
+<!-- ========== 六、考试要点速记 ========== -->
+<section>
+  <h2><span class="num">6</span>考试要点速记</h2>
+  <ol>
+    <li><b>PUE 公式</b>：总能耗 ÷ IT 设备能耗；越接近 1 越好；传统 ~2.0，绿色可 ≤1.2。</li>
+    <li><b>配电节能</b>：HVDC 高压直流、市电直供、模块化/高频 UPS、ECO 模式、智能 PDU——核心是<b>少转换、高效率</b>。</li>
+    <li><b>空调节能</b>：自然冷却（风侧/水侧/间接蒸发）、冷热通道隔离、行级/背板近端制冷、液冷（冷板/浸没）、升温度+变频。</li>
+    <li><b>源头节能</b>：虚拟化提高 IT 利用率，是绿色节能的基础。</li>
+    <li><b>典型数据中心</b>：Google（AI 控冷）、阿里（浸没液冷）、微软（海底/海水）、腾讯（余热回收）、华为（间接蒸发+模块化）。</li>
+    <li><b>选址逻辑</b>：利用自然冷源 → 高纬寒冷/干旱地区；利用绿电 → 风电光伏富集区。</li>
+  </ol>
+  <div class="safe"><b>一句话总结：</b>绿色节能 = 配电少损耗 + 空调借自然 + IT 高利用 + 能源可再生的系统工程。</div>
+</section>
+
+<footer>云计算技术考试 · 配套讲解 · 5.3 绿色节能技术 ｜ 建议结合 2.1 虚拟化、3.x 主流云一起复习</footer>
+</div>
+<div class="colfoot"><a class="prev" href="5-2.html"><div class="lab">上一章</div><div class="ttl">数据中心关键服务</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="6.html"><div class="lab">下一章</div><div class="ttl">云安全</div></a></div>
+</body>
+</html>

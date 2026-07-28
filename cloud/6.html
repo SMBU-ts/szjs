@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第六章 云安全 · 详细讲解（2025考纲）</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
+    --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
+    --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
+    --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
+    --warn:#d97706;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}
+  header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
+  header.top h1{margin:0;font-size:19px;font-weight:700;}
+  header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}
+  header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
+  header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}
+  .search-wrap{position:absolute;right:24px;top:14px;}
+  .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
+  .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:96px;width:280px;flex:0 0 280px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
+  nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
+  nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}
+  nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}
+  nav.toc a.sub{padding-left:22px;font-size:12.5px;}
+  main{flex:1;min-width:0;padding:22px 26px 80px;}
+  .section{margin-bottom:40px;scroll-margin-top:100px;}
+  .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}
+  .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
+  .section-head h2{margin:0;font-size:20px;}
+  .chapter{margin-top:22px;scroll-margin-top:160px;}
+  .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
+  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}
+  .kp.hide{display:none;}
+  .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .kp-head h4{margin:0;font-size:15.5px;}
+  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}
+  .lv1{background:var(--lv1);} .lv2{background:var(--lv2);} .lv3{background:var(--lv3);}
+  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}
+  .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}
+  .core .lab::before{content:"★ 核心知识点：";}
+  .core b{color:var(--ink);}
+  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}
+  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}
+  .ex .lab::before{content:"💡 示例：";}
+  .ex ul{margin:5px 0;padding-left:20px;}
+  .ex li{margin:3px 0;}
+  .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}
+  .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}
+  .warn .lab{font-weight:700;}
+  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
+  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}
+  table.tbl tr:nth-child(even) td{background:#fafcff;}
+  .fig{margin:14px 0;text-align:center;}
+  .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}
+  .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}
+  #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}
+  .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}
+  @media(max-width:920px){nav.toc{display:none;} .container{display:block;} main{padding:16px;} .search-wrap{position:static;margin-top:10px;} .search-wrap input{width:100%;}}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip active" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="progress" id="progress"></div>
+<header class="top">
+  <h1>第六章 云安全 · 详细讲解</h1>
+  <div class="sub">云安全的概念及重要性 ｜ 常见安全防护措施与安全策略 ｜ 身份·授权·访问管理（IAM）｜ 数据加密与密钥管理（配合《复习指南》使用）</div>
+  <div class="legend">
+    <span>📘 了解</span><span>📗 熟悉</span><span>📕 掌握</span>
+    <span>★ = 本知识点最该记住的核心</span><span>💡 = 对应示例</span>
+  </div>
+  <div class="search-wrap"><input id="search" type="text" placeholder="🔍 搜索知识点…"></div>
+</header>
+
+<div class="container">
+<nav class="toc" id="toc">
+  <h2>目录</h2>
+  <a href="#c61" class="sec">6.1 云安全概念及重要性</a>
+  <a href="#c61a" class="sub">定义与常见威胁</a><a href="#c61b" class="sub">复杂性与多样性</a><a href="#c61c" class="sub">云安全的重要性</a>
+  <a href="#c62" class="sec">6.2 防护措施与安全策略</a>
+  <a href="#c62a" class="sub">核心架构安全</a><a href="#c62b" class="sub">责任共担模型</a><a href="#c62c" class="sub">IaaS/PaaS/SaaS防护</a>
+  <a href="#c62d" class="sub">应用安全策略</a><a href="#c62e" class="sub">评估CSP安全性</a>
+  <a href="#c63" class="sec">6.3 身份·授权·访问管理</a>
+  <a href="#c63a" class="sub">基本概念</a><a href="#c63b" class="sub">重要性</a><a href="#c63c" class="sub">实现方式</a>
+  <a href="#c64" class="sec">6.4 数据加密与密钥管理</a>
+  <a href="#c64a" class="sub">加密的必要性</a><a href="#c64b" class="sub">常见加密方法</a><a href="#c64c" class="sub">密钥管理</a>
+</nav>
+
+<main>
+<!-- ================= 6.1 ================= -->
+<section class="section" id="c61">
+  <div class="section-head"><div class="num">6.1</div><h2>云安全的概念及重要性</h2></div>
+
+  <div class="chapter" id="c61a"><h3>一、云安全的定义与常见威胁</h3>
+
+    <div class="kp" id="d61">
+      <div class="kp-head"><h4>6.1.1 云安全的定义</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>云安全 = 保护云计算环境（数据、应用、平台、基础设施、账号）的机密性、完整性、可用性（CIA三性），并融合云计算特有风险（多租户、虚拟化、责任共担）而形成的安全体系</b>。</div>
+      <p class="note">云安全不是某一款产品，而是一套"技术 + 策略 + 运维"的组合：既包括传统信息安全（网络安全、主机安全、数据安全），又叠加了云特有的责任共担、多租户隔离、弹性资源等新问题。</p>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>传统安全 vs 云安全：</b>传统安全以"边界防火墙"为核心；云安全因为资源弹性伸缩、边界模糊，更强调"身份即边界"和"零信任"。</li>
+          <li><b>范围示例：</b>云安全既管"别人能不能偷看你的数据库"（机密性），也管"数据被改了没"（完整性），还管"服务卡顿打不开"（可用性）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kp" id="d62">
+      <div class="kp-head"><h4>6.1.2 常见云安全威胁（CSA 云安全威胁清单）</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>最高频的云威胁：配置错误（Misconfiguration）、身份凭证泄露/弱认证、不安全的接口与 API、账户劫持、内部威胁、共享技术漏洞、数据泄露与丢失</b>。</div>
+      <table class="tbl">
+        <tr><th>威胁</th><th>说明</th><th>典型场景</th></tr>
+        <tr><td><b>配置错误</b></td><td>存储桶/安全组/端口被错误开放为公网（云上"头号"事故源）</td><td>对象存储设为公开可读，导致用户数据被全网爬取</td></tr>
+        <tr><td><b>身份凭证泄露 / 弱认证</b></td><td>密钥、密码、AK/SK 泄露，无 MFA 保护</td><td>开发者把 AccessKey 提交到 GitHub，被恶意扫描利用挖矿</td></tr>
+        <tr><td><b>不安全的接口/API</b></td><td>API 未鉴权、未限流、存在越权漏洞</td><td>越权接口可遍历他人订单 ID 获取隐私</td></tr>
+        <tr><td><b>账户劫持</b></td><td>钓鱼/撞库夺取管理员账号</td><td>钓鱼邮件骗取控制台登录，删库勒索</td></tr>
+        <tr><td><b>内部威胁（恶意/失误）</b></td><td>内部人员越权访问或误操作</td><td>离职员工带走数据，或误删生产库</td></tr>
+        <tr><td><b>共享技术漏洞</b></td><td>虚拟化/容器隔离被突破，跨租户越权</td><td>同宿主机的邻居通过侧信道或漏洞读到你的内存</td></tr>
+        <tr><td><b>数据泄露 / 数据丢失</b></td><td>被窃取或误删、未备份</td><td>勒索软件加密数据；误删且无备份</td></tr>
+        <tr><td><b>拒绝服务（DoS/DDoS）</b></td><td>流量打满导致服务不可用</td><td>大规模请求冲垮 Web 入口</td></tr>
+        <tr><td><b>滥用云服务</b></td><td>用云资源做攻击跳板（挖矿、钓鱼）</td><td>攻击者用盗用的账号发起对外攻击</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>配置错误示例：</b>某公司将云数据库 3306 端口对 0.0.0.0/0 开放且无密码，被勒索组织拖库——这是"客户侧责任"，CSP 不背锅。</li>
+          <li><b>凭证泄露示例：</b>把长期有效的 Secret Key 写进前端代码，等于把家门钥匙挂在门口。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c61b"><h3>二、云计算环境中安全问题的复杂性与多样性</h3>
+    <div class="kp" id="d63">
+      <div class="kp-head"><h4>6.1.3 复杂性与多样性的来源</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>云安全"更复杂"的根本原因：边界消失、多租户共享、责任共担、资源弹性、合规跨境、攻击面叠加（虚拟化+容器+API+供应链）</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>边界模糊：</b>传统"内网可信"假设失效，访问来自任意终端/任意地点 → 必须"零信任"（默认不信任、持续验证）。</li>
+        <li><b>多租户隔离：</b>同一物理机跑多家客户的数据，隔离一旦失效就会"串门"，对底层虚拟化/容器安全提出极高要求。</li>
+        <li><b>责任共担：</b>安全职责在 CSP 与客户之间分割，双方都以为对方负责 → 出现"责任真空"。</li>
+        <li><b>弹性与动态：</b>资源随时创建/销毁，资产盘点、日志审计、配置基线难以稳定，影子 IT（未纳管资源）丛生。</li>
+        <li><b>合规与数据主权：</b>数据可能落在境外机房，要同时满足等保、GDPR、《数据安全法》《个人信息保护法》等多套法规。</li>
+        <li><b>攻击面叠加：</b>IaaS 的虚拟化、PaaS 的运行时、SaaS 的接口、加上第三方依赖/供应链，攻击面比传统 IT 更广。</li>
+      </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>多样性示例：</b>同样叫"上云"，用 IaaS 自己装系统（客户责任大）和用 SaaS（几乎全交给厂商）面临的安全工作天差地别——这就是"多样性"。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c61c"><h3>三、云安全对于云计算的重要性</h3>
+    <div class="kp" id="d64">
+      <div class="kp-head"><h4>6.1.4 为什么云安全是云计算的"生命线"</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>没有安全就没有信任，没有信任就没有上云——云安全决定了云计算能否被采用、能否合规、能否持续运营</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>数据是核心资产：</b>云上集中存放大量敏感数据，一旦泄露代价极高（声誉、罚款、诉讼）。</li>
+        <li><b>业务连续性依赖可用性：</b>云是业务关键底座，DDoS/勒索导致中断即直接损失营收。</li>
+        <li><b>合规硬约束：</b>金融、政务、医疗等行业上云必须满足等保/行业监管，否则不能上线。</li>
+        <li><b>信任基础：</b>企业是否敢把核心系统搬到云，取决于对 CSP 安全能力的信任。</li>
+      </ul>
+      <div class="warn"><span class="lab">⚠ 考试易错点：</span>云安全不是"买了云就自动安全"。CSP 负责"云本身安全"（基础设施），客户负责"云中安全"（配置、数据、身份）——安全是双方共同责任。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6.2 ================= -->
+<section class="section" id="c62">
+  <div class="section-head"><div class="num">6.2</div><h2>常见安全防护措施及相关安全策略</h2></div>
+
+  <div class="chapter" id="c62a"><h3>一、云计算核心架构安全（纵深防御）</h3>
+    <div class="kp" id="d65">
+      <div class="kp-head"><h4>6.2.1 核心架构安全分层</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>云安全遵循"纵深防御（Defense in Depth）"：从物理层 → 网络层 → 主机/计算层 → 应用层 → 数据层 → 身份层 → 安全运维，层层设防、任一单层被破仍有其他层兜底</b>。</div>
+      <table class="tbl">
+        <tr><th>层级</th><th>防护重点</th><th>常见措施</th></tr>
+        <tr><td>物理安全</td><td>机房、电力、防灾</td><td>门禁、监控、冗余供电（多为 CSP 负责）</td></tr>
+        <tr><td>网络安全</td><td>隔离与访问控制</td><td>VPC 私有网络、安全组、微隔离、WAF、DDoS 防护</td></tr>
+        <tr><td>主机/计算安全</td><td>系统与应用运行环境</td><td>镜像加固、补丁、堡垒机、主机入侵检测 HIDS</td></tr>
+        <tr><td>应用安全</td><td>代码与接口</td><td>安全开发生命周期（SDLC）、API 鉴权、漏洞扫描</td></tr>
+        <tr><td>数据安全</td><td>数据全生命周期</td><td>加密、脱敏、备份、DLP 数据防泄露</td></tr>
+        <tr><td>身份安全</td><td>人/程序身份</td><td>IAM、MFA、最小权限、SSO</td></tr>
+        <tr><td>安全运维</td><td>监测与响应</td><td>日志审计、SIEM/SOC、态势感知、应急响应</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>纵深防御示例：</b>即使黑客拿到一个 Web 应用权限（应用层破），仍要面对网络微隔离（拿不到数据库网段）、数据加密（读到的也是密文）、审计告警（行为被记录）——多层拦截。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c62b"><h3>二、责任共担模型（Shared Responsibility）</h3>
+    <div class="kp" id="d66">
+      <div class="kp-head"><h4>6.2.2 云安全责任如何划分</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>核心规则：CSP 负责"云本身的安全"（Hypervisor、网络、物理）；客户负责"云中的安全"（操作系统、应用、数据、身份与访问配置）。服务模型越往上（IaaS→PaaS→SaaS），CSP 承担越多，客户责任越少</b>。</div>
+      <div class="fig">
+        <svg viewBox="0 0 680 360" role="img" aria-label="责任共担模型">
+          <!-- legend -->
+          <rect x="40" y="20" width="16" height="16" rx="3" fill="#2563eb"></rect>
+          <text x="62" y="33" font-size="13" fill="#1f2a44">CSP 负责的"云本身安全"</text>
+          <rect x="300" y="20" width="16" height="16" rx="3" fill="#f59e0b"></rect>
+          <text x="322" y="33" font-size="13" fill="#1f2a44">客户负责的"云中安全"</text>
+          <!-- IaaS -->
+          <text x="130" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">IaaS</text>
+          <rect x="40" y="70" width="180" height="216" fill="#f59e0b" rx="8"></rect>
+          <rect x="40" y="286" width="180" height="54" fill="#2563eb" rx="8"></rect>
+          <text x="130" y="180" font-size="12.5" fill="#fff" text-anchor="middle">客户：OS / 应用</text>
+          <text x="130" y="200" font-size="12.5" fill="#fff" text-anchor="middle">/ 数据 / 网络配置</text>
+          <text x="130" y="318" font-size="12.5" fill="#fff" text-anchor="middle">CSP：虚拟化/硬件/机房</text>
+          <!-- PaaS -->
+          <text x="350" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">PaaS</text>
+          <rect x="260" y="70" width="180" height="135" fill="#f59e0b" rx="8"></rect>
+          <rect x="260" y="205" width="180" height="135" fill="#2563eb" rx="8"></rect>
+          <text x="350" y="142" font-size="12.5" fill="#fff" text-anchor="middle">客户：应用 / 数据</text>
+          <text x="350" y="262" font-size="12" fill="#fff" text-anchor="middle">CSP：运行时/OS/</text>
+          <text x="350" y="280" font-size="12" fill="#fff" text-anchor="middle">网络/硬件</text>
+          <!-- SaaS -->
+          <text x="570" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">SaaS</text>
+          <rect x="480" y="70" width="180" height="54" fill="#f59e0b" rx="8"></rect>
+          <rect x="480" y="124" width="180" height="216" fill="#2563eb" rx="8"></rect>
+          <text x="570" y="100" font-size="12.5" fill="#fff" text-anchor="middle">客户：使用配置/用户</text>
+          <text x="570" y="232" font-size="12" fill="#fff" text-anchor="middle">CSP：应用/运行时/</text>
+          <text x="570" y="250" font-size="12" fill="#fff" text-anchor="middle">OS/网络/硬件</text>
+        </svg>
+        <div class="cap">图 6-1 责任共担模型：越往上（SaaS）CSP 责任越大</div>
+      </div>
+      <div class="warn"><span class="lab">⚠ 考试易错点：</span>无论哪种服务模型，"<b>数据加密与客户端配置、身份管理</b>"始终属于客户责任——CSP 不会替你设好密码和权限。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c62c"><h3>三、IaaS / PaaS / SaaS 安全防护措施与策略要求</h3>
+    <div class="kp" id="d67">
+      <div class="kp-head"><h4>6.2.3 三类服务模型的安全重点</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>IaaS 重"系统层"，PaaS 重"应用与配置"，SaaS 重"使用与账号"——防护重心随责任转移而不同</b>。</div>
+      <table class="tbl">
+        <tr><th>维度</th><th>IaaS（基础设施）</th><th>PaaS（平台）</th><th>SaaS（软件）</th></tr>
+        <tr><td>客户主要<br>责任面</td><td>Guest OS、应用、数据、网络 ACL</td><td>应用代码、数据、配置</td><td>账号、权限、使用配置、DLP</td></tr>
+        <tr><td>关键防护措施</td><td>镜像/主机加固、及时打补丁、安全组最小化、堡垒机、磁盘加密、操作审计</td><td>安全 SDLC、依赖/组件漏洞扫描、密钥管理、API 安全、配置基线</td><td>SSO、强制 MFA、最小权限、数据防泄露、登录与操作审计</td></tr>
+        <tr><td>策略要求</td><td>禁止 0.0.0.0/0 全开；定期漏洞扫描；变更需审批</td><td>默认安全配置；密钥不得硬编码；CI/CD 安全门禁</td><td>账号生命周期管理（入职/离职回收）；外发内容管控</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>IaaS 示例：</b>自己用云服务器搭网站——你得自己装防火墙、打系统补丁、管数据库密码。</li>
+          <li><b>PaaS 示例：</b>用云上的数据库/函数计算——你只需管好访问密钥和 SQL 权限，底层系统由厂商管。</li>
+          <li><b>SaaS 示例：</b>用在线办公/邮箱——你重点管好员工账号、开启 MFA、限制文件外发。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c62d"><h3>四、不同云计算应用的安全策略与部署重点</h3>
+    <div class="kp" id="d68">
+      <div class="kp-head"><h4>6.2.4 按业务场景定策略</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>没有"放之四海皆准"的安全策略，应按应用特征（是否对外、是否含敏感数据、是否强合规）确定部署重点</b>。</div>
+      <table class="tbl">
+        <tr><th>应用类型</th><th>部署重点</th></tr>
+        <tr><td>对外 Web / 电商</td><td>WAF + DDoS 防护 + HTTPS + 防爬防刷 + 应用层限流</td></tr>
+        <tr><td>数据密集型 / 大数据</td><td>静态加密 + 备份容灾 + 脱敏 + 访问分级 + 跨区域复制</td></tr>
+        <tr><td>金融 / 政务（强合规）</td><td>等保三级 + 专属/私有云或专区 + 密钥自管(BYOK) + 全量审计</td></tr>
+        <tr><td>IoT / 边缘</td><td>设备身份认证 + 设备证书 + 网关加密 + 固件签名校验</td></tr>
+        <tr><td>DevOps / 研发</td><td>CI/CD 安全门禁 + 密钥不进代码库 + 镜像扫描 + 最小权限流水线</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="chapter" id="c62e"><h3>五、如何评估 CSP（云服务提供商）安全性</h3>
+    <div class="kp" id="d69">
+      <div class="kp-head"><h4>6.2.5 评估 CSP 安全性的维度</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>看"证书 + 透明度 + 数据主权 + SLA + 加密可控 + 事件响应"六方面；优先选择有第三方审计背书、合规齐全的厂商</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>合规认证：</b>ISO 27001、SOC 2 Type II、PCI DSS、国内等保三级/四级、CSA STAR——这些是"第三方替你审过"的依据。</li>
+        <li><b>安全透明度：</b>是否公开安全白皮书、合规报告（如 SOC 2 报告）、是否接受渗透测试与漏洞披露。</li>
+        <li><b>数据位置与主权：</b>数据中心地域是否可选、是否满足数据不出境/本地化要求。</li>
+        <li><b>SLA 与持久性：</b>可用性 SLA（如 99.95%）、数据持久性（如 99.999999999%）、故障赔付条款。</li>
+        <li><b>加密与密钥控制：</b>是否支持客户自管密钥（BYOK / HYOK）、是否提供 KMS/HSM。</li>
+        <li><b>事件响应：</b>是否有明确的安全事件通知时效（如 24 小时内告知）、应急与溯源能力。</li>
+      </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>评估示例：</b>金融客户选型时，先卡"是否具备等保三级 + 金融云专区 + 支持 BYOK"，再比 SLA 与事故赔付，最后看透明度报告。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6.3 ================= -->
+<section class="section" id="c63">
+  <div class="section-head"><div class="num">6.3</div><h2>身份、授权和访问管理（IAM）</h2></div>
+
+  <div class="chapter" id="c63a"><h3>一、基本概念：认证 · 授权 · MFA</h3>
+    <div class="kp" id="d610">
+      <div class="kp-head"><h4>6.3.1 身份认证 / 权限管理 / MFA</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>认证（Authentication）回答"你是谁"；授权（Authorization）回答"你能干什么"；MFA（多因素认证）用两种以上因素证明身份，防止单点凭证泄露</b>。</div>
+      <table class="tbl">
+        <tr><th>概念</th><th>本质问题</th><th>常见手段</th></tr>
+        <tr><td>身份认证<br>(Authentication)</td><td>你是谁？</td><td>密码、数字证书、生物特征、硬件 Token、单点登录</td></tr>
+        <tr><td>权限管理 / 授权<br>(Authorization)</td><td>你能做什么？</td><td>RBAC（基于角色）、ABAC（基于属性）、最小权限、默认拒绝</td></tr>
+        <tr><td>MFA 多因素认证</td><td>再加一道保险</td><td>知识(密码) + 持有(手机/令牌) + 固有(指纹/人脸)</td></tr>
+      </table>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>认证三要素（MFA 的"因素"）：</b>① 你知道的（密码/PIN）；② 你拥有的（手机/硬件 Key/U 盾）；③ 你本身的（指纹/人脸/声纹）。满足两类即"多因素"。</li>
+        <li><b>最小权限原则：</b>只给完成工作所必需的最小权限，默认拒绝一切未明确放开的访问。</li>
+      </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>MFA 示例：</b>登录时输密码（知识）+ 手机验证码/Authenticator 动态码（持有），即使密码泄露也登不进。</li>
+          <li><b>RBAC 示例：</b>"只读分析师"角色只能查数据不能删，新员工按角色批量授权，离职一键回收。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63b"><h3>二、IAM 在云计算环境中的重要性</h3>
+    <div class="kp" id="d611">
+      <div class="kp-head"><h4>6.3.2 为什么云上 IAM 是"第一道防线"</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>云时代"身份即边界"：传统防火墙守不住分散访问，凭证泄露又是头号云威胁，因此管好"谁能访问什么"比以往任何时候都关键</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li>云资源由 API/控制台远程访问，没有固定内网边界 → 身份成为唯一可靠的访问控制点。</li>
+        <li>大量攻击（账户劫持、AK 泄露）都从"冒用合法身份"入手，IAM 是阻断此类攻击的核心。</li>
+        <li>集中式 IAM 带来统一认证、统一授权、统一审计，满足合规对"账号可追溯"的要求。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63c"><h3>三、IAM 的实现方式</h3>
+    <div class="kp" id="d612">
+      <div class="kp-head"><h4>6.3.3 云中 IAM 的落地手段</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>主流实现：目录服务(AD/Entra ID) + SSO(单点登录) + 联合身份(Federation) + 角色/策略(临时凭证 STS) + 特权访问管理(PAM) + 零信任持续验证</b>。</div>
+      <div class="fig">
+        <svg viewBox="0 0 680 300" role="img" aria-label="SSO与MFA认证流程">
+          <defs>
+            <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L8,3 L0,6 Z" fill="#475569"></path>
+            </marker>
+          </defs>
+          <rect x="20" y="110" width="120" height="70" rx="10" fill="#eaf1ff" stroke="#2563eb"></rect>
+          <text x="80" y="138" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">用户</text>
+          <text x="80" y="158" font-size="11" text-anchor="middle" fill="#475569">浏览器/App</text>
+
+          <rect x="190" y="110" width="140" height="70" rx="10" fill="#eaf1ff" stroke="#2563eb"></rect>
+          <text x="260" y="135" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">身份提供商 IdP</text>
+          <text x="260" y="155" font-size="11" text-anchor="middle" fill="#475569">SSO / 目录(AD)</text>
+
+          <rect x="400" y="40" width="150" height="60" rx="10" fill="#fff7ed" stroke="#d97706"></rect>
+          <text x="475" y="66" font-size="12.5" font-weight="700" text-anchor="middle" fill="#9a3412">MFA 校验</text>
+          <text x="475" y="86" font-size="11" text-anchor="middle" fill="#9a3412">手机/令牌/生物</text>
+
+          <rect x="400" y="170" width="150" height="60" rx="10" fill="#eefaf2" stroke="#22a06b"></rect>
+          <text x="475" y="196" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0f6b3c">签发令牌</text>
+          <text x="475" y="216" font-size="11" text-anchor="middle" fill="#0f6b3c">STS 临时凭证</text>
+
+          <rect x="600" y="110" width="70" height="70" rx="10" fill="#f3e8ff" stroke="#7c3aed"></rect>
+          <text x="635" y="138" font-size="12" font-weight="700" text-anchor="middle" fill="#6d28d9">云资源</text>
+          <text x="635" y="158" font-size="10.5" text-anchor="middle" fill="#6d28d9">按策略鉴权</text>
+
+          <line x1="140" y1="145" x2="185" y2="145" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
+          <line x1="260" y1="125" x2="395" y2="78" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
+          <line x1="260" y1="155" x2="395" y2="195" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
+          <line x1="550" y1="100" x2="585" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
+          <line x1="550" y1="200" x2="585" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
+          <text x="300" y="100" font-size="10.5" fill="#475569">① 发起登录</text>
+          <text x="300" y="215" font-size="10.5" fill="#475569">② 通过则签发</text>
+        </svg>
+        <div class="cap">图 6-2 典型云身份流程：SSO 统一认证 + MFA 加强 + 临时凭证(STS)访问云资源</div>
+      </div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>SSO（单点登录）：</b>一次登录通行多个系统，常用 SAML、OIDC 协议，减少密码散落。</li>
+        <li><b>联合身份（Federation）：</b>用企业自有 IdP（如 AD）信任云厂商，员工用公司账号登云，离职即失效。</li>
+        <li><b>角色与 STS 临时凭证：</b>程序/人临时代入角色拿到短期有效的临时密钥，避免长期 AK 泄露风险。</li>
+        <li><b>PAM（特权访问管理）：</b>对管理员等高权限账号做审批、录像、时限控制。</li>
+        <li><b>零信任：</b>"从不信任、持续验证"，每次访问都重新评估身份、设备、环境风险。</li>
+      </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>最佳实践示例：</b>用企业微信/AD 做 SSO 登录云控制台，强制 MFA，给运维开"仅工作时间、仅特定网段、需审批"的临时角色，全程留痕。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6.4 ================= -->
+<section class="section" id="c64">
+  <div class="section-head"><div class="num">6.4</div><h2>数据加密与密钥管理</h2></div>
+
+  <div class="chapter" id="c64a"><h3>一、数据在存储、传输、使用中应用加密的必要性</h3>
+    <div class="kp" id="d613">
+      <div class="kp-head"><h4>6.4.1 加密三态：静态 / 传输中 / 使用中</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>数据有"三种状态"需分别防护：静态（存储）防磁盘/备份泄露；传输中（网络）防窃听/中间人；使用中（计算/内存）防运行时泄露——"全态加密"才是真正闭环</b>。</div>
+      <div class="fig">
+        <svg viewBox="0 0 680 230" role="img" aria-label="数据加密三态">
+          <rect x="20" y="40" width="190" height="150" rx="12" fill="#eaf1ff" stroke="#2563eb"></rect>
+          <text x="115" y="75" font-size="14" font-weight="700" text-anchor="middle" fill="#1d4ed8">① 静态 (At Rest)</text>
+          <text x="115" y="105" font-size="12" text-anchor="middle" fill="#475569">磁盘 / 数据库</text>
+          <text x="115" y="125" font-size="12" text-anchor="middle" fill="#475569">/ 备份 / 对象存储</text>
+          <text x="115" y="160" font-size="11.5" text-anchor="middle" fill="#0f6b3c">手段：AES-256 磁盘</text>
+          <text x="115" y="178" font-size="11.5" text-anchor="middle" fill="#0f6b3c">加密 / 透明加密</text>
+
+          <rect x="245" y="40" width="190" height="150" rx="12" fill="#eefaf2" stroke="#22a06b"></rect>
+          <text x="340" y="75" font-size="14" font-weight="700" text-anchor="middle" fill="#0f6b3c">② 传输中 (In Transit)</text>
+          <text x="340" y="105" font-size="12" text-anchor="middle" fill="#475569">网络 / API</text>
+          <text x="340" y="125" font-size="12" text-anchor="middle" fill="#475569">/ 跨机房</text>
+          <text x="340" y="160" font-size="11.5" text-anchor="middle" fill="#0f6b3c">手段：TLS 1.2+/HTTPS</text>
+          <text x="340" y="178" font-size="11.5" text-anchor="middle" fill="#0f6b3c">/ VPN / 专线</text>
+
+          <rect x="470" y="40" width="190" height="150" rx="12" fill="#fff7ed" stroke="#d97706"></rect>
+          <text x="565" y="75" font-size="14" font-weight="700" text-anchor="middle" fill="#9a3412">③ 使用中 (In Use)</text>
+          <text x="565" y="105" font-size="12" text-anchor="middle" fill="#475569">内存 / 计算</text>
+          <text x="565" y="125" font-size="12" text-anchor="middle" fill="#475569">/ 运行时处理</text>
+          <text x="565" y="160" font-size="11.5" text-anchor="middle" fill="#9a3412">手段：机密计算</text>
+          <text x="565" y="178" font-size="11.5" text-anchor="middle" fill="#9a3412">/ 同态加密(前沿)</text>
+
+          <line x1="210" y1="115" x2="243" y2="115" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"></line>
+          <line x1="435" y1="115" x2="468" y2="115" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"></line>
+        </svg>
+        <div class="cap">图 6-3 数据加密三态：覆盖"存、传、算"才能形成闭环</div>
+      </div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>静态加密必要性：</b>磁盘/备份盘丢失或被盗、存储桶误公开、内部人员越权读取时，密文无法被直接利用。</li>
+        <li><b>传输加密必要性：</b>公网传输若明文，易被中间人窃听、篡改、重放；TLS 保证"只有收发双方看得懂"。</li>
+        <li><b>使用中加密必要性（进阶）：</b>数据在计算/内存时是明文，机密计算（如可信执行环境 TEE）让数据"用的时候也不裸奔"，是前沿重点。</li>
+      </ul>
+      <div class="warn"><span class="lab">⚠ 考试易错点：</span>"传输加密"指网络传输用 TLS，不等于"存储加密"；两者都要做，不能互相替代。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64b"><h3>二、常见加密方法</h3>
+    <div class="kp" id="d614">
+      <div class="kp-head"><h4>6.4.2 对称 / 非对称 / 哈希 / 信封加密</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>对称加密快（AES/SM4）用于大数据；非对称加密(RSA/ECC/SM2)用于密钥交换与签名；哈希(SHA/SM3)用于完整性；实际系统用"信封加密"把三者结合</b>。</div>
+      <table class="tbl">
+        <tr><th>类型</th><th>特点</th><th>代表算法</th><th>用途</th></tr>
+        <tr><td>对称加密</td><td>加解密用同一把密钥，速度快</td><td>AES-256、国密 SM4</td><td>大批量数据静态加密、磁盘加密</td></tr>
+        <tr><td>非对称加密</td><td>公钥加密/私钥解密，或私钥签名/公钥验签</td><td>RSA、ECC、国密 SM2</td><td>密钥协商、数字签名、证书</td></tr>
+        <tr><td>哈希/摘要</td><td>单向不可逆，固定长度指纹</td><td>SHA-256、国密 SM3</td><td>完整性校验、口令存储（加盐哈希）</td></tr>
+        <tr><td>信封加密</td><td>数据密钥(DEK)加密数据，主密钥(CMK)加密 DEK</td><td>AES + KMS</td><td>云上规模化加密（见下节）</td></tr>
+      </table>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>为什么需要非对称 + 对称结合？</b>非对称安全但慢，不适合加密大文件；所以先用非对称"安全地交换"一把对称密钥，再用这把对称密钥高速加密数据（TLS 正是如此）。</li>
+        <li><b>国密算法：</b>国内合规常用 SM2（非对称）/SM3（哈希）/SM4（对称），金融、政务上云常要求支持国密。</li>
+      </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>信封加密示例：</b>上传文件时，系统用随机生成的"数据密钥"把文件 AES 加密（快）；再用 KMS 里的"主密钥"把该数据密钥加密后和密文一起存。解密时反向操作——主密钥永不离开 KMS，安全性与性能兼得。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64c"><h3>三、密钥管理（KMS / HSM / BYOK）</h3>
+    <div class="kp" id="d615">
+      <div class="kp-head"><h4>6.4.3 密钥比数据更该被保护</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>"密钥管理不好，加密等于没加密"：密钥需集中管理(KMS)、硬件保护(HSM)、定期轮换、分级隔离，并支持客户自管(BYOK)</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>KMS（密钥管理服务）：</b>集中生成、存储、轮换密钥，主密钥(CMK)不离开硬件边界；应用只调 API 加解密。</li>
+        <li><b>HSM（硬件安全模块）：</b>专用硬件保护密钥，防提取、防篡改，金融级高安全场景使用。</li>
+        <li><b>密钥轮换：</b>定期更换密钥，降低单把密钥泄露的影响面。</li>
+        <li><b>分级与隔离：</b>主密钥(CMK)与数据密钥(DEK)分离；不同业务用不同密钥，避免"一把钥匙开所有门"。</li>
+        <li><b>BYOK / HYOK：</b>客户自带密钥(BYOK)或持有自己密钥(HYOK)，云厂商看不到明文密钥，满足强合规与"密钥自管"诉求。</li>
+      </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>BYOK 示例：</b>银行把自有的主密钥导入云 KMS，云上数据用这把密钥加密；即使云厂商被攻破，没有银行的密钥也解不开数据。</li>
+          <li><b>轮换示例：</b>每年自动轮换一次主密钥，旧密文仍可用旧密钥解密、新数据用新密钥——平滑无感。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>第六章 云安全 · 详细讲解（2025考纲）｜ 配套复习资料 · 建议结合《复习指南》与题库演练</footer>
+</main>
+</div>
+
+<button id="toTop" title="回到顶部">↑</button>
+<script>
+  // 搜索过滤
+  const search = document.getElementById('search');
+  search.addEventListener('input', function(){
+    const q = this.value.trim().toLowerCase();
+    document.querySelectorAll('.kp').forEach(function(kp){
+      const txt = kp.textContent.toLowerCase();
+      kp.classList.toggle('hide', q && txt.indexOf(q) === -1);
+    });
+  });
+  // 进度条 + 回到顶部 + 目录高亮
+  const prog = document.getElementById('progress');
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    const h = document.documentElement;
+    const sc = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    prog.style.width = (sc*100) + '%';
+    toTop.style.display = h.scrollTop > 400 ? 'block' : 'none';
+  });
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+  const links = Array.from(document.querySelectorAll('nav.toc a'));
+  const map = {};
+  links.forEach(a => { const id = a.getAttribute('href').slice(1); if(document.getElementById(id)) map[id] = a; });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        const a = map[e.target.id]; if(a) a.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-20% 0px -70% 0px'});
+  Object.keys(map).forEach(id => obs.observe(document.getElementById(id)));
+</script>
+<div class="colfoot"><a class="prev" href="5-3.html"><div class="lab">上一章</div><div class="ttl">绿色节能技术</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="7.html"><div class="lab">下一章</div><div class="ttl">产业应用与发展</div></a></div>
+</body>
+</html>

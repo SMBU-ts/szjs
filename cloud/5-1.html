@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.1 云计算数据中心的概念及特征 · 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.78;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16.5px;margin:20px 0 8px;color:var(--ink)}
+  h4{font-size:15px;margin:14px 0 6px;color:#1e3a8a}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .flow{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:16px;margin:14px 0;text-align:center}
+  .flow svg{width:100%;height:auto;max-width:760px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-top:22px}
+  .toc b{color:var(--brand)}
+  .toc ol{margin:6px 0}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip active" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>5.1 云计算数据中心的概念及特征</h1>
+  <p>覆盖：数据中心的概念 · 核心组件 · 分类与分级 · 各组件的协同工作原理</p>
+  <span class="badge">考纲定位：了解级（概念清晰 + 关键指标记忆）</span>
+</header>
+
+<div class="toc">
+  <b>本页目录</b>
+  <ol>
+    <li>一、数据中心的概念（什么是数据中心？云数据中心与传统数据中心的区别）</li>
+    <li>二、数据中心的核心组件（计算 / 存储 / 网络 / 风火水电 / 管理运维）</li>
+    <li>三、数据中心的分类与分级（按归属·规模·服务形态；TierⅠ~Ⅳ、国标分级、容灾等级、PUE）</li>
+    <li>四、各组件在云计算数据中心中的作用与协同工作原理（资源池化 + 调度编排 + 弹性高可用）</li>
+  </ol>
+</div>
+
+<!-- 一 -->
+<section>
+  <h2><span class="num">1</span>一、数据中心的概念</h2>
+
+  <h3>1.1 什么是数据中心（Data Center, DC）</h3>
+  <p><b>数据中心</b>是指<b>集中放置计算、存储、网络等 IT 设备，以及保障其持续、稳定、安全运行所需的电力、制冷、安防、布线等基础设施</b>的物理场所与逻辑系统的集合。它既是一栋建筑（机房），也是一套把"算力、数据、网络"整合在一起对外提供服务的系统。</p>
+  <div class="kv"><b>一句记忆：</b>数据中心 = 一堆服务器 + 让它不宕机不发热的"风火水电" + 一套让人能管、能用它的软件。</div>
+
+  <h3>1.2 数据中心的本质</h3>
+  <p>数据中心是数字化转型的<b>"算力工厂"</b>——把分散的 IT 资源<b>集中化、规模化、专业化</b>，让用户无需自建机房即可获得稳定、弹性、按需的算力与存储服务。它是云计算、大数据、AI 的底层载体。</p>
+
+  <h3>1.3 云数据中心 vs 传统数据中心（考试重点）</h3>
+  <table>
+    <tr><th>对比维度</th><th>传统数据中心（IDC）</th><th>云计算数据中心（Cloud DC）</th></tr>
+    <tr><td>资源形态</td><td>物理机一对一绑定应用，孤岛式</td><td><b>资源池化</b>，计算/存储/网络被抽象成可灵活调度的池</td></tr>
+    <tr><td>交付方式</td><td>人工上架、手工配置，周期长</td><td><b>自助服务 + 自动化编排</b>，分钟级开通</td></tr>
+    <tr><td>隔离方式</td><td>物理隔离 / VLAN</td><td><b>虚拟化 + 多租户隔离</b>（VM、容器、VPC）</td></tr>
+    <tr><td>弹性</td><td>固定容量，扩容慢</td><td><b>弹性伸缩</b>，按需扩缩容</td></tr>
+    <tr><td>计费</td><td>包年包月机柜/带宽</td><td><b>按量计量</b>（CPU/GB/小时）— 即 DCaaS 思路</td></tr>
+    <tr><td>网络</td><td>传统三层网络，逐台配置</td><td><b>SDN（软件定义网络）</b>，控制器统一下发策略</td></tr>
+  </table>
+  <div class="safe"><b>考点提炼：</b>云计算数据中心的核心特征 = <span class="tag">资源池化</span><span class="tag">虚拟化</span><span class="tag">按需自助</span><span class="tag">弹性伸缩</span><span class="tag">多租户</span><span class="tag">自动化</span><span class="tag">计量计费</span>。</div>
+</section>
+
+<!-- 二 -->
+<section>
+  <h2><span class="num">2</span>二、数据中心的核心组件</h2>
+  <p>一个完整的数据中心由五大子系统构成，考试常考"核心组件"分类。可记为：<b>算、存、网、基、管</b> 五字诀。</p>
+
+  <div class="card-grid">
+    <div class="mini"><h4>① 计算系统</h4><p>服务器（机架式/刀片/整机柜）、CPU/GPU/FPGA、<b>虚拟化层（Hypervisor）</b>，承载业务负载与算力输出。</p></div>
+    <div class="mini"><h4>② 存储系统</h4><p>块存储/文件/对象存储、SAN/NAS、<b>分布式存储</b>（HDFS、Ceph），保证数据持久与高可用。</p></div>
+    <div class="mini"><h4>③ 网络系统</h4><p>交换机、路由器、负载均衡、<b>SDN 控制器</b>，负责内部互联与外部接入、流量调度。</p></div>
+    <div class="mini"><h4>④ 基础设施（风火水电）</h4><p>供配电（UPS/双路市电/柴发）、制冷（精密空调/液冷/自然冷源）、机柜、消防、安防。</p></div>
+    <div class="mini"><h4>⑤ 管理与运维</h4><p>DCIM、<b>云管平台/编排器</b>、监控系统、自动化运维，让一切可管、可控、可视。</p></div>
+  </div>
+
+  <h3>2.1 计算系统</h3>
+  <ul>
+    <li><b>服务器形态：</b>机架式（最通用）、刀片式（高密度）、整机柜（如天蝎整机柜，云厂商定制）。</li>
+    <li><b>算力芯片：</b>通用 CPU（x86/ARM）；AI 与高性能用 GPU、NPU（如华为昇腾）、FPGA。</li>
+    <li><b>虚拟化层：</b>Type1 裸金属虚拟化（KVM、VMware ESXi，性能损失小，<b>数据中心标配</b>）直接在硬件上跑；Type2 宿主型（VirtualBox，个人用）。</li>
+  </ul>
+
+  <h3>2.2 存储系统</h3>
+  <ul>
+    <li><b>按接口：</b>块存储（云硬盘）、文件存储（NAS）、对象存储（S3 式，海量非结构化数据）。</li>
+    <li><b>按架构：</b>集中式 SAN/NAS vs <b>分布式存储</b>（数据分块 + 多副本，单机宕机数据不丢）。</li>
+    <li><b>介质：</b>SSD（高性能）与 HDD（大容量低成本）分层。</li>
+  </ul>
+
+  <h3>2.3 网络系统</h3>
+  <ul>
+    <li>接入—汇聚—核心三层拓扑；负载均衡把流量分散到多台服务器。</li>
+    <li><b>云数据中心关键：SDN（软件定义网络）</b>——控制面与转发面分离，控制器统一下发流表，新业务上线<b>无需逐台配交换机</b>。</li>
+  </ul>
+
+  <h3>2.4 基础设施（风火水电）</h3>
+  <ul>
+    <li><b>供配电：</b>双路市电 + UPS（不间断电源） + 柴油发电机，确保不断电。</li>
+    <li><b>制冷：</b>精密空调、冷热通道隔离、<b>液冷</b>、利用自然冷源（free cooling）。</li>
+    <li><b>其他：</b>机柜与综合布线、气体消防、门禁监控等物理安防。</li>
+  </ul>
+
+  <h3>2.5 管理与运维系统</h3>
+  <ul>
+    <li><b>DCIM：</b>数据中心基础设施管理，监控电力/温湿度/空间。</li>
+    <li><b>云管理平台（CMP）：</b>资源申请、审批、计量计费。</li>
+    <li><b>编排器：</b>如 Kubernetes，把计算/存储/网络自动组装成可运行的服务。</li>
+  </ul>
+</section>
+
+<!-- 三 -->
+<section>
+  <h2><span class="num">3</span>三、数据中心的分类与分级</h2>
+
+  <h3>3.1 分类（按不同视角）</h3>
+  <table>
+    <tr><th>分类视角</th><th>类型</th><th>说明 / 典型场景</th></tr>
+    <tr><td rowspan="4">按归属与用途</td><td>企业自建 DC</td><td>大企业或政府自用，安全可控、成本高</td></tr>
+    <tr><td>托管 DC（Colocation）</td><td>用户出设备、运营商出机房/带宽，如主机托管</td></tr>
+    <tr><td>云数据中心</td><td>阿里云/腾讯云/华为云等，对外提供云服务</td></tr>
+    <tr><td>运营商 DC</td><td>电信/联通等基础网络运营商建设</td></tr>
+    <tr><td rowspan="2">按规模</td><td>超大型（Hyperscale）</td><td>十万+服务器，云/互联网巨头（如 AWS、谷歌）</td></tr>
+    <tr><td>大 / 中 / 小型、边缘 DC</td><td>边缘 DC 靠近用户，降低时延（5G、IoT）</td></tr>
+    <tr><td>按服务形态</td><td>传统 IDC / DCaaS</td><td><b>DCaaS（数据中心即服务）</b>：按需租用机柜/带宽/裸金属/专属云</td></tr>
+    <tr><td>按位置</td><td>中心 DC / 边缘 DC</td><td>中心集中处理，边缘就近响应</td></tr>
+  </table>
+
+  <h3>3.2 分级 —— 国际 Tier 标准（Uptime Institute）</h3>
+  <p>按<b>可用性</b>从低到高分为 TierⅠ ~ TierⅣ，可用性递增、年宕机时间递减：</p>
+  <table>
+    <tr><th>等级</th><th>关键特征</th><th>冗余能力</th><th>年宕机（约）</th></tr>
+    <tr><td>Tier Ⅰ</td><td>基本级</td><td>单路，无冗余</td><td>28.8 小时</td></tr>
+    <tr><td>Tier Ⅱ</td><td>冗余组件级</td><td>关键部件冗余（N+1）</td><td>22.0 小时</td></tr>
+    <tr><td>Tier Ⅲ</td><td>可并行维护级</td><td>N+1，任何部件可不停机维护</td><td>1.6 小时</td></tr>
+    <tr><td>Tier Ⅳ</td><td><b>容错级</b></td><td>2N 双路供电/制冷，故障不中断</td><td><b>&lt; 26 分钟</b></td></tr>
+  </table>
+  <div class="tip"><b>记忆口诀：</b>Ⅰ单 / Ⅱ冗余 / Ⅲ可维护 / Ⅳ容错；等级越高越"不宕机"。云数据中心普遍达到 Tier Ⅲ~Ⅳ。</div>
+
+  <h3>3.3 分级 —— 国内标准与容灾等级</h3>
+  <ul>
+    <li><b>机房分级（GB 50174 / 电子信息系统机房规范）：</b>A 级（容错，如银行/政务核心）、B 级（冗余）、C 级（基本）。</li>
+    <li><b>容灾等级（GB/T 20988）：</b>从 L1 基本数据备份 → L3 电子传输与完整设备支持 → L5 实时数据传输+远程集群（双活）→ <b>L6 数据零丢失（RPO=0、RTO≈0）</b>。</li>
+  </ul>
+
+  <h3>3.4 关键能效指标：PUE</h3>
+  <div class="kv"><b>PUE（电能使用效率）= 数据中心总能耗 ÷ IT 设备能耗</b>，越接近 1.0 越好。先进绿色数据中心 <b>PUE &lt; 1.2</b>。降 PUE 手段：自然冷源、液冷、高压直流供电、冷热通道隔离。</div>
+  <div class="safe"><b>考点：</b>PUE 衡量"绿色程度"，数值越小越省电；RTO/RPO 衡量"容灾能力"，数值越小要求越高。</div>
+</section>
+
+<!-- 四 -->
+<section>
+  <h2><span class="num">4</span>四、各组件在云计算数据中心中的作用与协同工作原理</h2>
+  <p>云数据中心不是组件的简单堆叠，而是<b>以"资源池化 + 统一编排"为纽带</b>协同运转的系统。下面用一条"用户申请一台云服务器"的业务流，串联各组件的作用与配合。</p>
+
+  <div class="flow">
+    <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif">
+      <defs>
+        <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+        </marker>
+      </defs>
+      <!-- 用户 -->
+      <rect x="20" y="125" width="100" height="50" rx="10" fill="#eef2ff" stroke="#2563eb"/>
+      <text x="70" y="155" text-anchor="middle" font-size="14" fill="#1e3a8a">用户/租户</text>
+      <!-- 云管平台 -->
+      <rect x="160" y="120" width="120" height="60" rx="10" fill="#e0f2fe" stroke="#0ea5e9"/>
+      <text x="220" y="148" text-anchor="middle" font-size="13" fill="#075985">云管平台</text>
+      <text x="220" y="166" text-anchor="middle" font-size="12" fill="#075985">/编排器</text>
+      <!-- 调度 -->
+      <rect x="320" y="120" width="110" height="60" rx="10" fill="#fef3c7" stroke="#d97706"/>
+      <text x="375" y="148" text-anchor="middle" font-size="13" fill="#92400e">调度决策</text>
+      <text x="375" y="166" text-anchor="middle" font-size="12" fill="#92400e">SDN/CMP</text>
+      <!-- 计算 -->
+      <rect x="470" y="40" width="110" height="50" rx="10" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="525" y="70" text-anchor="middle" font-size="13" fill="#166534">计算池</text>
+      <!-- 存储 -->
+      <rect x="470" y="125" width="110" height="50" rx="10" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="525" y="155" text-anchor="middle" font-size="13" fill="#166534">存储池</text>
+      <!-- 网络 -->
+      <rect x="470" y="210" width="110" height="50" rx="10" fill="#dcfce7" stroke="#16a34a"/>
+      <text x="525" y="240" text-anchor="middle" font-size="13" fill="#166534">网络(SDN)</text>
+      <!-- 基础设施 -->
+      <rect x="620" y="115" width="120" height="60" rx="10" fill="#fee2e2" stroke="#dc2626"/>
+      <text x="680" y="143" text-anchor="middle" font-size="13" fill="#991b1b">风火水电</text>
+      <text x="680" y="161" text-anchor="middle" font-size="12" fill="#991b1b">保障不停机</text>
+
+      <line x1="120" y1="150" x2="158" y2="150" stroke="#2563eb" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="280" y1="150" x2="318" y2="150" stroke="#2563eb" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="430" y1="145" x2="468" y2="65" stroke="#16a34a" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="430" y1="150" x2="468" y2="150" stroke="#16a34a" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="430" y1="155" x2="468" y2="235" stroke="#16a34a" stroke-width="2" marker-end="url(#ar)"/>
+      <line x1="580" y1="150" x2="618" y2="150" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
+    </svg>
+  </div>
+
+  <h3>4.1 协同流程（一步一步看组件怎么配合）</h3>
+  <ol>
+    <li><b>用户/租户</b>在自助门户提交需求（如"2核4G云主机 + 100G云盘"）。</li>
+    <li><b>云管平台 / 编排器</b>接收请求，做身份认证、配额校验与计费登记。</li>
+    <li><b>调度决策</b>根据资源池水位，选择合适物理机；同时通过 <b>SDN 控制器</b> 规划网络（分配 VPC、IP、安全组）。</li>
+    <li><b>计算池</b>由 Hypervisor 创建/启动虚拟机或容器；<b>存储池</b>挂载对应云盘（多副本保障不丢）；<b>网络(SDN)</b> 下发流表打通链路、负载均衡接入。</li>
+    <li><b>风火水电（基础设施）</b>全程为上述设备供电、制冷，确保不宕机、不过热。</li>
+    <li>服务就绪后，<b>监控/运维系统</b>持续采集指标（CPU、PUE、流量），异常自动告警或弹性扩缩容。</li>
+  </ol>
+
+  <h3>4.2 云计算数据中心的协同特征</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>资源池化</h4><p>算/存/网全部抽象成"池"，打破物理绑定，统一调度。</p></div>
+    <div class="mini"><h4>虚拟化隔离</h4><p>多租户共享硬件但彼此隔离，安全互不干扰。</p></div>
+    <div class="mini"><h4>软件定义</h4><p>SDN/SDS 让网络、存储由软件统一控制，敏捷灵活。</p></div>
+    <div class="mini"><h4>弹性自愈</h4><p>负载升高自动扩容；节点故障由副本/迁移兜底。</p></div>
+    <div class="mini"><h4>绿色节能</h4><p>液冷+自然冷源压低 PUE，降低 TCO。</p></div>
+    <div class="mini"><h4>高可用容灾</h4><p>多副本+跨可用区+双活，RTO/RPO 极小。</p></div>
+  </div>
+
+  <h3>4.3 经典样例（考试可直接套用）</h3>
+  <div class="safe"><b>弹性样例：</b>电商大促流量飙升，云管平台自动扩容云主机并借 SDN 把新节点加入负载均衡，峰值过后自动回收，按量计费。</div>
+  <div class="safe"><b>容灾样例：</b>银行"双活"数据中心，主中心断电，备中心秒级接管（RTO 极小、RPO≈0），多副本确保数据零丢失。</div>
+  <div class="safe"><b>节能样例：</b>用自然冷源 + 液冷把 PUE 降到 1.2 以下，比传统机房省电明显。</div>
+  <div class="safe"><b>DCaaS 样例：</b>初创公司不建机房，按需租用云厂商机柜/裸金属/专属云，免运维、按需付费。</div>
+</section>
+
+<!-- 考点速记 -->
+<section>
+  <h2><span class="num">★</span>考点速记与样题</h2>
+  <div class="threat"><b>易错点：</b>① PUE 是"越小越好"（不是越大越好）；② 云安全关键技术 = <b>数据安全/应用安全/虚拟化安全</b>（ABC），<b>不是"服务器安全"</b>（经典陷阱）；③ TierⅣ 是容错级，不是"最高功耗"级。</div>
+  <ul>
+    <li><b>概念：</b>数据中心 = IT 设备 + 风火水电 + 管理软件的集合；云 DC 本质是资源池化、按需服务的算力工厂。</li>
+    <li><b>核心组件（五字诀）：</b>算、存、网、基（风火水电）、管（运维）。</li>
+    <li><b>分级：</b>TierⅠ~Ⅳ（Ⅰ单/Ⅱ冗余/Ⅲ可维护/Ⅳ容错）；国标 A/B/C；容灾 GB/T 20988 L1~L6。</li>
+    <li><b>关键指标：</b>PUE=总能耗/IT能耗（绿色，越小越好）；RTO=恢复时间、RPO=数据丢失量（容灾，越小越好）。</li>
+    <li><b>协同：</b>用户申请 → 云管编排 → 调度+SDN → 算/存/网资源池联动 → 风火水电保障 → 监控弹性闭环。</li>
+  </ul>
+  <div class="tip"><b>一句话答题模板（名词解释"云计算数据中心"）：</b>云计算数据中心是在传统数据中心基础上，通过<b>虚拟化、资源池化、SDN 与自动化编排</b>，将计算、存储、网络等 IT 资源抽象为统一资源池，以<b>按需自助、弹性伸缩、多租户隔离、计量计费</b>方式对外提供服务的新型基础设施，并依赖可靠供配电、制冷（风火水电）与高可用容灾机制保障持续运行。</div>
+</section>
+
+<footer>5.1 云计算数据中心的概念及特征 · 详细讲解（与《完整复习手册》《核心知识点详解》配套）</footer>
+
+</div>
+<div class="colfoot"><a class="prev" href="4-4.html"><div class="lab">上一章</div><div class="ttl">微服务架构</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="5-2.html"><div class="lab">下一章</div><div class="ttl">数据中心关键服务</div></a></div>
+</body>
+</html>

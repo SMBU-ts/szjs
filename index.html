@@ -1,732 +1,103 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>湖南省数字技术应用能力考试 · 完整备考手册（2025考纲）· v1.1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云计算复习专栏 · 2025 考纲</title>
+<link rel="stylesheet" href="assets/nav.css">
+<nav class="colnav"><div class="inner">
+<a class="chip active" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="cloud/1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="cloud/2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="cloud/2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="cloud/2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="cloud/3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="cloud/3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="cloud/3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="cloud/4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="cloud/4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="cloud/4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="cloud/5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="cloud/5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="cloud/5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="cloud/6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="cloud/7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
 <style>
-:root{--bg:#f4f6fb;--panel:#fff;--ink:#1f2a44;--ink-soft:#56607a;--line:#e3e8f2;--shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
---ai:#7c3aed;--ai-soft:#f3ecff;--iot:#0d9488;--iot-soft:#e6f7f4;--cloud:#2563eb;--cloud-soft:#eaf1ff;
---lv1:#64748b;--lv2:#0d9488;--lv3:#dc2626;--deep-bg:#fdfdfa;--deep-bd:#d4b896;--deep-ink:#5c4033;--deep-tag:#8b6914;
---key-bg:#fff1f0;--key-bd:#ff9c8a;--key-ink:#b42318;--ex-bg:#eefaf2;--ex-bd:#22a06b;--ex-ink:#0f6b3c}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px}
-
-header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:13px 24px;box-shadow:var(--shadow)}
-.top h1{margin:0;font-size:18px;font-weight:700}.top .sub{font-size:12.5px;opacity:.92;margin-top:3px}
-.search-wrap{position:absolute;right:20px;top:12px}
-.search-wrap input{width:200px;padding:6px 10px;border-radius:999px;border:none;outline:none;font-size:12.5px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
-
-.container{display:flex;align-items:flex-start;max-width:1380px;margin:0 auto}
-nav.tree{position:sticky;top:86px;width:310px;flex:0 0 310px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto;padding:14px 8px 24px 10px;background:var(--panel);border-right:1px solid var(--line);font-size:12.5px}
-nav.tree h3.nav-hd{font-size:12px;color:var(--ink-soft);letter-spacing:1px;margin:0 0 5px 8px}
-nav.tree ul{list-style:none;padding:0;margin:0}
-nav.tree li{margin:0;padding:0}
-nav.tree .cbox{display:flex;align-items:center;cursor:pointer}
-nav.tree a{display:block;color:var(--ink-soft);text-decoration:none;padding:3px 6px;margin:1px 0;border-radius:5px;border-left:3px solid transparent;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-nav.tree a:hover{background:#eef2ff;color:var(--cloud)}
-nav.tree a.active{background:#ebf0ff;color:var(--cloud);border-left-color:var(--cloud);font-weight:600}
-nav.tree a.lv-part{font-size:13.5px;font-weight:700;color:var(--ink);padding:5px 8px;margin-top:5px}
-nav.tree a.lv-ch{font-size:12.5px;padding-left:18px;font-weight:600}
-nav.tree a.lv-sec{font-size:12px;padding-left:32px}
-nav.tree a.lv-sub{font-size:11.5px;padding-left:46px;color:#939db1}
-nav.tree .toggle{display:inline-block;width:14px;text-align:center;cursor:pointer;font-size:10px;line-height:1;margin-right:1px;color:#aaa;user-select:none;flex-shrink:0}
-nav.tree li.fold>ul{display:none}
-nav.tree .ctrls{display:flex;gap:6px;margin:6px 0 6px 8px}
-nav.tree .ctrls button{font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid var(--line);background:#f8f9fc;cursor:pointer;color:var(--ink-soft)}
-
-main{flex:1;min-width:0;padding:20px 28px 80px}
-.sec{margin-bottom:40px;scroll-margin-top:90px}
-.sec-hd{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;color:#fff;box-shadow:var(--shadow);position:sticky;top:86px;z-index:20}
-.sec.ai .sec-hd{background:linear-gradient(120deg,#7c3aed,#a855f7)}
-.sec.iot .sec-hd{background:linear-gradient(120deg,#0d9488,#14b8a6)}
-.sec.cloud .sec-hd{background:linear-gradient(120deg,#1d4ed8,#3b82f6)}
-.sec-hd .num{background:rgba(255,255,255,.22);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
-.sec-hd h2{margin:0;font-size:18px}
-
-.chapter{margin-top:20px;scroll-margin-top:150px} .chapter>h3{font-size:16px;margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--cloud);box-shadow:var(--shadow)}
-.sec.ai .chapter>h3{border-left-color:var(--ai)} .sec.iot .chapter>h3{border-left-color:var(--iot)} .sec.cloud .chapter>h3{border-left-color:var(--cloud)}
-.section-kp{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:150px}
-.section-kp.hide{display:none}
-.section-kp>h4{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.section-kp>h4 .badge{font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;color:#fff;white-space:nowrap}
-.lv1{background:var(--lv1)}.lv2{background:var(--lv2)}.lv3{background:var(--lv3)}
-.sub-kp{margin:10px 0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fafbfd;scroll-margin-top:150px}
-.sub-kp h5{margin:0 0 5px;font-size:13.5px;color:var(--ink);font-weight:600}
-.block{margin:8px 0}.block p,.block ul{margin:4px 0;color:var(--ink-soft)}.block ul{padding-left:18px}.block ul li{margin:3px 0}.block .t{font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;margin-bottom:3px}
-.sec.ai .block .t{color:var(--ai)}.sec.iot .block .t{color:var(--iot)}.sec.cloud .block .t{color:var(--cloud)}
-.block .t::before{content:"";width:6px;height:6px;border-radius:2px;background:currentColor;display:inline-block}
-.core{background:var(--ai-soft);border-radius:8px;padding:8px 12px;margin:8px 0}
-.sec.iot .core{background:var(--iot-soft)}.sec.cloud .core{background:var(--cloud-soft)}
-.core .clab{font-weight:700;font-size:12.5px}.sec.ai .core .clab{color:var(--ai)}.sec.iot .core .clab{color:var(--iot)}.sec.cloud .core .clab{color:var(--cloud)}
-.core .clab::before{content:"★ 核心：";color:var(--ai)}.sec.iot .core .clab::before{color:var(--iot)}.sec.cloud .core .clab::before{color:var(--cloud)}
-.deep{background:var(--deep-bg);border:1px solid var(--deep-bd);border-left:4px solid var(--deep-tag);border-radius:8px;padding:10px 13px;margin:10px 0}
-.deep .dlab{font-weight:700;font-size:12.5px;color:var(--deep-tag);margin-bottom:4px;display:flex;align-items:center;gap:5px}
-.deep .dlab::before{content:"📖 深度解析"}
-.deep .dsub{font-weight:700;font-size:12.5px;color:#7a5f2a;margin:8px 0 3px}.deep p,.deep ul{margin:3px 0;color:var(--deep-ink);line-height:1.7}.deep ul{padding-left:18px}.deep ul li{margin:2px 0}
-.deep ol{margin:3px 0;padding-left:18px;color:var(--deep-ink)}
-.deep table,.deep-table{border-collapse:collapse;width:100%;margin:6px 0;font-size:12.5px}
-.deep th,.deep-table th{background:#f5eed8;color:#6b4f1a;padding:4px 8px;text-align:left;border:1px solid #d4b896}
-.deep td,.deep-table td{padding:4px 8px;border:1px solid #d4b896;color:var(--deep-ink)}
-.key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:3px solid var(--key-ink);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--key-ink);font-size:13px}.key b{color:var(--key-ink)}
-.ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:3px solid var(--ex-bd);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--ex-ink);font-size:13px}
-.ex .lab{font-weight:700;display:block;margin-bottom:3px}.ex .lab::before{content:"💡 示例"}
-footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line)}
-#toTop{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:18px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60}
-.progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;z-index:100}
-@media(max-width:940px){nav.tree{display:none}.container{display:block}main{padding:14px}.search-wrap{position:static;margin-top:8px}.search-wrap input{width:100%}}
-
-/* ===== v1.1 新增内容高亮 ===== */
-.ver-pill{display:inline-block;background:#fbbf24;color:#7c2d12;font-size:12px;font-weight:800;padding:1px 9px;border-radius:999px;vertical-align:middle;margin-left:6px}
-.ver-note{color:#fde68a;font-weight:600}
-.v11-new{position:relative;border-left:4px solid #d97706;background:#fffbeb;padding:14px 18px;border-radius:0 8px 8px 0;margin:10px 0}
-.v11-tag{display:inline-block;background:#d97706;color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;margin-bottom:8px;letter-spacing:.5px}
-.v11-new .block{background:#fff;border:1px solid #fde68a}
-.v11-new .lead{color:#92400e;font-size:13.5px;margin:6px 0 12px}
-table.chlog{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
-table.chlog th,table.chlog td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
-table.chlog th{background:#f1f5f9;color:var(--ink)}
-table.chlog .v11-row td{background:#fffbeb}
-.chlog-note{color:var(--ink-soft);font-size:12.5px;background:#f8fafc;border-left:3px solid #94a3b8;padding:8px 12px;border-radius:0 6px 6px 0;margin-top:8px}
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1f2937;--sub:#52606d;--brand:#2563eb;--line:#e5e7eb}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+.hero{max-width:1120px;margin:26px auto 0;padding:34px 30px;border-radius:18px;color:#fff;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb 55%,#0ea5e9);box-shadow:0 12px 34px rgba(37,99,235,.28)}
+.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.5px}
+.hero p{margin:4px 0;opacity:.94;font-size:14.5px}
+.hero .badge{display:inline-block;margin-top:12px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);padding:3px 12px;border-radius:999px;font-size:12.5px}
+.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 70px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+.sec h2{font-size:19px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:9px}
+.sec h2 .dot{width:9px;height:9px;border-radius:3px;background:var(--brand);display:inline-block}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:11px 16px;margin-top:16px;font-size:13.5px;color:#92400e}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:6px}
+.card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:var(--ink);box-shadow:0 2px 8px rgba(15,23,42,.04);transition:.15s;border-top:4px solid var(--brand)}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(37,99,235,.18);border-color:#bfdbfe}
+.card .cnum{display:inline-block;font-weight:800;color:#fff;background:var(--brand);border-radius:8px;padding:1px 9px;font-size:13px}
+.card .ctitle{font-size:16px;font-weight:700;margin:9px 0 5px}
+.card .cdesc{font-size:12.8px;color:var(--sub);line-height:1.55}
+.oline{display:flex;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.oline:last-child{border-bottom:none}
+.opart{flex:0 0 180px;font-weight:700;color:#0f172a;font-size:14.5px}
+.oitems{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 16px}
+.oitems li a{color:var(--brand);text-decoration:none;font-size:13.5px}
+.oitems li a:hover{text-decoration:underline}
+.oitems .miss{color:#94a3b8;font-size:13px}
+footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
 </style>
 </head>
 <body>
-<div class="progress" id="progress"></div>
-<header class="top"><h1>完整备考手册 · 人工智能 / 物联网 / 云计算 <span class="ver-pill">v1.1</span></h1><div class="sub">湖南省数字技术应用能力水平考试（2025考纲）| 四级层级编号 · 深度解析 · 示例 · 考试重点 &nbsp;·&nbsp; <span class="ver-note">更新于 2026-07-25 · 前一版 v1.0</span></div>
-<div class="search-wrap"><input id="search" type="text" placeholder="🔍 搜索…"></div></header>
+<header class="hero">
+  <h1>☁ 云计算复习专栏</h1>
+  <p>依据《2025 湖南省数字技术应用能力考试 · 云计算基础知识及应用》考纲整理</p>
+  <p>整理自今晚的云计算讲解，按考纲第 1–7 章分篇，每章一篇，可顺序复习或按需跳转。</p>
+  <span class="badge">覆盖：概述 · 关键技术 · 典型平台 · 面向服务计算 · 数据中心 · 安全 · 产业发展</span>
+</header>
 
-<div class="container">
-<nav class="tree" id="tree">
-<h3 class="nav-hd">📑 目录（点击▾折叠）</h3>
-<div class="ctrls"><button onclick="foldAll()">全部折叠</button><button onclick="unfoldAll()">全部展开</button></div>
-<ul>
-<li><a class="lv-part lv-ai" href="#ai">Ⅰ 人工智能基础知识及应用</a><ul>
-<li><a class="lv-ch" href="#ai-c1">1 人工智能概述</a><ul>
-<li><a class="lv-sec" href="#s-a1-1">1.1 人工智能基本概念</a><ul>
-<li><a class="lv-sub" href="#s-a1-1-1">1.1.1 思维、智能与AI的概念</a></li>
-<li><a class="lv-sub" href="#s-a1-1-2">1.1.2 图灵测试</a></li>
-<li><a class="lv-sub" href="#s-a1-1-3">1.1.3 强AI与弱AI</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a1-2">1.2 人工智能发展简史</a><ul>
-<li><a class="lv-sub" href="#s-a1-2-1">1.2.1 达特茅斯会议</a></li>
-<li><a class="lv-sub" href="#s-a1-2-2">1.2.2 三大学派</a></li>
-<li><a class="lv-sub" href="#s-a1-2-3">1.2.3 发展现状与趋势</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a1-3">1.3 人工智能的主要特征</a><ul>
-<li><a class="lv-sub" href="#s-a1-3-1">1.3.1 环境感知能力</a></li>
-<li><a class="lv-sub" href="#s-a1-3-2">1.3.2 知识运用能力</a></li>
-<li><a class="lv-sub" href="#s-a1-3-3">1.3.3 学习能力</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a1-4">1.4 我国发展现状</a></li></ul></li>
-<li><a class="lv-ch" href="#ai-c2">2 人工智能基础理论</a><ul>
-<li><a class="lv-sec" href="#s-a2-1">2.1 机器学习</a><ul>
-<li><a class="lv-sub" href="#s-a2-1-1">2.1.1 概念与术语</a></li>
-<li><a class="lv-sub" href="#s-a2-1-2">2.1.2 分类任务（决策树 / SVM）</a></li>
-<li><a class="lv-sub" href="#s-a2-1-3">2.1.3 聚类任务（K-Means）</a></li>
-<li><a class="lv-sub" href="#s-a2-1-4">2.1.4 回归与过拟合</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a2-2">2.2 深度学习</a><ul>
-<li><a class="lv-sub" href="#s-a2-2-1">2.2.1 神经元与传播机制</a></li>
-<li><a class="lv-sub" href="#s-a2-2-2">2.2.2 CNN卷积神经网络</a></li>
-<li><a class="lv-sub" href="#s-a2-2-3">2.2.3 RNN与LSTM</a></li>
-<li><a class="lv-sub" href="#s-a2-2-4">2.2.4 深度学习 vs 传统机器学习</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a2-3">2.3 大模型</a><ul>
-<li><a class="lv-sub" href="#s-a2-3-1">2.3.1 大模型与涌现能力</a></li>
-<li><a class="lv-sub" href="#s-a2-3-2">2.3.2 提示工程（零/少样本、CoT）</a></li>
-<li><a class="lv-sub" href="#s-a2-3-3">2.3.3 代表模型</a></li></ul></li></ul></li>
-<li><a class="lv-ch" href="#ai-c3">3 人工智能关键技术</a><ul>
-<li><a class="lv-sec" href="#s-a3-1">3.1 计算机视觉</a><ul>
-<li><a class="lv-sub" href="#s-a3-1-1">3.1.1 数字图像基础</a></li>
-<li><a class="lv-sub" href="#s-a3-1-2">3.1.2 图像分类</a></li>
-<li><a class="lv-sub" href="#s-a3-1-3">3.1.3 图像分割</a></li>
-<li><a class="lv-sub" href="#s-a3-1-4">3.1.4 目标检测</a></li>
-<li><a class="lv-sub" href="#s-a3-1-5">3.1.5 目标跟踪与三维重建</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a3-2">3.2 自然语言处理</a><ul>
-<li><a class="lv-sub" href="#s-a3-2-1">3.2.1 NLP概念与难点</a></li>
-<li><a class="lv-sub" href="#s-a3-2-2">3.2.2 语言模型发展史</a></li>
-<li><a class="lv-sub" href="#s-a3-2-3">3.2.3 NLP四类任务</a></li>
-<li><a class="lv-sub" href="#s-a3-2-4">3.2.4 NLU与NLG</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a3-3">3.3 智能交互</a><ul>
-<li><a class="lv-sub" href="#s-a3-3-1">3.3.1 交互方式与模态</a></li>
-<li><a class="lv-sub" href="#s-a3-3-2">3.3.2 VR虚拟现实</a></li>
-<li><a class="lv-sub" href="#s-a3-3-3">3.3.3 AR增强现实与MR</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a3-4">3.4 智能推荐</a><ul>
-<li><a class="lv-sub" href="#s-a3-4-1">3.4.1 推荐系统分类</a></li>
-<li><a class="lv-sub" href="#s-a3-4-2">3.4.2 核心概念与多模态推荐</a></li></ul></li>
-<li><a class="lv-sec" href="#s-a3-5">3.5 群体智能</a><ul>
-<li><a class="lv-sub" href="#s-a3-5-1">3.5.1 概念与机制</a></li>
-<li><a class="lv-sub" href="#s-a3-5-2">3.5.2 常见算法</a></li></ul></li></ul></li>
-<li><a class="lv-ch" href="#ai-c4">4 典型应用</a><ul>
-<li><a class="lv-sub" href="#s-a4-1">4.1 智能教育</a></li><li><a class="lv-sub" href="#s-a4-2">4.2 智能制造</a></li>
-<li><a class="lv-sub" href="#s-a4-3">4.3 智能驾驶（含L0-L5）</a></li>
-<li><a class="lv-sub" href="#s-a4-4">4.4 智慧健康</a></li><li><a class="lv-sub" href="#s-a4-5">4.5 智慧医疗</a></li>
-<li><a class="lv-sub" href="#s-a4-6">4.6 智慧金融</a></li></ul></li>
-<li><a class="lv-ch" href="#ai-c5">5 应用工具</a><ul>
-<li><a class="lv-sub" href="#s-a5-1">5.1 软硬件基础</a></li><li><a class="lv-sub" href="#s-a5-2">5.2 实践流程</a><ul><li><a class="lv-sub" href="#s-a5-2-1">5.2.1 常见AI程序</a></li></ul></li></ul></li>
-<li><a class="lv-ch" href="#ai-c6">6 安全</a></li>
-<li><a class="lv-ch" href="#ai-c7">7 交叉融合</a></li></ul></li>
+<div class="wrap">
+  <section class="sec">
+    <h2><span class="dot"></span>考纲导航（点击直达对应章节）</h2>
+    <div class="oline"><div class="opart">第 1 部分 · 云计算概述</div><ul class="oitems"><li><a href="cloud/1.html">1.1 概念及发展</a></li><li><a href="cloud/1.html">1.2 服务模式</a></li><li><a href="cloud/1.html">1.3 部署模式</a></li><li><a href="cloud/1.html">1.4 特点及优势</a></li></ul></div>
+<div class="oline"><div class="opart">第 2 部分 · 云计算关键技术</div><ul class="oitems"><li><a href="cloud/2-1.html">2.1 虚拟化技术</a></li><li><a href="cloud/2-2.html">2.2 分布式技术</a></li><li><a href="cloud/2-3.html">2.3 SDN 与 NFV</a></li></ul></div>
+<div class="oline"><div class="opart">第 3 部分 · 典型云计算平台</div><ul class="oitems"><li><a href="cloud/3-1.html">3.1 Google 云计算</a></li><li><span class="miss">○ 3.2 亚马逊 AWS（待补充）</span></li><li><a href="cloud/3-3.html">3.3 华为云</a></li><li><a href="cloud/3-5.html">3.5 平台选择与比较</a></li></ul></div>
+<div class="oline"><div class="opart">第 4 部分 · 面向服务的分布式计算</div><ul class="oitems"><li><a href="cloud/4-2.html">4.2 Web 服务与协议</a></li><li><a href="cloud/4-3.html">4.3 面向服务架构 SOA</a></li><li><a href="cloud/4-4.html">4.4 微服务架构</a></li></ul></div>
+<div class="oline"><div class="opart">第 5 部分 · 云计算数据中心</div><ul class="oitems"><li><a href="cloud/5-1.html">5.1 概念及特征</a></li><li><a href="cloud/5-2.html">5.2 关键服务技术</a></li><li><a href="cloud/5-3.html">5.3 绿色节能技术</a></li></ul></div>
+<div class="oline"><div class="opart">第 6 部分 · 云计算安全</div><ul class="oitems"><li><a href="cloud/6.html">6 云安全（6.1/6.2/6.3）</a></li></ul></div>
+<div class="oline"><div class="opart">第 7 部分 · 云计算发展</div><ul class="oitems"><li><a href="cloud/7.html">7 产业应用与发展</a></li></ul></div>
+    <div class="note">⚠ 说明：考纲中的 <b>3.2 亚马逊 AWS</b> 等少数小节本次未单独生成讲解，已在上方标注「待补充」，后续可补充后加入。</div>
+  </section>
 
-<li><a class="lv-part lv-iot" href="#iot">Ⅱ 物联网基础知识及应用</a><ul>
-<li><a class="lv-ch" href="#iot-c1">1 物联网概述</a><ul>
-<li><a class="lv-sub" href="#s-i1-1">1.1 起源与发展</a></li><li><a class="lv-sub" href="#s-i1-2">1.2 概念与特点</a></li>
-<li><a class="lv-sub" href="#s-i1-3">1.3 体系架构</a></li><li><a class="lv-sub" href="#s-i1-4">1.4 标准与趋势</a></li></ul></li>
-<li><a class="lv-ch" href="#iot-c2">2 感知识别技术</a><ul>
-<li><a class="lv-sub" href="#s-i2-1">2.1 传感器与传感网络</a></li>
-<li><a class="lv-sub" href="#s-i2-2">2.2 RFID射频识别</a></li>
-<li><a class="lv-sub" href="#s-i2-3">2.3 EPC / 条码 / IC卡 / OCR</a></li>
-<li><a class="lv-sub" href="#s-i2-4">2.4 位置感知技术</a></li>
-<li><a class="lv-sub" href="#s-i2-5">2.5 生物特征 / SLAM</a></li></ul></li>
-<li><a class="lv-ch" href="#iot-c3">3 网络传输技术</a><ul>
-<li><a class="lv-sub" href="#s-i3-1">3.1 移动通信</a></li><li><a class="lv-sub" href="#s-i3-2">3.2 短距离无线</a></li>
-<li><a class="lv-sub" href="#s-i3-3">3.3 IPv6</a></li><li><a class="lv-sub" href="#s-i3-4">3.4 LPWAN</a></li></ul></li>
-<li><a class="lv-ch" href="#iot-c4">4 管理服务</a></li>
-<li><a class="lv-ch" href="#iot-c5">5 安全与隐私</a></li>
-<li><a class="lv-ch" href="#iot-c6">6 平台及综合应用</a></li>
-<li><a class="lv-ch" href="#iot-c7">7 前沿技术</a></li></ul></li>
+  <section class="sec">
+    <h2><span class="dot"></span>分章讲解（共 15 篇）</h2>
+    <div class="grid">
+      <a class="card" href="cloud/1.html"><div class="cnum">1</div><div class="ctitle">云计算概述</div><div class="cdesc">概念与发展 · 服务模式(IaaS/PaaS/SaaS) · 部署模式 · 特点优势</div></a>
+<a class="card" href="cloud/2-1.html"><div class="cnum">2.1</div><div class="ctitle">虚拟化技术</div><div class="cdesc">基本概念 · 常见虚拟化技术 · 容器 · 与虚拟机区别 · 安全</div></a>
+<a class="card" href="cloud/2-2.html"><div class="cnum">2.2</div><div class="ctitle">分布式技术</div><div class="cdesc">概念 · 在云中的应用 · 常见分布式技术 · 集群技术</div></a>
+<a class="card" href="cloud/2-3.html"><div class="cnum">2.3</div><div class="ctitle">SDN 与 NFV</div><div class="cdesc">软件定义网络 · 网络功能虚拟化 · 应用场景 · VPC 与网络隔离</div></a>
+<a class="card" href="cloud/3-1.html"><div class="cnum">3.1</div><div class="ctitle">Google 云计算</div><div class="cdesc">背景与场景 · 核心技术(GFS/MapReduce/BigTable等)</div></a>
+<a class="card" href="cloud/3-3.html"><div class="cnum">3.3</div><div class="ctitle">华为云</div><div class="cdesc">核心技术与服务 · 各领域应用场景</div></a>
+<a class="card" href="cloud/3-5.html"><div class="cnum">3.5</div><div class="ctitle">云平台选择比较</div><div class="cdesc">各平台特点 · 针对需求选型方法</div></a>
+<a class="card" href="cloud/4-2.html"><div class="cnum">4.2</div><div class="ctitle">Web 服务与协议</div><div class="cdesc">核心组件 · SOAP · RESTful 原理与对比</div></a>
+<a class="card" href="cloud/4-3.html"><div class="cnum">4.3</div><div class="ctitle">面向服务架构 SOA</div><div class="cdesc">概念 · 核心组件 · 在分布式计算中的优势</div></a>
+<a class="card" href="cloud/4-4.html"><div class="cnum">4.4</div><div class="ctitle">微服务架构</div><div class="cdesc">特性与架构 · 分布式数据管理 · 灵活扩展</div></a>
+<a class="card" href="cloud/5-1.html"><div class="cnum">5.1</div><div class="ctitle">数据中心概念特征</div><div class="cdesc">概念 · 核心组件 · 分类与分级 · 协同原理</div></a>
+<a class="card" href="cloud/5-2.html"><div class="cnum">5.2</div><div class="ctitle">数据中心关键服务</div><div class="cdesc">DCaaS · 总体架构 · 设计与构建需求</div></a>
+<a class="card" href="cloud/5-3.html"><div class="cnum">5.3</div><div class="ctitle">绿色节能技术</div><div class="cdesc">配电/空调节能 · 典型绿色数据中心</div></a>
+<a class="card" href="cloud/6.html"><div class="cnum">6</div><div class="ctitle">云安全</div><div class="cdesc">概念与威胁 · 分层安全(IaaS/PaaS/SaaS) · 身份访问管理</div></a>
+<a class="card" href="cloud/7.html"><div class="cnum">7</div><div class="ctitle">产业应用与发展</div><div class="cdesc">产业现状 · 行业应用 · 挑战与趋势</div></a>
+    </div>
+  </section>
 
-<li><a class="lv-part lv-cloud" href="#cloud">Ⅲ 云计算基础知识及应用</a><ul>
-<li><a class="lv-ch" href="#cloud-c1">1 概述</a><ul>
-<li><a class="lv-sub" href="#s-c1-1">1.1 概念与五大特征</a></li>
-<li><a class="lv-sub" href="#s-c1-2">1.2 IaaS / PaaS / SaaS</a></li>
-<li><a class="lv-sub" href="#s-c1-3">1.3 部署模式</a></li>
-<li><a class="lv-sub" href="#s-c1-4">1.4 特点与优势</a></li></ul></li>
-<li><a class="lv-ch" href="#cloud-c2">2 关键技术</a><ul>
-<li><a class="lv-sub" href="#s-c2-1">2.1 虚拟化与容器</a></li>
-<li><a class="lv-sub" href="#s-c2-2">2.2 分布式技术</a></li>
-<li><a class="lv-sub" href="#s-c2-3">2.3 SDN / NFV / VPC</a></li></ul></li>
-<li><a class="lv-ch" href="#cloud-c3">3 典型平台</a></li>
-<li><a class="lv-ch" href="#cloud-c4">4 面向服务的分布式计算</a><ul><li><a class="lv-sec" href="#s-c4-1">4.1 Web文档服务</a></li></ul></li>
-<li><a class="lv-ch" href="#cloud-c5">5 数据中心</a></li>
-<li><a class="lv-ch" href="#cloud-c6">6 云安全</a></li>
-<li><a class="lv-ch" href="#cloud-c7">7 发展</a><ul><li><a class="lv-sec" href="#s-c7-1">7.1 中国云计算产业</a></li><li><a class="lv-sec" href="#s-c7-2">7.2 行业应用</a></li></ul></li></ul></li>
-<li><a class="lv-part" href="#tips" style="color:#b45309">★ 考试样题速记</a></li><li><a class="lv-sec" href="#v11" style="color:#b45309">🆕 题型视角速记（v1.1 新增）</a></li><li><a class="lv-sec" href="#changelog" style="color:#64748b">📌 版本变更日志</a></li></ul></nav>
-
-<main>
-<!-- ================= Ⅰ 人工智能 ================= -->
-<section class="sec ai" id="ai"><div class="sec-hd"><div class="num">Ⅰ</div><h2>人工智能基础知识及应用</h2></div>
-
-<!-- 第1章 概述 -->
-<div class="chapter" id="ai-c1"><h3>第1章 人工智能概述</h3>
-
-<div class="section-kp" id="s-a1-1"><h4>1.1 人工智能基本概念<span class="badge lv1">了解</span></h4>
-<div class="core"><span class="clab"></span><b>图灵测试判据 + 强AI（通用·有自我意识）与弱AI（专用·无自我意识）的区分</b></div>
-
-<div class="sub-kp" id="s-a1-1-1"><h5>1.1.1 思维、智能与人工智能的概念</h5>
-<div class="block"><p><b>思维</b>：人脑对客观事物概括与间接的反映过程，包括分析、推理、判断、抽象等认知活动。<b>智能</b>：个体认识客观事物并运用知识解决问题的能力，包含感知、记忆、推理、学习、决策、语言、创造等维度。<b>人工智能（Artificial Intelligence, AI）</b>：研究、开发用于模拟、延伸和扩展人类智能的理论、方法、技术及应用系统的一门新技术科学。其目标不是"复制人脑"，而是让机器能够执行通常需要人类智能才能完成的任务。</p></div>
+  <footer>云计算复习专栏 · 备考专用 · 配合《2025考纲》与《核心知识点详解》使用</footer>
 </div>
-
-<div class="sub-kp" id="s-a1-1-2"><h5>1.1.2 图灵测试</h5>
-<div class="block"><p>1950年由英国数学家<b>阿兰·图灵（Alan Turing）</b>提出。一名人类评判者通过键盘与"真人A"和"机器B"进行纯文本对话（盲测），若多次对话后评判者无法可靠区分谁是人谁是机器，则机器被认为具有智能。设计要点：<b>纯文本交互</b>——排除语音、外貌干扰，只考验语言理解与推理能力。图灵测试并非"证明有意识"，而是提供了一个可操作的行为主义判据。至今尚无机器严格通过（有聊天机器人在限定话题下短暂骗过评判者）。</p></div>
-</div>
-
-<div class="sub-kp" id="s-a1-1-3"><h5>1.1.3 强人工智能与弱人工智能</h5>
-<div class="block"><p><b>弱人工智能（Narrow AI / Weak AI）</b>：仅在特定领域/单个任务上表现智能，无自我意识、无通用推理能力、无法迁移到新任务。当前现实中所有AI均属此类。<b>例子</b>：AlphaGo只会下围棋、Siri只回答特定问题、人脸识别只会识别人脸。<b>强人工智能（Strong AI / AGI）</b>：具备与人类相当的通用认知能力——理解、学习、推理、计划、创造，关键在<b>自我意识</b>和<b>跨领域迁移能力</b>。至今现实中尚不存在，大模型虽有"泛化"雏形但仍属弱AI范畴。</p></div>
-<div class="key"><b>考试重点：</b>图灵测试=纯文本行为判据；弱AI=专用/无自我意识、强AI=通用/有自我意识（尚不存在）。样题判断：当前以弱AI为主，逻辑推理/自主学习/复杂场景适应尚有局限 → 正确。</div>
-</div>
-</div>
-
-<div class="section-kp" id="s-a1-2"><h4>1.2 人工智能发展简史<span class="badge lv1">了解</span></h4>
-
-<div class="sub-kp" id="s-a1-2-1"><h5>1.2.1 达特茅斯会议</h5>
-<div class="block"><p>1956年夏，麦卡锡、明斯基、香农、罗切斯特等学者在美国达特茅斯学院召开研讨会，首次提出<b>"Artificial Intelligence"</b>一词，被视为AI作为独立学科正式诞生的标志。</p></div></div>
-
-<div class="sub-kp" id="s-a1-2-2"><h5>1.2.2 三大学派</h5>
-<div class="deep"><table class="deep-table"><tr><th>学派</th><th>核心思想</th><th>技术路线</th><th>代表成果</th></tr>
-<tr><td><b>符号主义</b></td><td>智能=基于符号的逻辑操作与推理</td><td>逻辑推理、知识图谱</td><td>专家系统（MYCIN）、IBM深蓝</td></tr>
-<tr><td><b>连接主义</b></td><td>智能源自大量神经元分布式连接</td><td>神经网络→深度学习（CNN、RNN、Transformer）</td><td>AlphaGo、GPT、图像识别</td></tr>
-<tr><td><b>行为主义</b></td><td>智能在"感知—动作"回路中体现</td><td>控制论、强化学习</td><td>扫地机器人、波士顿动力</td></tr></table><p>三条路线不互斥，现代AI常混合使用。</p></div>
-</div>
-
-<div class="sub-kp" id="s-a1-2-3"><h5>1.2.3 发展现状与趋势</h5>
-<div class="block"><p>当前以弱人工智能为主，在感知智能与初级认知智能上已成熟；大模型推动通用能力跃升，但逻辑推理、自主学习、复杂场景自适应上仍有局限。</p></div></div>
-</div>
-
-<div class="section-kp" id="s-a1-3"><h4>1.3 人工智能的主要特征<span class="badge lv1">了解</span></h4>
-
-<div class="sub-kp" id="s-a1-3-1"><h5>1.3.1 环境感知能力</h5>
-<div class="block"><p>通过传感器/数据采集获取外界状态——如摄像头识别路况、麦克风听取语音、激光雷达测距。</p></div></div>
-<div class="sub-kp" id="s-a1-3-2"><h5>1.3.2 知识运用能力</h5>
-<div class="block"><p>基于已学到的知识/模型进行推理与决策——如AlphaGo根据历史棋局判断落子位置。</p></div></div>
-<div class="sub-kp" id="s-a1-3-3"><h5>1.3.3 学习能力</h5>
-<div class="block"><p>从数据中不断优化自身表现——如推荐系统根据你每次点击调整下一次推荐。</p></div>
-<div class="ex"><span class="lab"></span>L4自动驾驶同时体现三大特征：摄像头+雷达感知（感知）→高精地图+交规决策（知识运用）→行驶后回传数据优化模型（学习）。</div></div>
-</div>
-
-<div class="section-kp" id="s-a1-4"><h4>1.4 我国人工智能发展现状<span class="badge lv1">了解</span></h4>
-<div class="block"><p>主线：<b>政策驱动</b>（国家《新一代人工智能发展规划》）+ <b>产业集聚</b>（北上广深AI产业园）+ <b>大模型/算力崛起</b>（豆包、文心一言、DeepSeek）。面临挑战：原创算法、高端芯片、数据质量、伦理治理。</p></div>
-</div></div>
-
-<!-- 第2章 基础理论 -->
-<div class="chapter" id="ai-c2"><h3>第2章 人工智能基础理论</h3>
-
-<div class="section-kp" id="s-a2-1"><h4>2.1 机器学习<span class="badge lv1">了解</span></h4>
-<div class="core"><span class="clab"></span><b>三类任务：分类（有标签·离散）/ 聚类（无标签·分组）/ 回归（连续值）；关键术语：训练/测试/过拟合</b></div>
-
-<div class="sub-kp" id="s-a2-1-1"><h5>2.1.1 机器学习基本概念与术语</h5>
-<div class="block"><p>机器学习（Machine Learning）：无需显式编程，让计算机从数据中自动发现规律并改进性能的方法。本质=给定数据→学习映射函数→对新输入做决策。<b>常用术语</b>：训练（用训练集学模型）、测试（用测试集评估）、标签（监督信号）、特征、过拟合/欠拟合。</p></div></div>
-
-<div class="sub-kp" id="s-a2-1-2"><h5>2.1.2 分类任务及代表方法</h5>
-<div class="block"><p>预测离散类别。<b>决策树</b>：将数据按特征值逐步分裂，每个内部节点是特征判断（如"年龄>30？"），每个叶节点是分类结果。训练时选择最佳划分特征——用<b>信息增益</b>（ID3）、<b>信息增益比</b>（C4.5）或<b>基尼系数</b>（CART）让子节点"纯度"尽可能高。特点：可解释性强（树结构直观）、无需数据归一化、过拟合风险需剪枝。场景：银行信用评分、医疗诊断。代表库：XGBoost、LightGBM。<b>SVM支持向量机</b>：在特征空间中找<b>最大间隔超平面</b>分隔两类数据。数据线性不可分时用<b>核函数</b>（RBF核）映射到高维空间。适于小样本高维数据，如文本分类、手写数字识别。</p></div></div>
-
-<div class="sub-kp" id="s-a2-1-3"><h5>2.1.3 聚类任务及代表方法</h5>
-<div class="block"><p>无标签数据的自动分组。<b>K-Means</b>：随机选K个质心→数据分配给最近质心→重新计算质心→重复直到收敛。简单快速适合大数据集，但需预设K值、对初始质心敏感、只适合球形分布。场景：客户分群（按消费行为分组）、图像压缩、文档聚类。</p></div></div>
-
-<div class="sub-kp" id="s-a2-1-4"><h5>2.1.4 回归任务与过拟合/欠拟合</h5>
-<div class="block"><p><b>回归</b>：预测连续数值（如房价预测用线性回归）。<b>过拟合</b>：训练集完美、测试集糟糕——"死记硬背"而非"理解规律"。原因=模型太复杂/数据太少/噪声被拟合，对策=增加数据、正则化、剪枝、早停。<b>欠拟合</b>：连训练集都表现不好——"还学不会"。原因=模型太简单/特征不够，对策=增加特征、提升复杂度。</p></div></div>
-</div>
-
-<div class="section-kp" id="s-a2-2"><h4>2.2 深度学习<span class="badge lv1">了解</span></h4>
-<div class="core"><span class="clab"></span><b>CNN处理图像 / RNN处理序列；卷积→池化→激活→全连接构成经典CNN流水线；核心优势=自动特征提取</b></div>
-
-<div class="sub-kp" id="s-a2-2-1"><h5>2.2.1 神经元模型与前向/反向传播</h5>
-<div class="block"><p>深度学习使用多层神经网络（"深度"指层数多），从数据中自动学习层级化特征表示。<b>神经元模型</b>：输入×权重+偏置→激活函数→输出（模拟生物神经元"信号累积→激发"）。核心术语：<b>前向传播</b>（输入→网络计算→输出）、<b>反向传播</b>（从输出层反向计算每层误差梯度，用<b>梯度下降</b>更新各层权重使损失函数减小）。</p></div></div>
-
-<div class="sub-kp" id="s-a2-2-2"><h5>2.2.2 CNN 卷积神经网络</h5>
-<div class="deep"><div class="dsub">核心组成（逐层）</div>
-<p><b>① 卷积层：</b>小尺寸<b>卷积核</b>（滤波器，如3×3）在图像上滑动，计算核与局部区域的点积，输出<b>特征图</b>（不同核提取边缘/纹理/形状）。同一核在整个图像<b>共享权重</b>——参数数量与图像尺寸无关。<br>
-<b>② 池化层：</b>降采样。最常见<b>最大池化</b>（2×2窗口取最大值，步长2→宽高减半）。作用：降计算量、引入平移不变性、防过拟合。<br>
-<b>③ 激活函数：</b>引入<b>非线性</b>。<b>ReLU</b>（f(x)=max(0,x)）最常用——正值直通、负值截零、缓解梯度消失。<b>Sigmoid</b>→(0,1)适合二分类输出层；<b>Tanh</b>→(-1,1)零中心；<b>Softmax</b>→多分类概率分布。<br>
-<b>④ 全连接层：</b>卷积+池化提取完特征后，展平为向量→几层全连接→输出类别概率。</p>
-<div class="dsub">经典网络演进</div>
-<table class="deep-table"><tr><th>网络</th><th>年份</th><th>关键创新</th></tr>
-<tr><td>LeNet-5</td><td>1998</td><td>卷积+池化+全连接开创范式（7层）</td></tr>
-<tr><td>AlexNet</td><td>2012</td><td>ReLU+Dropout+GPU，激发深度学习浪潮</td></tr>
-<tr><td>VGGNet</td><td>2014</td><td>小卷积核（3×3）堆叠深（16-19层）</td></tr>
-<tr><td>ResNet</td><td>2015</td><td>残差连接（跳跃连接）解决深层退化，可152层+</td></tr>
-<tr><td>YOLO</td><td>2016-</td><td>单阶段端到端目标检测（分类+定位一步到位）</td></tr></table>
-<p><b>应用：</b>图像分类（ImageNet）、目标检测（自动驾驶）、人脸识别、医学影像分析、图像分割。</p></div>
-</div>
-
-<div class="sub-kp" id="s-a2-2-3"><h5>2.2.3 RNN 循环神经网络与 LSTM</h5>
-<div class="block"><p><b>RNN</b>：每次输入不只看当前数据，还接收上一时刻的<b>隐藏状态</b>形成循环——适合序列数据（文本、语音、股价）。但长句子易<b>梯度消失</b>。<b>LSTM（1997年）</b>：引入<b>遗忘门/输入门/输出门</b>三个门控 + <b>细胞状态</b>（信息高速路），实现对长期信息的选择性记忆。如今很多NLP已被Transformer（自注意力+并行训练）替代，但LSTM仍活跃于嵌入式等资源受限场景。</p></div></div>
-
-<div class="sub-kp" id="s-a2-2-4"><h5>2.2.4 深度学习与传统机器学习的区别</h5>
-<div class="deep"><table class="deep-table"><tr><th></th><th>传统机器学习</th><th>深度学习</th></tr>
-<tr><td>特征提取</td><td>人工设计（特征工程）</td><td>自动学习层级化特征</td></tr>
-<tr><td>数据量需求</td><td>较小</td><td>很大（数据越多越强）</td></tr>
-<tr><td>硬件需求</td><td>普通CPU即可</td><td>通常需GPU/NPU加速</td></tr>
-<tr><td>可解释性</td><td>较好（如决策树）</td><td>较差（"黑箱"问题）</td></tr></table></div></div>
-</div>
-
-<div class="section-kp" id="s-a2-3"><h4>2.3 大模型<span class="badge lv1">了解</span></h4>
-
-<div class="sub-kp" id="s-a2-3-1"><h5>2.3.1 大模型概念与涌现能力</h5>
-<div class="block"><p>参数规模千亿甚至万亿、在海量数据上预训练、具备广泛通用任务能力的深度学习模型（以LLM大语言模型为代表）。关键特征：<b>规模性</b>（参数多→能力越强）、<b>涌现能力</b>（规模超临界点时突然出现小模型不具备的能力——逻辑推理、代码生成）、<b>上下文学习</b>（少量示例即完成新任务无需微调）。</p></div></div>
-
-<div class="sub-kp" id="s-a2-3-2"><h5>2.3.2 提示工程</h5>
-<div class="block"><p><b>零样本学习</b>：不给示例，直接用指令描述任务（"把下面翻译成英文"）。<b>少样本学习</b>：给几个示例再处理新输入（效果优于零样本）。<b>思维链（CoT）</b>：追加"一步步思考"引导模型先推导再作答，大幅提升数学/逻辑推理正确率。如不CoT→"小明有3个苹果给了1个又买5个剩几个？"可能猜错，加CoT→逐步推算"3-1=2→2+5=7→7个"。常用提示技术还包括：角色设定、格式化输出、结构化提示。</p></div></div>
-
-<div class="sub-kp" id="s-a2-3-3"><h5>2.3.3 行业领域代表大模型</h5>
-<div class="block"><p><b>豆包</b>（字节跳动，多模态对话）、<b>文心一言</b>（百度，搜索增强+知识图谱）、<b>DeepSeek</b>（开源、推理能力突出，数学/代码表现好）。应用场景：智能客服、写作辅助、代码辅助、教育辅导、知识检索。</p></div></div>
-</div></div>
-
-<!-- 第3章 关键技术 -->
-<div class="chapter" id="ai-c3"><h3>第3章 人工智能关键技术</h3>
-
-<div class="section-kp" id="s-a3-1"><h4>3.1 计算机视觉技术<span class="badge lv3">掌握</span></h4>
-<div class="core"><span class="clab"></span><b>五任务区分（分类/分割/检测/跟踪/三维重建）+ 基础概念（像素/RGB/图像格式/图像增强）</b></div>
-
-<div class="sub-kp" id="s-a3-1-1"><h5>3.1.1 数字图像处理基础</h5>
-<div class="block"><p><b>像素</b>：数字图像最小单元，每像素有(x,y)坐标和颜色值。1920×1080约207万像素。<b>颜色空间</b>：<b>RGB</b>（红绿蓝三通道0-255→约1670万色，显示器原生使用）；<b>HSV</b>（色相/饱和度/明度——符合颜色直觉）；<b>灰度</b>（单通道0黑-255白，简化计算）。<b>图像格式</b>：JPEG（有损、照片常用）、PNG（无损、支持透明）、BMP（无压缩、文件大）。<b>图像增强</b>：预处理技术——对比度拉伸、直方图均衡、去噪（中值/高斯滤波）、锐化。</p></div></div>
-
-<div class="sub-kp" id="s-a3-1-2"><h5>3.1.2 图像分类</h5>
-<div class="block"><p>将整张图像判定为单个类别标签——考纲样题：图像分类是将"原始光学信息"按逻辑分类。代表方法：ResNet、EfficientNet。应用：手机相册识别人物、垃圾邮件图像识别。</p></div></div>
-
-<div class="sub-kp" id="s-a3-1-3"><h5>3.1.3 图像分割</h5>
-<div class="block"><p>将图像中每个像素都标记为所属类别——语义分割（所有同一类物体同色）和实例分割（区分同一类不同个体）。代表方法：U-Net（医学影像）、Mask R-CNN。应用：CT影像标出肿瘤区域、自动驾驶道路/行人分割、遥感图像分类。</p></div></div>
-
-<div class="sub-kp" id="s-a3-1-4"><h5>3.1.4 目标检测</h5>
-<div class="block"><p>在图像中"框出"目标位置并标注其类别——既要知道"在哪"又要知道"是什么"。代表方法：<b>YOLO</b>系列（单阶段端到端，速度快）、Faster R-CNN（两阶段，精度高）。应用：自动驾驶检测行人/车辆、安防人脸检测、工业质检缺陷定位。</p></div></div>
-
-<div class="sub-kp" id="s-a3-1-5"><h5>3.1.5 目标跟踪与三维重建</h5>
-<div class="block"><p><b>目标跟踪</b>：在视频序列中持续锁定指定目标并跨帧保持同一ID。代表方法：DeepSORT、Siamese网络。<b>三维重建</b>：从多视角图像/点云恢复物体或场景的3D结构。代表方法：NeRF（神经辐射场）、SFM（运动恢复结构）。应用：赛事跟拍运动员、数字博物馆文物3D化。</p></div>
-<div class="key"><b>考试重点：</b>图像分类=只给类别标签；检测=框+类别；分割=逐像素标签；跟踪=跨帧ID。</div></div>
-</div>
-
-<div class="section-kp" id="s-a3-2"><h4>3.2 自然语言处理 NLP<span class="badge lv3">掌握</span></h4>
-
-<div class="sub-kp" id="s-a3-2-1"><h5>3.2.1 NLP 概念与难点</h5>
-<div class="block"><p>NLP让机器理解、生成人类语言。难点：一词多义、歧义消解、上下文依赖、语言灵活性、缺乏世界常识。</p></div></div>
-
-<div class="sub-kp" id="s-a3-2-2"><h5>3.2.2 语言模型发展史</h5>
-<div class="block"><p><b>统计语言模型（N-gram）</b>：用前N-1个词预测下一个词概率（如"我爱__"→"你"），简单但无法长距离依赖。<b>神经网络语言模型</b>（2003年Bengio）：学习词嵌入（word embedding），语义相似词向量相近——"国王-男人+女人≈女王"。<b>预训练大模型</b>（2018年起）：BERT（遮词填空）、GPT（预测下一词），Transformer自注意力→并行训练+全局建模取代RNN，开启"大力出奇迹"时代。</p></div></div>
-
-<div class="sub-kp" id="s-a3-2-3"><h5>3.2.3 NLP 四类任务</h5>
-<div class="deep"><table class="deep-table"><tr><th>类型</th><th>含义</th><th>示例</th></tr>
-<tr><td><b>序列→类别</b></td><td>文本输入→单个标签</td><td>情感分析（"很棒"→正面）</td></tr>
-<tr><td><b>异步序列→序列</b></td><td>输入输出长度/顺序不同</td><td>机器翻译（中文"你好"→英文"Hello"）</td></tr>
-<tr><td><b>同步序列→序列</b></td><td>输入输出逐词一一对应</td><td>中文分词/词性标注</td></tr>
-<tr><td><b>类别→序列</b></td><td>类别/图像→文本描述</td><td>图像描述生成</td></tr></table></div></div>
-
-<div class="sub-kp" id="s-a3-2-4"><h5>3.2.4 NLU 自然语言理解与 NLG 自然语言生成</h5>
-<div class="block"><p><b>NLU</b>：将语言转为机器可表示的含义——意图识别、实体抽取。如智能客服"听懂"你说要'退款'。<b>NLG</b>：将机器表示转为自然语言文本——摘要生成、对话回复。如客服"生成"一段回复话术。NLP完整链路=NLU理解+NLG生成。</p></div></div>
-</div>
-
-<div class="section-kp" id="s-a3-3"><h4>3.3 智能交互技术<span class="badge lv3">掌握</span></h4>
-
-<div class="sub-kp" id="s-a3-3-1"><h5>3.3.1 常见智能交互方式与模态分类</h5>
-<div class="block"><p>常见方式：<b>基于语言的交互</b>（语音/文本对话）、<b>基于身体姿态的交互</b>（手势、体感）、<b>面向智能机器人的交互</b>（物理/动作）。<b>交互模态</b>：<b>单模态</b>（仅一种通道——如纯语音）vs <b>多模态</b>（融合语音+视觉+触觉等多通道——智能座舱同时识语音+手势+表情）。</p></div></div>
-
-<div class="sub-kp" id="s-a3-3-2"><h5>3.3.2 VR 虚拟现实</h5>
-<div class="block"><p>通过VR头显（Meta Quest、Pico）完全替换真实世界为计算机生成的虚拟环境，完全沉浸，看不到外部环境。关键技术：立体显示、3D渲染、空间定位、动作捕捉。场景：VR游戏、虚拟培训（模拟飞行/手术）、虚拟展厅。</p></div></div>
-
-<div class="sub-kp" id="s-a3-3-3"><h5>3.3.3 AR 增强现实与 MR 混合现实</h5>
-<div class="block"><p><b>AR</b>：在真实世界上叠加虚拟信息/物体（手机AR导航、维修叠加步骤）。通过AR眼镜或手机/平板实现，可同时看到真实世界+虚拟叠加层。关键技术：SLAM定位、平面检测、光照估计、3D注册。<b>MR</b>（混合现实）：AR高级阶段，虚拟物体与真实环境可"互动"（虚拟球弹跳在真实桌上）。</p></div>
-</div>
-</div>
-
-<div class="section-kp" id="s-a3-4"><h4>3.4 智能推荐技术<span class="badge lv2">熟悉</span></h4>
-
-<div class="sub-kp" id="s-a3-4-1"><h5>3.4.1 推荐系统分类</h5>
-<div class="block"><p><b>基于内容的推荐</b>：物品相似——你爱看科幻片→推更多科幻片。<b>基于协同过滤的推荐</b>：用户相似——你和小明都买了A和B→口味相似→小明的C也推你。<b>基于人工智能的推荐</b>：深度学习模型（宽深模型Wide&Deep等），捕捉复杂非线性关系。</p></div></div>
-
-<div class="sub-kp" id="s-a3-4-2"><h5>3.4.2 核心概念与多模态推荐</h5>
-<div class="block"><p><b>核心概念</b>：用户行为数据、用户特征（画像）、商品特征、推荐算法、评估指标（点击率/转化率/停留时长）。<b>多模态推荐</b>：同时用画面、标题、背景音乐、用户停留时长、评论情感等多项信息综合推荐，超越单一文本匹配。</p></div></div>
-</div>
-
-<div class="section-kp" id="s-a3-5"><h4>3.5 群体智能技术<span class="badge lv2">熟悉</span></h4>
-
-<div class="sub-kp" id="s-a3-5-1"><h5>3.5.1 群体智能概念与机制</h5>
-<div class="block"><p>受自然群体（蚁群、鸟群）启发，大量简单个体通过局部交互涌现出整体智能。主要特点：<b>灵活性、鲁棒性、自组织</b>。两种机制：<b>自上而下</b>（集中控制）、<b>自下而上</b>（个体自组织——主流，如每只蚂蚁只按规则办事、蚁群自动找到最优路径）。</p></div></div>
-
-<div class="sub-kp" id="s-a3-5-2"><h5>3.5.2 常见群体智能算法</h5>
-<div class="deep"><table class="deep-table"><tr><th>类别</th><th>代表算法</th><th>灵感来源</th><th>应用示例</th></tr>
-<tr><td>昆虫类</td><td><b>蚁群算法 ACO</b></td><td>蚂蚁觅食留信息素→短路径浓度高</td><td>物流路径优化、TSP旅行商问题</td></tr>
-<tr><td>鸟群类</td><td><b>粒子群优化 PSO</b></td><td>鸟群觅食，以自身最佳和群体最佳调整</td><td>函数优化、神经网络权重训练</td></tr>
-<tr><td>细菌类</td><td>细菌觅食算法</td><td>大肠杆菌趋化运动</td><td>参数优化</td></tr>
-<tr><td>水生类</td><td><b>人工鱼群算法</b></td><td>鱼群觅食/聚群/追尾</td><td>组合优化、路径规划</td></tr></table></div>
-</div>
-</div></div>
-
-<!-- 第4章 典型应用 -->
-<div class="chapter" id="ai-c4"><h3>第4章 人工智能典型应用</h3>
-
-<div class="sub-kp" id="s-a4-1"><h5>4.1 智能教育</h5><span class="badge lv2" style="font-size:10px">熟悉</span>
-<div class="block"><p>个性化学习路径、智能阅卷、虚拟教师。技术：知识图谱、NLP、自适应学习系统。</p></div></div>
-
-<div class="sub-kp" id="s-a4-2"><h5>4.2 智能制造</h5><span class="badge lv2" style="font-size:10px">熟悉</span>
-<div class="block"><p>缺陷检测（机器视觉）、预测性维护、柔性产线。技术：工业机器人、数字孪生、边缘AI。</p></div></div>
-
-<div class="sub-kp" id="s-a4-3"><h5>4.3 智能驾驶</h5><span class="badge lv2" style="font-size:10px">熟悉</span>
-<div class="deep"><div class="dlab"></div><b>L0~L5分级（SAE标准）</b>
-<table class="deep-table"><tr><th>L0</th><th>L1</th><th>L2</th><th>L3</th><th>L4</th><th>L5</th></tr>
-<tr><td>无自动化<br>仅预警（倒车雷达）</td><td>驾驶辅助<br><b>单功能</b>辅助（ACC<b>或</b>LKA）</td><td>部分自动化<br><b>同时</b>横纵控制，人监控</td><td>有条件自动化<br>特定条件车驾驶，人备援</td><td>高度自动化<br><b>限定区域</b>无人驾驶</td><td>完全自动化<br><b>任何地方</b>无人驾驶</td></tr></table>
-<p><b>口诀：L0-L2人驾驶/监控；L3车开人备援；L4-L5车内无人。量产车在L2+。</b></p></div></div>
-
-<div class="sub-kp" id="s-a4-4"><h5>4.4 智慧健康</h5><span class="badge lv2" style="font-size:10px">熟悉</span>
-<div class="block"><p>可穿戴健康监测、生理信号分析、行为识别。技术：可穿戴传感器+机器学习。</p></div></div>
-
-<div class="sub-kp" id="s-a4-5"><h5>4.5 智慧医疗</h5><span class="badge lv2" style="font-size:10px">熟悉</span>
-<div class="block"><p>医学影像AI诊断（CT肺结节检测）、辅助诊疗、药物研发。技术：医学影像深度学习、知识图谱辅助诊断。</p></div></div>
-
-<div class="sub-kp" id="s-a4-6"><h5>4.6 智慧金融</h5><span class="badge lv2" style="font-size:10px">熟悉</span>
-<div class="block"><p>智能风控、智能投顾、反欺诈。技术：机器学习风控模型、知识图谱（关联交易识别）、NLP（合同/合规分析）。</p></div>
-<div class="key"><b>样题多选：</b>银行AI为特定客户批量提供"定制化、个性化"金融服务（AB），非"共性化/标准化"（CD）。</div></div>
-</div>
-
-<!-- 第5章 应用工具 -->
-<div class="chapter" id="ai-c5"><h3>第5章 人工智能应用工具</h3>
-
-<div class="section-kp" id="s-a5-1"><h4>5.1 人工智能软硬件基础<span class="badge lv3">掌握</span></h4>
-<div class="deep"><div class="dlab"></div><b>框架</b>
-<div class="dsub">昇思 MindSpore（华为，2019年）</div><p>华为自研开源框架，支持端/边/云全场景AI。核心功能：自动微分（动静统一）、全场景（同一代码跑云端NPU到手机端）、大模型训练原生支持、AI+科学计算（MindSpore Science）。用途：手机端侧AI、自动驾驶、政务金融信创环境。</p>
-<div class="dsub">PyTorch（Meta）</div><p>学术界最广框架，Python原生、动态计算图（边写边运行）、社区庞大（HuggingFace），研究首选。</p>
-<div class="dsub">飞桨 PaddlePaddle（百度）</div><p>国内产业界使用率高，配套AI Studio（免费GPU）、PaddleHub（一键迁移）、PaddleOCR全球知名。优势：中文NLP、OCR、工业落地成熟。</p></div>
-<div class="deep"><div class="dlab"></div><b>硬件加速器</b>
-<table class="deep-table"><tr><th>类型</th><th>代表</th><th>特点</th><th>场景</th></tr>
-<tr><td><b>GPU</b></td><td>NVIDIA A100/H100</td><td>通用并行最强、生态完善(CUDA)、功耗高</td><td>AI训练主力、推理、科学计算</td></tr>
-<tr><td><b>FPGA</b></td><td>Xilinx Versal</td><td>硬件可重编程、低延迟</td><td>推理加速、金融低延迟</td></tr>
-<tr><td><b>ASIC</b></td><td>Google TPU、华为昇腾NPU</td><td>为AI定制、能效比极高、不可重编程</td><td>数据中心推理、端侧AI（手机NPU）</td></tr></table>
-<p><b>简记：GPU通用最强（训练首选）；FPGA灵活可改；ASIC效能最高但不灵活。</b></p></div>
-<div class="deep"><div class="dlab"></div><b>数据标注工具</b>
-<p>AI模型训练需要大量标注数据（图像标签/文本分类/语音转写）。常见工具：<b>精灵标注助手</b>（支持图像分类/目标检测框/文本分类/语音标注等多模态标注，国内广泛使用）、<b>X-AnyLabeling</b>（开源、支持自动标注与人工校准，适用于图像/视频标注）、<b>LabelMe/LabelImg</b>（常用图像标注）。这些工具是AI实践流程中"数据收集与预处理"环节的核心支撑。</p></div>
-</div>
-
-<div class="section-kp" id="s-a5-2"><h4>5.2 人工智能实践流程<span class="badge lv3">掌握</span></h4>
-<div class="block"><p><b>六步标准流程（顺序重要）：</b>① <b>数据收集与预处理</b>（采集、标注、清洗、归一化）→ ② <b>模型选择</b>（按任务选CNN/LSTM等架构）→ ③ <b>模型训练</b>（喂数据、前向传播+反向传播更新权重）→ ④ <b>模型评估</b>（测试集测准确率/精度/召回率、判断过/欠拟合）→ ⑤ <b>模型优化</b>（调超参数、数据增广、正则化、剪枝压缩）→ ⑥ <b>部署与应用</b>（转推理格式、嵌入APP/服务/设备运行）。</p></div>
-<div class="ex"><span class="lab"></span>做"垃圾邮件分类器"：收集清洗邮件→选朴素贝叶斯→训练→测试集算准确率→调参降误判→接入邮箱实时过滤。</div>
-<div class="sub-kp" id="s-a5-2-1"><h5>5.2.1 常见人工智能应用程序</h5>
-<div class="block"><p>基于上述六步流程落地的常见AI应用：<b>聊天机器人</b>（智能客服/陪伴对话，如豆包、ChatGPT）、<b>写作助手</b>（公文/营销文案/代码辅助生成）、<b>图像生成器</b>（文生图/图生图，如Midjourney、Stable Diffusion）、<b>视频生成器</b>（文生视频/数字人播报）、<b>任务管理器</b>（智能日程/待办/流程自动化Agent）。它们本质都是"数据→模型→部署"流程的产品化封装。</p></div></div>
-</div></div>
-
-<!-- 第6章 安全 -->
-<div class="chapter" id="ai-c6"><h3>第6章 人工智能安全</h3>
-<div class="section-kp"><h4>6.1~6.3 安全概述 / 政策标准 / 安全治理<span class="badge lv1">了解</span></h4>
-<div class="deep"><div class="dlab"></div><b>对抗样本攻击</b><p>对输入施加人眼不可察觉微小扰动（给熊猫图加噪声），导致AI输出完全错误预测。体现AI脆弱性——对策：<b>对抗训练</b>（把对抗样本加入训练集）、输入预处理。</p></div>
-<div class="deep"><div class="dlab"></div><b>深度伪造（Deepfake）</b><p>用深度学习生成以假乱真的视频/音频（换脸、音色克隆），带来"有视频≠有真相"信任危机。对策：数字水印、AI检测工具、立法。</p></div>
-<div class="block"><p><b>治理原则：</b>以人为本、安全可控、公平透明、权责清晰。治理=技术+法律+伦理三位一体。</p></div></div></div>
-
-<!-- 第7章 交叉融合 -->
-<div class="chapter" id="ai-c7"><h3>第7章 人工智能与其他学科交叉融合</h3>
-<div class="section-kp"><h4>7.1~7.4 新文科 / 新农科 / 新医科 / 新工科<span class="badge lv2">熟悉</span></h4>
-<div class="block"><p><b>新文科：</b>AI赋能文本分析、文化遗产数字化、智能翻译。<b>新农科：</b>无人机巡田+AI病虫害识别、精准灌溉。<b>新医科：</b>AI辅助读片+基因组学分析，加速新药研发。<b>新工科：</b>智能制造、智能驾驶、工业物联网"AI+X"融合。趋势：学科边界模糊、复合型人才培养。</p></div></div></div>
-</section><!-- /AI -->
-
-<!-- ================= Ⅱ 物联网 ================= -->
-<section class="sec iot" id="iot"><div class="sec-hd"><div class="num">Ⅱ</div><h2>物联网基础知识及应用</h2></div>
-
-<div class="chapter" id="iot-c1"><h3>第1章 物联网概述</h3>
-
-<div class="section-kp" id="s-i1-1"><h4>1.1 物联网起源与发展<span class="badge lv1">了解</span></h4>
-<div class="block"><p>概念起源：1999年MIT Auto-ID中心提出；2005年ITU报告正式定义。<b>各国战略</b>：美国"智慧地球"、中国"感知中国"、欧盟IoT-EP、日本i-Japan。<b>可纳入物联网的"物"需满足五条件</b>：有收发器、有传输通路、有存储/计算能力、有全球唯一编号、遵循通信协议。<b>示例</b>：带RFID标签的智能水杯算"物"（有芯片+唯一EPC编码+联网），普通石头不算。</p></div></div>
-
-<div class="section-kp" id="s-i1-2"><h4>1.2 物联网概念与特点<span class="badge lv1">了解</span></h4>
-<div class="block"><p><b>三大特点：全面感知 + 可靠传输 + 智能处理。</b>与互联网关系：物联网是互联网的延伸，终端从"人"扩展到"物"。与传感网：传感网是物联网感知层的子集。与泛在网络：泛在网是"无所不在"网络的高级阶段，物联网是其重要组成。</p></div></div>
-
-<div class="section-kp" id="s-i1-3"><h4>1.3 物联网体系架构<span class="badge lv2">熟悉</span></h4>
-<div class="deep"><table class="deep-table"><tr><th>层次</th><th>功能</th><th>关键技术</th><th>类比</th></tr>
-<tr><td><b>感知层</b></td><td>采集物理世界信息</td><td>传感器、RFID、摄像头、GPS</td><td>五官和手脚</td></tr>
-<tr><td><b>网络层</b></td><td>数据传输与汇聚</td><td>WiFi、蓝牙、Zigbee、LoRa、NB-IoT、5G</td><td>神经系统</td></tr>
-<tr><td><b>应用层</b></td><td>数据处理与行业应用</td><td>云计算平台、中间件、AI、APP</td><td>大脑和决策</td></tr></table><p>考试以三层为主，扩展可加接入层（网关）和业务层。</p></div></div>
-
-<div class="section-kp" id="s-i1-4"><h4>1.4 物联网标准与趋势<span class="badge lv1">了解</span></h4>
-<div class="block"><p><b>标准</b>：国际（ISO/IEC、IEEE、ITU、3GPP）、国内（CCSA、电子标准院）。<b>趋势</b>：海量终端、边缘智能崛起、AI深度融入（AIoT）。</p></div></div></div>
-
-<div class="chapter" id="iot-c2"><h3>第2章 感知识别技术</h3>
-
-<div class="section-kp" id="s-i2-1"><h4>2.1 传感器与传感网络<span class="badge lv3">掌握</span></h4>
-<div class="block"><p><b>传感器</b>：将物理量→电信号。常见类型：<b>温度</b>（热敏电阻阻值随温度变化→电压变化）、<b>光敏</b>（光→电流变化，屏幕自动亮度）、<b>加速度</b>（MEMS质量块惯性位移→电容变化，计步器/碰撞检测）、<b>气体</b>（半导体遇气体电阻变化，煤气泄漏报警）、<b>湿度</b>（高分子膜吸湿电容变）。</p>
-<p><b>传感网络（WSN）</b>：大量廉价微型传感器节点自组织组网，四大构成=传感器+<b>微处理器</b>+<b>通信芯片</b>+<b>节点操作系统</b>。设计考虑：功耗、成本、覆盖、鲁棒性、时延。应用：森林火灾监测（大量节点自组网，异常即上报）。</p></div></div>
-
-<div class="section-kp" id="s-i2-2"><h4>2.2 RFID 射频识别<span class="badge lv3">掌握</span></h4>
-<div class="deep"><div class="dsub">系统组成</div><table class="deep-table"><tr><th>组件</th><th>功能</th></tr><tr><td><b>电子标签 Tag</b></td><td>含芯片+天线，存储唯一ID</td></tr><tr><td><b>读写器 Reader</b></td><td>发射射频信号激活标签，接收解码回传数据</td></tr><tr><td><b>天线</b></td><td>收发无线电波，决定读写距离</td></tr><tr><td><b>中间件</b></td><td>过滤重复、格式转换、上传管理系统</td></tr></table>
-<div class="dsub">工作原理（无源RFID）</div><ol><li>读写器天线持续发射特定频率射频信号</li><li>标签进入场区→天线耦合能量→给芯片供电</li><li>芯片激活后，将ID/数据调制到反射信号回传</li><li>读写器接收→解码→获得标签信息</li></ol>
-<p><b>分类：</b>按频率——低频LF（125kHz，动物标签）、高频HF（13.56MHz，门禁/公交卡）、超高频UHF（860-960MHz，物流仓储，读距可达10m）、微波（2.45GHz）；按供电——无源（靠读写器能量、最便宜）、有源（自带电池、主动发射、读距远）、半有源（电池辅助传感）。<b>优势：非视距、可批量读取、可写入。</b></p></div>
-</div>
-
-<div class="section-kp" id="s-i2-3"><h4>2.3 EPC / 条码 / IC卡 / OCR<span class="badge lv3">掌握</span></h4>
-<div class="block"><p><b>EPC电子产品代码</b>：EPCglobal（GS1组织）推动的物品全球唯一编码体系。结构：<b>EPC编码→RFID标签承载→读写器采集→ONS对象名解析服务</b>（"EPC的DNS"，查服务器URI）→<b>EPCIS信息服务</b>（全生命周期数据）。</p>
-<p><b>条形码</b>：一维（黑白条编码数字，简单可靠但只存少量数字）、二维（QR码，矩阵式方格用图像识别解析，可存大量数据，手机即扫描器）。<b>IC卡</b>：集成电路卡（接触/非接触如公交卡，安全性高于磁卡）。<b>OCR光学字符识别</b>：从图像识别文字——传统（边缘检测+模板匹配）→现代（CNN+CTC/Seq2Seq端到端），应用：车牌识别、发票识别。</p>
-<div class="key"><b>样题判断：</b>"RFID是物联网中唯一的自动识别技术"→❌错误（条码/IC卡/OCR均为自动识别）。</div></div></div>
-
-<div class="section-kp" id="s-i2-4"><h4>2.4 位置感知技术<span class="badge lv3">掌握</span></h4>
-<div class="deep"><table class="deep-table"><tr><th>系统</th><th>全称</th><th>国家</th></tr>
-<tr><td><b>GPS</b></td><td>Global Positioning System</td><td>美国（~31颗MEO）</td></tr>
-<tr><td><b>北斗 BDS</b></td><td>BeiDou Navigation Satellite System<br><b>英文缩写 COMPASS</b>（样题）</td><td>中国（~30颗，独特混合GEO+MEO+IGSO星座）</td></tr>
-<tr><td><b>GLONASS</b></td><td>Global Navigation Satellite System</td><td>俄罗斯（~24颗MEO）</td></tr>
-<tr><td><b>Galileo</b></td><td>Galileo</td><td>欧盟（~26颗MEO）</td></tr></table>
-<p><b>定位原理</b>：卫星广播自身位置和时间→接收机收≥4颗星信号→算到达时间差→换算与各星距离→三球交于唯一点。<b>蜂窝定位</b>：基站信号强度/时间/角度（精度几十~几百米），城市GPS盲区补充。<b>室内定位</b>：蓝牙信标（iBeacon~米级）、WiFi指纹（预建RSSI信号地图）、UWB超宽带（厘米级精度）。</p></div>
-</div>
-
-<div class="section-kp" id="s-i2-5"><h4>2.5 生物特征识别 / SLAM<span class="badge lv3">掌握</span></h4>
-<div class="deep"><div class="dsub">生物特征识别四种方式</div>
-<table class="deep-table"><tr><th>类型</th><th>原理</th><th>安全性</th><th>应用</th></tr>
-<tr><td><b>指纹</b></td><td>纹线端点/分叉细节点匹配</td><td>中</td><td>手机解锁、考勤</td></tr>
-<tr><td><b>面部</b></td><td>五官几何+深度学习特征比对</td><td>中（需活体检测）</td><td>刷脸支付</td></tr>
-<tr><td><b>虹膜</b></td><td>环形放射状纹理近红外成像</td><td><b>最高</b></td><td>边境管控、高安防</td></tr>
-<tr><td><b>手形</b></td><td>手指长度/手掌宽度几何</td><td>低</td><td>早期门禁</td></tr></table>
-<div class="dsub">SLAM 即时定位与地图构建</div><p>机器在未知环境中无GPS，同时解决"我在哪？"和"周围长什么样？"的互锁问题。经典五步：<b>①传感器数据获取</b>（激光雷达/相机/IMU）→<b>②前端里程计</b>（帧间估计运动，短时精确但累积误差）→<b>③后端优化</b>（全局图优化校正漂移——数学核心）→<b>④回环检测</b>（认出"我来过这里！"拉回轨迹，消除累积误差最关键一步）→<b>⑤地图构建</b>（稀疏/稠密点云/栅格/语义地图）。应用：扫地机器人、自动驾驶融合SLAM、AR眼镜空间定位。</p></div>
-</div></div>
-
-<div class="chapter" id="iot-c3"><h3>第3章 网络传输技术</h3>
-
-<div class="section-kp" id="s-i3-1"><h4>3.1 移动通信技术<span class="badge lv3">掌握</span></h4>
-<div class="block"><p>1G→5G演进：广覆盖、移动性、大容量。5G的<b>mMTC（海量机器通信）</b>是广域物联网关键承载，赋能车联网、远程抄表。城市智能水表通过5G/NB-IoT每天自动上报读数。</p></div></div>
-
-<div class="section-kp" id="s-i3-2"><h4>3.2 短距离无线通信技术<span class="badge lv3">掌握</span></h4>
-<div class="deep"><table class="deep-table"><tr><th>技术</th><th>距离</th><th>速率</th><th>功耗</th><th>典型应用</th></tr>
-<tr><td><b>WiFi</b></td><td>~100m</td><td>数百Mbps~Gbps</td><td>高</td><td>家庭/办公上网</td></tr>
-<tr><td><b>蓝牙</b></td><td>~10m</td><td>~2Mbps</td><td>低</td><td>耳机、穿戴设备</td></tr>
-<tr><td><b>NFC</b></td><td>≤10cm</td><td>~424kbps</td><td>极低</td><td>刷卡支付、门禁</td></tr>
-<tr><td><b>Zigbee</b></td><td>~100m（多跳更远）</td><td>~250kbps</td><td>很低</td><td>智能家居传感网（网状自组，多节点、电池可用数年）</td></tr>
-<tr><td><b>UWB</b></td><td>~50m</td><td>数百Mbps</td><td>低</td><td>精准定位（车钥匙）</td></tr>
-<tr><td><b>星闪</b></td><td>短距</td><td>高</td><td>低</td><td>鸿蒙生态，超低时延20μs</td></tr>
-<tr><td><b>红外</b></td><td>~几m（需视距）</td><td>低</td><td>很低</td><td>遥控器</td></tr>
-<tr><td><b>EnOcean</b></td><td>~30m</td><td>~125kbps</td><td><b>无需电池</b></td><td>楼宇自动化</td></tr></table>
-<p><b>NFC三种模式</b>：①读卡器模式（刷公交卡信息）；②卡模拟模式（手机模拟银行卡）；③点对点模式（两手机互传）。<b>Zigbee协议</b>：物理层→MAC（CSMA/CA）→网络层（路由/组网）→应用层（ZCL定义设备行为）。</p></div>
-<div class="key"><b>样题多选：</b>"下列哪些属短距离无线通信？"→WiFi/蓝牙/NFC（ABC）；LoRa属LPWAN广域→不选D。</div></div>
-
-<div class="section-kp" id="s-i3-3"><h4>3.3 IPv6技术<span class="badge lv3">掌握</span></h4>
-<div class="block"><p>IPv4地址约43亿→全球人口80亿+每人多台设备+海量IoT终端→严重不足。<b>IPv6</b>：地址<b>128位</b>（IPv4仅32位），约3.4×10³⁸"地球上每粒沙子分一个"。附加优势：<b>无状态自动配置</b>（设备插电自生成IP无需DHCP）、<b>内置IPsec</b>、<b>简化报头</b>（路由更快），天然适合海量IoT接入。</p></div></div>
-
-<div class="section-kp" id="s-i3-4"><h4>3.4 低功耗广域网 LPWAN<span class="badge lv3">掌握</span></h4>
-<div class="deep"><table class="deep-table"><tr><th></th><th>LoRa</th><th>NB-IoT</th><th>SigFox</th></tr>
-<tr><td><b>频谱</b></td><td>非授权（ISM免费）</td><td>授权（运营商付费）</td><td>非授权</td></tr>
-<tr><td><b>网络</b></td><td>自建网关→自组网</td><td>运营商蜂窝网络</td><td>SigFox专有网络</td></tr>
-<tr><td><b>调制</b></td><td>扩频（Chirp）</td><td>OFDMA</td><td>超窄带（UNB）</td></tr>
-<tr><td><b>覆盖</b></td><td>数km（郊区15km）</td><td>深覆盖（地下室可达）</td><td>~10km（郊区50km）</td></tr>
-<tr><td><b>适用</b></td><td>农场/园区自建、抄表</td><td>全国城市部署、地下设备</td><td>极简传感上报</td></tr></table>
-<p><b>选型口诀：城市地下抄表→NB-IoT；郊区农场自控→LoRa。</b></p></div></div></div>
-
-<div class="chapter" id="iot-c4"><h3>第4章 管理服务技术</h3>
-<div class="section-kp"><h4>4.1~4.3 中间件 / 边缘计算 / 数据融合<span class="badge lv1">了解</span></h4>
-<div class="block"><p><b>中间件</b>：感知设备与应用间的"软件总线"，屏蔽异构、数据过滤与设备管理——不同品牌传感器协议各异，中间件统一转成标准格式。<b>边缘计算</b>：将计算从云下沉到边缘（网关/设备侧），降时延（毫秒级响应）、省带宽（只传结果不传全流）、护隐私（数据不离开本地）、离线自治（断网也工作）——是AIoT的核心形态。<b>数据融合</b>：多源传感关联综合，去冗余、提精度、降能耗、增可靠——三种层次：数据层（原始合并）、特征层（提取特征后融合）、决策层（各传感器先各自判断再综合）。自动驾驶同时用摄像头+雷达+激光雷达融合判断"行人非影子"。</p></div></div></div>
-
-<div class="chapter" id="iot-c5"><h3>第5章 安全与隐私保护</h3>
-<div class="section-kp"><h4>5.1~5.4 密码学 / 安全威胁 / 隐私保护<span class="badge lv1">了解</span></h4>
-<div class="deep"><div class="dsub">密码学速查</div><table class="deep-table"><tr><th>概念</th><th>作用</th><th>代表算法</th></tr>
-<tr><td><b>对称加密</b></td><td>同一密钥加解密，快</td><td>AES（128/256位主流）</td></tr>
-<tr><td><b>非对称</b></td><td>公钥加密+私钥解密</td><td>RSA、ECC椭圆曲线</td></tr>
-<tr><td><b>摘要</b></td><td>任意数据→固定"指纹"（不可逆）</td><td>SHA-256；MD5（已不安全）</td></tr>
-<tr><td><b>MAC</b></td><td>验证来源真实+内容完整</td><td>HMAC-SHA256</td></tr>
-<tr><td><b>数字签名</b></td><td>防抵赖+完整+认证</td><td>RSA签名、ECDSA</td></tr>
-<tr><td><b>随机数生成</b></td><td>密钥/IV/挑战值等必须不可预测</td><td>CSPRNG（加密安全伪随机，如/dev/urandom）</td></tr></table></div>
-<div class="block"><p><b>物联网安全强调"轻量级"</b>——终端算力/电量受限无法用重型方案。<b>差分隐私</b>：查询统计时掺入精确噪声使无法反推个体，Apple/Google手机统计即用此法。<b>联邦学习</b>："数据不动模型动"——模型下发本地训练、只上传权重更新不传原始数据，多家银行联合建模不共享客户数据。</p></div></div></div>
-
-<div class="chapter" id="iot-c6"><h3>第6章 平台及综合应用</h3>
-<div class="section-kp"><h4>6.1~6.2 典型系统平台 / 综合应用<span class="badge lv2">熟悉</span> / <span class="badge lv3">掌握</span></h4>
-<div class="deep"><div class="dlab"></div><b>鸿蒙系统（HarmonyOS）</b><p>华为自研分布式操作系统，<b>"一套系统、多端部署"</b>。关键特性：<b>分布式软总线</b>——多设备（手机/手表/车机/家电）连成逻辑"超级终端"，硬件互助资源共享（手机碰烤箱→菜谱流转）。微内核+确定性延迟引擎（工业IoT实时性），开源版OpenHarmony可跑各种嵌入式设备。</p></div>
-<div class="deep"><div class="dlab"></div><b>典型物联网云平台</b><p><b>OneNET（中国移动）</b>：设备接入、数据存储、规则引擎、可视化大屏一站式。<b>华为云IoT</b>：设备接入管理+边缘计算+数字孪生，覆盖车联/工业。<b>百度天工</b>：时序数据库+规则引擎+AI，偏工业能源。<b>微软Azure IoT</b>：IoT Hub设备双向通信+Stream Analytics流分析，全球部署成熟。共性架构="海量设备接入→消息队列→规则引擎→存储/AI→应用"。</p></div>
-<div class="block"><p><b>综合应用</b>都套"感知—网络—应用"三件套：<b>智能家居</b>→门窗磁(感知)+Zigbee(网络)+APP联动(应用)；<b>智慧农业</b>→土壤传感器+LoRa+自动滴灌；<b>智能物流</b>→RFID标签+蜂窝+WMS仓储系统。<b>智能制造（工业物联网IIoT）</b>→设备联网监控+预测性维护+数字孪生产线。<b>智慧能源</b>→智能电表+LoRa抄表+电网负荷预测，光伏/风电远程监控。<b>智能交通</b>→车路协同+信号机自适应+电子车牌缓解拥堵。<b>智慧医疗</b>→可穿戴健康监测+远程问诊+医疗冷链（疫苗温湿度传感）。均遵循"感知—网络—应用"三件套。</p></div></div></div>
-
-<div class="chapter" id="iot-c7"><h3>第7章 前沿技术</h3>
-<div class="section-kp"><h4>7.1~7.4 无源感知 / 群智 / Li-Fi / 空间互联网<span class="badge lv1">了解</span></h4>
-<div class="deep"><table class="deep-table"><tr><th>技术</th><th>核心</th><th>示例</th></tr>
-<tr><td><b>无源感知网络</b></td><td>利用环境射频（WiFi/RFID信号）供能与感知，无需电池</td><td>RFID无源标签</td></tr>
-<tr><td><b>群智计算/群智感知</b></td><td>汇聚大众智能设备协作感知与计算（人人为节点）</td><td>高德用千万手机GPS众包实时拥堵</td></tr>
-<tr><td><b>毫米波/Li-Fi</b></td><td>毫米波60GHz高速短距；Li-Fi用LED光通信（光不穿墙更安全）</td><td>博物馆LED导览</td></tr>
-<tr><td><b>空间互联网</b></td><td>低轨卫星星座（Starlink/星网）全球覆盖</td><td>补盲海洋、荒漠</td></tr></table></div></div></div>
-</section><!-- /IoT -->
-
-<!-- ================= Ⅲ 云计算 ================= -->
-<section class="sec cloud" id="cloud"><div class="sec-hd"><div class="num">Ⅲ</div><h2>云计算基础知识及应用</h2></div>
-
-<div class="chapter" id="cloud-c1"><h3>第1章 云计算概述</h3>
-
-<div class="section-kp" id="s-c1-1"><h4>1.1 云计算概念及发展<span class="badge lv1">了解</span></h4>
-<div class="block"><p><b>定义</b>：通过网络"按需、便捷、自助"地获取可配置计算资源（网络、服务器、存储、应用、服务），资源可快速供给与释放，管理开销最小化。<b>起源与发展</b>：思想源自20世纪60年代"效用计算"（像水电一样按需购买计算）、90年代网格计算；2006年亚马逊AWS推出EC2/S3标志商用云计算诞生；随后Google、微软、阿里等跟进，云成为数字基础设施。</p></div>
-<div class="deep"><div class="dlab"></div><b>五大本质特征（NIST定义）</b>
-<table class="deep-table"><tr><th>特征</th><th>含义</th><th>举例</th></tr>
-<tr><td><b>按需自助</b></td><td>无需人工交互、自行配置资源</td><td>控制台点几下开一台虚拟机</td></tr>
-<tr><td><b>泛在网络访问</b></td><td>任何终端通过网络访问</td><td>各处用浏览器管理云服务器</td></tr>
-<tr><td><b>资源池化</b></td><td>多租户共享物理资源、虚拟隔离</td><td>几百家小公司共享一台物理服务器</td></tr>
-<tr><td><b>快速弹性</b></td><td>资源可快速伸缩</td><td>大促秒级从1台扩到100台</td></tr>
-<tr><td><b>可计量服务</b></td><td>按实际用量计费</td><td>按CPU小时/流量/存储GB计费</td></tr></table></div></div>
-
-<div class="section-kp" id="s-c1-2"><h4>1.2 服务模式 IaaS / PaaS / SaaS<span class="badge lv3">掌握</span></h4>
-<div class="deep"><table class="deep-table"><tr><th></th><th>IaaS 基础设施即服务</th><th>PaaS 平台即服务</th><th>SaaS 软件即服务</th></tr>
-<tr><td><b>提供</b></td><td>虚拟机/存储/网络等底层资源</td><td>开发/运行平台（中间件/数据库/SDK）</td><td>直接可用软件</td></tr>
-<tr><td><b>用户管</b></td><td>OS及以上</td><td>只管理应用与数据</td><td>零运维，按订阅</td></tr>
-<tr><td><b>典型</b></td><td>阿里云ECS、AWS EC2</td><td>Google App Engine、华为云PaaS</td><td>钉钉、Office 365、Salesforce</td></tr></table></div>
-<div class="key"><b>样题单选：</b>"将平台作为服务的云计算服务类型"→PaaS（B）。</div></div>
-
-<div class="section-kp" id="s-c1-3"><h4>1.3 云计算的部署模式<span class="badge lv3">掌握</span></h4>
-<div class="deep"><table class="deep-table"><tr><th>模式</th><th>特点</th><th>适用</th></tr>
-<tr><td><b>私有云</b></td><td>单组织专用，安全性高</td><td>金融、政务核心数据</td></tr>
-<tr><td><b>公共云</b></td><td>第三方运营、多租户，弹性好/成本低</td><td>互联网业务</td></tr>
-<tr><td><b>混合云</b></td><td>私有+公有结合，兼顾安全与弹性</td><td>银行敏感数据私有+促销公有无弹性</td></tr>
-<tr><td><b>社区云</b></td><td>多个有共同关切的组织共享</td><td>产业链协同</td></tr></table></div></div>
-
-<div class="section-kp" id="s-c1-4"><h4>1.4 云计算的特点及优势<span class="badge lv1">了解</span></h4>
-<div class="block"><p>核心价值=降低CAPEX/OPEX、弹性伸缩、按需付费、高可用容灾。场景：网站托管、大数据处理、AI训练、灾备、测试开发。</p></div>
-<div class="key"><b>样题判断：</b>"云计算把普通服务器连接获得超算能力且成本更低"→正确（分布式集群核心价值）。</div></div></div>
-
-<div class="chapter" id="cloud-c2"><h3>第2章 关键技术</h3>
-
-<div class="section-kp" id="s-c2-1"><h4>2.1 虚拟化与容器技术<span class="badge lv3">掌握</span></h4>
-<div class="deep"><div class="dsub">Hypervisor</div><p><b>Type1裸金属</b>：直接运行在物理硬件无底层OS（VMware ESXi、KVM），性能损失小——数据中心标配。<b>Type2宿主</b>：跑在宿主OS上（VirtualBox、VMware Workstation），方便个人使用但多一层开销。</p>
-<div class="dsub">Docker容器 vs 虚拟机</div><table class="deep-table"><tr><th></th><th>虚拟机</th><th>容器</th></tr>
-<tr><td><b>隔离</b></td><td>强（独立OS内核）</td><td>较弱（共享内核）</td></tr>
-<tr><td><b>启动</b></td><td>数十秒</td><td>毫秒~秒级</td></tr>
-<tr><td><b>资源</b></td><td>GB级内存</td><td>MB级</td></tr>
-<tr><td><b>适用</b></td><td>需强隔离/多OS</td><td>微服务/弹性/轻量</td></tr></table>
-<div class="dsub">Kubernetes (K8s)</div><p>容器编排事实标准——管理百千容器的部署、扩缩、负载均衡、自愈、滚动更新。主流云均有托管K8s（EKS/ACK/CCE）。<b>安全威胁</b>：虚拟机逃逸、容器逃逸、侧信道攻击，保障=加固Hypervisor、最小权限、隔离策略。</p></div></div>
-
-<div class="section-kp" id="s-c2-2"><h4>2.2 分布式技术<span class="badge lv3">掌握</span></h4>
-<div class="block"><p><b>分布式系统</b>：多节点协同如整体——<b>分布式存储</b>（GFS/HDFS：文件分块多副本、一台宕机数据不丢）、<b>分布式计算</b>（MapReduce：Map分散算+Reduce归约——经典"分治"范式）、<b>集群技术</b>（高可用集群/负载均衡集群/高性能计算集群，如Web服务器集群）。</p></div></div>
-
-<div class="section-kp" id="s-c2-3"><h4>2.3 SDN / NFV / VPC<span class="badge lv3">掌握</span></h4>
-<div class="block"><p><b>SDN软件定义网络</b>：将<b>控制平面</b>（决定流量怎么走）从交换机抽出到集中<b>SDN控制器</b>（OpenDaylight/ONOS），交换机只剩<b>数据平面</b>按控制器下发的规则转发。南向协议<b>OpenFlow</b>（最主流）发流表给交换机匹配转发。优势：集中编排、灵活可编程、成本低。<b>NFV网络功能虚拟化</b>：将防火墙/负载均衡等网元功能以软件形式运行在通用服务器上。<b>VPC虚拟私有云</b>：公有云上为每租户划出隔离私有网络（独立子网/路由表/安全组/NAT网关），本质是<b>网络虚拟化</b>。</p></div></div></div>
-
-<div class="chapter" id="cloud-c3"><h3>第3章 典型云计算平台<span class="badge lv2">熟悉</span></h3>
-<div class="section-kp">
-<div class="deep"><table class="deep-table"><tr><th>平台</th><th>核心技术/服务</th></tr>
-<tr><td><b>Google</b></td><td><b>GFS</b>（分布式文件系统分块多副本）+ <b>MapReduce</b>（批处理分治）+ <b>BigTable</b>（列式NoSQL）+ <b>Borg</b>（K8s前身）</td></tr>
-<tr><td><b>AWS</b></td><td><b>Dynamo</b>（最终一致性键值存储，一致性哈希+Quorum+向量时钟，S3/DynamoDB均借鉴）——哲学："宁可返回稍旧数据也不可下线"</td></tr>
-<tr><td><b>华为云</b></td><td>鲲鹏算力+昇腾AI+ModelArts+HCS混合云（政务/金融/制造）</td></tr>
-<tr><td><b>百度云</b></td><td>飞桨PaddlePaddle+AI开放平台（语音/视觉/NLP）+网盘+Apollo自动驾驶</td></tr></table></div></div></div>
-
-<div class="chapter" id="cloud-c4"><h3>第4章 面向服务的分布式计算<span class="badge lv2">熟悉</span></h3>
-<div class="section-kp" id="s-c4-1"><h4>4.1 Web文档服务<span class="badge lv2">熟悉</span></h4>
-<div class="block"><p><b>HTML（超文本标记语言）</b>：用标签描述网页结构与内容，是Web文档的载体。<b>超链接（Hyperlink）</b>：用&lt;a href&gt;把文档彼此连接，形成"万维网"的网状结构，是Web区别于早期信息系统的关键。<b>HTTP（超文本传输协议）</b>：浏览器与服务器之间请求/响应通信的协议（默认80端口，安全版HTTPS=HTTP+TLS）。三者共同构成Web基础：HTML承载内容、超链接组织内容、HTTP传输内容。</p></div></div>
-<div class="section-kp">
-<div class="deep"><div class="dlab"></div><b>SOAP vs RESTful</b>
-<table class="deep-table"><tr><th></th><th>SOAP</th><th>RESTful</th></tr>
-<tr><td><b>协议</b></td><td>严格XML（Envelope/Header/Body）</td><td>HTTP动词（GET/POST/PUT/DELETE）</td></tr>
-<tr><td><b>格式</b></td><td>几乎只有XML</td><td>JSON（主流）、XML</td></tr>
-<tr><td><b>状态</b></td><td>可维护会话</td><td>无状态（请求自包含）</td></tr>
-<tr><td><b>适用</b></td><td>银行/支付（事务+强安全）</td><td>互联网API——90%+是RESTful</td></tr></table>
-<div class="dsub">SOA vs 微服务</div>
-<table class="deep-table"><tr><th></th><th>SOA</th><th>微服务</th></tr>
-<tr><td><b>总线</b></td><td>ESB企业服务总线（集中重）</td><td>无中心总线，直连或轻量API网关</td></tr>
-<tr><td><b>数据</b></td><td>通常共享数据库</td><td>每服务独立数据库（去中心化）</td></tr>
-<tr><td><b>部署</b></td><td>整体打包</td><td>独立部署、独立扩展、技术异构</td></tr></table>
-<p><b>弹性关键：</b>大促时只对"订单服务"扩容，单服务故障不影响下单（降级/熔断）。</p></div></div></div>
-
-<div class="chapter" id="cloud-c5"><h3>第5章 云计算数据中心<span class="badge lv1">了解</span></h3>
-<div class="section-kp">
-<div class="block"><p><b>PUE</b>：总能耗÷IT能耗，越接近1.0越好——先进绿色<1.2。降PUE：自然冷源、液冷、高压直流供电。<b>RTO恢复时间目标</b>：灾难恢复到业务恢复的最大允许时间；<b>RPO恢复点目标</b>：灾难后可接受的最大数据丢失量。容灾等级GB/T 20988：L1基本备份→L3电子传输→L5双活→L6数据零丢失（RPO=0、RTO≈0）。云存储容灾用多副本+跨可用区复制。</p><div class="block"><p><b>DCaaS（数据中心即服务）</b>：将数据中心的计算/存储/网络能力以服务形式对外提供，用户按需租用机柜、带宽或整机柜算力，免去自建机房。典型服务=主机托管(Colocation)、裸金属租用、专属云。<b>数据中心分级（TierⅠ~Ⅳ）</b>：可用性递增，TierⅣ为容错级（双路供电/制冷、年宕机&lt;26分钟）。</p></div></div></div></div>
-
-<div class="chapter" id="cloud-c6"><h3>第6章 云计算安全<span class="badge lv2">熟悉</span></h3>
-<div class="section-kp">
-<div class="block"><p><b>IAM身份访问管理</b>：身份认证+权限管理（RBAC角色权限、SSO单点登录）。<b>MFA多因素认证</b>：要求≥2因素——①知识因素（密码）、②持有因素（手机TOTP）、③固有因素（指纹/面部）。<b>加密三态</b>：静态（AES-256）、传输（TLS/HTTPS）、使用中（机密计算TEE）。<b>KMS</b>：集中式密钥生成/存储/轮换/审计。</p></div>
-<div class="key"><b>样题多选：</b>云安全关键技术=数据安全+应用安全+虚拟化安全（ABC），非"服务器安全"（D——经典陷阱）。</div></div></div>
-
-<div class="chapter" id="cloud-c7"><h3>第7章 云计算发展<span class="badge lv1">了解</span></h3>
-<div class="section-kp" id="s-c7-1"><h4>7.1 中国云计算产业发展现状<span class="badge lv1">了解</span></h4>
-<div class="block"><p>我国已形成<b>阿里云、腾讯云、华为云、天翼云（中国电信）</b>等领先厂商，政务云/金融云/工业云快速增长；云存储、大数据库（如OceanBase、TiDB）技术成熟；厂商加速全球化（阿里云亚太、华为云海外节点）。政策层面"东数西算"工程统筹算力布局，信创云推动自主可控。</p></div></div>
-<div class="section-kp" id="s-c7-2"><h4>7.2 云计算的行业应用<span class="badge lv1">了解</span></h4>
-<div class="block"><p><b>金融</b>：核心系统上云、移动支付风控、智能投顾；<b>医疗</b>：影像云存储、远程会诊、基因计算；<b>教育</b>：在线课堂、弹性考试系统、AI阅卷；<b>零售</b>：双11秒杀弹性扩容、用户画像与精准营销、智能供应链。云计算成为各行业数字化转型的核心引擎。</p></div></div>
-<div class="section-kp">
-<div class="block"><p><b>Serverless</b>：开发者只写函数代码，平台按事件触发执行，按调用次数+执行时间计费——"真正零运维"（AWS Lambda）。<b>云原生</b>：容器+微服务+声明式API+持续交付——应用"生于云、长于云"，代表栈K8s+Docker+Istio+Prometheus。<b>信创云</b>：国产信创生态（鲲鹏/飞腾CPU+麒麟/统信OS+达梦/人大金仓DB）上的云平台。<b>挑战</b>：安全合规、厂商锁定、跨云互通、能耗。</p><div class="block"><p><b>主流开源云计算系统</b>：<b>OpenStack</b>（开源IaaS，管理计算/网络/存储资源）、<b>Kubernetes(K8s)</b>（容器编排事实标准）、<b>CloudStack</b>（另一主流开源IaaS）、<b>Hadoop/Spark</b>（开源大数据）。企业可基于开源构建私有云，避免厂商锁定。</p></div></div></div></div>
-</section><!-- /Cloud -->
-
-<!-- 备考速记 -->
-<section class="sec" id="tips"><div class="sec-hd" style="background:linear-gradient(120deg,#475569,#64748b);"><div class="num">★</div><h2>三大板块备考要点速记（9道样题直接对应）</h2></div>
-<div class="section-kp">
-<div class="block"><div class="t">人工智能（3道样题）</div><ul>
-<li>【单选】图像分类是将"原始光学信息"进行逻辑分类→<b>C</b></li>
-<li>【多选】银行AI为特定客户批量提供"定制化、个性化"金融服务→<b>A定制化 B个性化</b></li>
-<li>【判断】当前以弱AI为主，逻辑推理/自主学习/复杂场景适应尚有局限→<b>正确</b></li></ul></div>
-<div class="block"><div class="t">物联网（3道样题）</div><ul>
-<li>【单选】中国北斗英文缩写→<b>COMPASS</b>（C）</li>
-<li>【多选】短距离无线通信→<b>WiFi/蓝牙/NFC（ABC）</b>（LoRa属LPWAN不选D）</li>
-<li>【判断】"RFID是唯一自动识别技术"→<b>❌错误</b>（条码/IC卡/OCR也是）</li></ul></div>
-<div class="block"><div class="t">云计算（3道样题）</div><ul>
-<li>【单选】"将平台作为服务的云计算服务类型"→<b>PaaS</b>（B）</li>
-<li>【多选】云安全关键技术→<b>数据安全/应用安全/虚拟化安全（ABC）</b>（非D服务器安全）</li>
-<li>【判断】云计算连接普通服务器获得超算能力且成本更低→<b>正确</b></li></ul></div>
-<div class="key"><b>考试形式：</b>每科50分钟闭卷机考，60题满分100分（单选30×2 + 多选10×2 + 判断20×1）。<br><b>优先级：</b>📕掌握=重要考点 → 📗熟悉=命题重点 → 📘了解=能识别。</div></div></section>
-
-<footer>本手册依据《湖南省数字技术应用能力水平考试大纲 · 2025版》整理 · 含四级层级编号 / 深度解析 / 技术详表 / 示例 / 样题对照 · 仅供个人学习使用
-<!-- ================= v1.1 新增：题型视角速记 ================= -->
-<section class="sec" id="v11"><div class="sec-hd" style="background:linear-gradient(120deg,#b45309,#d97706);"><div class="num">🆕</div><h2>题型视角速记 · 高频易错与样题对应（v1.1 新增）</h2></div>
-<div class="v11-new section-kp">
-<div class="v11-tag">v1.1 新增</div>
-<p class="lead">本节由《数字技术应用能力复习》版的"高频易错 &amp; 样题对应"提炼，按 <strong>单选 / 多选 / 判断</strong> 题型重新组织，便于考前快速过筛易错点；与前面"按板块"的样题速记互为补充。</p>
-<div class="block"><div class="t">【单选】必考易错</div><ul>
-<li>人工智能：图像分类是对"原始光学信息"的逻辑分类 → <b>C</b></li>
-<li>物联网：中国北斗英文缩写 = <b>COMPASS</b> → <b>C</b></li>
-<li>云计算："将平台作为服务"的云类型 = <b>PaaS</b> → <b>B</b></li></ul></div>
-<div class="block"><div class="t">【多选】必考易错</div><ul>
-<li>人工智能：<b>金融AI</b>（银行AI）为特定客户批量提供"定制化、个性化"服务，非共性化/标准化 → <b>A 定制化 B 个性化</b></li>
-<li>物联网：短距离无线通信 = WiFi / 蓝牙 / NFC / Zigbee / 星闪；<b>LoRa 属 LPWAN</b>（不选）</li>
-<li>云计算：云安全关键技术 = 数据安全 / 应用安全 / 虚拟化安全（非"服务器安全"）</li></ul></div>
-<div class="block"><div class="t">【判断】必考易错</div><ul>
-<li>当前主流是<b>弱人工智能</b>（感知/初级认知），强AI仍有局限 → <b>正确</b></li>
-<li>RFID <b>不是</b>唯一自动识别技术（条码 / IC卡 / OCR 也是） → <b>❌错误</b></li>
-<li>云计算连接普通服务器获得超算能力且成本更低 → <b>正确</b></li></ul></div>
-<div class="key"><b>掌握程度提示：</b>📘了解=能识别；📗熟悉=知原理+联系（命题重点）；📕掌握=能区分、能运用（重要考点，务必深入）。</div>
-</div></section>
-
-<!-- ================= 版本变更日志 ================= -->
-<section class="sec" id="changelog"><div class="sec-hd" style="background:linear-gradient(120deg,#334155,#475569);"><div class="num">📌</div><h2>版本变更日志</h2></div>
-<div class="section-kp">
-<table class="chlog"><thead><tr><th>版本</th><th>日期</th><th>主要改动</th></tr></thead><tbody>
-<tr><td><b>v1.0</b></td><td>基准版</td><td>依据《湖南省数字技术应用能力水平考试大纲（2025版）》整合人工智能 / 物联网 / 云计算三板块，建立四级层级编号、深度解析、技术详表、示例与样题对照；含侧边导航目录（折叠+滚动高亮）、搜索与回到顶部。已完整吸收《数字技术应用能力复习》版的核心知识点与 9 道样题。</td></tr>
-<tr class="v11-row"><td><b>v1.1</b></td><td>2026-07-25</td><td>① 标注版本号与更新日期，手册自此进入版本化维护；② 新增"题型视角速记 · 高频易错与样题对应"一节（取自《数字技术应用能力复习》版，按单选/多选/判断题型重组，<b>高亮标注为新增</b>）；③ 补全"金融AI 定制化/个性化服务"表述；④ 同步更新左侧目录索引；⑤ 新增本版本变更日志。</td></tr>
-</tbody></table>
-<p class="chlog-note">说明：v1.0 已完整涵盖《数字技术应用能力复习》版的知识点与样题；v1.1 进一步补入其"题型视角"速记框架，并确立版本号 / 更新日期 / 变更日志的维护机制。</p>
-</div></section>
-</footer></main></div>
-
-<button id="toTop" title="回到顶部">↑</button>
-
-<script>
-const search=document.getElementById('search');search.addEventListener('input',function(){const q=this.value.trim().toLowerCase();document.querySelectorAll('.section-kp,.sub-kp').forEach(el=>el.classList.toggle('hide',q&&!el.textContent.toLowerCase().includes(q)));});
-const progress=document.getElementById('progress'),toTop=document.getElementById('toTop');
-window.addEventListener('scroll',()=>{const h=document.documentElement;progress.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';toTop.style.display=h.scrollTop>400?'block':'none';});
-toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-
-(function(){const t=document.getElementById('tree');t.querySelectorAll('li').forEach(li=>{const ul=li.querySelector('ul');if(!ul)return;const a=li.querySelector(':scope>a');if(!a)return;const arrow=document.createElement('span');arrow.className='toggle';arrow.textContent='▾';arrow.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();li.classList.toggle('fold');arrow.textContent=li.classList.contains('fold')?'▸':'▾';});a.parentNode.insertBefore(arrow,a);});})();
-function foldAll(){document.querySelectorAll('nav.tree li').forEach(li=>{const ul=li.querySelector('ul');if(ul){li.classList.add('fold');const a=li.querySelector('.toggle');if(a)a.textContent='▸';}});}
-function unfoldAll(){document.querySelectorAll('nav.tree li').forEach(li=>{const ul=li.querySelector('ul');if(ul){li.classList.remove('fold');const a=li.querySelector('.toggle');if(a)a.textContent='▾';}});}
-
-(function(){const dests=[];document.querySelectorAll('[id]').forEach(el=>{if(el.classList.contains('sec')||el.classList.contains('chapter')||el.classList.contains('section-kp')||el.classList.contains('sub-kp'))dests.push(el.id);});const links=Array.from(document.querySelectorAll('nav.tree a'));const ss=function(){let aid=null;const vh=window.innerHeight;for(let i=dests.length-1;i>=0;i--){const el=document.getElementById(dests[i]);if(!el)continue;const r=el.getBoundingClientRect();if(r.top<vh*0.4){aid=dests[i];break;}}if(!aid)return;links.forEach(a=>a.classList.remove('active'));const hits=links.filter(a=>a.getAttribute('href')==='#'+aid);if(hits.length)hits.forEach(a=>a.classList.add('active'));};window.addEventListener('scroll',ss,{passive:true});ss();})();
-</script>
-</body></html>
+</body>
+</html>

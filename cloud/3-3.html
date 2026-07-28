@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.3 华为云 · 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+  .silo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+  .silo .mini{background:linear-gradient(135deg,#eef2ff,#f8fafc)}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip active" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>3.3 华为云 · 详细讲解</h1>
+  <p>云计算典型平台（熟悉）｜ 核心技术与服务、各领域的应用场景</p>
+  <span class="badge">考纲要求：熟悉</span>
+</header>
+
+<!-- ========== 一、华为云概述 ========== -->
+<section>
+  <h2><span class="num">1</span>华为云概述</h2>
+  <div class="kv">
+    <b>定义：</b>华为云（Huawei Cloud）是华为公司推出的<b>云计算服务品牌</b>，提供从 <b>IaaS（基础设施）</b>、
+    <b>PaaS（平台）</b> 到 <b>SaaS（软件）</b> 的全栈云服务，既包含面向公众的公有云，也包含面向政企的
+    <b>混合云（HCS）</b>与私有云能力。
+  </div>
+
+  <h3>在考纲中的位置</h3>
+  <p>华为云属于考纲"第三章 典型平台"中的一节，与以下平台并列考查：</p>
+  <div class="card-grid">
+    <div class="mini"><h4>3.1 Google</h4><p>GFS / MapReduce / BigTable / Borg</p></div>
+    <div class="mini"><h4>3.2 AWS</h4><p>Dynamo / S3 / EC2 / DynamoDB</p></div>
+    <div class="mini"><h4>3.3 华为云</h4><p class="ct">鲲鹏算力 + 昇腾AI + ModelArts + HCS</p></div>
+    <div class="mini"><h4>3.4 百度云</h4><p>飞桨 PaddlePaddle / AI 开放平台 / Apollo</p></div>
+    <div class="mini"><h4>3.5 平台选型</h4><p>按成本、合规、技术栈、生态、SLA 选型</p></div>
+  </div>
+
+  <h3>华为云的差异化定位（易混点）</h3>
+  <ul>
+    <li><b>自主软硬件底座</b>：与"纯软件云"不同，华为云有自研芯片（<b>鲲鹏</b>通用算力、<b>昇腾</b>AI 算力）与自研操作系统（<b>欧拉 openEuler</b>），强调<b>自主可控 / 信创</b>。</li>
+    <li><b>政企与混合云强项</b>：通过 <b>HCS（Huawei Cloud Stack）</b> 把公有云能力下沉到政企本地机房，满足政务、金融等<b>数据不出域、强合规</b>需求。</li>
+    <li><b>云、边、端协同</b>：与鸿蒙（HarmonyOS）、欧拉、5G 协同，适合物联网与工业互联网场景。</li>
+  </ul>
+  <div class="tip"><b>考试定位：</b>华为云在考纲中属"熟悉"级别，<b>不要求记忆产品参数</b>，重点是记住它的
+  <b>四大技术标签</b>（鲲鹏 / 昇腾 / ModelArts / HCS）以及<b>政务、金融、制造</b>三大典型场景。</div>
+</section>
+
+<!-- ========== 二、核心技术与服务 ========== -->
+<section>
+  <h2><span class="num">2</span>华为云的核心技术与服务</h2>
+  <p>华为云的能力可概括为"<b>一颗芯（鲲鹏/昇腾）+ 一个平台（ModelArts）+ 一朵云（HCS 混合云）+ 全套基础云服务</b>"。下面逐项拆解。</p>
+
+  <h3>① 鲲鹏（Kunpeng）—— 通用算力底座</h3>
+  <div class="kv">
+    <b>是什么：</b>华为自研的 <b>ARM 架构服务器芯片</b>（代表：鲲鹏 920），用于<b>通用计算</b>（对标 x86 服务器），
+    主打<b>多核、低功耗、自主可控</b>。基于鲲鹏构建的云服务器叫 <b>鲲鹏云服务器（KC1 等）</b>。
+  </div>
+  <ul>
+    <li>价值：在"信创 / 自主可控"背景下，提供不依赖国外 x86 的算力选择。</li>
+    <li>场景：政务、金融、国企的国产化替代与等保合规。</li>
+  </ul>
+
+  <h3>② 昇腾（Ascend）—— AI 算力底座</h3>
+  <div class="kv">
+    <b>是什么：</b>华为自研的 <b>AI 处理器（NPU，达芬奇架构）</b>。训练芯片（如昇腾 910）用于大模型/AI 训练，
+    推理芯片（如昇腾 310）用于端边云推理，主打<b>高算力、高能效比</b>的 AI 计算。
+  </div>
+  <ul>
+    <li>配套软件栈 <b>CANN</b> 与 AI 框架 <b>昇思 MindSpore</b>，形成"芯片 + 框架 + 平台"的 AI 全栈。</li>
+    <li>样题示例：<b>"政务云用鲲鹏服务器 + 昇腾 AI 做健康码海量并发核验" → 正确</b>。</li>
+  </ul>
+
+  <h3>③ ModelArts —— 一站式 AI 开发平台（PaaS）</h3>
+  <div class="kv">
+    <b>是什么：</b>华为云的<b>全流程 AI 开发平台</b>，覆盖<b>数据标注 → 模型训练 → 模型部署 → MLOps</b> 的 AI 开发生命周期，
+    内置 AutoML、Notebook、分布式训练、模型仓库等能力。
+  </div>
+  <ul>
+    <li>降低 AI 门槛：企业无需自建 GPU 集群即可"开箱即用"地训练与部署模型。</li>
+    <li>对标：AWS SageMaker、百度 AI 开发平台。</li>
+  </ul>
+
+  <h3>④ HCS（Huawei Cloud Stack）—— 混合云</h3>
+  <div class="kv">
+    <b>是什么：</b>把华为<b>公有云的能力"搬"到客户本地数据中心（IDC / 机房）</b>的混合云方案。
+    用户在自己机房里获得与公有云一致的服务与管理体验，数据<b>物理不出域</b>。
+  </div>
+  <ul>
+    <li>解决痛点：政务、金融对"数据主权 / 合规 / 低时延"的强要求，不能完全上公有云。</li>
+    <li>本质：<b>公有云技术栈 + 私有化部署</b>，是混合云（Hybrid Cloud）的典型实现。</li>
+  </ul>
+
+  <h3>⑤ 基础云服务（了解即可）</h3>
+  <p>与 AWS/阿里云类似，华为云也提供标准化 IaaS/PaaS 服务，认识名称即可：</p>
+  <table>
+    <tr><th>类别</th><th>代表服务</th><th>作用</th></tr>
+    <tr><td><b>计算</b></td><td>ECS 弹性云服务器、CCE（云容器引擎 / K8s）</td><td>虚拟主机、容器编排</td></tr>
+    <tr><td><b>存储</b></td><td>OBS 对象存储、EVS 云硬盘</td><td>海量对象存储、块存储</td></tr>
+    <tr><td><b>网络</b></td><td>VPC 虚拟私有云、EIP 弹性公网 IP</td><td>隔离网络、公网接入</td></tr>
+    <tr><td><b>数据库</b></td><td>GaussDB、RDS</td><td>关系型 / 分布式数据库（信创主力 GaussDB）</td></tr>
+    <tr><td><b>OS</b></td><td>欧拉 openEuler（服务器）、鸿蒙 HarmonyOS（端/边）</td><td>云上及边缘操作系统</td></tr>
+  </table>
+
+  <h3>核心技术速查表（必背）</h3>
+  <table>
+    <tr><th>技术/服务</th><th>是什么</th><th>解决的痛点</th></tr>
+    <tr><td><b>鲲鹏</b></td><td>ARM 架构通用服务器芯片</td><td class="ct">自主可控算力、低功耗多核</td></tr>
+    <tr><td><b>昇腾</b></td><td>AI 处理器（NPU）</td><td class="ct">高算力 AI 训练与推理</td></tr>
+    <tr><td><b>ModelArts</b></td><td>一站式 AI 开发平台</td><td class="ct">降低 AI 开发门槛、全流程</td></tr>
+    <tr><td><b>HCS</b></td><td>本地化混合云</td><td class="ct">数据不出域、合规可控</td></tr>
+  </table>
+  <div class="tip"><b>记忆口诀：</b>"<b>鲲鹏算、昇腾智、ModelArts 开发易、HCS 把云搬本地</b>"。
+  考试常把"鲲鹏"与"通用计算"绑定、"昇腾"与"AI"绑定，别搞反。</div>
+</section>
+
+<!-- ========== 三、各领域应用场景 ========== -->
+<section>
+  <h2><span class="num">3</span>华为云在各领域的应用场景</h2>
+  <p>华为云因"自主可控 + 混合云 + 政企服务"的特质，在<b>政务、金融、制造</b>三大领域最为突出（考纲明确列举）。</p>
+
+  <h3>核心三大场景（必背）</h3>
+  <div class="map">
+    <div class="safe">
+      <b>① 政务云</b>
+      <ul>
+        <li>政务系统上云、"一网通办"、城市大脑</li>
+        <li>健康码 / 疫情防控海量并发核验（鲲鹏 + 昇腾）</li>
+        <li>HCS 混合云保障数据不出域、符合等保</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>② 金融</b>
+      <ul>
+        <li>核心业务系统上云、分布式核心银行</li>
+        <li>移动支付风控、智能投顾、反欺诈</li>
+        <li>GaussDB 替代国外数据库（信创）</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>③ 制造 / 工业</b>
+      <ul>
+        <li>工业互联网平台、设备上云、数字孪生</li>
+        <li>智能制造、质检 AI（昇腾视觉）、预测性维护</li>
+        <li>5G + 云 + AI 协同的柔性产线</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>延伸：医疗 / 教育 / 交通</b>
+      <ul>
+        <li>医疗：影像云存储、基因计算、远程会诊</li>
+        <li>教育：在线课堂、弹性考试系统、AI 阅卷</li>
+        <li>交通/能源：车联网、智能电网、矿山/港口</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>为什么这些领域选华为云？（加分理解）</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>合规与安全</h4><p>政企最关心数据主权，HCS 混合云 + 自主软硬件天然契合等保与信创。</p></div>
+    <div class="mini"><h4>端边云协同</h4><p>鸿蒙 + 欧拉 + 5G，适合物联网、工业互联网等"云边端一体"场景。</p></div>
+    <div class="mini"><h4>AI 全栈</h4><p>昇腾 + MindSpore + ModelArts，从芯片到平台打通，便于行业 AI 落地。</p></div>
+    <div class="mini"><h4>服务与生态</h4><p>深耕大 B / 政企客户，懂行业流程，交付与运维体系成熟。</p></div>
+  </div>
+  <div class="tip"><b>考试重点：</b>应用层只要求"熟悉"——记住 <b>政务、金融、制造</b> 三个关键词及其代表性用法即可；
+  能区分"华为云擅长政企/混合云"与"AWS 擅长全球公有云 / 百度云擅长 AI 与自动驾驶"的差异。</div>
+</section>
+
+<!-- ========== 四、易混对比 ========== -->
+<section>
+  <h2><span class="num">4</span>华为云 vs 其他典型平台（易考对比）</h2>
+  <table>
+    <tr><th>维度</th><th class="vm">华为云</th><th class="ct">AWS</th><th class="ct">百度智能云</th></tr>
+    <tr><td>核心技术标签</td><td class="vm">鲲鹏 + 昇腾 + ModelArts + HCS</td><td class="ct">Dynamo + S3 + EC2</td><td class="ct">飞桨 + AI 开放平台 + Apollo</td></tr>
+    <tr><td>差异化优势</td><td class="vm">自主软硬件、混合云、政企</td><td class="ct">全球规模、生态最成熟</td><td class="ct">AI 与自动驾驶领先</td></tr>
+    <tr><td>典型场景</td><td class="vm">政务 / 金融 / 制造</td><td class="ct">全球化互联网业务</td><td class="ct">智能驾驶、AI 应用</td></tr>
+    <tr><td>云形态侧重</td><td class="vm">公有云 + 混合云(HCS) 并重</td><td class="ct">公有云为主</td><td class="ct">公有云 + AI 平台</td></tr>
+  </table>
+  <div class="threat"><b>易错点：</b>不要把"鲲鹏"当成 AI 芯片、把"昇腾"当成通用芯片——
+  <b>鲲鹏＝通用计算，昇腾＝AI 计算</b>。也不要把华为云等同于"只有公有云"，它的 <b>HCS 混合云</b>是政企场景的关键。</div>
+</section>
+
+<!-- ========== 速记 ========== -->
+<section>
+  <h2><span class="num">★</span>考试速记清单</h2>
+  <ul>
+    <li>华为云是考纲"第三章 典型平台"中的 <b>3.3</b>（与 Google/AWS/百度云/选型并列），要求 <b>熟悉</b>。</li>
+    <li>华为云四大技术标签：<b>鲲鹏（通用算力）＋ 昇腾（AI 算力）＋ ModelArts（AI 开发平台）＋ HCS（混合云）</b>。</li>
+    <li><b>鲲鹏≠AI</b>、<b>昇腾≠通用</b>：鲲鹏是 ARM 服务器芯片（通用计算），昇腾是 NPU（AI 训练/推理）。</li>
+    <li><b>HCS</b> = 把公有云能力部署到客户本地的<b>混合云</b>，解决政务/金融"数据不出域、强合规"。</li>
+    <li>三大应用场景（必背）：<b>政务、金融、制造</b>；延伸：医疗、教育、交通/能源。</li>
+    <li>样题：政务云用鲲鹏+昇腾做健康码并发核验 → <b>正确</b>；华为云差异化＝自主可控 + 混合云 + 政企服务。</li>
+    <li>记住一句话：<b>"鲲鹏算、昇腾智、ModelArts 开发易、HCS 把云搬本地"</b>。</li>
+  </ul>
+</section>
+
+<footer>本讲解对应考纲 3.3 华为云（熟悉）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
+</div>
+<div class="colfoot"><a class="prev" href="3-1.html"><div class="lab">上一章</div><div class="ttl">Google 云计算</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="3-5.html"><div class="lab">下一章</div><div class="ttl">云平台选择比较</div></a></div>
+</body>
+</html>

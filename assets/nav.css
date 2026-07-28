@@ -1,0 +1,23 @@
+/* 云计算复习专栏 — 共享导航样式 */
+.colnav{position:sticky;top:0;z-index:100;background:linear-gradient(120deg,#1d4ed8,#3b82f6 60%,#0ea5e9);box-shadow:0 2px 10px rgba(20,40,80,.20)}
+.colnav .inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:7px 14px}
+.colnav .brand{font-weight:800;font-size:15px;white-space:nowrap;text-decoration:none;color:#fff;display:flex;align-items:center;gap:5px;flex:0 0 auto}
+.colnav .brand small{font-weight:500;opacity:.8;font-size:11px}
+.colnav .chips{display:flex;gap:6px;overflow-x:auto;flex:1;padding:2px 0;scrollbar-width:thin}
+.colnav .chips::-webkit-scrollbar{height:5px}
+.colnav .chips::-webkit-scrollbar-thumb{background:rgba(255,255,255,.4);border-radius:4px}
+.colnav .chip{flex:0 0 auto;text-decoration:none;color:#dbeafe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:3px 9px;border-radius:999px;font-size:12px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;transition:.15s}
+.colnav .chip:hover{background:rgba(255,255,255,.22);color:#fff}
+.colnav .chip .num{font-weight:700;color:#fff}
+.colnav .chip.active{background:#fff;color:#1d4ed8;border-color:#fff}
+.colnav .chip.active .num{color:#1d4ed8}
+.colfoot{max-width:980px;margin:28px auto 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.colfoot a{text-decoration:none;flex:1 1 200px;border:1px solid #e5e7eb;background:#fff;border-radius:12px;padding:12px 16px;color:#1f2937;box-shadow:0 2px 8px rgba(15,23,42,.05);transition:.15s}
+.colfoot a:hover{border-color:#2563eb;box-shadow:0 4px 14px rgba(37,99,235,.15)}
+.colfoot a.home{text-align:center;background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8;font-weight:700;flex:0 1 180px}
+.colfoot .lab{font-size:12px;color:#94a3b8}
+.colfoot .ttl{font-size:14.5px;font-weight:700;margin-top:2px}
+.colfoot a.prev .ttl::before{content:"\2190  "}
+.colfoot a.next{text-align:right}
+.colfoot a.next .ttl::after{content:"  \2192"}
+@media(max-width:560px){.colfoot a{flex:1 1 100%}.colfoot a.next{text-align:left}.colfoot a.home{flex:1 1 100%}}

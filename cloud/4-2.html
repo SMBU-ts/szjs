@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.2 Web服务与协议 — 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#ffffff; --ink:#1f2933; --muted:#5b6775;
+    --line:#e3e8ef; --brand:#2563eb; --brand-soft:#eff4ff;
+    --green:#16a34a; --green-soft:#ecfdf3; --red:#dc2626; --red-soft:#fef2f2;
+    --amber:#d97706; --amber-soft:#fff7ed; --purple:#7c3aed; --purple-soft:#f5f3ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.75;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 22px 80px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;border-radius:16px;
+    padding:30px 30px;box-shadow:0 10px 30px rgba(37,99,235,.18)}
+  header.hero h1{margin:0 0 6px;font-size:26px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:22px 0}
+  .toc b{color:var(--brand)}
+  .toc ol{margin:8px 0 0;padding-left:20px}
+  .toc a{color:var(--brand);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:24px 26px;margin:20px 0;box-shadow:0 2px 10px rgba(16,24,40,.04)}
+  h2{font-size:21px;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--brand-soft);color:var(--brand)}
+  h3{font-size:17px;margin:22px 0 10px;color:var(--ink)}
+  p{margin:10px 0}
+  ul,ol{margin:10px 0;padding-left:22px}
+  li{margin:6px 0}
+  .lead{color:var(--muted);background:var(--brand-soft);border-left:4px solid var(--brand);
+    padding:12px 16px;border-radius:8px;margin:14px 0}
+  .box{border-radius:10px;padding:14px 18px;margin:14px 0;border:1px solid}
+  .box.pros{border-color:#bbf7d0;background:var(--green-soft)}
+  .box.cons{border-color:#fecaca;background:var(--red-soft)}
+  .box.note{border-color:#fed7aa;background:var(--amber-soft)}
+  .box.key{border-color:#ddd6fe;background:var(--purple-soft)}
+  .box b{display:block;margin-bottom:6px}
+  .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;margin-right:6px}
+  .tag.g{background:var(--green-soft);color:var(--green)}
+  .tag.r{background:var(--red-soft);color:var(--red)}
+  .tag.b{background:var(--brand-soft);color:var(--brand)}
+  .tag.a{background:var(--amber-soft);color:var(--amber)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--brand-soft);color:var(--brand)}
+  tr:nth-child(even) td{background:#fafbfe}
+  pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.6}
+  code{font-family:"SFMono-Regular",Consolas,monospace;background:#eef2f7;padding:1px 6px;border-radius:5px;font-size:13px}
+  pre code{background:none;padding:0}
+  .diagram{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;text-align:center}
+  .diagram svg{width:100%;height:auto;max-width:680px}
+  .cap{font-size:12px;color:var(--muted);margin-top:8px}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.twocol{grid-template-columns:1fr}}
+  .pill{display:inline-block;background:var(--brand-soft);color:var(--brand);font-weight:600;
+    padding:2px 12px;border-radius:999px;font-size:13px;margin:2px 0}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:30px}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip active" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>4.2 Web 服务与协议</h1>
+  <p>核心组件 · 定义与特性 · 工作流程 · SOAP · RESTful · REST 安全性 · REST vs SOAP 比较</p>
+</header>
+
+<div class="toc">
+  <b>目录</b>
+  <ol>
+    <li><a href="#def">Web 服务的定义与基本特性</a></li>
+    <li><a href="#core">Web 服务的核心组件</a></li>
+    <li><a href="#flow">Web 服务的工作流程</a></li>
+    <li><a href="#soap">SOAP（简单对象访问协议）</a></li>
+    <li><a href="#rest">RESTful Web 服务</a></li>
+    <li><a href="#sec">REST 安全性</a></li>
+    <li><a href="#cmp">REST 与 SOAP 异同比较</a></li>
+  </ol>
+</div>
+
+<!-- 1. 定义 -->
+<section id="def">
+  <h2>一、Web 服务的定义与基本特性</h2>
+
+  <div class="lead">
+    <b>定义：</b>Web 服务（Web Service）是一种<strong>通过网络（通常是 Internet/Intranet）实现机器对机器（M2M）互操作</strong>的软件系统。它对外暴露一个<strong>可被机器处理的接口描述</strong>（如 WSDL），调用方通过标准化的消息格式（典型为 SOAP/XML 或 REST/JSON）与其交互。
+  </div>
+
+  <h3>1.1 本质</h3>
+  <p>可以把 Web 服务理解为「部署在 Web 上的、可程序化调用的功能单元」——它把一段业务逻辑（如查询天气、扣款、查库存）封装起来，让<strong>不同平台、不同语言编写的程序</strong>都能像调用本地函数一样远程调用它。</p>
+
+  <h3>1.2 基本特性</h3>
+  <ul>
+    <li><span class="tag b">互操作性</span>平台无关、语言无关：.NET 程序可调用 Java 服务，只要遵循相同标准。</li>
+    <li><span class="tag b">松耦合</span>服务端与客户端可独立演化，只要接口契约不变，内部实现可自由替换。</li>
+    <li><span class="tag g">自描述 / 契约化</span>通过 WSDL（SOAP）或 OpenAPI（REST）描述接口、参数与返回值，调用方无需看源码即可对接。</li>
+    <li><span class="tag b">基于标准协议</span>依托 XML、HTTP、SOAP、WSDL、UDDI 等开放标准，不被厂商锁定。</li>
+    <li><span class="tag g">可组合性</span>多个原子服务可编排组合成更复杂的业务流程（服务编排 / BPM）。</li>
+    <li><span class="tag a">封装性</span>只暴露接口，隐藏内部实现细节与数据结构。</li>
+    <li><span class="tag b">可寻址</span>服务可通过 URI / 注册中心被发现与定位。</li>
+  </ul>
+
+  <div class="box note"><b>💡 一句话记忆</b>Web 服务 = 用标准协议 + 机器可读描述，让异构系统互通的「网络函数」。</div>
+</section>
+
+<!-- 2. 核心组件 -->
+<section id="core">
+  <h2>二、Web 服务的核心组件</h2>
+  <p>以最经典的 <strong>SOAP Web 服务技术栈</strong>为例，核心组件自底向上构成一条完整的「通信链路」：</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+      <defs>
+        <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+        </marker>
+      </defs>
+      <!-- layers -->
+      <rect x="170" y="20" width="340" height="44" rx="8" fill="#eff4ff" stroke="#2563eb"/>
+      <text x="340" y="47" text-anchor="middle" fill="#1f2933" font-size="15" font-weight="700">应用层（业务逻辑 / 调用方程序）</text>
+
+      <rect x="170" y="84" width="340" height="40" rx="8" fill="#f5f3ff" stroke="#7c3aed"/>
+      <text x="340" y="109" text-anchor="middle" fill="#1f2933" font-size="14"><tspan font-weight="700">WSDL</tspan> — 服务描述（接口契约）</text>
+
+      <rect x="170" y="142" width="340" height="40" rx="8" fill="#fff7ed" stroke="#d97706"/>
+      <text x="340" y="167" text-anchor="middle" fill="#1f2933" font-size="14"><tspan font-weight="700">UDDI</tspan> — 服务注册与发现</text>
+
+      <rect x="170" y="200" width="340" height="40" rx="8" fill="#ecfdf3" stroke="#16a34a"/>
+      <text x="340" y="225" text-anchor="middle" fill="#1f2933" font-size="14"><tspan font-weight="700">SOAP</tspan> — 消息协议（基于 XML 的信封）</text>
+
+      <rect x="170" y="258" width="340" height="40" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+      <text x="340" y="283" text-anchor="middle" fill="#1f2933" font-size="14"><tspan font-weight="700">XML</tspan> — 数据交换格式</text>
+
+      <!-- transport -->
+      <rect x="40" y="200" width="110" height="98" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+      <text x="95" y="252" text-anchor="middle" fill="#475569" font-size="13" font-weight="700">传输层</text>
+      <text x="95" y="274" text-anchor="middle" fill="#475569" font-size="12">HTTP / SMTP</text>
+      <text x="95" y="292" text-anchor="middle" fill="#475569" font-size="12">/ JMS / TCP</text>
+
+      <line x1="150" y1="220" x2="170" y2="220" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="340" y1="64" x2="340" y2="84" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="340" y1="124" x2="340" y2="142" stroke="#d97706" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="340" y1="182" x2="340" y2="200" stroke="#16a34a" stroke-width="2" marker-end="url(#arr)"/>
+      <line x1="340" y1="240" x2="340" y2="258" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+    </svg>
+    <div class="cap">图 1 · 经典 SOAP Web 服务技术栈：自顶向下依赖，最底层以 XML 承载、通过 HTTP 等传输</div>
+  </div>
+
+  <h3>2.1 各组件职责</h3>
+  <table>
+    <tr><th>组件</th><th>英文 / 全称</th><th>作用</th></tr>
+    <tr><td><b>XML</b></td><td>eXtensible Markup Language</td><td>平台中立的数据表示格式，是 SOAP 消息的载体</td></tr>
+    <tr><td><b>SOAP</b></td><td>Simple Object Access Protocol</td><td>基于 XML 的消息封装协议，定义「请求/响应」的信封结构</td></tr>
+    <tr><td><b>WSDL</b></td><td>Web Services Description Language</td><td>用 XML 描述服务的「地址、操作、参数、数据类型」契约</td></tr>
+    <tr><td><b>UDDI</b></td><td>Universal Description, Discovery and Integration</td><td>服务注册中心，供提供者发布、请求者查找服务</td></tr>
+    <tr><td><b>传输协议</b></td><td>HTTP / SMTP / JMS / TCP</td><td>承载 SOAP 消息的网络通道（Web 服务中最常用 HTTP）</td></tr>
+  </table>
+
+  <div class="box key"><b>🔑 REST 的核心组件（对照）</b>对 RESTful 而言，核心组件更轻量：<b>资源（Resource）</b> + <b>URI</b> + <b>HTTP 方法（GET/POST/PUT/DELETE）</b> + <b>表示（Representation，多为 JSON）</b> + <b>无状态通信</b>。不需要 WSDL/UDDI/SOAP 这套重型栈。</div>
+</section>
+
+<!-- 3. 工作流程 -->
+<section id="flow">
+  <h2>三、Web 服务的工作流程</h2>
+  <p>SOAP Web 服务遵循经典的 <strong>「发布 — 查找 — 绑定」（Publish-Find-Bind）</strong>三角模型，涉及三个角色：</p>
+  <ul>
+    <li><b>服务提供者（Service Provider）</b>：拥有并部署服务的一方。</li>
+    <li><b>服务注册中心（Registry，如 UDDI）</b>：存放服务描述的目录。</li>
+    <li><b>服务请求者（Service Requester）</b>：调用服务的一方。</li>
+  </ul>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+      <defs>
+        <marker id="a1" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#2563eb"/></marker>
+        <marker id="a2" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#16a34a"/></marker>
+        <marker id="a3" markerWidth="12" markerHeight="12" refX="9" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#dc2626"/></marker>
+      </defs>
+      <rect x="60" y="100" width="150" height="60" rx="10" fill="#eff4ff" stroke="#2563eb"/>
+      <text x="135" y="128" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">服务提供者</text>
+      <text x="135" y="146" text-anchor="middle" fill="#5b6775" font-size="11">Provider</text>
+
+      <rect x="265" y="30" width="150" height="60" rx="10" fill="#fff7ed" stroke="#d97706"/>
+      <text x="340" y="58" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">注册中心 UDDI</text>
+      <text x="340" y="76" text-anchor="middle" fill="#5b6775" font-size="11">Registry</text>
+
+      <rect x="470" y="100" width="150" height="60" rx="10" fill="#ecfdf3" stroke="#16a34a"/>
+      <text x="545" y="128" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">服务请求者</text>
+      <text x="545" y="146" text-anchor="middle" fill="#5b6775" font-size="11">Requester</text>
+
+      <line x1="210" y1="120" x2="263" y2="80" stroke="#2563eb" stroke-width="2" marker-end="url(#a1)"/>
+      <text x="225" y="92" fill="#2563eb" font-size="11" font-weight="700">① 发布 publish</text>
+
+      <line x1="415" y1="80" x2="468" y2="120" stroke="#16a34a" stroke-width="2" marker-end="url(#a2)"/>
+      <text x="430" y="92" fill="#16a34a" font-size="11" font-weight="700">② 查找 find</text>
+
+      <line x1="470" y1="130" x2="215" y2="130" stroke="#dc2626" stroke-width="2" marker-end="url(#a3)"/>
+      <text x="320" y="155" text-anchor="middle" fill="#dc2626" font-size="11" font-weight="700">③ 绑定/调用 bind（SOAP over HTTP）</text>
+    </svg>
+    <div class="cap">图 2 · Web 服务「发布—查找—绑定」工作流程</div>
+  </div>
+
+  <h3>3.1 步骤拆解</h3>
+  <ol>
+    <li><b>发布（Publish）：</b>提供者将 WSDL 描述文件发布到 UDDI 注册中心。</li>
+    <li><b>查找（Find）：</b>请求者向注册中心查询所需服务的描述与端点地址。</li>
+    <li><b>绑定 / 调用（Bind）：</b>请求者根据 WSDL 构造 SOAP 消息，通过 HTTP 发送到服务提供者，服务执行后返回 SOAP 响应。</li>
+  </ol>
+
+  <div class="box note"><b>⚙️ REST 的工作流程（简化）</b>REST 没有 UDDI 注册环节：客户端直接通过<strong>已知 URI + HTTP 方法</strong>向服务端发起请求，服务端返回资源的<strong>表示（如 JSON）</strong>。流程即：<code>客户端请求 URI → 服务端定位资源 → 返回表示</code>，本质是「请求—响应」两步，远比 SOAP 三角模型轻量。</div>
+</section>
+
+<!-- 4. SOAP -->
+<section id="soap">
+  <h2>四、SOAP（简单对象访问协议）</h2>
+
+  <div class="lead">
+    SOAP 是一种<strong>基于 XML 的、用于交换结构化信息的轻量级协议</strong>。注意名为「简单对象访问协议」，但它<strong>既不简单、也不限于对象访问</strong>——它是一套严格的消息格式规范。SOAP 本身只定义消息结构，传输可绑定到 HTTP、SMTP、JMS、TCP 等。
+  </div>
+
+  <h3>4.1 基本结构（SOAP 信封）</h3>
+  <p>每条 SOAP 消息都是一个 <code>Envelope</code>（信封），内部包含可选的 <code>Header</code> 与必需的 <code>Body</code>：</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+      <rect x="180" y="20" width="320" height="260" rx="10" fill="#eff4ff" stroke="#2563eb" stroke-width="2"/>
+      <text x="340" y="44" text-anchor="middle" fill="#1f2933" font-size="15" font-weight="700">&lt;soap:Envelope&gt;</text>
+
+      <rect x="210" y="62" width="260" height="58" rx="8" fill="#fff7ed" stroke="#d97706"/>
+      <text x="340" y="84" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">&lt;soap:Header&gt;</text>
+      <text x="340" y="104" text-anchor="middle" fill="#5b6775" font-size="11">可选 · 路由/认证/事务等元数据</text>
+
+      <rect x="210" y="138" width="260" height="100" rx="8" fill="#ecfdf3" stroke="#16a34a"/>
+      <text x="340" y="160" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">&lt;soap:Body&gt;</text>
+      <text x="340" y="180" text-anchor="middle" fill="#5b6775" font-size="11">必需 · 实际业务数据</text>
+      <text x="340" y="200" text-anchor="middle" fill="#5b6775" font-size="11">（请求参数 / 响应结果）</text>
+      <text x="340" y="224" text-anchor="middle" fill="#dc2626" font-size="11">&lt;soap:Fault&gt; 可选 · 错误信息</text>
+
+      <text x="340" y="272" text-anchor="middle" fill="#1f2933" font-size="15" font-weight="700">&lt;/soap:Envelope&gt;</text>
+    </svg>
+    <div class="cap">图 3 · SOAP 消息信封结构</div>
+  </div>
+
+  <pre><code>&lt;soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"&gt;
+  &lt;soap:Header&gt;
+    &lt;Auth&gt;token123&lt;/Auth&gt;          &lt;!-- 可选：认证、事务等 --&gt;
+  &lt;/soap:Header&gt;
+  &lt;soap:Body&gt;
+    &lt;GetPrice&gt;
+      &lt;Item&gt;Book-001&lt;/Item&gt;     &lt;!-- 业务请求数据 --&gt;
+    &lt;/GetPrice&gt;
+    &lt;!-- 出错时返回 &lt;soap:Fault&gt; ... &lt;/soap:Fault&gt; --&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+
+  <table>
+    <tr><th>元素</th><th>是否必需</th><th>说明</th></tr>
+    <tr><td><b>Envelope</b></td><td>必需</td><td>根元素，标识这是一条 SOAP 消息</td></tr>
+    <tr><td><b>Header</b></td><td>可选</td><td>扩展信息：安全令牌、事务 ID、路由路径等</td></tr>
+    <tr><td><b>Body</b></td><td>必需</td><td>真正的业务负载（调用的方法与参数 / 返回结果）</td></tr>
+    <tr><td><b>Fault</b></td><td>可选</td><td>错误信息容器：code、string、actor、detail</td></tr>
+  </table>
+
+  <h3>4.2 应用场景</h3>
+  <ul>
+    <li><span class="tag a">企业级 B2B 集成</span>跨企业、跨系统的严谨数据交换（如供应链、ERP 对接）。</li>
+    <li><span class="tag r">金融 / 支付 / 银行</span>需要<strong>强事务一致性、内置安全（WS-Security）、正式契约</strong>的高价值交易。</li>
+    <li><span class="tag b">遗留系统打通</span>把老旧系统封装成 WS，供新系统以标准方式调用。</li>
+    <li><span class="tag a">需要正式契约与版本治理</span>接口变更需严格管控、可追溯的场景。</li>
+  </ul>
+
+  <div class="twocol">
+    <div class="box pros"><b>✅ 优点</b>
+      <ul>
+        <li>标准化、跨平台、跨语言</li>
+        <li>WSDL 提供<strong>正式契约</strong>，机器可读、可代码生成</li>
+        <li>内置安全/事务标准（WS-Security、WS-AtomicTransaction）</li>
+        <li>强类型、结构严谨，错误通过 Fault 规范处理</li>
+        <li>可绑定多种传输协议（不限于 HTTP）</li>
+      </ul>
+    </div>
+    <div class="box cons"><b>❌ 缺点</b>
+      <ul>
+        <li>XML 冗余，<strong>消息体大、带宽与解析开销高</strong></li>
+        <li>协议复杂、<strong>学习曲线陡、开发调试困难</strong></li>
+        <li>与 WSDL 紧耦合，灵活性差</li>
+        <li>性能较低，不适合高并发轻量场景</li>
+        <li>对简单 CRUD 而言「杀鸡用牛刀」</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 5. REST -->
+<section id="rest">
+  <h2>五、RESTful（表征性状态转移）Web 服务</h2>
+
+  <div class="lead">
+    REST 不是协议，而是一种<strong>架构风格</strong>，由 Roy Fielding 于 2000 年提出。它把一切都抽象为<strong>资源（Resource）</strong>，通过 URI 定位、用统一的 HTTP 方法操作、以某种表示（如 JSON）在客户端与服务端之间转移状态。
+  </div>
+
+  <h3>5.1 六大设计原则（约束）</h3>
+  <table>
+    <tr><th>约束</th><th>含义</th><th>考试要点</th></tr>
+    <tr><td><b>1. 客户端-服务器分离</b><br>(Client-Server)</td><td>前端与后端职责分离，可独立演化</td><td>关注点分离，提升可移植性</td></tr>
+    <tr><td><b>2. 无状态</b><br>(Stateless)</td><td>每个请求必须自带<strong>全部所需信息</strong>，服务端不保存客户端会话状态</td><td>服务端无会话上下文，利于横向扩展</td></tr>
+    <tr><td><b>3. 可缓存</b><br>(Cacheable)</td><td>响应须标明是否可缓存，减少重复请求</td><td>借助 HTTP 缓存头提升性能</td></tr>
+    <tr><td><b>4. 统一接口</b><br>(Uniform Interface)</td><td>REST 的核心，含 4 个子约束（见下）</td><td>解耦架构的关键</td></tr>
+    <tr><td><b>5. 分层系统</b><br>(Layered System)</td><td>可插入代理、网关等中间层，客户端透明</td><td>提升可伸缩性与安全性</td></tr>
+    <tr><td><b>6. 按需代码</b><br>(Code-On-Demand, 可选)</td><td>服务端可下发可执行脚本（如 JS）到客户端</td><td>唯一可选约束</td></tr>
+  </table>
+
+  <h3>5.2 统一接口的四个子约束</h3>
+  <ol>
+    <li><b>资源由 URI 标识</b>：每个资源有唯一地址，如 <code>/users/1001</code>。</li>
+    <li><b>通过表示操作资源</b>：客户端拿到的是资源的「表示」（JSON/XML），修改表示即修改资源。</li>
+    <li><b>自描述消息</b>：消息自带足够元信息（如 <code>Content-Type</code>），无需额外文档即可理解。</li>
+    <li><b>超媒体驱动应用状态（HATEOAS）</b>：响应中嵌入可进一步操作的链接，客户端按需导航。</li>
+  </ol>
+
+  <h3>5.3 RESTful 设计实践</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Microsoft YaHei, sans-serif">
+      <rect x="40" y="70" width="150" height="60" rx="10" fill="#eff4ff" stroke="#2563eb"/>
+      <text x="115" y="98" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">资源 URI</text>
+      <text x="115" y="116" text-anchor="middle" fill="#5b6775" font-size="11">/users/1001</text>
+
+      <rect x="265" y="70" width="150" height="60" rx="10" fill="#f5f3ff" stroke="#7c3aed"/>
+      <text x="340" y="98" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">HTTP 方法</text>
+      <text x="340" y="116" text-anchor="middle" fill="#5b6775" font-size="11">GET/POST/PUT/DELETE</text>
+
+      <rect x="490" y="70" width="150" height="60" rx="10" fill="#ecfdf3" stroke="#16a34a"/>
+      <text x="565" y="98" text-anchor="middle" fill="#1f2933" font-size="13" font-weight="700">表示 Representation</text>
+      <text x="565" y="116" text-anchor="middle" fill="#5b6775" font-size="11">JSON / XML</text>
+
+      <line x1="190" y1="100" x2="261" y2="100" stroke="#2563eb" stroke-width="2"/>
+      <line x1="415" y1="100" x2="486" y2="100" stroke="#2563eb" stroke-width="2"/>
+    </svg>
+    <div class="cap">图 4 · REST 统一接口三要素：URI 定位资源 + HTTP 方法操作 + 表示承载状态</div>
+  </div>
+
+  <ul>
+    <li><span class="pill">资源用名词，不用动词</span> 正确：<code>GET /orders</code>；错误：<code>GET /getOrders</code>。</li>
+    <li><b>用 HTTP 方法表达动作：</b></li>
+  </ul>
+  <table>
+    <tr><th>方法</th><th>语义</th><th>对应操作</th><th>幂等</th></tr>
+    <tr><td><b>GET</b></td><td>读取资源</td><td>查</td><td>是</td></tr>
+    <tr><td><b>POST</b></td><td>新建资源</td><td>增</td><td>否</td></tr>
+    <tr><td><b>PUT</b></td><td>整体替换资源</td><td>改（全量）</td><td>是</td></tr>
+    <tr><td><b>PATCH</b></td><td>部分更新资源</td><td>改（增量）</td><td>否</td></tr>
+    <tr><td><b>DELETE</b></td><td>删除资源</td><td>删</td><td>是</td></tr>
+  </table>
+  <ul>
+    <li><span class="pill">用 HTTP 状态码表达结果</span> <code>200</code> 成功、<code>201</code> 已创建、<code>400</code> 请求错误、<code>401/403</code> 未认证/无权限、<code>404</code> 不存在、<code>500</code> 服务端错误。</li>
+    <li><span class="pill">无状态</span> 每次请求携带完整凭证（如 Token），服务端不存会话。</li>
+    <li><span class="pill">表示优先 JSON</span> 轻量、易解析，已成为事实标准（也可 XML）。</li>
+  </ul>
+
+  <pre><code># 获取用户
+GET /users/1001  →  200 OK  { "id":1001, "name":"张三" }
+
+# 创建订单
+POST /orders     →  201 Created  { "id":77, "amount":99 }
+
+# 删除用户
+DELETE /users/1001  →  204 No Content</code></pre>
+</section>
+
+<!-- 6. REST 安全性 -->
+<section id="sec">
+  <h2>六、REST 安全性</h2>
+  <p>REST 本身是无状态架构，没有内置的安全协议，安全需<strong>由传输层 + 应用层机制共同保障</strong>。以下为考试高频要点：</p>
+
+  <table>
+    <tr><th>安全维度</th><th>常用机制</th><th>说明</th></tr>
+    <tr><td><b>传输安全</b></td><td>HTTPS / TLS</td><td>加密传输内容，防窃听、防中间人篡改（REST 安全基石）</td></tr>
+    <tr><td><b>身份认证</b></td><td>OAuth 2.0、JWT（Bearer Token）、API Key、OpenID Connect</td><td>无状态场景用<strong>令牌（Token）</strong>代替服务端 Session</td></tr>
+    <tr><td><b>授权 / 访问控制</b></td><td>Scope、RBAC、ABAC</td><td>控制「能访问哪些资源、能做哪些操作」</td></tr>
+    <tr><td><b>输入校验</b></td><td>参数白名单、类型校验</td><td>防 SQL 注入、XSS、XML/JSON 注入</td></tr>
+    <tr><td><b>限流 / 防刷</b></td><td>Rate Limiting、Throttling</td><td>防 DoS、暴力破解、资源耗尽</td></tr>
+    <tr><td><b>跨域安全</b></td><td>正确配置 CORS</td><td>限定可信来源，避免任意站点调用</td></tr>
+    <tr><td><b>审计与监控</b></td><td>日志、告警</td><td>记录访问、异常行为可追溯</td></tr>
+  </table>
+
+  <div class="box key"><b>🔐 关键对比：REST vs SOAP 的安全思路</b>
+    <ul style="margin:6px 0">
+      <li><b>SOAP</b>：在<strong>协议层</strong>内置 <b>WS-Security</b>（XML 数字签名、加密、令牌），安全与消息绑定，即便走非 HTTPS 也能端到端保护。</li>
+      <li><b>REST</b>：安全<strong>依赖外部标准</strong>——靠 <b>HTTPS</b> 保传输、靠 <b>OAuth 2.0 / JWT</b> 保身份，是「约定俗成」而非协议强制。</li>
+    </ul>
+  </div>
+  <div class="box note"><b>⚠️ 考试提示</b>REST 强调无状态，因此<strong>不能用服务端 Session 维持登录</strong>，必须靠每次请求携带的 Token（如 JWT）来识别身份。这也是 REST 易水平扩展的原因。</div>
+</section>
+
+<!-- 7. 比较 -->
+<section id="cmp">
+  <h2>七、REST 与 SOAP 异同比较</h2>
+
+  <h3>7.1 相同点（异中有同）</h3>
+  <ul>
+    <li>都用于<strong>跨网络、跨平台的机器间通信</strong>，实现系统互操作。</li>
+    <li>都可通过 <strong>HTTP</strong> 传输（也可承载于其他协议）。</li>
+    <li>都采用<strong>请求/响应</strong>模型，都支持 XML 作为数据格式。</li>
+    <li>都可用于构建<strong>分布式、松耦合</strong>的服务架构。</li>
+  </ul>
+
+  <h3>7.2 不同点（核心差异）</h3>
+  <table>
+    <tr><th>比较维度</th><th>SOAP</th><th>REST</th></tr>
+    <tr><td>本质</td><td>一种<strong>协议（Protocol）</strong></td><td>一种<strong>架构风格（Architecture）</strong></td></tr>
+    <tr><td>消息格式</td><td>仅 <strong>XML</strong></td><td><strong>JSON / XML / HTML 等</strong>（多用 JSON）</td></tr>
+    <tr><td>接口契约</td><td>正式 <strong>WSDL</strong> 契约</td><td>通常无强制契约（常用 OpenAPI/Swagger 描述）</td></tr>
+    <tr><td>耦合度</td><td>与 WSDL <strong>紧耦合</strong></td><td><strong>松耦合</strong></td></tr>
+    <tr><td>状态</td><td>可支持<strong>有状态</strong></td><td>设计为<strong>无状态</strong></td></tr>
+    <tr><td>传输</td><td>HTTP / SMTP / JMS / TCP 皆可</td><td>通常基于 <strong>HTTP</strong></td></tr>
+    <tr><td>性能</td><td>XML 重、<strong>较慢、开销大</strong></td><td>轻量（尤其 JSON）、<strong>更快</strong></td></tr>
+    <tr><td>安全</td><td>内置 <strong>WS-Security</strong> 等标准</td><td>依赖 HTTPS + OAuth/JWT 等外部机制</td></tr>
+    <tr><td>错误处理</td><td>规范化的 <strong>&lt;soap:Fault&gt;</strong></td><td>HTTP <strong>状态码</strong>（200/404/500…）</td></tr>
+    <tr><td>缓存</td><td>不易缓存</td><td>借 HTTP 缓存机制<strong>天然可缓存</strong></td></tr>
+    <tr><td>复杂度 / 学习成本</td><td><strong>高</strong></td><td><strong>低</strong></td></tr>
+    <tr><td>典型场景</td><td>企业 B2B、金融支付、事务性、强契约</td><td>Web / 移动端、公开 API、轻量 CRUD</td></tr>
+  </table>
+
+  <div class="box key"><b>🎯 选型口诀</b>要<strong>严谨契约、事务安全、跨协议</strong>选 <b>SOAP</b>；要<strong>轻量、高性能、易用、面向 Web/移动</strong>选 <b>REST</b>。当今互联网公开 API 绝大多数采用 REST（JSON）。</div>
+</section>
+
+<footer>4.2 Web 服务与协议 · 复习讲义 · 建议结合「核心知识点详解」配套练习</footer>
+</div>
+<div class="colfoot"><a class="prev" href="3-5.html"><div class="lab">上一章</div><div class="ttl">云平台选择比较</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="4-3.html"><div class="lab">下一章</div><div class="ttl">面向服务架构 SOA</div></a></div>
+</body>
+</html>

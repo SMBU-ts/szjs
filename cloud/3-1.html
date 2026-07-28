@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.1 Google云计算 · 详解复习卡（熟悉）</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
+    --cloud:#2563eb; --cloud-soft:#eaf1ff; --green:#0f6e56; --green-soft:#e1f5ee;
+    --amber:#854f0b; --amber-soft:#faedda; --pink:#993556; --pink-soft:#fbeaf0;
+    --key-bg:#fff1f0; --key-bd:#ff9c8a; --key-ink:#b42318;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px;}
+  header{background:linear-gradient(120deg,#1d4ed8,#3b82f6);color:#fff;padding:16px 26px;box-shadow:var(--shadow);}
+  header h1{margin:0;font-size:19px;font-weight:700;}
+  header .sub{font-size:12.5px;opacity:.92;margin-top:4px;}
+  main{max-width:1000px;margin:0 auto;padding:22px 24px 70px;}
+  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow);}
+  .kp h3{margin:0 0 10px;font-size:16.5px;color:var(--ink);border-left:5px solid var(--cloud);padding-left:10px;}
+  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--green);vertical-align:middle;margin-left:8px;}
+  .block{margin:10px 0;}
+  .block .t{font-weight:700;font-size:13.5px;color:var(--cloud);display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+  .block .t::before{content:"";width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block;}
+  .block p{margin:4px 0;color:var(--ink-soft);}
+  .block ul{margin:4px 0;padding-left:20px;color:var(--ink-soft);}
+  .block ul li{margin:3px 0;}
+  .key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:4px solid var(--key-ink);
+    border-radius:8px;padding:9px 13px;margin:11px 0;color:var(--key-ink);font-size:13.5px;}
+  .key b{color:var(--key-ink);}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--cloud-soft);color:var(--ink);}
+  .pill{display:inline-block;font-size:12px;background:var(--cloud-soft);color:var(--cloud);padding:2px 10px;border-radius:999px;margin:2px 4px 2px 0;}
+  .timeline{position:relative;margin:12px 0 4px;padding-left:22px;}
+  .timeline::before{content:"";position:absolute;left:7px;top:4px;bottom:4px;width:2px;background:var(--cloud);}
+  .timeline li{list-style:none;margin:10px 0;position:relative;}
+  .timeline li::before{content:"";position:absolute;left:-19px;top:7px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--cloud);}
+  .timeline ul{padding-left:0;}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:24px;border-top:1px solid var(--line);}
+  .tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0;}
+  .tech-card{background:var(--cloud-soft);border:1px solid #b5d4f4;border-radius:10px;padding:12px 14px;}
+  .tech-card h4{margin:0 0 6px;font-size:14.5px;color:var(--cloud);}
+  .tech-card p{margin:2px 0;font-size:12.5px;color:var(--ink-soft);}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip active" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<header>
+  <h1>3.1 Google云计算 · 详解复习卡</h1>
+  <div class="sub">考纲要求：📗 熟悉 ｜ 配套《湖南省数字技术应用能力水平考试（2025版）》云计算·典型平台章节</div>
+</header>
+<main>
+
+<div class="kp">
+  <h3>一、背景及起源 <span class="badge">熟悉</span></h3>
+  <div class="block"><div class="t">为什么 Google 是现代云计算的源头</div>
+    <p>Google 云计算并非作为"产品"诞生，而是为<b>解决自身搜索业务的海量数据问题</b>而被"逼"出来的技术体系。</p>
+    <ul>
+      <li><b>业务痛点：</b>搜索引擎要抓取/存储/索引整个互联网（PB 级），传统方案（小型机 + 商业数据库）太贵、难扩展。</li>
+      <li><b>破局思路：</b>用成千上万台<b>廉价普通 PC 组成集群</b>，靠<b>软件层容错</b>弥补单机不可靠——即"用一堆便宜机器拼出超算能力且成本更低"（考纲判断样题）。</li>
+      <li><b>三篇奠基论文（2003–2006）：</b>GFS、MapReduce、BigTable 公开后，直接催生 Hadoop、HBase、Cassandra 等开源生态，是现代大数据与云计算的理论基石。</li>
+      <li><b>内部系统 Borg：</b>2000 年代即管理全球数据中心的数万任务，后开源演化为 <b>Kubernetes（K8s）</b>。</li>
+      <li><b>走向商用：</b>2008 年推 Google App Engine（PaaS 鼻祖之一），2011 年后 GCP 正式成为公有云。</li>
+    </ul>
+  </div>
+  <div class="block"><div class="t">发展时间线</div>
+    <ul class="timeline">
+      <li><b>2003</b> GFS 论文发布（分布式文件系统）</li>
+      <li><b>2004</b> MapReduce 论文发布（批处理模型）</li>
+      <li><b>2006</b> BigTable 论文发布（NoSQL 列族库）</li>
+      <li><b>2000s 内部</b> Borg 集群管理系统运行，后演化为 K8s</li>
+      <li><b>2008</b> Google App Engine 上线（PaaS）</li>
+      <li><b>2011+</b> Google Cloud Platform（GCP）正式商用</li>
+    </ul>
+  </div>
+  <div class="key"><b>记忆锚点：</b>Google 是"现代云计算思想的源头"，其论文奠定了整个开源大数据生态；Borg → Kubernetes 是容器编排的血脉。</div>
+</div>
+
+<div class="kp">
+  <h3>二、应用场景 <span class="badge">熟悉</span></h3>
+  <div class="block"><div class="t">典型场景一览</div>
+    <table>
+      <tr><th>场景</th><th>技术体现</th></tr>
+      <tr><td><b>搜索引擎</b>（抓取/索引/排序）</td><td>GFS 存网页 + MapReduce 建索引 + BigTable 存结果——<b>最典型场景</b></td></tr>
+      <tr><td><b>YouTube 视频</b></td><td>海量视频分块存储 + 并行转码处理</td></tr>
+      <tr><td><b>Gmail / 地图 / 地球</b></td><td>BigTable 列族模型天然契合海量结构化与地理数据</td></tr>
+      <tr><td><b>大数据批处理 / 日志分析</b></td><td>MapReduce 离线高吞吐处理</td></tr>
+    </table>
+  </div>
+  <div class="block"><div class="t">共同特征</div>
+    <p>数据量极大、需要<b>水平扩展</b>、<b>单点故障不影响整体</b>——云计算"廉价机器拼集群"思想的最佳注脚。</p>
+  </div>
+</div>
+
+<div class="kp">
+  <h3>三、核心技术 <span class="badge">熟悉</span></h3>
+  <div class="block"><div class="t">四大核心技术总览</div>
+    <div class="tech-grid">
+      <div class="tech-card"><h4>GFS</h4><p>分布式文件系统</p><p>分块 + 3 副本，Master 管元数据</p></div>
+      <div class="tech-card"><h4>MapReduce</h4><p>分布式批处理模型</p><p>Map → Shuffle → Reduce 分治</p></div>
+      <div class="tech-card"><h4>BigTable</h4><p>NoSQL 列族数据库</p><p>PB 级稀疏多维排序映射</p></div>
+      <div class="tech-card"><h4>Borg</h4><p>集群编排（容器前身）</p><p>后演化为 Kubernetes</p></div>
+    </div>
+  </div>
+
+  <div class="block"><div class="t">1) GFS（Google 文件系统）</div>
+    <p>支撑一切的上层存储底座，目标是在廉价机器上可靠存超大规模文件，支持高吞吐顺序读。</p>
+    <ul>
+      <li><b>架构：</b>单 Master（管元数据/目录树/块位置）+ 多个 ChunkServer（真正存数据）。</li>
+      <li><b>分块与副本：</b>文件切成固定大小<b>块（Chunk，默认 64MB）</b>，每块在集群存 <b>3 个副本</b>，任一机器宕机数据不丢。</li>
+      <li><b>读写路径：</b>客户端先问 Master 拿位置，再<b>直接与 ChunkServer 读写数据</b>（Master 不经手数据流，避免瓶颈）。</li>
+      <li><b>适用特征：</b>大文件、流式顺序读、追加写为主——完美贴合搜索索引与日志。</li>
+    </ul>
+  </div>
+
+  <div class="block"><div class="t">2) MapReduce（分布式批处理模型）</div>
+    <p>处理海量数据的<b>编程范式与思想核心</b>，本质是"分治 + 归并"。</p>
+    <ul>
+      <li><b>Map（映射）：</b>大任务切小块，分发集群大量机器<b>并行</b>处理（如统计各网页词频）。</li>
+      <li><b>Shuffle &amp; Sort（洗牌排序）：</b>框架自动把<b>相同 key</b> 的中间结果归拢到一起。</li>
+      <li><b>Reduce（归约）：</b>对同一 key 的结果汇总（如把各机 "apple" 计数相加）。</li>
+      <li><b>容错：</b>某机挂了，Master 把未完成任务<b>重新调度</b>到别的机器——"普通机器拼集群也可靠"的关键。</li>
+    </ul>
+    <div class="key">考纲要点：MapReduce 是<b>批处理</b>（离线高吞吐，非实时）；开源实现即 <b>Hadoop MapReduce</b>。</div>
+  </div>
+
+  <div class="block"><div class="t">3) BigTable（分布式 NoSQL 数据库）</div>
+    <p>构建在 GFS 之上的结构化海量存储，<b>非关系型</b>，而是列族模型。</p>
+    <ul>
+      <li><b>数据模型：</b>一个<b>稀疏、分布式、持久化的多维排序映射表</b>，用「行键 RowKey + 列族:列 + 时间戳」定位单元格；同一行键数据物理连续存放。</li>
+      <li><b>能力：</b>扩展到 <b>PB 级</b>、上千台机器；适合网页库、地理数据、用户画像（行多、列动态）。</li>
+      <li><b>影响：</b>直接启发开源 <b>HBase、Cassandra</b>。</li>
+    </ul>
+  </div>
+
+  <div class="block"><div class="t">4) Borg（集群管理与容器编排）</div>
+    <p>Google 内部把成千上万个任务<b>自动调度</b>到海量机器，按优先级与资源共享，把硬件利用率榨到极高。</p>
+    <ul>
+      <li><b>意义：</b>是<b>容器编排</b>思想的早期大规模实践（任务以容器方式隔离运行）。</li>
+      <li><b>血脉：</b>后开源演化为今天的 <b>Kubernetes（K8s）</b>——考纲称其为"容器编排前身"。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="kp">
+  <h3>四、技术演进与开源影响 <span class="badge">熟悉</span></h3>
+  <table>
+    <tr><th>Google 内部技术</th><th>受其启发的开源 / 产业实现</th></tr>
+    <tr><td>GFS（2003）</td><td><b>HDFS</b>（Hadoop 分布式文件系统）</td></tr>
+    <tr><td>MapReduce（2004）</td><td><b>Hadoop MapReduce</b>（开源批处理）</td></tr>
+    <tr><td>BigTable（2006）</td><td><b>HBase / Cassandra</b>（列族数据库）</td></tr>
+    <tr><td>Borg（集群编排）</td><td><b>Kubernetes</b>（容器编排标准）</td></tr>
+  </table>
+  <p><span class="pill">GFS → HDFS</span><span class="pill">MapReduce → Hadoop</span><span class="pill">BigTable → HBase/Cassandra</span><span class="pill">Borg → K8s</span></p>
+</div>
+
+<div class="kp">
+  <h3>五、考试重点速记 <span class="badge">必看</span></h3>
+  <div class="key">
+    <b>①</b> Google 是<b>现代云计算思想的源头</b>，靠廉价 PC 集群 + 软件容错解决海量数据问题。<br>
+    <b>②</b> 四大核心技术：<b>GFS（文件系统）/ MapReduce（批处理）/ BigTable（NoSQL）/ Borg（编排前身）</b>——务必能对应名称与用途。<br>
+    <b>③</b> MapReduce 是<b>批处理</b>，非实时；容错靠任务重调度。<br>
+    <b>④</b> Borg 是<b>容器编排（Kubernetes）的前身</b>。<br>
+    <b>⑤</b> 判断样题："云计算把普通服务器连接获得超算能力且成本更低"→ <b>正确</b>（Google 体系即范例）。<br>
+    <b>⑥</b> 最典型应用场景：<b>搜索引擎</b>（抓取/索引/排序）。
+  </div>
+</div>
+
+</main>
+<footer>本复习卡依据《湖南省数字技术应用能力水平考试大纲 · 2025版》整理 ｜ 3.1 Google云计算（熟悉级）｜ 仅供个人学习使用</footer>
+<div class="colfoot"><a class="prev" href="2-3.html"><div class="lab">上一章</div><div class="ttl">SDN 与 NFV</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="3-3.html"><div class="lab">下一章</div><div class="ttl">华为云</div></a></div>
+</body>
+</html>

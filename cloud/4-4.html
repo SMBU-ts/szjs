@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.4 微服务的体系结构 · 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+    --purple:#7c3aed; --purplebg:#f5f3ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)} .pp{background:var(--purplebg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .pbox{background:var(--purplebg);border:1px solid #ddd6fe;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .pbox b{color:var(--purple)}
+  .layer{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.layer,.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .fig{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:16px 0;text-align:center}
+  .fig svg{width:100%;height:auto;max-width:680px}
+  .figcap{font-size:12.5px;color:#64748b;margin-top:8px}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip active" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>4.4 微服务的体系结构 · 详细讲解</h1>
+  <p>云计算 / 云原生架构（重点 · 掌握）｜ 微服务概念与特性、分布式数据管理、灵活性与可扩展性</p>
+  <span class="badge">考纲要求：掌握</span>
+</header>
+
+<!-- ========== 一、微服务概述：概念与特性 ========== -->
+<section>
+  <h2><span class="num">1</span>微服务及其特性与架构</h2>
+
+  <div class="kv">
+    <b>定义：</b>微服务架构（Microservices Architecture）是一种将<b>单一应用程序拆分为一组小型、松耦合、围绕业务领域组织、可独立开发部署</b>的服务的架构风格。
+    每个服务运行在<b>独立的进程</b>中，服务间通过<b>轻量级通信机制</b>（如 HTTP/REST、消息队列）交互，并拥有<b>自己的数据存储</b>。
+  </div>
+
+  <h3>1.1 微服务 vs 单体架构（必考对比）</h3>
+  <table>
+    <tr><th>对比维度</th><th>单体架构（Monolith）</th><th>微服务架构（Microservices）</th></tr>
+    <tr><td>部署单位</td><td>整个应用打包为<b>一个</b>部署包</td><td>每个服务<b>独立</b>打包、独立部署</td></tr>
+    <tr><td>耦合度</td><td class="vm">模块间<b>紧耦合</b>，改一处需整体重测</td><td class="ct">服务间<b>松耦合</b>，边界清晰</td></tr>
+    <tr><td>数据</td><td>通常<b>共享一个</b>数据库</td><td>每个服务<b>拥有独立数据库</b>（去中心化）</td></tr>
+    <tr><td>技术栈</td><td class="vm">全系统<b>统一</b>一种语言/框架</td><td class="ct"><b>技术异构</b>，各服务按需选型</td></tr>
+    <tr><td>扩展</td><td class="vm">只能<b>整体</b>水平/垂直扩展</td><td class="ct">仅对<b>热点服务</b>独立扩缩容</td></tr>
+    <tr><td>故障影响</td><td class="vm">一处崩溃 → <b>整个应用</b>不可用</td><td class="ct"><b>故障隔离</b>，单服务故障可降级</td></tr>
+    <tr><td>团队</td><td>大团队协同同一代码库</td><td>小团队<b>端到端自治</b>（康威定律）</td></tr>
+  </table>
+
+  <div class="fig">
+    <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+        </marker>
+      </defs>
+      <!-- 单体 -->
+      <rect x="20" y="40" width="200" height="200" rx="12" fill="#fef2f2" stroke="#fca5a5" stroke-width="2"/>
+      <text x="120" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#dc2626">单体架构</text>
+      <rect x="40" y="60" width="160" height="34" rx="6" fill="#fff" stroke="#fca5a5"/><text x="120" y="82" text-anchor="middle" font-size="12" fill="#7f1d1d">UI 界面</text>
+      <rect x="40" y="104" width="160" height="34" rx="6" fill="#fff" stroke="#fca5a5"/><text x="120" y="126" text-anchor="middle" font-size="12" fill="#7f1d1d">订单模块</text>
+      <rect x="40" y="148" width="160" height="34" rx="6" fill="#fff" stroke="#fca5a5"/><text x="120" y="170" text-anchor="middle" font-size="12" fill="#7f1d1d">用户模块</text>
+      <rect x="40" y="192" width="160" height="34" rx="6" fill="#fff" stroke="#fca5a5"/><text x="120" y="214" text-anchor="middle" font-size="12" fill="#7f1d1d">库存模块</text>
+      <rect x="120" y="240" width="0" height="0"/>
+      <text x="120" y="262" text-anchor="middle" font-size="11" fill="#9ca3af">共享一个数据库</text>
+
+      <!-- 箭头 -->
+      <line x1="240" y1="140" x2="300" y2="140" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="270" y="128" text-anchor="middle" font-size="11" fill="#475569">拆分</text>
+
+      <!-- 微服务 -->
+      <text x="490" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#16a34a">微服务架构</text>
+      <!-- API GW -->
+      <rect x="400" y="40" width="180" height="30" rx="8" fill="#2563eb"/><text x="490" y="60" text-anchor="middle" font-size="12" fill="#fff">API 网关</text>
+      <line x1="490" y1="70" x2="490" y2="92" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <!-- services -->
+      <rect x="400" y="94" width="80" height="40" rx="8" fill="#f0fdf4" stroke="#86efac"/><text x="440" y="118" text-anchor="middle" font-size="11" fill="#166534">订单服务</text>
+      <rect x="500" y="94" width="80" height="40" rx="8" fill="#f0fdf4" stroke="#86efac"/><text x="540" y="118" text-anchor="middle" font-size="11" fill="#166534">用户服务</text>
+      <rect x="450" y="146" width="80" height="40" rx="8" fill="#f0fdf4" stroke="#86efac"/><text x="490" y="170" text-anchor="middle" font-size="11" fill="#166534">库存服务</text>
+      <line x1="440" y1="134" x2="430" y2="150" stroke="#475569" stroke-width="1" marker-end="url(#arrow)"/>
+      <line x1="540" y1="134" x2="550" y2="150" stroke="#475569" stroke-width="1" marker-end="url(#arrow)"/>
+      <!-- DBs -->
+      <rect x="400" y="200" width="80" height="30" rx="6" fill="#eef2ff" stroke="#a5b4fc"/><text x="440" y="220" text-anchor="middle" font-size="11" fill="#3730a3">订单DB</text>
+      <rect x="500" y="200" width="80" height="30" rx="6" fill="#eef2ff" stroke="#a5b4fc"/><text x="540" y="220" text-anchor="middle" font-size="11" fill="#3730a3">用户DB</text>
+      <rect x="450" y="236" width="80" height="30" rx="6" fill="#eef2ff" stroke="#a5b4fc"/><text x="490" y="256" text-anchor="middle" font-size="11" fill="#3730a3">库存DB</text>
+      <line x1="440" y1="134" x2="440" y2="200" stroke="#a5b4fc" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="540" y1="134" x2="540" y2="200" stroke="#a5b4fc" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="490" y1="186" x2="490" y2="236" stroke="#a5b4fc" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+    <div class="figcap">图 1：单体架构（紧耦合、共享库）与微服务架构（松耦合、独立库）对比</div>
+  </div>
+
+  <h3>1.2 微服务的核心特性（掌握，选择题/判断题常考）</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>单一职责</h4><p>一个服务只做一件事，围绕<b>业务领域（DDD）</b>划分边界。</p></div>
+    <div class="mini"><h4>独立部署</h4><p>每个服务可<b>单独编译、测试、发布</b>，不牵动整体。</p></div>
+    <div class="mini"><h4>松耦合</h4><p>服务间通过<b>定义良好的接口/契约</b>通信，内部实现可改。</p></div>
+    <div class="mini"><h4>去中心化</h4><p>数据去中心化（各管各库）+ 治理去中心化（非统一中央管控）。</p></div>
+    <div class="mini"><h4>技术异构</h4><p>不同服务可用不同语言/框架/存储，<b>因材施用</b>。</p></div>
+    <div class="mini"><h4>故障隔离</h4><p>单服务崩溃被隔离，配合熔断降级，<b>不影响全局</b>。</p></div>
+    <div class="mini"><h4>轻量通信</h4><p>HTTP/REST、gRPC、消息队列等<b>轻量级协议</b>，非重量级 ESB。</p></div>
+    <div class="mini"><h4>可独立扩缩</h4><p>只对<b>负载高的服务</b>扩容，资源利用率高。</p></div>
+  </div>
+
+  <h3>1.3 典型微服务架构组成（支撑组件）</h3>
+  <div class="kv">
+    <b>微服务 ≠ 只是把代码拆开。</b>要落地微服务，必须配套一整套<b>"基础设施（微服务全家桶）"</b>来解决"服务在哪、怎么调用、如何容错、如何观测"的问题。
+  </div>
+  <table>
+    <tr><th>组件</th><th>作用</th><th>代表技术</th></tr>
+    <tr><td><b>服务注册与发现</b></td><td>服务启动时<b>登记地址</b>，调用方动态查询，应对实例扩缩</td><td class="ct">Nacos、Eureka、Consul、ZooKeeper</td></tr>
+    <tr><td><b>API 网关</b></td><td>统一<b>入口</b>：路由、认证、限流、日志，屏蔽内部细节</td><td class="ct">Spring Cloud Gateway、Kong、Nginx</td></tr>
+    <tr><td><b>配置中心</b></td><td>配置<b>集中管理、动态下发</b>，无需重启服务</td><td class="ct">Nacos、Apollo、Spring Cloud Config</td></tr>
+    <tr><td><b>服务通信</b></td><td>同步（REST/gRPC）或异步（消息），定义调用方式</td><td class="ct">Feign、gRPC、Dubbo、OpenFeign</td></tr>
+    <tr><td><b>容错治理</b></td><td><b>熔断、降级、限流、重试</b>，防止故障雪崩</td><td class="ct">Sentinel、Hystrix、Resilience4j</td></tr>
+    <tr><td><b>链路追踪</b></td><td>跨服务<b>调用链监控</b>，定位慢/错节点</td><td class="ct">SkyWalking、Zipkin、Jaeger</td></tr>
+    <tr><td><b>容器与编排</b></td><td>服务<b>打包、调度、弹性伸缩</b>，微服务最佳载体</td><td class="ct">Docker + Kubernetes</td></tr>
+    <tr><td><b>事件/消息</b></td><td>异步解耦、事件驱动、保证最终一致</td><td class="ct">Kafka、RocketMQ、RabbitMQ</td></tr>
+  </table>
+
+  <div class="fig">
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+      <defs>
+        <marker id="a2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+        </marker>
+      </defs>
+      <!-- Client -->
+      <rect x="20" y="130" width="90" height="44" rx="10" fill="#e0e7ff" stroke="#6366f1"/><text x="65" y="157" text-anchor="middle" font-size="12" fill="#312e81">客户端</text>
+      <line x1="110" y1="152" x2="170" y2="152" stroke="#475569" stroke-width="2" marker-end="url(#a2)"/>
+      <!-- API GW -->
+      <rect x="170" y="128" width="120" height="48" rx="10" fill="#2563eb"/><text x="230" y="150" text-anchor="middle" font-size="12" fill="#fff">API 网关</text><text x="230" y="166" text-anchor="middle" font-size="10" fill="#dbeafe">路由/认证/限流</text>
+      <!-- Registry -->
+      <rect x="320" y="20" width="120" height="40" rx="10" fill="#fef3c7" stroke="#f59e0b"/><text x="380" y="45" text-anchor="middle" font-size="12" fill="#92400e">服务注册中心</text>
+      <!-- Config -->
+      <rect x="540" y="20" width="120" height="40" rx="10" fill="#fef3c7" stroke="#f59e0b"/><text x="600" y="45" text-anchor="middle" font-size="12" fill="#92400e">配置中心</text>
+      <!-- Service A B C -->
+      <rect x="320" y="120" width="100" height="50" rx="10" fill="#f0fdf4" stroke="#86efac"/><text x="370" y="142" text-anchor="middle" font-size="12" fill="#166534">订单服务</text><text x="370" y="158" text-anchor="middle" font-size="10" fill="#16a34a">订单DB</text>
+      <rect x="440" y="120" width="100" height="50" rx="10" fill="#f0fdf4" stroke="#86efac"/><text x="490" y="142" text-anchor="middle" font-size="12" fill="#166534">用户服务</text><text x="490" y="158" text-anchor="middle" font-size="10" fill="#16a34a">用户DB</text>
+      <rect x="560" y="120" width="100" height="50" rx="10" fill="#f0fdf4" stroke="#86efac"/><text x="610" y="142" text-anchor="middle" font-size="12" fill="#166534">库存服务</text><text x="610" y="158" text-anchor="middle" font-size="10" fill="#16a34a">库存DB</text>
+      <!-- MQ -->
+      <rect x="320" y="220" width="120" height="40" rx="10" fill="#ede9fe" stroke="#8b5cf6"/><text x="380" y="245" text-anchor="middle" font-size="12" fill="#5b21b6">消息队列</text>
+      <!-- Tracing -->
+      <rect x="540" y="220" width="120" height="40" rx="10" fill="#fce7f3" stroke="#ec4899"/><text x="600" y="245" text-anchor="middle" font-size="12" fill="#9d174d">链路追踪</text>
+      <!-- links -->
+      <line x1="230" y1="152" x2="320" y2="145" stroke="#475569" stroke-width="2" marker-end="url(#a2)"/>
+      <line x1="370" y1="120" x2="370" y2="60" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#a2)"/>
+      <line x1="490" y1="120" x2="490" y2="60" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#a2)"/>
+      <line x1="610" y1="120" x2="610" y2="60" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#a2)"/>
+      <line x1="420" y1="145" x2="440" y2="145" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="540" y1="145" x2="560" y2="145" stroke="#475569" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="370" y1="170" x2="380" y2="220" stroke="#8b5cf6" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="490" y1="170" x2="460" y2="220" stroke="#8b5cf6" stroke-width="1" marker-end="url(#a2)"/>
+      <line x1="370" y1="170" x2="370" y2="200" stroke="#ec4899" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+    <div class="figcap">图 2：微服务体系结构全景——网关入口 + 注册/配置中心 + 独立服务与数据库 + 消息/追踪支撑</div>
+  </div>
+
+  <div class="tip"><b>考试重点：</b>① 微服务核心特征是<b>单一职责、独立部署、松耦合、去中心化（数据+治理）、技术异构、故障隔离</b>；
+  ② 微服务"全家桶"常考组件：<b>注册中心、API 网关、配置中心、熔断限流、链路追踪、容器编排</b>；
+  ③ 与 2.2 联系：<b>分布式服务框架（Dubbo/Spring Cloud）正是支撑微服务的工具</b>。</div>
+</section>
+
+<!-- ========== 二、分布式数据管理 ========== -->
+<section>
+  <h2><span class="num">2</span>微服务架构下的分布式数据管理</h2>
+
+  <div class="kv">
+    <b>核心原则：Database per Service（每个服务拥有自己的数据库）。</b>微服务强调<b>数据去中心化</b>——
+    每个服务独占自己的数据存储，<b>不允许其他服务直接访问其数据库</b>，只能通过该服务暴露的接口读写数据。
+    这保证了服务边界的纯粹性，却也带来了<b>分布式数据一致性</b>这一最大难题。
+  </div>
+
+  <h3>2.1 为什么数据管理变难了</h3>
+  <div class="layer">
+    <div class="threat">
+      <b>本质矛盾：</b>
+      <ul>
+        <li>业务操作常需<b>跨多个服务</b>（如"下单"要同时扣库存、扣余额、建订单）。</li>
+        <li>各服务数据<b>分布在不同库、甚至可能不同数据库类型</b>。</li>
+        <li>无法用<b>单机数据库的事务（ACID）</b>保证跨库原子性。</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>约束来源：</b>
+      <ul>
+        <li>回到 2.2 的 <b>CAP 定理</b>：分布式下分区 P 不可避免。</li>
+        <li>强一致(C)与高可用(A)需取舍，微服务多走 <b>AP + 最终一致</b>。</li>
+        <li>因此出现 BASE 思想（基本可用、软状态、最终一致）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>2.2 分布式事务与一致性解决方案（重点）</h3>
+  <table>
+    <tr><th>方案</th><th>思路</th><th>特点 / 适用</th></tr>
+    <tr>
+      <td><b>Saga 模式</b></td>
+      <td>把一个跨服务"大事务"拆成<b>一系列本地事务</b>；任一步失败，则按相反顺序执行<b>补偿（Compensation）</b>操作回滚</td>
+      <td class="ct">无锁、长事务友好；分<b>编排(Choreography, 事件驱动)</b>与<b>协同(Orchestration, 中央协调器)</b>两种</td>
+    </tr>
+    <tr>
+      <td><b>TCC 模式</b></td>
+      <td><b>Try（预留资源）→ Confirm（确认）/ Cancel（取消）</b>，两阶段业务补偿</td>
+      <td class="vm">强一致、性能好但<b>侵入业务代码</b>，需手写三个接口</td>
+    </tr>
+    <tr>
+      <td><b>事件溯源<br>Event Sourcing</b></td>
+      <td>不存"当前状态"，而存<b>状态变化的事件序列</b>；当前状态由重放事件得到</td>
+      <td class="ct">审计友好、可追溯；实现复杂，需配合快照</td>
+    </tr>
+    <tr>
+      <td><b>CQRS</b></td>
+      <td><b>读写分离</b>：写模型（命令侧）与读模型（查询侧）用不同模型/存储</td>
+      <td class="ct">读多写少、查询复杂场景性能高；架构变复杂</td>
+    </tr>
+    <tr>
+      <td><b>可靠事件 / 消息队列</b></td>
+      <td>通过<b>消息中间件</b>异步通知，配合"本地消息表/事务消息"保证事件不丢</td>
+      <td class="pp">实现<b>最终一致性</b>的工程常用手段（Kafka/RocketMQ 事务消息）</td>
+    </tr>
+  </table>
+
+  <div class="fig">
+    <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC, Microsoft YaHei, sans-serif">
+      <defs>
+        <marker id="a3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+        </marker>
+      </defs>
+      <!-- 订单服务 -->
+      <rect x="20" y="20" width="150" height="46" rx="10" fill="#f0fdf4" stroke="#86efac"/><text x="95" y="48" text-anchor="middle" font-size="12" fill="#166534">① 订单服务：创建订单</text>
+      <!-- 库存服务 -->
+      <rect x="20" y="92" width="150" height="46" rx="10" fill="#f0fdf4" stroke="#86efac"/><text x="95" y="120" text-anchor="middle" font-size="12" fill="#166534">② 库存服务：扣库存</text>
+      <!-- 用户服务 -->
+      <rect x="20" y="164" width="150" height="46" rx="10" fill="#f0fdf4" stroke="#86efac"/><text x="95" y="192" text-anchor="middle" font-size="12" fill="#166534">③ 用户服务：扣余额</text>
+      <!-- MQ -->
+      <rect x="270" y="92" width="140" height="46" rx="10" fill="#ede9fe" stroke="#8b5cf6"/><text x="340" y="120" text-anchor="middle" font-size="12" fill="#5b21b6">消息队列（事件驱动）</text>
+      <!-- 补偿 -->
+      <rect x="500" y="92" width="160" height="46" rx="10" fill="#fef2f2" stroke="#fca5a5"/><text x="580" y="113" text-anchor="middle" font-size="12" fill="#dc2626">失败时执行补偿</text>
+      <rect x="500" y="164" width="160" height="40" rx="10" fill="#fef2f2" stroke="#fca5a5"/><text x="580" y="188" text-anchor="middle" font-size="11" fill="#dc2626">回滚：恢复库存/余额</text>
+      <line x1="170" y1="43" x2="270" y2="105" stroke="#475569" stroke-width="1.5" marker-end="url(#a3)"/>
+      <line x1="170" y1="115" x2="270" y2="120" stroke="#475569" stroke-width="1.5" marker-end="url(#a3)"/>
+      <line x1="410" y1="115" x2="500" y2="115" stroke="#dc2626" stroke-width="1.5" marker-end="url(#a3)"/>
+      <line x1="580" y1="138" x2="580" y2="164" stroke="#dc2626" stroke-width="1.2" marker-end="url(#a3)"/>
+      <line x1="95" y1="180" x2="95" y2="150" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+    <div class="figcap">图 3：Saga（编排式）跨服务流程——本地事务 + 消息驱动 + 失败补偿回滚</div>
+  </div>
+
+  <div class="pbox">
+    <b>一句话记忆：</b>"每个服务各管各的库"是微服务的基石，代价是跨服务数据一致性。
+    工程上常用 <b>最终一致性</b> 取代强一致：要么走 <b>Saga</b>（补偿回滚）、<b>TCC</b>（预留+确认/取消），
+    要么用 <b>消息队列 + 事务消息</b> 保证事件可靠、异步达成最终一致；需要审计/复杂查询时上 <b>事件溯源 / CQRS</b>。
+  </div>
+
+  <div class="tip"><b>考试重点：</b>① <b>Database per Service</b> 是数据管理第一原则；② 跨服务事务靠
+  <b>Saga / TCC / 消息最终一致</b>；③ 微服务数据一致性多遵循 <b>BASE（最终一致）</b>，与 2.2 的 CAP/AP 一脉相承；
+  ④ "直接让服务 A 读写服务 B 的数据库"是<b>反模式</b>（破坏边界、耦合）。</div>
+</section>
+
+<!-- ========== 三、灵活性与可扩展性 ========== -->
+<section>
+  <h2><span class="num">3</span>微服务如何提升灵活性与可扩展性</h2>
+
+  <div class="kv">
+    <b>本质：</b>微服务把"一个大铁板"切成"一群可独立运动的小积木"。正因为每个积木<b>独立部署、独立扩缩、技术自决</b>，
+    系统整体就获得了单体架构难以企及的<b>灵活性（改得动、换得掉）</b>与<b>可扩展性（撑得住、花得省）</b>。
+  </div>
+
+  <h3>3.1 灵活性：为什么"改得动、换得掉"</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>独立部署</h4><p>改一个服务只发布它自己，<b>不需整体回归</b>，发布更快、风险更隔离。</p></div>
+    <div class="mini"><h4>技术异构</h4><p>新业务可用新语言/新存储，<b>老服务不动</b>，渐进式演进。</p></div>
+    <div class="mini"><h4>故障隔离</h4><p>单点故障被隔离，配合<b>熔断降级</b>，局部坏不拖垮全局。</p></div>
+    <div class="mini"><h4>团队自治</h4><p>小团队<b>端到端</b>负责一个服务（康威定律），并行不打架。</p></div>
+    <div class="mini"><h4>易替换</h4><p>服务边界清晰，可<b>整体重写/替换</b>某服务而不动其他。</p></div>
+    <div class="mini"><h4>持续交付</h4><p>每个小服务可独立 CI/CD，<b>快速试错、快速迭代</b>。</p></div>
+  </div>
+
+  <h3>3.2 可扩展性：为什么"撑得住、花得省"</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>细粒度扩容</h4><p>只对<b>真正繁忙的服务</b>（如秒杀订单）扩容，不必扩整站。</p></div>
+    <div class="mini"><h4>水平扩展</h4><p>无状态服务加实例即可（Scale-out），<b>近乎线性</b>提升能力。</p></div>
+    <div class="mini"><h4>资源利用率高</h4><p>不同服务负载错峰，<b>按需分配</b>，避免单体"为一点热点买整机"。</p></div>
+    <div class="mini"><h4>弹性伸缩</h4><p>配合 K8s，按 CPU/流量<b>自动扩缩</b>，应对峰值与低谷。</p></div>
+    <div class="mini"><h4>无上限扩展</h4><p>跨节点/跨机柜/跨地域部署，突破单机物理上限。</p></div>
+    <div class="mini"><h4>存储可扩展</h4><p>各服务按数据特性选存储（KV/关系/时序），<b>分库分表自然落地</b>。</p></div>
+  </div>
+
+  <h3>3.3 单体 vs 微服务：扩展方式对比（经典题型）</h3>
+  <table>
+    <tr><th>场景</th><th>单体架构</th><th>微服务架构</th></tr>
+    <tr><td>下单接口成为热点</td><td class="vm">必须<b>整体复制</b>整套应用（含用不到的模块），浪费资源</td><td class="ct">仅<b>扩容"订单服务"</b>实例，精准高效</td></tr>
+    <tr><td>流量高峰（大促）</td><td class="vm">纵向升级单机 or 整体横向克隆，成本高</td><td class="ct">热点服务自动扩容，闲时缩容，<b>弹性省钱</b></td></tr>
+    <tr><td>引入新业务</td><td class="vm">侵入大代码库，重编译重部署，风险高</td><td class="ct">新建独立服务，<b>即插即用</b>，互不干扰</td></tr>
+    <tr><td>技术升级</td><td class="vm">全栈绑定，升级牵一发动全身</td><td class="ct">单服务可单独用新技术<b>平滑迁移</b></td></tr>
+  </table>
+
+  <div class="layer">
+    <div class="safe">
+      <b>灵活性提升要点：</b>
+      <ul>
+        <li>独立部署 → 发布快、风险小</li>
+        <li>技术异构 → 渐进演进、老系统不推倒</li>
+        <li>故障隔离 → 局部可用、降级保核心</li>
+        <li>团队自治 → 并行开发、康威定律落地</li>
+      </ul>
+    </div>
+    <div class="pbox">
+      <b>可扩展性提升要点：</b>
+      <ul>
+        <li>细粒度扩容 → 只扩热点，省资源</li>
+        <li>水平扩展 → 加实例线性提能力</li>
+        <li>弹性伸缩 → 配合容器按需伸缩</li>
+        <li>存储分治 → 各服务按需选型存储</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="threat">
+    <b>客观提醒（考试也可能考权衡）：</b>微服务不是银弹。它带来<b>分布式复杂度</b>：
+    网络延迟、数据一致性、运维（几十上百服务）、链路追踪、测试难度上升。
+    因此<b>小系统/团队初期用单体更合适</b>，当系统规模、团队规模、变更频率上来后再演进到微服务（"单体优先，按需拆分"）。
+  </div>
+
+  <div class="tip"><b>考试重点：</b>① 灵活性 = <b>独立部署 + 技术异构 + 故障隔离 + 团队自治</b>；
+  ② 可扩展性 = <b>细粒度独立扩容 + 水平扩展 + 弹性伸缩 + 高资源利用率</b>；
+  ③ 与 2.2 关联：微服务是分布式思想在"应用架构"层的落地，其扩展同样依赖<b>横向扩展（加节点）</b>；
+  ④ 权衡：微服务增加分布式复杂度，并非所有场景都适用。</div>
+</section>
+
+<!-- ========== 速记 ========== -->
+<section>
+  <h2><span class="num">★</span>考试速记清单</h2>
+  <ul>
+    <li><b>微服务定义</b>＝将单体应用拆分为<b>一组小型、松耦合、独立部署</b>的服务，通过轻量通信协作，各服务<b>自有数据</b>。</li>
+    <li><b>核心特性</b>：单一职责、独立部署、松耦合、<b>去中心化（数据+治理）</b>、技术异构、故障隔离、轻量通信、可独立扩缩。</li>
+    <li><b>全家桶组件</b>：服务注册发现、API 网关、配置中心、服务通信、熔断限流（容错）、链路追踪、<b>容器+K8s 编排</b>、消息队列。</li>
+    <li><b>分布式数据管理第一原则</b>：<b>Database per Service</b>（每服务独立库，禁止跨库直访）。</li>
+    <li><b>跨服务一致性方案</b>：<b>Saga（补偿回滚）、TCC（预留+确认/取消）、事件溯源、CQRS、消息队列最终一致</b>；
+      多走 <b>BASE/最终一致</b>（与 2.2 的 CAP/AP 一致）。</li>
+    <li><b>灵活性</b>＝独立部署 + 技术异构 + 故障隔离 + 团队自治（改得动、换得掉）。</li>
+    <li><b>可扩展性</b>＝细粒度独立扩容 + 水平扩展 + 弹性伸缩 + 高资源利用率（撑得住、花得省）。</li>
+    <li><b>权衡</b>：微服务增加分布式复杂度（一致性/运维/延迟），小系统宜"单体优先、按需拆分"。</li>
+    <li><b>与 2.2 关联</b>：微服务是分布式思想在应用层的落地；Dubbo/Spring Cloud 等分布式服务框架支撑微服务；
+      其数据最终一致性与 CAP/BASE 一脉相承。</li>
+  </ul>
+</section>
+
+<footer>本讲解对应考纲 4.4 微服务的体系结构（掌握）｜ 配合《2.2 分布式技术》《完整复习手册》《核心知识点详解》使用效果更佳</footer>
+</div>
+<div class="colfoot"><a class="prev" href="4-3.html"><div class="lab">上一章</div><div class="ttl">面向服务架构 SOA</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="5-1.html"><div class="lab">下一章</div><div class="ttl">数据中心概念特征</div></a></div>
+</body>
+</html>

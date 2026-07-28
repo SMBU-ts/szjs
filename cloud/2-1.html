@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2.1 虚拟化技术 · 详细讲解</title>
+<style>
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+</style>
+  <link rel="stylesheet" href="../assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="../index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip active" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+  <h1>2.1 虚拟化技术 · 详细讲解</h1>
+  <p>云计算关键技术（重点 · 掌握）｜ 备考要点、原理、对比与安全</p>
+  <span class="badge">考纲要求：掌握</span>
+</header>
+
+<!-- ========== 一、基本概念 ========== -->
+<section>
+  <h2><span class="num">1</span>虚拟化的基本概念</h2>
+  <div class="kv">
+    <b>定义：</b>虚拟化（Virtualization）是一种资源管理技术，将计算机的物理资源（CPU、内存、存储、网络等）
+    抽象、转换成逻辑上的资源，从而<b>打破硬件与软件之间的紧耦合关系</b>，使一份物理资源可被多个逻辑环境共享使用。
+  </div>
+  <h3>核心思想</h3>
+  <ul>
+    <li><b>一虚多</b>：把一台物理机虚拟成多个相互独立的逻辑资源（如一台服务器上跑多个虚拟机）。</li>
+    <li><b>多虚一</b>：把多台物理机的资源汇聚成一个统一的逻辑资源池（如分布式存储池、集群计算）。</li>
+  </ul>
+  <h3>关键特征</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>资源抽象</h4><p>隐藏物理硬件细节，向上提供统一的逻辑接口。</p></div>
+    <div class="mini"><h4>隔离</h4><p>各虚拟环境相互独立，故障/攻击互不波及。</p></div>
+    <div class="mini"><h4>封装</h4><p>整个系统可打包为文件，便于迁移、备份、复制。</p></div>
+    <div class="mini"><h4>按需分配</h4><p>资源可动态划分与回收，弹性伸缩。</p></div>
+  </div>
+  <h3>价值与作用</h3>
+  <ul>
+    <li><b>提高资源利用率</b>：解决物理机"低负载、高闲置"问题。</li>
+    <li><b>降低运维成本</b>：减少物理设备数量与能耗。</li>
+    <li><b>快速部署与弹性伸缩</b>：分钟/秒级创建环境。</li>
+    <li><b>支撑云计算</b>：虚拟化是云计算的<b>底层基石</b>（没有虚拟化就没有 IaaS 的资源池化）。</li>
+  </ul>
+  <div class="tip"><b>易混点：</b>虚拟化 ≠ 云计算。虚拟化是"底层资源抽象技术"，云计算是"按需服务的交付模式"。
+  虚拟化是云计算的必要不充分条件。</div>
+</section>
+
+<!-- ========== 二、常见虚拟化技术 ========== -->
+<section>
+  <h2><span class="num">2</span>常见的虚拟化技术</h2>
+  <p>按<b>资源对象</b>分类，虚拟化技术主要包括以下四类：</p>
+
+  <h3>① 服务器虚拟化（计算虚拟化）—— 最核心</h3>
+  <p>在物理服务器上通过 <b>Hypervisor（虚拟监控器 / 虚拟机监视器，VMM）</b> 创建多个虚拟机。按部署方式分为两类：</p>
+  <table>
+    <tr><th>类型</th><th>部署位置</th><th>代表产品</th><th>特点 / 场景</th></tr>
+    <tr>
+      <td><b>Type-1<br>裸金属型<br>（原生）</b></td>
+      <td>直接运行在物理硬件上，<b>无底层宿主 OS</b></td>
+      <td>VMware ESXi、Microsoft Hyper-V、KVM、Xen</td>
+      <td class="vm">性能损失小、安全性高；<br><b>数据中心 / 云平台标配</b></td>
+    </tr>
+    <tr>
+      <td><b>Type-2<br>宿主型<br>（托管）</b></td>
+      <td>运行在宿主操作系统之上（如 Windows 上的软件）</td>
+      <td>VirtualBox、VMware Workstation、Parallels</td>
+      <td class="ct">使用方便、适合个人/开发；<br>多一层 OS 开销，性能略低</td>
+    </tr>
+  </table>
+
+  <h3>② 存储虚拟化</h3>
+  <p>将多个独立的存储设备抽象为统一的<b>存储资源池</b>，对上层屏蔽物理差异。如：RAID、SAN/NAS、
+  分布式存储（Ceph、HDFS）、存储副本与快照。</p>
+
+  <h3>③ 网络虚拟化</h3>
+  <p>将网络硬件与逻辑网络解耦，典型包括：VLAN / VXLAN、<b>SDN（软件定义网络）</b>、
+  <b>NFV（网络功能虚拟化）</b>、<b>VPC（虚拟私有云）</b>。</p>
+
+  <h3>④ 其他</h3>
+  <ul>
+    <li><b>桌面虚拟化（VDI）</b>：虚拟桌面基础设施，远程交付桌面。</li>
+    <li><b>应用虚拟化</b>：将应用与操作系统解耦（应用容器、远程应用）。</li>
+  </ul>
+
+  <h3>按"实现方式"补充（加分点）</h3>
+  <ul>
+    <li><b>全虚拟化</b>：客户 OS 无需修改（依赖二进制翻译或硬件辅助）。</li>
+    <li><b>半虚拟化</b>：客户 OS 需修改内核以配合 Hypervisor（如早期 Xen）。</li>
+    <li><b>硬件辅助虚拟化</b>：CPU 提供 Intel VT-x / AMD-V 指令集，提升性能与隔离。</li>
+  </ul>
+</section>
+
+<!-- ========== 三、常用容器技术 ========== -->
+<section>
+  <h2><span class="num">3</span>常用容器技术</h2>
+  <div class="kv">
+    <b>容器是什么？</b>一种<b>轻量级</b>的虚拟化/隔离技术：多个容器<b>共享宿主操作系统内核</b>，
+    通过内核的 Namespace（命名空间）实现隔离、Cgroups（控制组）实现资源限制，属于<b>进程级隔离</b>。
+  </div>
+  <div class="card-grid">
+    <div class="mini"><h4>Docker</h4><p>最流行的容器引擎。核心概念：<b>镜像 Image</b>（只读模板）、<b>容器 Container</b>（运行实例）、
+    <b>仓库 Registry</b>、<b>Dockerfile</b>。镜像分层 + 写时复制（Copy-on-Write）。</p></div>
+    <div class="mini"><h4>Kubernetes（K8s）</h4><p>容器<b>编排</b>事实标准。自动化部署、扩缩容、服务发现、自愈、负载均衡。</p></div>
+    <div class="mini"><h4>containerd / Podman</h4><p>轻量运行时 / 无守护进程容器引擎，常与 K8s 搭配。</p></div>
+    <div class="mini"><h4>Docker Swarm / Mesos</h4><p>早期容器编排方案，现多被 K8s 取代。</p></div>
+  </div>
+  <h3>镜像与容器的关系</h3>
+  <ul>
+    <li><b>镜像</b>：静态、只读的"模板"（类比"类"）。</li>
+    <li><b>容器</b>：镜像运行的"实例"（类比"对象"），可读写层叠加在镜像之上。</li>
+  </ul>
+  <div class="tip"><b>考试重点：</b>Docker 负责"打包与运行"，Kubernetes 负责"大规模编排调度"。
+  容器是<b>云原生（Cloud Native）</b>与 DevOps / 微服务架构的基础。</div>
+</section>
+
+<!-- ========== 四、容器与虚拟机对比 ========== -->
+<section>
+  <h2><span class="num">4</span>容器与虚拟机的区别及应用场景</h2>
+  <table>
+    <tr><th>对比维度</th><th class="vm">虚拟机 VM</th><th class="ct">容器 Container</th></tr>
+    <tr><td>隔离级别</td><td class="vm">操作系统级 / 内核级（强隔离）</td><td class="ct">进程级（共享内核，弱隔离）</td></tr>
+    <tr><td>客户 OS</td><td class="vm">每个 VM 有独立 Guest OS</td><td class="ct">共享宿主 OS 内核，无需独立 OS</td></tr>
+    <tr><td>启动速度</td><td class="vm">分钟级（需启动完整 OS）</td><td class="ct">秒级（仅启动进程）</td></tr>
+    <tr><td>资源开销</td><td class="vm">大（GB 级，占用多）</td><td class="ct">小（MB 级，轻量）</td></tr>
+    <tr><td>性能</td><td class="vm">有 Hypervisor 开销</td><td class="ct">接近原生性能</td></tr>
+    <tr><td>隔离/安全</td><td class="vm">硬件级隔离，安全性高</td><td class="ct">共享内核，隔离性较弱</td></tr>
+    <tr><td>可移植性</td><td class="vm">受 Hypervisor 约束</td><td class="ct">强（一次构建，处处运行）</td></tr>
+    <tr><td>部署密度</td><td class="vm">低（单台几十个）</td><td class="ct">高（单台可达上百/上千）</td></tr>
+  </table>
+
+  <h3>应用场景</h3>
+  <div class="map">
+    <div class="threat">
+      <b>虚拟机更适合：</b>
+      <ul>
+        <li>多租户、需要<b>强隔离</b>的场景</li>
+        <li>需运行<b>不同操作系统</b>（如 Linux + Windows 混部）</li>
+        <li>传统企业单体应用、安全敏感系统</li>
+        <li>需要完整 OS 环境 / 内核级定制</li>
+      </ul>
+    </div>
+    <div class="safe">
+      <b>容器更适合：</b>
+      <ul>
+        <li><b>微服务</b>架构、云原生应用</li>
+        <li>CI/CD、DevOps、快速迭代</li>
+        <li>弹性伸缩、高密度部署</li>
+        <li>需要快速启动、轻量迁移的业务</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tip"><b>现实做法：</b>"容器跑在虚拟机上"是云平台的常见组合——用 VM 提供强隔离底座，
+  再在 VM 内用容器提升密度与弹性（如公有云一台 ECS 上跑 K8s 节点）。</div>
+</section>
+
+<!-- ========== 五、安全问题及保障 ========== -->
+<section>
+  <h2><span class="num">5</span>虚拟化技术安全问题及保障措施</h2>
+
+  <h3>主要安全威胁</h3>
+  <div class="threat"><b>① 虚拟机逃逸（VM Escape）</b>：攻击者从 guest VM 突破 Hypervisor，
+    获得宿主机乃至整个资源池的控制权——虚拟化最严重风险之一。</div>
+  <div class="threat"><b>② 容器逃逸（Container Escape）</b>：利用内核漏洞或配置不当，从容器内突破到宿主，
+    因容器共享内核而风险更突出。</div>
+  <div class="threat"><b>③ 侧信道攻击（Side-channel）</b>：同宿主上通过共享 CPU 缓存等窃取其他租户数据
+    （如 Spectre / Meltdown、Rowhammer）。</div>
+  <div class="threat"><b>④ 多租户隔离失效</b>：租户间资源、数据、网络相互泄漏。</div>
+  <div class="threat"><b>⑤ 镜像安全</b>：恶意 / 含漏洞镜像（镜像投毒），"带病上线"。</div>
+  <div class="threat"><b>⑥ 管理平面风险</b>：Hypervisor 或编排平台（如 K8s API Server）被攻破。</div>
+
+  <h3>保障措施</h3>
+  <div class="safe"><b>① 加固 Hypervisor</b>：最小化安装、及时打补丁、关闭非必要服务与端口。</div>
+  <div class="safe"><b>② 隔离策略</b>：VM 用硬件级隔离；容器用 Namespace + Cgroups + seccomp + AppArmor / SELinux。</div>
+  <div class="safe"><b>③ 镜像安全</b>：使用可信镜像仓库、<b>镜像漏洞扫描</b>（如 Trivy）、最小基础镜像、镜像签名验证。</div>
+  <div class="safe"><b>④ 最小权限</b>：容器以非 root 运行、只读根文件系统、限制系统调用。</div>
+  <div class="safe"><b>⑤ 多租户隔离</b>：VPC、安全组、资源配额（QoS）限制。</div>
+  <div class="safe"><b>⑥ 机密计算（TEE）</b>：用硬件可信执行环境保护"使用中"的数据。</div>
+  <div class="safe"><b>⑦ 监控审计 + 网络微隔离</b>：运行时入侵检测、日志审计、K8s NetworkPolicy 微分段。</div>
+  <div class="safe"><b>⑧ 漏洞与补丁管理</b>：定期扫描、及时更新内核与组件。</div>
+
+  <div class="kv"><b>考点关联：</b>在"云安全关键技术"多选题中，正确选项为 <span class="tag">数据安全</span>
+    <span class="tag">应用安全</span> <span class="tag">虚拟化安全</span>（ABC）；
+    <b>"服务器安全"是经典干扰项（不选）</b>。</div>
+</section>
+
+<!-- ========== 速记 ========== -->
+<section>
+  <h2><span class="num">★</span>考试速记清单</h2>
+  <ul>
+    <li><b>虚拟化</b>＝物理资源抽象成逻辑资源，核心理念"一虚多 / 多虚一"。</li>
+    <li>虚拟化是<b>云计算的基石</b>；Hypervisor 分 <b>Type-1 裸金属</b>（ESXi/KVM）与 <b>Type-2 宿主</b>（VirtualBox）。</li>
+    <li>容器共享内核、秒级启动、轻量；VM 独立 OS、隔离强、开销大。</li>
+    <li><b>Docker</b> 运行容器，<b>Kubernetes</b> 编排容器。</li>
+    <li>安全重点：虚拟机/容器<b>逃逸</b>、<b>侧信道</b>攻击；保障靠加固 Hypervisor、镜像扫描、最小权限、隔离。</li>
+    <li>云安全关键技术含<b>虚拟化安全</b>（非"服务器安全"）。</li>
+  </ul>
+</section>
+
+<footer>本讲解对应考纲 2.1 虚拟化技术（掌握）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
+</div>
+<div class="colfoot"><a class="prev" href="1.html"><div class="lab">上一章</div><div class="ttl">云计算概述</div></a><a class="home" href="../index.html">☁ 返回专栏首页</a><a class="next" href="2-2.html"><div class="lab">下一章</div><div class="ttl">分布式技术</div></a></div>
+</body>
+</html>
