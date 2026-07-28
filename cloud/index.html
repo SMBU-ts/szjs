@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云计算复习专栏 · 2025 考纲</title>
+<link rel="stylesheet" href="assets/nav.css">
+<nav class="colnav"><div class="inner">
+<a class="chip active" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1f2937;--sub:#52606d;--brand:#2563eb;--line:#e5e7eb}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+.hero{max-width:1120px;margin:26px auto 0;padding:34px 30px;border-radius:18px;color:#fff;
+  background:linear-gradient(135deg,#1e3a8a,#2563eb 55%,#0ea5e9);box-shadow:0 12px 34px rgba(37,99,235,.28)}
+.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.5px}
+.hero p{margin:4px 0;opacity:.94;font-size:14.5px}
+.hero .badge{display:inline-block;margin-top:12px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);padding:3px 12px;border-radius:999px;font-size:12.5px}
+.wrap{max-width:1120px;margin:0 auto;padding:24px 18px 70px}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+.sec h2{font-size:19px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:9px}
+.sec h2 .dot{width:9px;height:9px;border-radius:3px;background:var(--brand);display:inline-block}
+.note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:11px 16px;margin-top:16px;font-size:13.5px;color:#92400e}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:6px}
+.card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:var(--ink);box-shadow:0 2px 8px rgba(15,23,42,.04);transition:.15s;border-top:4px solid var(--brand)}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(37,99,235,.18);border-color:#bfdbfe}
+.card .cnum{display:inline-block;font-weight:800;color:#fff;background:var(--brand);border-radius:8px;padding:1px 9px;font-size:13px}
+.card .ctitle{font-size:16px;font-weight:700;margin:9px 0 5px}
+.card .cdesc{font-size:12.8px;color:var(--sub);line-height:1.55}
+.oline{display:flex;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.oline:last-child{border-bottom:none}
+.opart{flex:0 0 180px;font-weight:700;color:#0f172a;font-size:14.5px}
+.oitems{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 16px}
+.oitems li a{color:var(--brand);text-decoration:none;font-size:13.5px}
+.oitems li a:hover{text-decoration:underline}
+.oitems .miss{color:#94a3b8;font-size:13px}
+footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>☁ 云计算复习专栏</h1>
+  <p>依据《2025 湖南省数字技术应用能力考试 · 云计算基础知识及应用》考纲整理</p>
+  <p>整理自今晚的云计算讲解，按考纲第 1–7 章分篇，每章一篇，可顺序复习或按需跳转。</p>
+  <span class="badge">覆盖：概述 · 关键技术 · 典型平台 · 面向服务计算 · 数据中心 · 安全 · 产业发展</span>
+</header>
+
+<div class="wrap">
+  <section class="sec">
+    <h2><span class="dot"></span>考纲导航（点击直达对应章节）</h2>
+    <div class="oline"><div class="opart">第 1 部分 · 云计算概述</div><ul class="oitems"><li><a href="1.html">1.1 概念及发展</a></li><li><a href="1.html">1.2 服务模式</a></li><li><a href="1.html">1.3 部署模式</a></li><li><a href="1.html">1.4 特点及优势</a></li></ul></div>
+<div class="oline"><div class="opart">第 2 部分 · 云计算关键技术</div><ul class="oitems"><li><a href="2-1.html">2.1 虚拟化技术</a></li><li><a href="2-2.html">2.2 分布式技术</a></li><li><a href="2-3.html">2.3 SDN 与 NFV</a></li></ul></div>
+<div class="oline"><div class="opart">第 3 部分 · 典型云计算平台</div><ul class="oitems"><li><a href="3-1.html">3.1 Google 云计算</a></li><li><a href="3-2.html">3.2 亚马逊 AWS</a></li><li><a href="3-3.html">3.3 华为云</a></li><li><a href="3-4.html">3.4 百度云</a></li><li><a href="3-5.html">3.5 平台选择与比较</a></li></ul></div>
+<div class="oline"><div class="opart">第 4 部分 · 面向服务的分布式计算</div><ul class="oitems"><li><a href="4-1.html">4.1 Web 文档服务</a></li><li><a href="4-2.html">4.2 Web 服务与协议</a></li><li><a href="4-3.html">4.3 面向服务架构 SOA</a></li><li><a href="4-4.html">4.4 微服务架构</a></li></ul></div>
+<div class="oline"><div class="opart">第 5 部分 · 云计算数据中心</div><ul class="oitems"><li><a href="5-1.html">5.1 概念及特征</a></li><li><a href="5-2.html">5.2 关键服务技术</a></li><li><a href="5-3.html">5.3 绿色节能技术</a></li><li><a href="5-4.html">5.4 容灾备份</a></li></ul></div>
+<div class="oline"><div class="opart">第 6 部分 · 云计算安全</div><ul class="oitems"><li><a href="6.html">6 云安全（6.1/6.2/6.3）</a></li></ul></div>
+<div class="oline"><div class="opart">第 7 部分 · 云计算发展</div><ul class="oitems"><li><a href="7.html">7 产业应用与发展</a></li></ul></div>
+    <div class="note">✅ 说明：考纲第 1–7 章全部小节均已生成独立讲解（含 3.2 亚马逊 AWS、3.4 百度云、4.1 Web 文档服务、5.4 容灾备份），共 19 篇，可顺序复习或按需跳转。</div>
+  </section>
+
+  <section class="sec">
+    <h2><span class="dot"></span>分章讲解（共 19 篇）</h2>
+    <div class="grid">
+      <a class="card" href="1.html"><div class="cnum">1</div><div class="ctitle">云计算概述</div><div class="cdesc">概念与发展 · 服务模式(IaaS/PaaS/SaaS) · 部署模式 · 特点优势</div></a>
+<a class="card" href="2-1.html"><div class="cnum">2.1</div><div class="ctitle">虚拟化技术</div><div class="cdesc">基本概念 · 常见虚拟化技术 · 容器 · 与虚拟机区别 · 安全</div></a>
+<a class="card" href="2-2.html"><div class="cnum">2.2</div><div class="ctitle">分布式技术</div><div class="cdesc">概念 · 在云中的应用 · 常见分布式技术 · 集群技术</div></a>
+<a class="card" href="2-3.html"><div class="cnum">2.3</div><div class="ctitle">SDN 与 NFV</div><div class="cdesc">软件定义网络 · 网络功能虚拟化 · 应用场景 · VPC 与网络隔离</div></a>
+<a class="card" href="3-1.html"><div class="cnum">3.1</div><div class="ctitle">Google 云计算</div><div class="cdesc">背景与场景 · 核心技术(GFS/MapReduce/BigTable等)</div></a>
+<a class="card" href="3-2.html"><div class="cnum">3.2</div><div class="ctitle">亚马逊 AWS</div><div class="cdesc">核心服务(EC2/S3/RDS等) · 应用场景</div></a>
+<a class="card" href="3-3.html"><div class="cnum">3.3</div><div class="ctitle">华为云</div><div class="cdesc">核心技术与服务 · 各领域应用场景</div></a>
+<a class="card" href="3-4.html"><div class="cnum">3.4</div><div class="ctitle">百度云</div><div class="cdesc">核心服务 · AI 与行业应用</div></a>
+<a class="card" href="3-5.html"><div class="cnum">3.5</div><div class="ctitle">云平台选择比较</div><div class="cdesc">各平台特点 · 针对需求选型方法</div></a>
+<a class="card" href="4-1.html"><div class="cnum">4.1</div><div class="ctitle">Web 文档服务</div><div class="cdesc">定义 · 核心组件 · 与 Web 服务的区别</div></a>
+<a class="card" href="4-2.html"><div class="cnum">4.2</div><div class="ctitle">Web 服务与协议</div><div class="cdesc">核心组件 · SOAP · RESTful 原理与对比</div></a>
+<a class="card" href="4-3.html"><div class="cnum">4.3</div><div class="ctitle">面向服务架构 SOA</div><div class="cdesc">概念 · 核心组件 · 在分布式计算中的优势</div></a>
+<a class="card" href="4-4.html"><div class="cnum">4.4</div><div class="ctitle">微服务架构</div><div class="cdesc">特性与架构 · 分布式数据管理 · 灵活扩展</div></a>
+<a class="card" href="5-1.html"><div class="cnum">5.1</div><div class="ctitle">数据中心概念特征</div><div class="cdesc">概念 · 核心组件 · 分类与分级 · 协同原理</div></a>
+<a class="card" href="5-2.html"><div class="cnum">5.2</div><div class="ctitle">数据中心关键服务</div><div class="cdesc">DCaaS · 总体架构 · 设计与构建需求</div></a>
+<a class="card" href="5-3.html"><div class="cnum">5.3</div><div class="ctitle">绿色节能技术</div><div class="cdesc">配电/空调节能 · 典型绿色数据中心</div></a>
+<a class="card" href="5-4.html"><div class="cnum">5.4</div><div class="ctitle">容灾备份</div><div class="cdesc">容灾概念 · 备份策略 · RPO/RTO</div></a>
+<a class="card" href="6.html"><div class="cnum">6</div><div class="ctitle">云安全</div><div class="cdesc">概念与威胁 · 分层安全(IaaS/PaaS/SaaS) · 身份访问管理</div></a>
+<a class="card" href="7.html"><div class="cnum">7</div><div class="ctitle">产业应用与发展</div><div class="cdesc">产业现状 · 行业应用 · 挑战与趋势</div></a>
+    </div>
+  </section>
+
+  <footer>云计算复习专栏 · 备考专用 · 配合《2025考纲》与《核心知识点详解》使用</footer>
+</div>
+</body>
+</html>

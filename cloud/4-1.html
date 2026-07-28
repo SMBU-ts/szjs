@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4.1 Web文档服务 · 复习卡片</title>
+<style>
+  :root{
+    --blue:#185FA5; --blue-bg:#E6F1FB;
+    --green:#3B6D11; --green-bg:#EAF3DE;
+    --teal:#0F6E56; --teal-bg:#E1F5EE;
+    --gray:#5F5E5A; --gray-bg:#F1EFE8;
+    --ink:#2C2C2A; --muted:#444441;
+    --line:#D3D1C7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:#FBFAF7; color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+    line-height:1.7; font-size:15px;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:32px 24px 64px;}
+  header h1{font-size:26px; margin:0 0 4px;}
+  header .sub{color:var(--muted); margin:0 0 16px;}
+  .badge{
+    display:inline-block; padding:2px 10px; border-radius:999px;
+    font-size:12px; font-weight:600; background:var(--blue-bg); color:var(--blue);
+    border:1px solid #B5D4F4;
+  }
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:22px 24px; margin:20px 0; box-shadow:0 1px 2px rgba(0,0,0,.04);
+  }
+  .card h2{
+    font-size:19px; margin:0 0 4px; padding-left:12px;
+    border-left:4px solid var(--blue);
+  }
+  .card h2 .tag{font-size:12px; color:var(--muted); font-weight:400; margin-left:8px;}
+  .card h3{font-size:15px; margin:18px 0 6px; color:var(--blue);}
+  p{margin:8px 0;}
+  ul{margin:8px 0; padding-left:22px;}
+  li{margin:4px 0;}
+  code{
+    background:var(--gray-bg); padding:1px 6px; border-radius:5px;
+    font-family:Consolas,Menlo,monospace; font-size:13px; color:var(--ink);
+  }
+  .diagram{
+    background:var(--gray-bg); border-radius:12px; padding:14px; margin:16px 0;
+    text-align:center;
+  }
+  .diagram svg{width:100%; max-width:640px; height:auto;}
+  .key{
+    background:var(--teal-bg); border:1px solid #9FE1CB; border-radius:12px;
+    padding:16px 20px; margin:20px 0;
+  }
+  .key h3{margin:0 0 8px; color:var(--teal);}
+  .key ul{margin:0;}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left;}
+  th{background:var(--gray-bg);}
+  .flow{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    background:#fff; border:1px dashed var(--blue); border-radius:12px;
+    padding:16px; margin:16px 0; justify-content:center;
+  }
+  .flow .step{
+    background:var(--blue-bg); color:var(--blue); border-radius:8px;
+    padding:8px 12px; font-size:13px; font-weight:600;
+  }
+  .flow .arr{color:var(--gray); font-weight:700;}
+  .exam{
+    background:#FFF7E6; border:1px solid #FAC775; border-radius:12px;
+    padding:16px 20px; margin:20px 0;
+  }
+  .exam h3{margin:0 0 8px; color:#854F0B;}
+  footer{color:var(--muted); font-size:12px; text-align:center; margin-top:32px;}
+</style>
+  <link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip active" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+  <header>
+    <h1>4.1 Web文档服务</h1>
+    <p class="sub">第四章 面向服务的分布式计算 · <span class="badge">掌握要求：熟悉</span></p>
+  </header>
+
+  <div class="card">
+    <p><b>Web文档服务</b>是万维网（WWW）赖以存在的三个基石：</p>
+    <ul>
+      <li><b>超文本标记语言（HTML）</b> —— 用什么写网页（结构 / 内容）</li>
+      <li><b>超链接（Hyperlink）</b> —— 网页之间怎么连（连接 / 跳转）</li>
+      <li><b>超文本传输协议（HTTP）</b> —— 网页怎么在网络上传输（请求 / 响应）</li>
+    </ul>
+    <p>一句话区分：<b>HTML 负责"写什么 / 怎么排"，超链接负责"连到哪"，HTTP 负责"怎么传"。</b></p>
+  </div>
+
+  <!-- 一、HTML -->
+  <div class="card">
+    <h2>一、超文本标记语言（HTML）<span class="tag">HyperText Markup Language</span></h2>
+    <p><b>定义：</b>创建网页的<strong>标准标记语言</strong>。"超文本"指文本中可嵌入可跳转的链接（非线性阅读）；"标记"指用标签描述文档结构与语义。</p>
+    <h3>核心构成</h3>
+    <ul>
+      <li>文档由<strong>元素（Element）</strong>组成：<code>&lt;标签&gt;内容&lt;/标签&gt;</code>，如 <code>&lt;p&gt;文字&lt;/p&gt;</code>。</li>
+      <li><strong>标签</strong>分双标签（<code>&lt;p&gt;&lt;/p&gt;</code>）与单标签（<code>&lt;img&gt;</code>、<code>&lt;br&gt;</code>）。</li>
+      <li><strong>属性</strong>提供附加信息：<code>&lt;a href="..."&gt;</code> 的 <code>href</code>、<code>&lt;img src="..."&gt;</code> 的 <code>src</code>。</li>
+      <li>浏览器解析后形成 <strong>DOM 树</strong>（文档对象模型），再据此渲染页面。</li>
+    </ul>
+    <h3>基本骨架</h3>
+    <p><code>&lt;!DOCTYPE html&gt;</code>（声明）→ <code>&lt;html&gt;</code>（根）→ <code>&lt;head&gt;</code>（元数据：标题、编码、样式引用）+ <code>&lt;body&gt;</code>（可见内容）。</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 680 264" width="100%" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="HTML 文档结构树">
+        <title>HTML 文档结构树（DOM）</title>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <path d="M340 68 L340 89 L220 89 L220 110" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M340 68 L340 89 L460 89 L460 110" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M220 154 L220 200" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M460 154 L460 177 L370 177 L370 200" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M460 154 L460 177 L490 177 L490 200" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+        <path d="M460 154 L460 177 L610 177 L610 200" fill="none" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+        <rect x="290" y="24" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="340" y="46" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;html&gt;</text>
+        <rect x="170" y="110" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="220" y="132" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;head&gt;</text>
+        <rect x="410" y="110" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="460" y="132" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;body&gt;</text>
+        <rect x="170" y="200" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="220" y="222" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;title&gt;</text>
+        <rect x="320" y="200" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="370" y="222" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;h1&gt;</text>
+        <rect x="440" y="200" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="490" y="222" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;p&gt;</text>
+        <rect x="560" y="200" width="100" height="44" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="610" y="222" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">&lt;a&gt;</text>
+      </svg>
+      <p style="font-size:12px;color:#444441;margin:6px 0 0;">根元素 &lt;html&gt; 含 &lt;head&gt; 与 &lt;body&gt;；解析后整体形成 DOM 树</p>
+    </div>
+
+    <div class="key">
+      <h3>易错点</h3>
+      <ul>
+        <li>HTML 是<strong>标记语言，不是编程语言</strong>——只描述"结构和内容"，不带逻辑与计算。</li>
+        <li>表现（样式）交给 <strong>CSS</strong>，行为（交互）交给 <strong>JavaScript</strong>。</li>
+        <li>HTML5 新增语义化标签 <code>header / nav / article / section / footer</code> 与音视频原生支持。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 二、超链接 -->
+  <div class="card">
+    <h2>二、超链接（Hyperlink）<span class="tag">网页之间的"连接"</span></h2>
+    <p><b>定义：</b>连接一个文档与另一个资源（网页、图片、文件、页内位置）的引用，是"超文本"里"超"字的体现。无数文档通过超链接彼此连接，才织成了"网"（Web）。</p>
+    <h3>实现与指向形式</h3>
+    <ul>
+      <li>HTML 中用 <code>&lt;a&gt;</code>（anchor 锚）标签 + <code>href</code> 属性（Hypertext Reference）实现。</li>
+      <li><strong>绝对 URL：</strong><code>https://www.example.com/page.html</code></li>
+      <li><strong>相对 URL：</strong><code>./about.html</code>、<code>../img/p.png</code></li>
+      <li><strong>页内锚点：</strong><code>#chapter1</code>（同一页面内跳转）</li>
+      <li><strong>其他协议：</strong><code>mailto:</code>（邮件）、<code>tel:</code>（拨号）、<code>ftp://</code>（文件传输）</li>
+    </ul>
+    <h3>表现形式</h3>
+    <p>文本链接、图片链接（<code>&lt;a&gt;&lt;img&gt;&lt;/a&gt;</code>）、锚点链接。</p>
+    <p><b>机制：</b>点击链接 → 浏览器解析 <code>href</code> → 构造 <strong>HTTP 请求</strong> → 服务器返回目标资源 → 页面跳转 / 渲染。超链接正是进入 HTTP 的入口。</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 680 250" width="100%" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="超链接连接两个文档">
+        <title>超链接连接两个文档</title>
+        <defs>
+          <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <text x="60" y="28" fill="#2C2C2A" font-size="13" font-weight="500" font-family="sans-serif">超链接把分散的文档连接成"网"</text>
+        <rect x="60" y="40" width="260" height="170" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+        <text x="80" y="66" fill="#2C2C2A" font-size="13" font-weight="500" font-family="sans-serif">文档 A</text>
+        <rect x="90" y="110" width="200" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+        <text x="190" y="130" text-anchor="middle" dominant-baseline="central" fill="#085041" font-size="13" font-weight="500" font-family="sans-serif">点击这里 到 文档 B</text>
+        <text x="90" y="172" fill="#444441" font-size="11" font-family="sans-serif">href="docB.html"</text>
+        <rect x="400" y="40" width="220" height="170" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+        <text x="420" y="66" fill="#2C2C2A" font-size="13" font-weight="500" font-family="sans-serif">文档 B</text>
+        <rect x="420" y="100" width="180" height="14" rx="3" fill="#D3D1C7"/>
+        <rect x="420" y="124" width="150" height="14" rx="3" fill="#D3D1C7"/>
+        <rect x="420" y="148" width="170" height="14" rx="3" fill="#D3D1C7"/>
+        <text x="420" y="188" fill="#444441" font-size="11" font-family="sans-serif">页面内容（HTML 渲染结果）</text>
+        <path d="M290 130 L400 130" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <text x="345" y="118" text-anchor="middle" fill="#0F6E56" font-size="11" font-family="sans-serif">超链接 &lt;a href&gt;</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 三、HTTP -->
+  <div class="card">
+    <h2>三、超文本传输协议（HTTP）<span class="tag">HyperText Transfer Protocol</span></h2>
+    <p><b>定义：</b><strong>应用层协议</strong>，用于在客户端与服务器之间传输超文本（网页文档），是 WWW 数据通信的基础。</p>
+    <h3>模型与过程</h3>
+    <p>客户端-服务器（C/S）模式，遵循<strong>请求-响应（Request-Response）</strong>：</p>
+    <ul>
+      <li><strong>请求报文：</strong>请求行（方法 + 路径 + 版本，如 <code>GET /index.html HTTP/1.1</code>）+ 请求头（Host、User-Agent、Accept 等）+ 可选请求体。</li>
+      <li><strong>响应报文：</strong>状态行（版本 + 状态码 + 原因，如 <code>HTTP/1.1 200 OK</code>）+ 响应头 + 响应体（通常是 HTML 文档）。</li>
+    </ul>
+    <h3>资源定位（URL）</h3>
+    <p><code>scheme://host:port/path?query#fragment</code>，例 <code>https://www.example.com:443/news?id=1#top</code></p>
+    <h3>常用方法（动词）</h3>
+    <p><code>GET</code>（获取）、<code>POST</code>（提交 / 新建）、<code>PUT</code>（替换）、<code>DELETE</code>（删除）、<code>HEAD</code>、<code>PATCH</code>、<code>OPTIONS</code>。</p>
+
+    <h3>状态码（考试必考）</h3>
+    <table>
+      <tr><th>类别</th><th>含义</th><th>常见</th></tr>
+      <tr><td>2xx</td><td>成功</td><td><code>200 OK</code></td></tr>
+      <tr><td>3xx</td><td>重定向</td><td><code>301</code> 永久、<code>302</code> 临时</td></tr>
+      <tr><td>4xx</td><td>客户端错误</td><td><code>400</code> 错误请求、<code>403</code> 禁止、<code>404</code> 未找到</td></tr>
+      <tr><td>5xx</td><td>服务器错误</td><td><code>500</code> 内部错误、<code>502</code> 网关错误、<code>503</code> 服务不可用</td></tr>
+    </table>
+
+    <h3>关键特性</h3>
+    <ul>
+      <li><strong>无状态（Stateless）：</strong>每次请求相互独立，服务器不保留之前状态；状态靠 <code>Cookie / Session / Token</code> 维持。</li>
+      <li><strong>HTTP vs HTTPS：</strong>HTTPS = HTTP + TLS/SSL 加密，保证传输安全。</li>
+      <li><strong>版本演进：</strong>HTTP/1.0（每次请求新建连接）→ HTTP/1.1（持久连接 Keep-Alive）→ HTTP/2（二进制分帧、多路复用）→ HTTP/3（基于 QUIC/UDP）。</li>
+    </ul>
+
+    <div class="diagram">
+      <svg viewBox="0 0 680 270" width="100%" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="HTTP 请求响应流程">
+        <title>HTTP 请求-响应流程</title>
+        <defs>
+          <marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <text x="60" y="40" fill="#2C2C2A" font-size="13" font-weight="500" font-family="sans-serif">一次 Web 访问的 HTTP 交互</text>
+        <rect x="60" y="100" width="160" height="70" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="140" y="126" text-anchor="middle" dominant-baseline="central" fill="#0C447C" font-size="13" font-weight="500" font-family="sans-serif">浏览器</text>
+        <text x="140" y="146" text-anchor="middle" dominant-baseline="central" fill="#444441" font-size="11" font-family="sans-serif">客户端 Client</text>
+        <rect x="460" y="100" width="160" height="70" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+        <text x="540" y="126" text-anchor="middle" dominant-baseline="central" fill="#27500A" font-size="13" font-weight="500" font-family="sans-serif">Web 服务器</text>
+        <text x="540" y="146" text-anchor="middle" dominant-baseline="central" fill="#444441" font-size="11" font-family="sans-serif">服务端 Server</text>
+        <path d="M220 118 L460 118" fill="none" stroke="#185FA5" stroke-width="1.5" marker-end="url(#arrow3)"/>
+        <text x="340" y="108" text-anchor="middle" fill="#185FA5" font-size="11" font-family="sans-serif">① 请求: GET /index.html</text>
+        <path d="M460 152 L220 152" fill="none" stroke="#3B6D11" stroke-width="1.5" marker-end="url(#arrow3)"/>
+        <text x="340" y="174" text-anchor="middle" fill="#3B6D11" font-size="11" font-family="sans-serif">② 响应: 200 OK + HTML</text>
+        <text x="60" y="220" fill="#444441" font-size="11" font-family="sans-serif">无状态：每次请求相互独立；状态由 Cookie / Session / Token 维持</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 三者协作 -->
+  <div class="card">
+    <h2>四、三者如何协作（完整流程）</h2>
+    <div class="flow">
+      <span class="step">HTML 写页面</span><span class="arr">→</span>
+      <span class="step">&lt;a href&gt; 插超链接</span><span class="arr">→</span>
+      <span class="step">点击链接</span><span class="arr">→</span>
+      <span class="step">浏览器发 HTTP 请求</span><span class="arr">→</span>
+      <span class="step">服务器回传 HTML</span><span class="arr">→</span>
+      <span class="step">渲染 + 新链接</span>
+    </div>
+    <p>如此循环往复，构成万维网。三者的关系：<b>HTML 负责"写什么 / 怎么排"，超链接负责"连到哪"，HTTP 负责"怎么传"。</b></p>
+  </div>
+
+  <!-- 考试重点 -->
+  <div class="exam">
+    <h3>考试重点（要求"熟悉"）</h3>
+    <ul>
+      <li>三者各自作用能清晰区分（结构 / 连接 / 传输）。</li>
+      <li><strong>HTML</strong>：是*标记语言*不是编程语言；标签 + 属性；骨架 <code>&lt;html&gt;/&lt;head&gt;/&lt;body&gt;</code>；解析成 DOM 树。</li>
+      <li><strong>超链接</strong>：由 <code>&lt;a href&gt;</code> 实现；目标地址四种形式（绝对 URL、相对 URL、页内锚点、其他协议）。</li>
+      <li><strong>HTTP</strong>：应用层、C/S、请求-响应、<strong>无状态</strong>；方法 <code>GET/POST</code>；状态码分类（尤其 <code>200 / 301 / 302 / 404 / 500</code>）；<strong>HTTP 与 HTTPS 的区别</strong>（有无 TLS 加密）。</li>
+      <li><strong>URL</strong> 各部分含义：<code>scheme://host:port/path?query#fragment</code>。</li>
+    </ul>
+  </div>
+
+  <footer>整理自 4.1 Web文档服务 · 配套复习卡片 · 建议结合 4.2 Web服务与 SOAP/REST 一起复习</footer>
+</div>
+<div class="colfoot"><a class="prev" href="3-5.html"><div class="lab">上一章</div><div class="ttl">云平台选择比较</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="4-2.html"><div class="lab">下一章</div><div class="ttl">Web 服务与协议</div></a></div>
+</body>
+</html>

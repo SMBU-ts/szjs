@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.4 容灾备份 · 复习卡片</title>
+<style>
+  :root{
+    --blue:#185FA5; --blue-l:#E6F1FB; --blue-m:#85B7EB;
+    --green:#3B6D11; --green-l:#EAF3DE;
+    --amber:#BA7517; --amber-l:#FAEEDA;
+    --red:#A32D2D;
+    --ink:#1f2937; --muted:#5F5E5A; --line:#d8dde3;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink); background:#f5f7fa; line-height:1.6;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:24px 20px 60px;}
+  header.top{
+    background:linear-gradient(180deg,#fff,#f0f6fc); border:1px solid var(--line);
+    border-radius:14px; padding:22px 26px; margin-bottom:18px;
+  }
+  header.top h1{margin:0 0 4px; font-size:22px;}
+  header.top .sub{color:var(--muted); font-size:13px;}
+  .badge{display:inline-block; font-size:12px; padding:2px 10px; border-radius:999px;
+    background:var(--blue-l); color:var(--blue); border:1px solid #b5d4f4; margin-left:8px;}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:20px 24px; margin-bottom:16px;
+  }
+  .card h2{font-size:18px; margin:0 0 12px; display:flex; align-items:center; gap:8px;}
+  .card h2 .num{background:var(--blue); color:#fff; font-size:13px; width:24px; height:24px;
+    border-radius:7px; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;}
+  .card h3{font-size:15px; margin:18px 0 8px; color:var(--blue);}
+  p{margin:8px 0;}
+  ul,ol{margin:8px 0; padding-left:22px;}
+  li{margin:5px 0;}
+  .kp{background:var(--blue-l); border-left:4px solid var(--blue); border-radius:8px;
+    padding:10px 14px; margin:12px 0; font-size:14px;}
+  .warn{background:#FCEBEB; border-left:4px solid var(--red); border-radius:8px;
+    padding:10px 14px; margin:12px 0; font-size:14px;}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  th{background:#f1f5f9; font-weight:600;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  .fig{background:#fbfdff; border:1px solid var(--line); border-radius:10px;
+    padding:14px; margin:14px 0; text-align:center;}
+  .fig svg{width:100%; height:auto; max-width:680px;}
+  .fig .cap{font-size:12px; color:var(--muted); margin-top:8px;}
+  .cols{display:flex; gap:14px; flex-wrap:wrap;}
+  .cols .col{flex:1 1 240px; background:var(--blue-l); border-radius:10px; padding:12px 14px;}
+  .cols .col.g{background:var(--green-l);}
+  .cols .col.a{background:var(--amber-l);}
+  .cols .col h4{margin:0 0 6px; font-size:14px;}
+  .tag{display:inline-block; font-size:11px; padding:1px 8px; border-radius:6px;
+    background:#eef2f6; color:var(--muted); margin-right:4px;}
+  footer{text-align:center; color:var(--muted); font-size:12px; margin-top:10px;}
+  @media print{
+    body{background:#fff;}
+    .card,.fig{break-inside:avoid;}
+    .wrap{padding:0;}
+  }
+</style>
+  <link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip active" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<div class="wrap">
+
+  <header class="top">
+    <h1>5.4 容灾备份 · 复习卡片<span class="badge">了解</span></h1>
+    <div class="sub">第5章 云计算数据中心 · 考纲要点：等级标准 / 关键技术 / 云存储应用</div>
+  </header>
+
+  <!-- 一、核心指标 -->
+  <section class="card">
+    <h2><span class="num">1</span>两个核心指标（先背这个）</h2>
+    <div class="kp"><b>RTO（Recovery Time Objective，恢复时间目标）</b>：从灾难发生到业务系统恢复可用所允许的<b>最长时间</b>。RTO 越小，恢复越快、要求越高。</div>
+    <div class="kp"><b>RPO（Recovery Point Objective，恢复点目标）</b>：灾难发生时，允许<b>丢失的数据量所对应的时间点</b>（最多丢多久的数据）。RPO 越接近 0，数据越完整、要求越高。</div>
+    <p>一句话记：<b>RTO 管"停多久"，RPO 管"丢多少"；两个值都是越小越贵、要求越高。</b></p>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 280" width="100%" role="img" aria-label="RTO 与 RPO 概念示意">
+        <title>RTO 与 RPO 概念示意</title>
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+        <text x="340" y="26" text-anchor="middle" font-size="14" font-weight="500" fill="#1f2937">RTO 与 RPO 概念示意</text>
+        <line x1="40" y1="150" x2="650" y2="150" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#ar1)"/>
+        <text x="650" y="146" text-anchor="end" font-size="11" fill="#5F5E5A">时间 →</text>
+        <rect x="40" y="135" width="215" height="30" rx="4" fill="#B5D4F4"/>
+        <text x="147" y="150" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0C447C">正常运行·数据持续写入</text>
+        <rect x="255" y="120" width="45" height="60" fill="#FAC775" stroke="#BA7517" stroke-width="1"/>
+        <text x="277" y="112" text-anchor="middle" font-size="12" font-weight="500" fill="#BA7517">RPO</text>
+        <text x="277" y="205" text-anchor="middle" font-size="11" fill="#854F0B">允许丢失</text>
+        <text x="277" y="219" text-anchor="middle" font-size="11" fill="#854F0B">的数据窗口</text>
+        <line x1="300" y1="100" x2="300" y2="205" stroke="#A32D2D" stroke-width="2"/>
+        <text x="300" y="94" text-anchor="middle" font-size="12" font-weight="500" fill="#A32D2D">灾难发生</text>
+        <rect x="300" y="135" width="240" height="30" rx="4" fill="#C0DD97"/>
+        <text x="420" y="150" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#27500A">RTO：业务中断恢复期</text>
+        <line x1="540" y1="100" x2="540" y2="205" stroke="#3B6D11" stroke-width="2"/>
+        <text x="540" y="94" text-anchor="middle" font-size="12" font-weight="500" fill="#3B6D11">业务恢复</text>
+        <text x="277" y="245" text-anchor="middle" font-size="11" fill="#5F5E5A">RPO 越小 → 数据丢失越少</text>
+        <text x="420" y="260" text-anchor="middle" font-size="11" fill="#5F5E5A">RTO 越小 → 恢复越快、要求越高</text>
+      </svg>
+      <div class="cap">时间轴上：RPO 是"最后一次成功复制"到"灾难发生"之间允许丢失的数据窗口；RTO 是"灾难发生"到"业务恢复"的中断时长。</div>
+    </div>
+  </section>
+
+  <!-- 二、等级标准 -->
+  <section class="card">
+    <h2><span class="num">2</span>等级标准：国标 GB/T 20988-2007</h2>
+    <p>《信息系统灾难恢复规范》将容灾分为 <b>6 级</b>，保护能力逐级增强、RTO 逐级缩短：</p>
+    <table>
+      <thead>
+        <tr><th style="width:64px">等级</th><th style="width:150px">名称</th><th>关键特征</th><th style="width:120px">RTO / RPO 水平</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>第1级</td><td>基本支持</td><td>数据备份介质<b>异地存放</b>，无备用场地/设备</td><td>RTO 天~周</td></tr>
+        <tr><td>第2级</td><td>备用场地支持</td><td>预先准备好<b>备用场地</b></td><td>RTO 数天</td></tr>
+        <tr><td>第3级</td><td>电子传输·部分设备</td><td>数据<b>电子传输</b>到异地，配部分备用设备</td><td>RTO 天级</td></tr>
+        <tr><td>第4级</td><td>电子传输·完整设备</td><td>异地有<b>完整备用系统</b>，定时批量传输</td><td>RTO 天~小时</td></tr>
+        <tr><td>第5级</td><td>实时传输·完整设备</td><td>数据<b>实时复制</b>到异地，远程完整设备</td><td>RTO 小时级</td></tr>
+        <tr><td>第6级</td><td>零丢失·远程集群</td><td>远程<b>双活/集群</b>，灾难时实时切换</td><td>RPO≈0、RTO 秒/分级</td></tr>
+      </tbody>
+    </table>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 290" width="100%" role="img" aria-label="国标 GB/T 20988 容灾六级">
+        <title>国标 GB/T 20988 容灾六级</title>
+        <text x="340" y="26" text-anchor="middle" font-size="14" font-weight="500" fill="#1f2937">国标 GB/T 20988 容灾六级（保护能力递增）</text>
+        <rect x="150" y="60" width="50" height="22" rx="3" fill="#E6F1FB"/><text x="175" y="71" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#0C447C">L1</text><text x="42" y="71" font-size="11" fill="#1f2937">L1 基本支持</text><text x="512" y="71" font-size="11" fill="#5F5E5A">RTO 天~周</text>
+        <rect x="150" y="95" width="95" height="22" rx="3" fill="#B5D4F4"/><text x="197" y="106" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#0C447C">L2</text><text x="42" y="106" font-size="11" fill="#1f2937">L2 备用场地</text><text x="512" y="106" font-size="11" fill="#5F5E5A">RTO 数天</text>
+        <rect x="150" y="130" width="140" height="22" rx="3" fill="#85B7EB"/><text x="220" y="141" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#042C53">L3</text><text x="42" y="141" font-size="11" fill="#1f2937">L3 电子传输·部分</text><text x="512" y="141" font-size="11" fill="#5F5E5A">RTO 天级</text>
+        <rect x="150" y="165" width="195" height="22" rx="3" fill="#378ADD"/><text x="247" y="176" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#FFFFFF">L4</text><text x="42" y="176" font-size="11" fill="#1f2937">L4 电子传输·完整</text><text x="512" y="176" font-size="11" fill="#5F5E5A">RTO 天~时</text>
+        <rect x="150" y="200" width="270" height="22" rx="3" fill="#185FA5"/><text x="285" y="211" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#FFFFFF">L5</text><text x="42" y="211" font-size="11" fill="#1f2937">L5 实时传输·完整</text><text x="512" y="211" font-size="11" fill="#5F5E5A">RTO 小时级</text>
+        <rect x="150" y="235" width="350" height="22" rx="3" fill="#0C447C"/><text x="325" y="246" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#FFFFFF">L6</text><text x="42" y="246" font-size="11" fill="#1f2937">L6 零丢失·集群</text><text x="512" y="246" font-size="11" fill="#5F5E5A">RPO≈0/RTO秒</text>
+        <text x="150" y="278" font-size="11" fill="#5F5E5A">L1~L4 以备用场地/设备与电子传输为主；L5 实时复制 RTO 降至小时级；L6 远程集群、RPO≈0。</text>
+      </svg>
+      <div class="cap">横条越长 = 保护能力越强；RTO 随等级升高而缩短，L6 达到 RPO≈0。</div>
+    </div>
+  </section>
+
+  <!-- 三、关键技术 -->
+  <section class="card">
+    <h2><span class="num">3</span>容灾备份的关键技术</h2>
+    <p>围绕"把数据安全地复制到别处、并能快速拉起来"，核心技术有四类：</p>
+
+    <h3>① 数据复制（Data Replication）</h3>
+    <ul>
+      <li><b>同步复制</b>：写入须主、备两端都确认才返回。<b>RPO≈0</b>，但受网络延迟限制，通常只适合 ≤100 km 的同城场景。</li>
+      <li><b>异步复制</b>：先写本地、再批量/实时传异地。RPO 会有少量丢失，但可支持远距离、跨地域。</li>
+      <li>折中：半同步 / 组复制等。</li>
+    </ul>
+
+    <h3>② 快照（Snapshot）</h3>
+    <p>对某一时刻数据的"照片"，用于本地快速恢复、回滚到干净状态。底层常用<b>写时复制（COW）</b>等机制，几乎不占额外空间即可保留历史点。</p>
+
+    <h3>③ 双活 / 多活（Active-Active）</h3>
+    <p>多个数据中心<b>同时</b>对外服务、互为备份。一个中心断电，另一个<b>秒级接管</b>，实现极小 RTO、接近零 RPO。样例中"银行双活数据中心"即典型。</p>
+
+    <h3>④ 辅助技术</h3>
+    <div class="cols">
+      <div class="col"><h4>CDP 连续数据保护</h4><p style="margin:0">记录每一次 I/O，可恢复到任意时间点，RPO≈0。</p></div>
+      <div class="col a"><h4>备份策略</h4><p style="margin:0">全量 / 增量 / 差异备份的组合。</p></div>
+      <div class="col g"><h4>Failover / Failback</h4><p style="margin:0">灾难时切到备用中心，恢复后再切回。</p></div>
+    </div>
+  </section>
+
+  <!-- 四、云存储应用 -->
+  <section class="card">
+    <h2><span class="num">4</span>云存储在容灾备份中的应用</h2>
+    <p>云存储（对象存储、云硬盘等）天然带容灾属性，是中小企业实现高等级容灾的低成本路径：</p>
+    <ul>
+      <li><b>多副本机制</b>：同一份数据存 <b>≥3 副本</b>，分布在不同<b>可用区（AZ）</b>。单硬件/机柜/机房故障都不丢数据，持久性可达"11 个 9"。</li>
+      <li><b>跨地域复制（Cross-Region Replication）</b>：数据自动<b>异步复制</b>到异地 Region，抵御地震、洪水等地域级灾难，对应 L5/L6 级。</li>
+      <li><b>快照与镜像</b>：云硬盘快照、整机镜像可一键回滚或拉起新实例，缩短 RTO。</li>
+      <li><b>云备份服务</b>：把本地数据备份到云端（混合云备份），无需自建异地机房，按需付费、弹性扩展、免运维。</li>
+    </ul>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 300" width="100%" role="img" aria-label="云存储在容灾备份中的应用架构">
+        <title>云存储在容灾备份中的应用架构</title>
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+        <text x="340" y="26" text-anchor="middle" font-size="14" font-weight="500" fill="#1f2937">云存储在容灾备份中的应用架构</text>
+        <rect x="30" y="130" width="90" height="40" rx="8" fill="#CECBF6"/><text x="75" y="150" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3C3489">业务/用户</text>
+        <rect x="150" y="40" width="250" height="210" rx="20" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="275" y="62" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C">主区域 Region A</text>
+        <rect x="170" y="80" width="70" height="38" rx="6" fill="#85B7EB"/><text x="205" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#042C53">AZ1 副本</text>
+        <rect x="250" y="80" width="70" height="38" rx="6" fill="#85B7EB"/><text x="285" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#042C53">AZ2 副本</text>
+        <rect x="330" y="80" width="55" height="38" rx="6" fill="#85B7EB"/><text x="357" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#042C53">AZ3</text>
+        <text x="275" y="135" text-anchor="middle" font-size="11" fill="#185FA5">多副本(≥3) 分布不同可用区</text>
+        <rect x="180" y="155" width="190" height="34" rx="6" fill="#FAC775"/><text x="275" y="172" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#633806">快照/备份点（可回滚）</text>
+        <text x="275" y="215" text-anchor="middle" font-size="11" fill="#5F5E5A">可靠性：多副本 → 11 个 9 持久性</text>
+        <line x1="120" y1="150" x2="150" y2="150" stroke="#3C3489" stroke-width="1.5" marker-end="url(#ar2)"/>
+        <line x1="400" y1="120" x2="450" y2="120" stroke="#BA7517" stroke-width="1.5" stroke-dasharray="5" marker-end="url(#ar2)"/>
+        <text x="425" y="110" text-anchor="middle" font-size="11" fill="#BA7517">异步跨地域复制</text>
+        <rect x="450" y="40" width="190" height="210" rx="20" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+        <text x="545" y="62" text-anchor="middle" font-size="13" font-weight="500" fill="#27500A">备区域 Region B</text>
+        <rect x="470" y="80" width="150" height="38" rx="6" fill="#97C459"/><text x="545" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#173404">异地副本</text>
+        <rect x="470" y="155" width="150" height="34" rx="6" fill="#FAC775"/><text x="545" y="172" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#633806">异地备份/接管</text>
+        <text x="545" y="215" text-anchor="middle" font-size="11" fill="#5F5E5A">抵御地域级灾难</text>
+      </svg>
+      <div class="cap">主区域多副本跨 AZ + 异步跨地域复制 + 快照回滚，三者叠加即成低成本异地容灾方案。</div>
+    </div>
+  </section>
+
+  <!-- 五、考试要点 -->
+  <section class="card">
+    <h2><span class="num">★</span>考试要点小结</h2>
+    <div class="warn"><b>两个核心指标必背</b>：RTO＝恢复时间（停多久），RPO＝恢复点/数据丢失量（丢多少），二者都是<b>越小要求越高</b>。</div>
+    <ul>
+      <li><b>等级标准</b>：认得 <b>国标 GB/T 20988 的 1~6 级</b>，尤其 L5「实时传输·完整设备」、L6「零丢失·远程集群（RPO≈0）」。</li>
+      <li><b>关键技术</b>：数据复制（同步/异步）、快照、双活/多活，外加 CDP、全量/增量/差异备份、Failover。</li>
+      <li><b>云存储应用</b>：多副本（≥3，跨可用区）、跨地域复制、快照/镜像、云备份服务 → 高可靠（11 个 9）、低成本实现异地容灾。</li>
+    </ul>
+    <p style="margin-top:12px"><span class="tag">样题1</span>判断"银行双活数据中心主中心断电、备中心秒级接管" → 对应 <b>极小 RTO、RPO≈0</b>。</p>
+    <p><span class="tag">样题2</span>判断"云存储多副本+跨区复制保障可靠性" → <b>正确</b>。</p>
+  </section>
+
+  <footer>复习卡片 · 5.4 容灾备份 · 依据 2025 考纲（了解层级）整理</footer>
+</div>
+<div class="colfoot"><a class="prev" href="5-3.html"><div class="lab">上一章</div><div class="ttl">绿色节能技术</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6.html"><div class="lab">下一章</div><div class="ttl">云安全</div></a></div>
+</body>
+</html>

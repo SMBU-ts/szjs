@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.2 亚马逊云计算AWS · 详细讲解（2025考纲）</title>
+<style>
+  :root{
+    --bg:#f4f6fb;
+    --panel:#ffffff;
+    --ink:#1f2a44;
+    --ink-soft:#55607a;
+    --line:#e3e8f2;
+    --accent:#2563eb;
+    --accent-soft:#eaf1ff;
+    --cloud:#2563eb;
+    --cloud-soft:#eaf1ff;
+    --warn-bg:#fff7e6;
+    --warn-bd:#ffcf66;
+    --warn-ink:#8a5a00;
+    --key-bg:#fff1f0;
+    --key-bd:#ff9c8a;
+    --key-ink:#b42318;
+    --lv2:#0d9488;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
+  header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1d4ed8,#3b82f6 55%,#0d9488);
+    color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
+  header.top h1{margin:0;font-size:19px;font-weight:700;letter-spacing:.5px;}
+  header.top .sub{font-size:12.5px;opacity:.9;margin-top:3px;}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
+  .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}
+  .container{display:flex;align-items:flex-start;max-width:1180px;margin:0 auto;}
+  nav.toc{position:sticky;top:96px;width:230px;flex:0 0 230px;align-self:flex-start;
+    max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;
+    background:var(--panel);border-right:1px solid var(--line);margin-right:8px;border-radius:0 0 12px 0;}
+  nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:6px 0 6px;}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13.5px;
+    padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
+  nav.toc a:hover{background:var(--accent-soft);color:var(--accent);}
+  main{flex:1;min-width:0;padding:22px 26px 80px;}
+  .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);
+    border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
+  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:100px;}
+  .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .kp-head h4{margin:0;font-size:15.5px;color:var(--ink);}
+  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}
+  .lv2{background:var(--lv2);}
+  .block{margin:10px 0;}
+  .block .t{font-weight:700;font-size:13.5px;color:var(--cloud);display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+  .block .t::before{content:"";width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block;}
+  .block p{margin:4px 0;color:var(--ink-soft);}
+  .block ul{margin:4px 0;padding-left:20px;color:var(--ink-soft);}
+  .block ul li{margin:3px 0;}
+  .key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:4px solid var(--key-ink);
+    border-radius:8px;padding:9px 13px;margin:11px 0;color:var(--key-ink);font-size:13.5px;}
+  .key b{color:var(--key-ink);}
+  .warn{background:var(--warn-bg);border:1px solid var(--warn-bd);border-left:4px solid var(--warn-ink);
+    border-radius:8px;padding:9px 13px;margin:11px 0;color:var(--warn-ink);font-size:13.5px;}
+  .sample{background:#fbfcff;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:13px;color:var(--ink-soft);}
+  .sample b{color:var(--ink);}
+  table.dt{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px;}
+  table.dt th{background:var(--cloud-soft);color:var(--cloud);text-align:left;padding:8px 10px;border:1px solid var(--line);font-weight:700;}
+  table.dt td{padding:8px 10px;border:1px solid var(--line);color:var(--ink-soft);vertical-align:top;}
+  .digi{margin:14px 0;text-align:center;}
+  .digi svg{max-width:100%;height:auto;}
+  .cap{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+  @media(max-width:920px){nav.toc{display:none;} .container{display:block;} main{padding:16px;}}
+</style>
+  <link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip active" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
+<a class="chip" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+</div>
+</div></nav>
+<header class="top">
+  <h1>3.2 亚马逊云计算 AWS · 详细讲解</h1>
+  <div class="sub">2025 考纲「云计算」板块 · 典型云计算平台 · 要求层级：熟悉（lv2）</div>
+  <div class="legend"><span>📘 了解</span><span>📗 熟悉（本节点）</span><span>📕 掌握</span></div>
+</header>
+
+<div class="container">
+<nav class="toc">
+  <h2>本节导航</h2>
+  <a href="#s1">① AWS 概述</a>
+  <a href="#s2">② 基础存储架构 Dynamo</a>
+  <a href="#s3">③ 主要服务四件套</a>
+  <a href="#s4">④ Dynamo 的影响</a>
+  <a href="#key">考试重点</a>
+  <a href="#warn">易错点</a>
+  <a href="#sample">样题自测</a>
+</nav>
+
+<main>
+<div class="chapter">
+  <h3>3 典型云计算平台 · 3.2 亚马逊 AWS</h3>
+
+  <!-- ① AWS 概述 -->
+  <div class="kp" id="s1">
+    <div class="kp-head"><h4>① AWS 概述：云计算商用先驱</h4><span class="badge lv2">熟悉</span></div>
+    <div class="block"><div class="t">核心概念</div>
+      <p><b>地位</b>：亚马逊 AWS 是现代商用云计算的开创者。2006 年同时推出 <b>EC2（弹性计算云）</b> 与 <b>S3（简单存储服务）</b>，被视为现代云计算诞生的标志。</p>
+      <p><b>核心特征</b>：按需自助、泛在网络访问、资源池化、快速弹性、按使用量计量（对应 NIST 五大特征）。具备全球多区域（Region / AZ）、规模效应低成本、成熟服务生态。</p>
+    </div>
+  </div>
+
+  <!-- ② Dynamo -->
+  <div class="kp" id="s2">
+    <div class="kp-head"><h4>② 基础存储架构 Dynamo（★本节核心）</h4><span class="badge lv2">熟悉</span></div>
+    <div class="block"><div class="t">Dynamo 是什么</div>
+      <p>亚马逊为「购物车」等核心业务自研的 <b>高可用、可水平扩展的分布式键值（Key-Value）存储</b>。经典论文 <i>Dynamo: Amazon's Highly Available Key-value Store</i>（SOSP 2007）。</p>
+      <p><b>CAP 取舍</b>：在 CAP 定理中选 <b>AP（可用性 + 分区容忍）</b>，牺牲强一致性 → <b>最终一致性</b>。设计哲学：<b>宁可返回稍旧的数据，也绝不让服务下线</b>，即「永远可写 / 永远可读」。</p>
+    </div>
+
+    <div class="block"><div class="t">五大核心技术</div>
+      <table class="dt">
+        <tr><th>技术</th><th>作用</th><th>一句话考点</th></tr>
+        <tr><td><b>一致性哈希</b></td><td>按 key 分片到哈希环；用「虚拟节点」均衡负载</td><td>避免普通哈希扩容时的海量数据迁移</td></tr>
+        <tr><td><b>复制 Replication</b></td><td>每个 key 存 N 份，落到协调者顺时针后继的 N-1 个节点（默认 N=3）</td><td>无单点故障，任意节点宕机仍有副本</td></tr>
+        <tr><td><b>向量时钟</b><br>Vector Clock</td><td>用 [节点:版本号] 列表记录更新的因果关系</td><td>多副本冲突时判断先后、如何合并</td></tr>
+        <tr><td><b>Quorum</b></td><td>配置 R（读副本数）、W（写副本数），要求 R+W&gt;N</td><td>可调一致性强度；W=N 偏写可用，反之偏读一致</td></tr>
+        <tr><td><b>Hinted Handoff</b><br>提示移交</td><td>副本节点宕机时由其他节点代管，恢复后再移交</td><td>实现「永远可写」的关键兜底（sloppy quorum）</td></tr>
+      </table>
+      <p style="font-size:12.5px;color:var(--ink-soft)">补充：节点间用 <b>Gossip 协议</b>做去中心化成员管理与故障检测；用 <b>Merkle 树</b>做副本差异比对与「反熵（anti-entropy）」同步。</p>
+    </div>
+
+    <div class="digi">
+      <svg viewBox="0 0 680 460" width="100%" role="img">
+        <title>Dynamo 基础存储架构：一致性哈希环与复制</title>
+        <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        </defs>
+        <text x="40" y="34" font-size="15" font-weight="700" fill="#1f2a44">Dynamo 架构：一致性哈希环与复制</text>
+        <circle cx="215" cy="250" r="150" fill="none" stroke="#B4B2A9" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <circle cx="215" cy="250" r="110" fill="none" stroke="#D3D1C7" stroke-width="0.5"/>
+        <circle cx="215" cy="100" r="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+        <text x="215" y="100" text-anchor="middle" dominant-baseline="central" font-weight="700" fill="#042C53">A</text>
+        <circle cx="345" cy="175" r="22" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+        <text x="345" y="175" text-anchor="middle" dominant-baseline="central" font-weight="700" fill="#04342C">B</text>
+        <circle cx="345" cy="325" r="22" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+        <text x="345" y="325" text-anchor="middle" dominant-baseline="central" font-weight="700" fill="#04342C">C</text>
+        <circle cx="215" cy="400" r="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
+        <text x="215" y="400" text-anchor="middle" dominant-baseline="central" font-weight="700" fill="#2C2C2A">D</text>
+        <circle cx="85" cy="325" r="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
+        <text x="85" y="325" text-anchor="middle" dominant-baseline="central" font-weight="700" fill="#2C2C2A">E</text>
+        <circle cx="85" cy="175" r="22" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="1.2"/>
+        <text x="85" y="175" text-anchor="middle" dominant-baseline="central" font-weight="700" fill="#2C2C2A">F</text>
+        <path d="M236 108 Q300 130 340 160" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <path d="M345 200 Q345 260 345 300" fill="none" stroke="#0F6E56" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <path d="M150 60 Q165 90 178 96" fill="none" stroke="#993C1D" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <text x="60" y="58" font-size="12.5" fill="#712B13">Key K 哈希定位 → 顺时针到 A（协调者）</text>
+        <text x="360" y="250" font-size="12.5" fill="#04342C">复制链</text>
+        <rect x="372" y="262" width="74" height="22" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+        <text x="409" y="273" text-anchor="middle" dominant-baseline="central" font-size="12.5" fill="#04342C">N=3</text>
+        <text x="40" y="436" font-size="12.5" fill="#444441">A=协调者(蓝)  B,C=副本(绿)  D,E,F=其他节点(灰) — 任意节点宕机仍可写</text>
+        <line x1="430" y1="70" x2="430" y2="430" stroke="#D3D1C7" stroke-width="0.5"/>
+        <text x="450" y="92" font-size="14" font-weight="700" fill="#1f2a44">Dynamo 四大核心技术</text>
+        <text x="450" y="124" font-size="12.5" fill="#26215C">① 一致性哈希：按 key 分片，</text>
+        <text x="468" y="144" font-size="12.5" fill="#26215C">虚拟节点均衡负载</text>
+        <text x="450" y="180" font-size="12.5" fill="#04342C">② 复制 N 份：顺时针写到</text>
+        <text x="468" y="200" font-size="12.5" fill="#04342C">其后继 N-1 个节点</text>
+        <text x="450" y="236" font-size="12.5" fill="#412402">③ 向量时钟：记录版本因果</text>
+        <text x="468" y="256" font-size="12.5" fill="#412402">关系，解决写入冲突</text>
+        <text x="450" y="292" font-size="12.5" fill="#501313">④ Quorum：R+W&gt;N 可调</text>
+        <text x="468" y="312" font-size="12.5" fill="#501313">一致性强度</text>
+        <rect x="448" y="338" width="200" height="64" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+        <text x="462" y="360" font-size="12.5" fill="#712B13">设计哲学（CAP 选 AP）：</text>
+        <text x="462" y="380" font-size="12.5" fill="#712B13">宁可返回旧数据，也不可</text>
+        <text x="462" y="396" font-size="12.5" fill="#712B13">让服务下线 — 永远可写</text>
+      </svg>
+      <div class="cap">图 1：Dynamo 一致性哈希环分片 + 顺时针复制 N=3（节点宕机靠 Hinted Handoff 兜底）</div>
+    </div>
+  </div>
+
+  <!-- ③ 主要服务 -->
+  <div class="kp" id="s3">
+    <div class="kp-head"><h4>③ 主要服务（考试四件套）</h4><span class="badge lv2">熟悉</span></div>
+    <div class="block"><div class="t">四大核心服务</div>
+      <table class="dt">
+        <tr><th>服务</th><th>类别</th><th>说明</th><th>计费 / 特点</th></tr>
+        <tr><td><b>EC2</b><br>弹性计算云</td><td>计算（IaaS）</td><td>可弹性伸缩的虚拟机，按需启停</td><td>按小时计费，云=租服务器的最直观体现</td></tr>
+        <tr><td><b>S3</b><br>简单存储服务</td><td>存储</td><td>对象存储（Bucket/Object），持久性 11 个 9</td><td>无限扩展；<b>借鉴 Dynamo 高可用思想</b></td></tr>
+        <tr><td><b>RDS</b><br>关系型数据库</td><td>数据库</td><td>托管 MySQL/PostgreSQL/Oracle/SQL Server 等</td><td>自动备份、扩容、故障切换</td></tr>
+        <tr><td><b>Lambda</b><br>无服务器计算</td><td>Serverless</td><td>事件驱动，上传代码由 AWS 在触发时运行</td><td>按调用次数 + 执行时长计费，自动扩缩</td></tr>
+      </table>
+      <p style="font-size:12.5px;color:var(--ink-soft)">补充认识（常作干扰项）：<b>DynamoDB</b>（托管 NoSQL，源自 Dynamo 思想）、<b>EBS</b>（块存储）、<b>ELB</b>（负载均衡）、<b>CloudFront</b>（CDN）、<b>VPC</b>（私有网络）。</p>
+    </div>
+
+    <div class="digi">
+      <svg viewBox="0 0 680 420" width="100%" role="img">
+        <title>AWS 主要服务地图</title>
+        <defs>
+        <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        </defs>
+        <text x="40" y="34" font-size="15" font-weight="700" fill="#1f2a44">AWS 主要服务地图（考试四件套）</text>
+        <rect x="40" y="64" width="600" height="70" rx="12" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+        <text x="60" y="92" font-size="14" font-weight="700" fill="#26215C">底座：Dynamo 思想（高可用 + 最终一致）</text>
+        <text x="60" y="116" font-size="12.5" fill="#3C3489">支撑 S3 / DynamoDB 等存储服务；2006 年 EC2+S3 开启现代商用云计算</text>
+        <rect x="60" y="160" width="270" height="100" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+        <text x="80" y="188" font-size="14" font-weight="700" fill="#042C53">EC2 弹性计算云</text>
+        <text x="80" y="212" font-size="12.5" fill="#0C447C">可伸缩的虚拟机（IaaS 计算）</text>
+        <text x="80" y="232" font-size="12.5" fill="#0C447C">按需启停、按小时计费</text>
+        <rect x="350" y="160" width="270" height="100" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1"/>
+        <text x="370" y="188" font-size="14" font-weight="700" fill="#04342C">S3 简单存储服务</text>
+        <text x="370" y="212" font-size="12.5" fill="#085041">对象存储（11 个 9 持久性）</text>
+        <text x="370" y="232" font-size="12.5" fill="#085041">借鉴 Dynamo 高可用思想</text>
+        <rect x="60" y="280" width="270" height="100" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="1"/>
+        <text x="80" y="308" font-size="14" font-weight="700" fill="#412402">RDS 关系型数据库</text>
+        <text x="80" y="332" font-size="12.5" fill="#633806">托管 MySQL/PG/Oracle 等</text>
+        <text x="80" y="352" font-size="12.5" fill="#633806">自动备份、扩容、故障切换</text>
+        <rect x="350" y="280" width="270" height="100" rx="10" fill="#FAECE7" stroke="#993C1D" stroke-width="1"/>
+        <text x="370" y="308" font-size="14" font-weight="700" fill="#4A1B0C">Lambda 无服务器计算</text>
+        <text x="370" y="332" font-size="12.5" fill="#712B13">事件驱动，按调用次数计费</text>
+        <text x="370" y="352" font-size="12.5" fill="#712B13">无需管理服务器，自动扩缩</text>
+        <path d="M340 99 L340 210" fill="none" stroke="#534AB7" stroke-width="1.2" marker-end="url(#arrow2)"/>
+        <path d="M340 99 L340 330" fill="none" stroke="#534AB7" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      </svg>
+      <div class="cap">图 2：AWS 考试四件套均构建在 Dynamo 高可用底座之上</div>
+    </div>
+  </div>
+
+  <!-- ④ 影响 -->
+  <div class="kp" id="s4">
+    <div class="kp-head"><h4>④ Dynamo 的影响与平台对比</h4><span class="badge lv2">熟悉</span></div>
+    <div class="block"><div class="t">Dynamo 的辐射</div>
+      <ul>
+        <li><b>S3、DynamoDB</b> 都借鉴了 Dynamo 的高可用思想；DynamoDB 可视为 Dynamo 思想的商业化托管版。</li>
+        <li>开源界受其启发诞生 <b>Cassandra、Riak、Voldemort</b> 等。</li>
+      </ul>
+    </div>
+    <div class="block"><div class="t">平台路线对比（易连考）</div>
+      <table class="dt">
+        <tr><th>平台</th><th>核心技术 / 服务</th></tr>
+        <tr><td><b>Google</b></td><td>GFS（分布式文件系统）+ MapReduce（批处理）+ BigTable（列式 NoSQL）+ Borg（K8s 前身）</td></tr>
+        <tr><td><b>AWS</b></td><td><b>Dynamo</b>（最终一致键值存储，一致性哈希 + Quorum + 向量时钟，S3/DynamoDB 均借鉴）；哲学：宁可返回旧数据也不可下线</td></tr>
+        <tr><td><b>华为云</b></td><td>鲲鹏算力 + 昇腾 AI + ModelArts + HCS 混合云（政务/金融/制造）</td></tr>
+        <tr><td><b>百度云</b></td><td>飞桨 PaddlePaddle + AI 开放平台 + 网盘 + Apollo 自动驾驶</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 考试重点 -->
+  <div class="key" id="key">
+    <b>考试重点（熟悉）：</b>AWS Dynamo 存储架构（高可用 + 最终一致的分布式键值存储）；一致性哈希 / 复制 / 向量时钟 / Quorum 四大机制；主要服务 EC2、S3、RDS、Lambda 的定位与区别；Dynamo 思想对 S3 / DynamoDB 及开源系统（Cassandra 等）的影响。
+  </div>
+
+  <!-- 易错点 -->
+  <div class="warn" id="warn">
+    <b>易错点速记：</b>
+    <ul style="margin:6px 0 0;">
+      <li>❌ Dynamo 是关系型数据库 → ✅ 是<b>分布式键值存储 + 最终一致</b>。</li>
+      <li>❌ Dynamo 保证强一致 → ✅ 是<b>最终一致</b>，用 Quorum 调强度。</li>
+      <li>❌ S3 是块存储 → ✅ 是<b>对象存储</b>（块存储是 EBS）。</li>
+      <li>❌ Lambda 按实例包月 → ✅ 按<b>调用次数 + 执行时长</b>计费。</li>
+      <li>❌ 分片用普通哈希 → ✅ 用<b>一致性哈希</b>，避免扩容大量迁移。</li>
+    </ul>
+  </div>
+
+  <!-- 样题 -->
+  <div class="sample" id="sample">
+    <b>样题自测（熟悉层级，单选 / 简答）</b><br>
+    1. 亚马逊 AWS 的基础存储架构 Dynamo 属于哪一类存储系统？（ ）<br>
+    A. 关系型数据库　B. 分布式键值存储　C. 文档型关系库　D. 内存缓存<br>
+    <b>答案：B</b>。Dynamo 是高可用、最终一致的分布式键值存储。<br><br>
+    2. 下列关于 Dynamo 说法，正确的是？（ ）<br>
+    A. 保证强一致性　B. 采用一致性哈希分片　C. 仅支持单副本　D. 主从同步复制<br>
+    <b>答案：B</b>。Dynamo 用一致性哈希分片、N 份复制、最终一致、去中心化。<br><br>
+    3. 简述 Dynamo 的「永远可写」是如何实现的。<br>
+    <b>要点：</b>去中心化 + N 份复制（R+W&gt;N 的 Quorum）+ Hinted Handoff（副本节点宕机时由其他节点临时代管、恢复后移交）+ Gossip 故障检测，使部分节点失效时写入仍能被接受。
+  </div>
+</main>
+</div>
+<div class="colfoot"><a class="prev" href="3-1.html"><div class="lab">上一章</div><div class="ttl">Google 云计算</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="3-3.html"><div class="lab">下一章</div><div class="ttl">华为云</div></a></div>
+</body>
+</html>

@@ -18,14 +18,18 @@ chapters = [
     ("2-2", "2.2", "分布式技术",       "概念 · 在云中的应用 · 常见分布式技术 · 集群技术"),
     ("2-3", "2.3", "SDN 与 NFV",      "软件定义网络 · 网络功能虚拟化 · 应用场景 · VPC 与网络隔离"),
     ("3-1", "3.1", "Google 云计算",    "背景与场景 · 核心技术(GFS/MapReduce/BigTable等)"),
+    ("3-2", "3.2", "亚马逊 AWS",       "核心服务(EC2/S3/RDS等) · 应用场景"),
     ("3-3", "3.3", "华为云",           "核心技术与服务 · 各领域应用场景"),
+    ("3-4", "3.4", "百度云",           "核心服务 · AI 与行业应用"),
     ("3-5", "3.5", "云平台选择比较",   "各平台特点 · 针对需求选型方法"),
+    ("4-1", "4.1", "Web 文档服务",    "定义 · 核心组件 · 与 Web 服务的区别"),
     ("4-2", "4.2", "Web 服务与协议",  "核心组件 · SOAP · RESTful 原理与对比"),
     ("4-3", "4.3", "面向服务架构 SOA", "概念 · 核心组件 · 在分布式计算中的优势"),
     ("4-4", "4.4", "微服务架构",       "特性与架构 · 分布式数据管理 · 灵活扩展"),
     ("5-1", "5.1", "数据中心概念特征", "概念 · 核心组件 · 分类与分级 · 协同原理"),
     ("5-2", "5.2", "数据中心关键服务", "DCaaS · 总体架构 · 设计与构建需求"),
     ("5-3", "5.3", "绿色节能技术",     "配电/空调节能 · 典型绿色数据中心"),
+    ("5-4", "5.4", "容灾备份",         "容灾概念 · 备份策略 · RPO/RTO"),
     ("6",   "6",   "云安全",           "概念与威胁 · 分层安全(IaaS/PaaS/SaaS) · 身份访问管理"),
     ("7",   "7",   "产业应用与发展",   "产业现状 · 行业应用 · 挑战与趋势"),
 ]
@@ -36,14 +40,18 @@ SRC_FILE = {
     "2-2": "2.2分布式技术_详细讲解.html",
     "2-3": "2.3软件定义网络和网络功能虚拟化_详细讲解.html",
     "3-1": "3.1Google云计算_详解.html",
+    "3-2": "3.2亚马逊AWS_详细讲解.html",
     "3-3": "3.3华为云_详细讲解.html",
+    "3-4": "3.4百度云_复习.html",
     "3-5": "3.5典型云平台的选择与比较_详解.html",
+    "4-1": "4.1_Web文档服务_复习.html",
     "4-2": "4.2 Web服务与协议_详细讲解.html",
     "4-3": "4.3面向服务的体系结构_详细讲解.html",
     "4-4": "4.4微服务架构_详细讲解.html",
     "5-1": "5.1云计算数据中心的概念及特征_详细讲解.html",
     "5-2": "5.2数据中心提供的关键服务和技术_详细讲解.html",
     "5-3": "5.3绿色节能技术_详细讲解.html",
+    "5-4": "5.4容灾备份_复习卡片.html",
     "6":   "6_云安全_详细讲解.html",
     "7":   "7.云计算产业应用与发展_详细讲解.html",
 }
@@ -109,10 +117,10 @@ def build_chapter_pages():
         with open(src_path, "r", encoding="utf-8") as f:
             html = f.read()
         # 仅取 nav_html 里的 <nav> 段（<link> 单独注入 head）
-        nav_full = nav_html(slug, "", "../index.html", "../assets/nav.css")
+        nav_full = nav_html(slug, "", "index.html", "assets/nav.css")
         nav_bar = nav_full.split("\n", 1)[1] if nav_full.startswith("<link") else nav_full
-        bottom_bar = bottom_html(slug, "", "../index.html")
-        html = re.sub(r"</head>", '  <link rel="stylesheet" href="../assets/nav.css">\n</head>', html, count=1)
+        bottom_bar = bottom_html(slug, "", "index.html")
+        html = re.sub(r"</head>", '  <link rel="stylesheet" href="assets/nav.css">\n</head>', html, count=1)
         html = re.sub(r"<body[^>]*>", lambda m: m.group(0) + "\n" + nav_bar, html, count=1)
         html = re.sub(r"</body>", bottom_bar + "\n</body>", html, count=1)
         out_path = os.path.join(OUT, "cloud", f"{slug}.html")
@@ -121,14 +129,14 @@ def build_chapter_pages():
         print(f"[ok] cloud/{slug}.html  ({title})")
 
 def build_home():
-    nav = nav_html("home", "cloud/", "index.html", "assets/nav.css")
+    nav = nav_html("home", "", "index.html", "assets/nav.css")
     # 考纲大纲
     outline = [
         ("1", "云计算概述", [("1.1 概念及发展","1"),("1.2 服务模式","1"),("1.3 部署模式","1"),("1.4 特点及优势","1")]),
         ("2", "云计算关键技术", [("2.1 虚拟化技术","2-1"),("2.2 分布式技术","2-2"),("2.3 SDN 与 NFV","2-3")]),
-        ("3", "典型云计算平台", [("3.1 Google 云计算","3-1"),("3.2 亚马逊 AWS","__"),("3.3 华为云","3-3"),("3.5 平台选择与比较","3-5")]),
-        ("4", "面向服务的分布式计算", [("4.2 Web 服务与协议","4-2"),("4.3 面向服务架构 SOA","4-3"),("4.4 微服务架构","4-4")]),
-        ("5", "云计算数据中心", [("5.1 概念及特征","5-1"),("5.2 关键服务技术","5-2"),("5.3 绿色节能技术","5-3")]),
+        ("3", "典型云计算平台", [("3.1 Google 云计算","3-1"),("3.2 亚马逊 AWS","3-2"),("3.3 华为云","3-3"),("3.4 百度云","3-4"),("3.5 平台选择与比较","3-5")]),
+        ("4", "面向服务的分布式计算", [("4.1 Web 文档服务","4-1"),("4.2 Web 服务与协议","4-2"),("4.3 面向服务架构 SOA","4-3"),("4.4 微服务架构","4-4")]),
+        ("5", "云计算数据中心", [("5.1 概念及特征","5-1"),("5.2 关键服务技术","5-2"),("5.3 绿色节能技术","5-3"),("5.4 容灾备份","5-4")]),
         ("6", "云计算安全", [("6 云安全（6.1/6.2/6.3）","6")]),
         ("7", "云计算发展", [("7 产业应用与发展","7")]),
     ]
@@ -139,7 +147,7 @@ def build_home():
             if slug == "__":
                 lis.append(f'<li><span class="miss">\u25cb {it}（待补充）</span></li>')
             else:
-                lis.append(f'<li><a href="cloud/{slug}.html">{it}</a></li>')
+                lis.append(f'<li><a href="{slug}.html">{it}</a></li>')
         outline_html.append(
             f'<div class="oline"><div class="opart">第 {part} 部分 · {ptitle}</div><ul class="oitems">'
             + "".join(lis) + "</ul></div>"
@@ -149,7 +157,7 @@ def build_home():
     cards = []
     for slug, num, title, desc in chapters:
         cards.append(
-            f'<a class="card" href="cloud/{slug}.html"><div class="cnum">{num}</div>'
+            f'<a class="card" href="{slug}.html"><div class="cnum">{num}</div>'
             f'<div class="ctitle">{title}</div><div class="cdesc">{desc}</div></a>'
         )
     cards_html = "\n".join(cards)
@@ -203,7 +211,7 @@ footer{{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}}
   <section class="sec">
     <h2><span class="dot"></span>考纲导航（点击直达对应章节）</h2>
     {outline_html}
-    <div class="note">\u26a0 说明：考纲中的 <b>3.2 亚马逊 AWS</b> 等少数小节本次未单独生成讲解，已在上方标注「待补充」，后续可补充后加入。</div>
+    <div class="note">✅ 说明：考纲第 1–7 章全部小节均已生成独立讲解（含 3.2 亚马逊 AWS、3.4 百度云、4.1 Web 文档服务、5.4 容灾备份），共 19 篇，可顺序复习或按需跳转。</div>
   </section>
 
   <section class="sec">
@@ -218,15 +226,15 @@ footer{{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}}
 </body>
 </html>
 """
-    with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
+    with open(os.path.join(OUT, "cloud", "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
-    print("[ok] index.html (专栏首页)")
+    print("[ok] cloud/index.html (专栏首页)")
 
 def main():
-    os.makedirs(os.path.join(OUT, "assets"), exist_ok=True)
-    with open(os.path.join(OUT, "assets", "nav.css"), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.join(OUT, "cloud", "assets"), exist_ok=True)
+    with open(os.path.join(OUT, "cloud", "assets", "nav.css"), "w", encoding="utf-8") as f:
         f.write(NAV_CSS)
-    print("[ok] assets/nav.css")
+    print("[ok] cloud/assets/nav.css")
     build_chapter_pages()
     build_home()
     print("\n全部生成完成。")
