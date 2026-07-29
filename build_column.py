@@ -3,7 +3,7 @@
 云计算复习专栏构建脚本（左右分栏单页应用 + 独立分章页）
 - 读取「技术考试」目录里的分章讲解 HTML
 - 抽取每章正文（优先 <main>，回退 .wrap / <body>），避免无 .wrap 章节把自身 header/内部目录/footer 一并塞进内容区
-- 1、7、6 按 <h2> 自动拆成小板块；6 从合并文件拆出 6.1–6.4（跳过「目录」）
+- 1、7、6 均使用独立源文件，不再使用 split_by_h2 切割（避免孤立标签导致渲染空白）
 - 每章样式按作用域隔离后内嵌，章节间互不干扰；统一标题栏 + 统一基础排版
 按《2025 湖南省数字技术应用能力考试 · 云计算基础知识及应用》考纲 1-7 章组织
 """
@@ -159,8 +159,10 @@ def build_entries():
         subs = [(t, b) for (t, b) in split_by_h2(content)
                 if not any(k in t for k in skip)]
         for i, (t, b) in enumerate(subs):
+            # 去除 h2 自带的前缀编号（如 "1.1" -> ""），避免 ch-head 重复显示 "1.1 1.1xxx"
+            clean_t = re.sub(r'^\d+\.\d+\s*', '', t) or t
             E.append({
-                "slug": f"{base}-{i+1}", "num": f"{base}.{i+1}", "title": t,
+                "slug": f"{base}-{i+1}", "num": f"{base}.{i+1}", "title": clean_t,
                 "group": group, "style": style, "content": b,
                 "scope": f".ch{base}", "wrap_based": ('class="wrap"' in html),
             })
@@ -187,10 +189,15 @@ def build_entries():
     add_single("5-2", "5.2", "数据中心关键服务", "5.2数据中心提供的关键服务和技术_详细讲解.html", "五、云计算数据中心")
     add_single("5-3", "5.3", "绿色节能技术", "5.3绿色节能技术_详细讲解.html", "五、云计算数据中心")
     add_single("5-4", "5.4", "容灾备份", "5.4容灾备份_复习卡片.html", "五、云计算数据中心")
-    # 六、云计算安全（按 <h2> 从合并文件拆成 6.1–6.4，跳过「目录」）
-    add_split("6", "云计算安全", "6_云安全_详细讲解.html", "六、云计算安全", skip=["目录"])
-    # 七、云计算产业发展（拆分）
-    add_split("7", "产业应用与发展", "7.云计算产业应用与发展_详细讲解.html", "七、云计算产业发展")
+    # 六、云计算安全（独立源文件，避免 split ��割导致孤立标签）
+    add_single("6-1", "6.1", "云安全的概念及重要性", "6.1_云安全的概念及重要性_2025考纲.html", "六、云计算安全")
+    add_single("6-2", "6.2", "安全防护与策略", "6.2_常见安全防护措施及相关安全策略_2025考纲.html", "六、云计算安全")
+    add_single("6-3", "6.3", "身份授权与访问管理", "6.3_身份、授权和访问管理_2025考纲.html", "六、云计算安全")
+    add_single("6-4", "6.4", "数据加密与密钥管理", "6.4_数据加密与密钥管理_2025考纲.html", "六、云计算安全")
+    # 七、云计算产业发展（独立源文件）
+    add_single("7-1", "7.1", "中国云计算产业发展现状", "7.1_中国云计算产业发展现状_复习考纲.html", "七、云计算产业发展")
+    add_single("7-2", "7.2", "云计算的行业应用", "7.2_云计算的行业应用_复习考纲.html", "七、云计算产业发展")
+    add_single("7-3", "7.3", "云计算发展及挑战", "7.3_云计算发展及挑战_复习考纲.html", "七、云计算产业发展")
     return E
 
 ENTRIES = []
@@ -332,8 +339,9 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 .nav-item.active .nav-num{background:rgba(255,255,255,.28);color:#fff}
 .nav-item .nav-ttl{line-height:1.3}
 .content{flex:1;overflow-y:auto;background:#f1f5f9;padding:24px}
-.chapter{max-width:940px;margin:0 auto;display:none;font-size:15px;line-height:1.75;color:#1f2937}
-.chapter.active{display:block;animation:fade .25s ease}
+/* 用 main > section.chapter 仅匹配专栏自己的板块 section，避免误伤源文件里的 <div class="chapter"> */
+main > section.chapter{max-width:940px;margin:0 auto;display:none;font-size:15px;line-height:1.75;color:#1f2937}
+main > section.chapter.active{display:block;animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 /* ===== 统一标题栏（每个板块一致） ===== */
 .ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.22);margin-bottom:18px}

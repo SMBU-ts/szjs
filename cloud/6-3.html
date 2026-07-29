@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>6.3 身份、授权和访问管理（IAM） · 云计算复习专栏</title>
+<title>6.3 身份授权与访问管理 · 云计算复习专栏</title>
 <style>
 /* 独立分章页基础排版（与专栏 SPA 统一） */
 .wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
@@ -33,63 +33,36 @@
     --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
     --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
     --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
-    --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
-    --warn:#d97706;
-    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+    --warn:#d97706; --warn-bg:#fff7ed;
+    --shadow:0 1px 3px rgba(15,23,42,.06);
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}
-  header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
-  header.top h1{margin:0;font-size:19px;font-weight:700;}
-  header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}
-  header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
-  header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}
-  .search-wrap{position:absolute;right:24px;top:14px;}
-  .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
-  .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
-  nav.toc{position:sticky;top:96px;width:280px;flex:0 0 280px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
-  nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
-  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
-  nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}
-  nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}
-  nav.toc a.sub{padding-left:22px;font-size:12.5px;}
-  main{flex:1;min-width:0;padding:22px 26px 80px;}
-  .section{margin-bottom:40px;scroll-margin-top:100px;}
-  .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}
-  .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
-  .section-head h2{margin:0;font-size:20px;}
-  .chapter{margin-top:22px;scroll-margin-top:160px;}
-  .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
-  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}
-  .kp.hide{display:none;}
-  .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
-  .kp-head h4{margin:0;font-size:15.5px;}
-  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}
-  .lv1{background:var(--lv1);} .lv2{background:var(--lv2);} .lv3{background:var(--lv3);}
-  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}
-  .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}
-  .core .lab::before{content:"★ 核心知识点：";}
-  .core b{color:var(--ink);}
-  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}
-  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}
-  .ex .lab::before{content:"💡 示例：";}
-  .ex ul{margin:5px 0;padding-left:20px;}
-  .ex li{margin:3px 0;}
-  .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}
-  .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}
-  .warn .lab{font-weight:700;}
-  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
-  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
-  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}
-  table.tbl tr:nth-child(even) td{background:#fafcff;}
-  .fig{margin:14px 0;text-align:center;}
-  .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}
-  .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
-  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}
-  #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}
-  .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}
-  @media(max-width:920px){nav.toc{display:none;} .container{display:block;} main{padding:16px;} .search-wrap{position:static;margin-top:10px;} .search-wrap input{width:100%;}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 22px 70px}
+  .hero{background:linear-gradient(135deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;border-radius:14px;padding:24px 28px;box-shadow:0 8px 24px rgba(37,99,235,.22);margin-bottom:20px}
+  .hero h1{margin:0;font-size:22px}
+  .hero p{margin:6px 0 0;opacity:.88;font-size:13.5px}
+  section{margin-top:18px}
+  h2{font-size:19px;margin:0 0 12px;padding:10px 14px;border-left:5px solid var(--cloud);background:var(--panel);border-radius:0 10px 10px 0;border:1px solid var(--line)}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--ink-soft)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--ink-soft)}
+  li{margin:5px 0}
+  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;font-size:14px;border-left:4px solid var(--cloud)}
+  .core .lab{font-weight:700;color:var(--cloud);font-size:13px;display:block;margin-bottom:4px}
+  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;font-size:14px;color:var(--ex-ink)}
+  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px}
+  .warn{background:var(--warn-bg);border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;font-size:14px;color:#9a3412}
+  .warn .lab{font-weight:700}
+  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700}
+  table.tbl tr:nth-child(even) td{background:#fafcff}
+  .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;font-weight:700}
+  .badge.must{background:#fee2e2;color:#dc2626}
+  .badge.know{background:#e0f2fe;color:#0ea5e9}
+  .code{font-family:"Cascadia Code","Source Code Pro",Consolas,monospace;background:#1e293b;color:#e2e8f0;padding:2px 8px;border-radius:5px;font-size:13px}
 
 </style>
 <link rel="stylesheet" href="assets/nav.css">
@@ -98,10 +71,10 @@
 <nav class="colnav"><div class="inner">
 <a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
 <div class="chips">
-<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
-<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
-<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
-<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 云计算的特点及优势</a>
 <a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
 <a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
 <a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
@@ -119,114 +92,111 @@
 <a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
 <a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
 <a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全的概念及重要性</a>
-<a class="chip" href="6-2.html"><span class="num">6.2</span> 常见安全防护措施及相关安全策略</a>
-<a class="chip active" href="6-3.html"><span class="num">6.3</span> 身份、授权和访问管理（IAM）</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip active" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
 <a class="chip" href="6-4.html"><span class="num">6.4</span> 数据加密与密钥管理</a>
-<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
-<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
-<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 云计算发展及挑战</a>
 </div>
 </div></nav>
-<main>
-<div class="ch-head"><span class="ch-num">6.3</span><span class="ch-ttl">身份、授权和访问管理（IAM）</span></div>
-<h2>身份、授权和访问管理（IAM）</h2></div>
+<div class="wrap">
+<div class="ch-head"><span class="ch-num">6.3</span><span class="ch-ttl">身份授权与访问管理</span></div>
 
-  <div class="chapter" id="c63a"><h3>一、基本概念：认证 · 授权 · MFA</h3>
-    <div class="kp" id="d610">
-      <div class="kp-head"><h4>6.3.1 身份认证 / 权限管理 / MFA</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>认证（Authentication）回答"你是谁"；授权（Authorization）回答"你能干什么"；MFA（多因素认证）用两种以上因素证明身份，防止单点凭证泄露</b>。</div>
-      <table class="tbl">
-        <tr><th>概念</th><th>本质问题</th><th>常见手段</th></tr>
-        <tr><td>身份认证<br>(Authentication)</td><td>你是谁？</td><td>密码、数字证书、生物特征、硬件 Token、单点登录</td></tr>
-        <tr><td>权限管理 / 授权<br>(Authorization)</td><td>你能做什么？</td><td>RBAC（基于角色）、ABAC（基于属性）、最小权限、默认拒绝</td></tr>
-        <tr><td>MFA 多因素认证</td><td>再加一道保险</td><td>知识(密码) + 持有(手机/令牌) + 固有(指纹/人脸)</td></tr>
-      </table>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>认证三要素（MFA 的"因素"）：</b>① 你知道的（密码/PIN）；② 你拥有的（手机/硬件 Key/U 盾）；③ 你本身的（指纹/人脸/声纹）。满足两类即"多因素"。</li>
-        <li><b>最小权限原则：</b>只给完成工作所必需的最小权限，默认拒绝一切未明确放开的访问。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>MFA 示例：</b>登录时输密码（知识）+ 手机验证码/Authenticator 动态码（持有），即使密码泄露也登不进。</li>
-          <li><b>RBAC 示例：</b>"只读分析师"角色只能查数据不能删，新员工按角色批量授权，离职一键回收。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
-  <div class="chapter" id="c63b"><h3>二、IAM 在云计算环境中的重要性</h3>
-    <div class="kp" id="d611">
-      <div class="kp-head"><h4>6.3.2 为什么云上 IAM 是"第一道防线"</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云时代"身份即边界"：传统防火墙守不住分散访问，凭证泄露又是头号云威胁，因此管好"谁能访问什么"比以往任何时候都关键</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li>云资源由 API/控制台远程访问，没有固定内网边界 → 身份成为唯一可靠的访问控制点。</li>
-        <li>大量攻击（账户劫持、AK 泄露）都从"冒用合法身份"入手，IAM 是阻断此类攻击的核心。</li>
-        <li>集中式 IAM 带来统一认证、统一授权、统一审计，满足合规对"账号可追溯"的要求。</li>
-      </ul>
-    </div>
-  </div>
+<header class="hero">
+  <h1>6.3 身份、授权和访问管理（IAM）</h1>
+  <p>第6章 云计算安全 · 身份认证 | 权限管理 | MFA | 云中 IAM 的重要性与实现方式</p>
+</header>
 
-  <div class="chapter" id="c63c"><h3>三、IAM 的实现方式</h3>
-    <div class="kp" id="d612">
-      <div class="kp-head"><h4>6.3.3 云中 IAM 的落地手段</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>主流实现：目录服务(AD/Entra ID) + SSO(单点登录) + 联合身份(Federation) + 角色/策略(临时凭证 STS) + 特权访问管理(PAM) + 零信任持续验证</b>。</div>
-      <div class="fig">
-        <svg viewBox="0 0 680 300" role="img" aria-label="SSO与MFA认证流程">
-          <defs>
-            <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L8,3 L0,6 Z" fill="#475569"></path>
-            </marker>
-          </defs>
-          <rect x="20" y="110" width="120" height="70" rx="10" fill="#eaf1ff" stroke="#2563eb"></rect>
-          <text x="80" y="138" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">用户</text>
-          <text x="80" y="158" font-size="11" text-anchor="middle" fill="#475569">浏览器/App</text>
+<!-- 一、基本概念 -->
+<section>
+<h2>一、身份认证、权限管理和 MFA 的基本概念 <span class="badge must">掌握</span></h2>
 
-          <rect x="190" y="110" width="140" height="70" rx="10" fill="#eaf1ff" stroke="#2563eb"></rect>
-          <text x="260" y="135" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">身份提供商 IdP</text>
-          <text x="260" y="155" font-size="11" text-anchor="middle" fill="#475569">SSO / 目录(AD)</text>
+<h3>1.1 身份认证（Authentication, AuthN）</h3>
+<div class="core"><span class="lab"></span>认证回答：<b>"你是谁？"</b>——验证用户或服务的身份是否真实。</div>
+<p>三类认证因素（"你知道什么、你有什么、你是什么"）：</p>
+<table class="tbl">
+  <tr><th>因素类型</th><th>说明</th><th>示例</th></tr>
+  <tr><td><b>知识因素</b>（Something you know）</td><td>只有用户知道的信息</td><td>密码、PIN 码、安全问题答案</td></tr>
+  <tr><td><b>持有因素</b>（Something you have）</td><td>用户持有的物理设备或数字凭证</td><td>手机（短信验证码）、硬件 Token、智能卡、数字证书</td></tr>
+  <tr><td><b>固有因素</b>（Something you are）</td><td>用户生物特征</td><td>指纹、人脸、虹膜、声纹</td></tr>
+</table>
 
-          <rect x="400" y="40" width="150" height="60" rx="10" fill="#fff7ed" stroke="#d97706"></rect>
-          <text x="475" y="66" font-size="12.5" font-weight="700" text-anchor="middle" fill="#9a3412">MFA 校验</text>
-          <text x="475" y="86" font-size="11" text-anchor="middle" fill="#9a3412">手机/令牌/生物</text>
+<h3>1.2 授权（Authorization, AuthZ）</h3>
+<div class="core"><span class="lab"></span>授权回答：<b>"你能做什么？"</b>——决定已验证的用户或服务可以访问哪些资源、执行哪些操作。</div>
+<p>四大授权模型：</p>
+<table class="tbl">
+  <tr><th>模型</th><th>原理</th><th>适用场景</th></tr>
+  <tr><td><b>DAC</b>（自主访问控制）</td><td>资源所有者自行决定谁可以访问</td><td>个人文件共享</td></tr>
+  <tr><td><b>MAC</b>（强制访问控制）</td><td>系统根据安全标签强制控制，用户无法绕过</td><td>军事/机密系统</td></tr>
+  <tr><td><b>RBAC</b>（基于角色的访问控制）</td><td>权限绑定到角色，用户通过角色获得权限</td><td>企业应用、云 IAM 的默认模型</td></tr>
+  <tr><td><b>ABAC</b>（基于属性的访问控制）</td><td>根据用户属性、资源属性、环境条件动态判定权限</td><td>零信任架构、精细化云策略</td></tr>
+</table>
 
-          <rect x="400" y="170" width="150" height="60" rx="10" fill="#eefaf2" stroke="#22a06b"></rect>
-          <text x="475" y="196" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0f6b3c">签发令牌</text>
-          <text x="475" y="216" font-size="11" text-anchor="middle" fill="#0f6b3c">STS 临时凭证</text>
+<div class="core"><span class="lab"></span>最小权限原则（Least Privilege）：用户或服务仅被授予完成任务所需的<b>最小权限集合</b>。这是信息安全中最基础也是最容易被忽略的原则。</div>
 
-          <rect x="600" y="110" width="70" height="70" rx="10" fill="#f3e8ff" stroke="#7c3aed"></rect>
-          <text x="635" y="138" font-size="12" font-weight="700" text-anchor="middle" fill="#6d28d9">云资源</text>
-          <text x="635" y="158" font-size="10.5" text-anchor="middle" fill="#6d28d9">按策略鉴权</text>
+<h3>1.3 MFA（多因素认证 Multi-Factor Authentication）</h3>
+<div class="core"><span class="lab"></span>MFA 要求用户提供<b>两种及以上不同类别的认证因素</b>才能通过认证。即使密码泄露，攻击者仍无法通过 MFA。</div>
+<ul>
+  <li><b>弱 MFA</b>：密码 + 短信验证码（虽然两个因素，但短信可被 SIM Swap 攻击劫持）。</li>
+  <li><b>强 MFA</b>：密码 + TOTP（基于时间的一次性密码，如 Google Authenticator）+ 硬件安全密钥（如 FIDO2 / U2F 标准）。</li>
+</ul>
 
-          <line x1="140" y1="145" x2="185" y2="145" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="260" y1="125" x2="395" y2="78" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="260" y1="155" x2="395" y2="195" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="550" y1="100" x2="585" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="550" y1="200" x2="585" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <text x="300" y="100" font-size="10.5" fill="#475569">① 发起登录</text>
-          <text x="300" y="215" font-size="10.5" fill="#475569">② 通过则签发</text>
-        </svg>
-        <div class="cap">图 6-2 典型云身份流程：SSO 统一认证 + MFA 加强 + 临时凭证(STS)访问云资源</div>
-      </div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>SSO（单点登录）：</b>一次登录通行多个系统，常用 SAML、OIDC 协议，减少密码散落。</li>
-        <li><b>联合身份（Federation）：</b>用企业自有 IdP（如 AD）信任云厂商，员工用公司账号登云，离职即失效。</li>
-        <li><b>角色与 STS 临时凭证：</b>程序/人临时代入角色拿到短期有效的临时密钥，避免长期 AK 泄露风险。</li>
-        <li><b>PAM（特权访问管理）：</b>对管理员等高权限账号做审批、录像、时限控制。</li>
-        <li><b>零信任：</b>"从不信任、持续验证"，每次访问都重新评估身份、设备、环境风险。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>最佳实践示例：</b>用企业微信/AD 做 SSO 登录云控制台，强制 MFA，给运维开"仅工作时间、仅特定网段、需审批"的临时角色，全程留痕。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="ex"><span class="lab"></span>Google 在 2017 年强制要求所有员工使用硬件安全密钥后，员工账号被钓鱼攻击的成功率下降至<b>零</b>。这证明了强 MFA 的有效性。</div>
 </section>
 
-<!-- ================= 6.4 ================= -->
-<section class="section" id="c64">
-  <div class="section-head"><div class="num">6.4</div>
-</main>
-<div class="colfoot"><a class="prev" href="6-2.html"><div class="lab">上一篇</div><div class="ttl">6.2 常见安全防护措施及相关安全策略</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-4.html"><div class="lab">下一篇</div><div class="ttl">6.4 数据加密与密钥管理</div></a></div>
+<!-- 二、IAM 在云中的重要性与实现方式 -->
+<section>
+<h2>二、身份访问管理在云计算环境中的重要性和实现方式 <span class="badge must">掌握</span></h2>
+
+<h3>2.1 云计算中 IAM 的核心重要性</h3>
+<ul>
+  <li><b>"身份即边界"（Identity is the New Perimeter）</b>：传统网络有物理防火墙作为边界；云环境中资源分布在多个可用区/地域，不存在固定的网络边界。身份认证和授权成为<b>第一道也是最重要的一道防线</b>。</li>
+  <li><b>API 驱动</b>：云上的一切操作（创建实例、修改配置、读取数据）都通过 API 执行。API 密钥（AK/SK）的泄露等同于云账户的完全失控。</li>
+  <li><b>多租户环境</b>：同一云平台上的不同用户通过 IAM 进行身份与资源隔离。IAM 配置错误（如过度授权）是数据泄露的头号原因。</li>
+  <li><b>合规要求</b>：等保 2.0 的"安全计算环境"和"安全区域边界"中明确要求对用户身份进行标识与鉴别，对访问进行控制。</li>
+  <li><b>责任共担</b>：CSP 提供 IAM 工具，但<b>用户负责正确配置 IAM 策略</b>。CSP 不会替你审查权限是否过度。</li>
+</ul>
+
+<h3>2.2 云 IAM 的核心组件</h3>
+<table class="tbl">
+  <tr><th>组件</th><th>功能</th><th>云厂商示例</th></tr>
+  <tr><td><b>用户（User）</b></td><td>长期凭证（用户名+密码 / AK/SK）</td><td>AWS IAM User / 阿里云 RAM 用户</td></tr>
+  <tr><td><b>角色（Role）</b></td><td>临时凭证，用于跨服务授权或联合身份</td><td>AWS IAM Role / 阿里云 RAM 角色</td></tr>
+  <tr><td><b>策略（Policy）</b></td><td>JSON 格式的权限声明：允许/拒绝什么操作、针对什么资源、在什么条件</td><td><span class="code">"Effect":"Allow","Action":"s3:GetObject"</span></td></tr>
+  <tr><td><b>组（Group）</b></td><td>将用户分组并统一授权，配合 RBAC 使用</td><td>AWS IAM Group / 腾讯云 CAM 用户组</td></tr>
+  <tr><td><b>联合身份</b></td><td>使用企业 IdP（如 AD / LDAP / Okta）通过 SAML 或 OIDC 登录云平台</td><td>AWS SSO / 阿里云 SSO</td></tr>
+</table>
+
+<h3>2.3 云 IAM 的最佳实践</h3>
+<ol>
+  <li><b>绝不使用根账号</b>（Root Account）做日常操作。创建单独的管理员用户，根账号仅用于需要根权限的极少数操作（如更改账户设置）。为根账号强制启用 MFA。</li>
+  <li><b>使用角色而非长期 AK/SK</b>：跨服务调用（如 EC2 读 S3）应使用 IAM Role 获取临时凭证，而不是在代码中硬编码 AK/SK。</li>
+  <li><b>最小权限 + 定期审查</b>：使用 IAM Access Analyzer 或类似工具定期审查权限，删除未使用的角色和过度宽泛的策略（如 <span class="code">Resource:"*"</span>）。</li>
+  <li><b>策略条件</b>：利用条件键（Condition）细化权限。例如：只允许从公司 IP 地址段登录（IP 白名单）、只允许通过 MFA 认证后执行敏感操作。</li>
+  <li><b>联合身份 + SSO</b>：与企业身份源（AD / Okta / Azure AD）集成，实现员工入职自动开通权限、离职一键回收。</li>
+  <li><b>审计与告警</b>：开启 API 日志，设置异常告警（如从未使用过的 Region 发起操作、失败登录次数超过阈值）。</li>
+</ol>
+
+<h3>2.4 常见云 IAM 实现方案对比</h3>
+<table class="tbl">
+  <tr><th>云厂商</th><th>IAM 服务名</th><th>核心特色</th></tr>
+  <tr><td><b>AWS</b></td><td>IAM + IAM Identity Center</td><td>策略颗粒度最细（到 API 级别）；Access Analyzer；支持 ABAC（基于标签的访问控制）</td></tr>
+  <tr><td><b>阿里云</b></td><td>RAM（资源访问管理）</td><td>与阿里云 SSO 和 AD 集成；支持 RBAC 角色；操作审计 ActionTrail</td></tr>
+  <tr><td><b>华为云</b></td><td>IAM（统一身份认证）</td><td>企业项目（EPS）粒度管理；支持 SAML / OIDC 联合身份；多因素认证 MFA</td></tr>
+  <tr><td><b>腾讯云</b></td><td>CAM（访问管理）</td><td>策略语法与 AWS 类似；角色、用户组、策略三件套；支持企业微信/SAML/OIDC 联合</td></tr>
+</table>
+
+<div class="warn"><span class="lab">⚠ 常见错误：</span>在代码或配置文件中硬编码云 API 密钥（AK/SK），导致密钥被泄露到 GitHub 等代码仓库。正确做法：<b>在 IaaS 上使用实例角色、在开发环境中使用临时令牌（STS Token）。</b></div>
+
+<h3>2.5 身份管理闭环</h3>
+<p>一个完整的云 IAM 生命周期：<b>身份源同步</b> → <b>权限建模</b>（RBAC + ABAC）→ <b>访问请求</b> → <b>审批</b> → <b>分配/回收</b> → <b>周期性审计</b>（"谁，在什么时候，访问了什么，做了什么"）。整个过程必须<b>可审计、可追溯、可自动化</b>。</p>
+
+</section>
+
+
+</div>
+<div class="colfoot"><a class="prev" href="6-2.html"><div class="lab">上一篇</div><div class="ttl">6.2 安全防护与策略</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-4.html"><div class="lab">下一篇</div><div class="ttl">6.4 数据加密与密钥管理</div></a></div>
 </body>
 </html>

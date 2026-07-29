@@ -33,63 +33,56 @@
     --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
     --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
     --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
+    --warn:#d97706; --warn-bg:#fff7ed;
     --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
-    --warn:#d97706;
-    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+    --shadow:0 1px 3px rgba(15,23,42,.06);
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}
-  header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
-  header.top h1{margin:0;font-size:19px;font-weight:700;}
-  header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}
-  header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
-  header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}
-  .search-wrap{position:absolute;right:24px;top:14px;}
-  .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
-  .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
-  nav.toc{position:sticky;top:96px;width:280px;flex:0 0 280px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
-  nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
-  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
-  nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}
-  nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}
-  nav.toc a.sub{padding-left:22px;font-size:12.5px;}
-  main{flex:1;min-width:0;padding:22px 26px 80px;}
-  .section{margin-bottom:40px;scroll-margin-top:100px;}
-  .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}
-  .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
-  .section-head h2{margin:0;font-size:20px;}
-  .chapter{margin-top:22px;scroll-margin-top:160px;}
-  .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
-  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}
-  .kp.hide{display:none;}
-  .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
-  .kp-head h4{margin:0;font-size:15.5px;}
-  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}
-  .lv1{background:var(--lv1);} .lv2{background:var(--lv2);} .lv3{background:var(--lv3);}
-  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}
-  .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}
-  .core .lab::before{content:"★ 核心知识点：";}
-  .core b{color:var(--ink);}
-  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}
-  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}
-  .ex .lab::before{content:"💡 示例：";}
-  .ex ul{margin:5px 0;padding-left:20px;}
-  .ex li{margin:3px 0;}
-  .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}
-  .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}
-  .warn .lab{font-weight:700;}
-  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
-  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
-  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}
-  table.tbl tr:nth-child(even) td{background:#fafcff;}
-  .fig{margin:14px 0;text-align:center;}
-  .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}
-  .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
-  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}
-  #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}
-  .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}
-  @media(max-width:920px){nav.toc{display:none;} .container{display:block;} main{padding:16px;} .search-wrap{position:static;margin-top:10px;} .search-wrap input{width:100%;}}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 22px 70px}
+
+  /* 标题栏 */
+  .hero{background:linear-gradient(135deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;border-radius:14px;padding:24px 28px;box-shadow:0 8px 24px rgba(37,99,235,.22);margin-bottom:20px}
+  .hero h1{margin:0;font-size:22px}
+  .hero p{margin:6px 0 0;opacity:.88;font-size:13.5px}
+
+  /* 各知识块 */
+  section{margin-top:18px}
+  h2{font-size:19px;margin:0 0 12px;padding:10px 14px;border-left:5px solid var(--cloud);background:var(--panel);border-radius:0 10px 10px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--ink-soft)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--ink-soft)}
+  li{margin:5px 0}
+
+  /* 核心知识点 */
+  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;font-size:14px;border-left:4px solid var(--cloud)}
+  .core .lab{font-weight:700;color:var(--cloud);font-size:13px;display:block;margin-bottom:4px}
+
+  /* 示例 */
+  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;font-size:14px;color:var(--ex-ink)}
+  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px}
+
+  /* 警示 */
+  .warn{background:var(--warn-bg);border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;font-size:14px;color:#9a3412}
+  .warn .lab{font-weight:700}
+
+  /* 表格 */
+  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700}
+  table.tbl tr:nth-child(even) td{background:#fafcff}
+
+  /* 知识点小卡片 */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0}
+  .mini{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow)}
+  .mini h4{margin:0 0 6px;font-size:14.5px;color:var(--cloud-deep)}
+  .mini p{margin:0;font-size:13.5px}
+
+  .badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;font-weight:700}
+  .badge.must{background:#fee2e2;color:#dc2626}
+  .badge.know{background:#e0f2fe;color:#0ea5e9}
+  .badge.learn{background:#fef3c7;color:#d97706}
 
 </style>
 <link rel="stylesheet" href="assets/nav.css">
@@ -98,10 +91,10 @@
 <nav class="colnav"><div class="inner">
 <a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
 <div class="chips">
-<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
-<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
-<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
-<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 云计算的特点及优势</a>
 <a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
 <a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
 <a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
@@ -119,95 +112,119 @@
 <a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
 <a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
 <a class="chip active" href="6-1.html"><span class="num">6.1</span> 云安全的概念及重要性</a>
-<a class="chip" href="6-2.html"><span class="num">6.2</span> 常见安全防护措施及相关安全策略</a>
-<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份、授权和访问管理（IAM）</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
 <a class="chip" href="6-4.html"><span class="num">6.4</span> 数据加密与密钥管理</a>
-<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
-<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
-<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 云计算发展及挑战</a>
 </div>
 </div></nav>
-<main>
+<div class="wrap">
 <div class="ch-head"><span class="ch-num">6.1</span><span class="ch-ttl">云安全的概念及重要性</span></div>
-<h2>云安全的概念及重要性</h2></div>
 
-  <div class="chapter" id="c61a"><h3>一、云安全的定义与常见威胁</h3>
 
-    <div class="kp" id="d61">
-      <div class="kp-head"><h4>6.1.1 云安全的定义</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云安全 = 保护云计算环境（数据、应用、平台、基础设施、账号）的机密性、完整性、可用性（CIA三性），并融合云计算特有风险（多租户、虚拟化、责任共担）而形成的安全体系</b>。</div>
-      <p class="note">云安全不是某一款产品，而是一套"技术 + 策略 + 运维"的组合：既包括传统信息安全（网络安全、主机安全、数据安全），又叠加了云特有的责任共担、多租户隔离、弹性资源等新问题。</p>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>传统安全 vs 云安全：</b>传统安全以"边界防火墙"为核心；云安全因为资源弹性伸缩、边界模糊，更强调"身份即边界"和"零信任"。</li>
-          <li><b>范围示例：</b>云安全既管"别人能不能偷看你的数据库"（机密性），也管"数据被改了没"（完整性），还管"服务卡顿打不开"（可用性）。</li>
-        </ul>
-      </div>
-    </div>
+<header class="hero">
+  <h1>6.1 云安全的概念及重要性</h1>
+  <p>第6章 云计算安全 · 考��：云安全的定义与常见威胁、安全问题的复杂性与多样性、云安全对云计算的重要性</p>
+</header>
 
-    <div class="kp" id="d62">
-      <div class="kp-head"><h4>6.1.2 常见云安全威胁（CSA 云安全威胁清单）</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>最高频的云威胁：配置错误（Misconfiguration）、身份凭证泄露/弱认证、不安全的接口与 API、账户劫持、内部威胁、共享技术漏洞、数据泄露与丢失</b>。</div>
-      <table class="tbl">
-        <tr><th>威胁</th><th>说明</th><th>典型场景</th></tr>
-        <tr><td><b>配置错误</b></td><td>存储桶/安全组/端口被错误开放为公网（云上"头号"事故源）</td><td>对象存储设为公开可读，导致用户数据被全网爬取</td></tr>
-        <tr><td><b>身份凭证泄露 / 弱认证</b></td><td>密钥、密码、AK/SK 泄露，无 MFA 保护</td><td>开发者把 AccessKey 提交到 GitHub，被恶意扫描利用挖矿</td></tr>
-        <tr><td><b>不安全的接口/API</b></td><td>API 未鉴权、未限流、存在越权漏洞</td><td>越权接口可遍历他人订单 ID 获取隐私</td></tr>
-        <tr><td><b>账户劫持</b></td><td>钓鱼/撞库夺取管理员账号</td><td>钓鱼邮件骗取控制台登录，删库勒索</td></tr>
-        <tr><td><b>内部威胁（恶意/失误）</b></td><td>内部人员越权访问或误操作</td><td>离职员工带走数据，或误删生产库</td></tr>
-        <tr><td><b>共享技术漏洞</b></td><td>虚拟化/容器隔离被突破，跨租户越权</td><td>同宿主机的邻居通过侧信道或漏洞读到你的内存</td></tr>
-        <tr><td><b>数据泄露 / 数据丢失</b></td><td>被窃取或误删、未备份</td><td>勒索软件加密数据；误删且无备份</td></tr>
-        <tr><td><b>拒绝服务（DoS/DDoS）</b></td><td>流量打满导致服务不可用</td><td>大规模请求冲垮 Web 入口</td></tr>
-        <tr><td><b>滥用云服务</b></td><td>用云资源做攻击跳板（挖矿、钓鱼）</td><td>攻击者用盗用的账号发起对外攻击</td></tr>
-      </table>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>配置错误示例：</b>某公司将云数据库 3306 端口对 0.0.0.0/0 开放且无密码，被勒索组织拖库——这是"客户侧责任"，CSP 不背锅。</li>
-          <li><b>凭证泄露示例：</b>把长期有效的 Secret Key 写进前端代码，等于把家门钥匙挂在门口。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<!-- 一、云安全的定义与常见威胁 -->
+<section>
+<h2>一、云安全的定义与常见威胁</h2>
 
-  <div class="chapter" id="c61b"><h3>二、云计算环境中安全问题的复杂性与多样性</h3>
-    <div class="kp" id="d63">
-      <div class="kp-head"><h4>6.1.3 复杂性与多样性的来源</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云安全"更复杂"的根本原因：边界消失、多租户共享、责任共担、资源弹性、合规跨境、攻击面叠加（虚拟化+容器+API+供应链）</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>边界模糊：</b>传统"内网可信"假设失效，访问来自任意终端/任意地点 → 必须"零信任"（默认不信任、持续验证）。</li>
-        <li><b>多租户隔离：</b>同一物理机跑多家客户的数据，隔离一旦失效就会"串门"，对底层虚拟化/容器安全提出极高要求。</li>
-        <li><b>责任共担：</b>安全职责在 CSP 与客户之间分割，双方都以为对方负责 → 出现"责任真空"。</li>
-        <li><b>弹性与动态：</b>资源随时创建/销毁，资产盘点、日志审计、配置基线难以稳定，影子 IT（未纳管资源）丛生。</li>
-        <li><b>合规与数据主权：</b>数据可能落在境外机房，要同时满足等保、GDPR、《数据安全法》《个人信息保护法》等多套法规。</li>
-        <li><b>攻击面叠加：</b>IaaS 的虚拟化、PaaS 的运行时、SaaS 的接口、加上第三方依赖/供应链，攻击面比传统 IT 更广。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>多样性示例：</b>同样叫"上云"，用 IaaS 自己装系统（客户责任大）和用 SaaS（几乎全交给厂商）面临的安全工作天差地别——这就是"多样性"。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<h3>1.1 云安全的定义 <span class="badge must">掌握</span></h3>
+<div class="core">
+  <span class="lab"></span>
+  云安全（Cloud Security）是一套<b>保护云计算环境（数据、应用、平台、基础设施及用户身份）的机密性（Confidentiality）、完整性（Integrity）、可用性（Availability）</b>的策略、技术和控制措施的集合。它不是某一款产品，而是<b>技术 + 策略 + 运维</b>的组合体系。
+</div>
+<p>与传统信息安全相比，云安全的核心区别在于：</p>
+<ul>
+  <li><b>边界模糊化</b>：传统安全以"防火墙 + 内网"为边界模型；云环境中资源弹性伸缩、多租户共存，物理边界消失，因此强调<b>"身份即边界"</b>和<b>"零信任"</b>理念。</li>
+  <li><b>责任共担</b>：安全责任由云服务提供商（CSP）与用户<b>共同承担</b>——CSP负责"云的安全"（物理基础设施、虚拟化层），用户负责"云中的安全"（数据、配置、身份、应用）。</li>
+  <li><b>多租户隔离</b>：多个用户的业务运行在同一套物理资源上，逻辑隔离是云安全的基石之一。</li>
+  <li><b>自动化与DevSecOps</b>：云安全需嵌入CI/CD流水线，通过"安全左移"实现自动化检测与修复。</li>
+</ul>
 
-  <div class="chapter" id="c61c"><h3>三、云安全对于云计算的重要性</h3>
-    <div class="kp" id="d64">
-      <div class="kp-head"><h4>6.1.4 为什么云安全是云计算的"生命线"</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>没有安全就没有信任，没有信任就没有上云——云安全决定了云计算能否被采用、能否合规、能否持续运营</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>数据是核心资产：</b>云上集中存放大量敏感数据，一旦泄露代价极高（声誉、罚款、诉讼）。</li>
-        <li><b>业务连续性依赖可用性：</b>云是业务关键底座，DDoS/勒索导致中断即直接损失营收。</li>
-        <li><b>合规硬约束：</b>金融、政务、医疗等行业上云必须满足等保/行业监管，否则不能上线。</li>
-        <li><b>信任基础：</b>企业是否敢把核心系统搬到云，取决于对 CSP 安全能力的信任。</li>
-      </ul>
-      <div class="warn"><span class="lab">⚠ 考试易错点：</span>云安全不是"买了云就自动安全"。CSP 负责"云本身安全"（基础设施），客户负责"云中安全"（配置、数据、身份）——安全是双方共同责任。</div>
-    </div>
-  </div>
+<h3>1.2 常见云安全威胁 <span class="badge must">掌握</span></h3>
+<p>根据 CSA（Cloud Security Alliance，云安全联盟）发布的云安全威胁清单，最高频的云安全威胁包括以下几类：</p>
+
+<table class="tbl">
+  <tr><th>威胁类别</th><th>说明</th><th>典型场景</th></tr>
+  <tr><td><b>配置错误</b></td><td>存储桶公开访问、安全组规则过于宽松、默认密码未修改</td><td>AWS S3 桶误设为 Public、数据库端口暴露公网</td></tr>
+  <tr><td><b>身份凭证泄露</b></td><td>AK/SK 泄露、弱密码、未启用 MFA、令牌管理不当</td><td>代码仓库中硬编码云 API 密钥被爬取</td></tr>
+  <tr><td><b>不安全的接口/API</b></td><td>API 未鉴权、无速率限制、敏感数据通过 URL 明文传输</td><td>云管理 API 暴露公网且无认证</td></tr>
+  <tr><td><b>账户劫持</b></td><td>钓鱼攻击获取云控制台登录凭证、凭据填充攻击</td><td>管理员邮箱被钓鱼，攻击者登录控制台创建挖矿实例</td></tr>
+  <tr><td><b>内部威胁</b></td><td>员工恶意操作、权限过大、离职后账号未回收</td><td>运维人员利用合法权限批量下载用户数据库</td></tr>
+  <tr><td><b>数据泄露</b></td><td>数据库快照未加密、日志中打印敏感信息、备份数据未受控</td><td>Elasticsearch 集群无认证暴露在公网</td></tr>
+  <tr><td><b>拒绝服务（DoS/DDoS）</b></td><td>SYN Flood、UDP Flood、CC 攻击消耗云资源</td><td>攻击者向云主机发起海量请求导致业务瘫痪</td></tr>
+  <tr><td><b>共享技术漏洞</b></td><td>虚拟机逃逸、容器逃逸、侧信道攻击</td><td>利用虚拟化层漏洞从一台虚拟机攻击同一宿主机上的其他 VM</td></tr>
+  <tr><td><b>高级持续性威胁（APT）</b></td><td>长期潜伏、多阶段攻击、供应链渗透</td><td>SolarWinds 供应链攻击波及多家云客户</td></tr>
+</table>
+
+<div class="warn"><span class="lab">⚠ 考试易错：</span>"配置错误"是 CSA 常年排名第一的云安全威胁，而非传统认知中的"黑客入侵"或"病毒攻击"。考题中常以"最常见云安全威胁"出现，必记。</div>
+
 </section>
 
-<!-- ================= 6.2 ================= -->
-<section class="section" id="c62">
-  <div class="section-head"><div class="num">6.2</div>
-</main>
-<div class="colfoot"><a class="prev" href="5-4.html"><div class="lab">上一篇</div><div class="ttl">5.4 容灾备份</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-2.html"><div class="lab">下一篇</div><div class="ttl">6.2 常见安全防护措施及相关安全策略</div></a></div>
+<!-- 二、安全问题的复杂性与多样性 -->
+<section>
+<h2>二、云计算环境中安全问题的复杂性与多样性 <span class="badge learn">熟悉</span></h2>
+
+<div class="core"><span class="lab"></span>云环境的复杂性来自<b>"三多一弹"</b>：多租户 · 多服务模式 · 多部署地点 · 弹性伸缩。这四者叠加，使安全攻击面成倍放大，远超过传统 IDC。</div>
+
+<h3>2.1 六大复杂性来源</h3>
+<table class="tbl">
+  <tr><th>来源</th><th>具体表现</th></tr>
+  <tr><td><b>多租户架构</b></td><td>同一物理资源运行多个租户，逻辑隔离失败可导致<b>跨租户数据泄露</b>（如虚拟机逃逸、侧信道攻击）。</td></tr>
+  <tr><td><b>多服务模式</b></td><td>IaaS / PaaS / SaaS 三种模式的安全责任边界不同，用户必须清楚"自己负责什么"→ 见 6.2 责任共担模型。</td></tr>
+  <tr><td><b>多部署地点</b></td><td>公有云 / 私有云 / 混合云 / 多云 → 数据可能在多个地域、多个厂商之间流动，合规与数据主权问题突出。</td></tr>
+  <tr><td><b>弹性与自动化</b></td><td>资源的快速创建与销毁使得<b>资产不可见</b>，传统"资产盘点→漏洞扫描→修复"流程跟不上变化速度。</td></tr>
+  <tr><td><b>API 驱动</b></td><td>云上一切操作通过 API，API 的安全性直接决定整个云环境的安全。一次 API 密钥泄露即可导致全部资源被控。</td></tr>
+  <tr><td><b>供应链依赖</b></td><td>云服务本身依赖大量第三方组件（操作系统镜像、开源库、容器基础镜像），任何一个环节的漏洞都可能影响最终用户。</td></tr>
+</table>
+
+<h3>2.2 云安全"多样性"的典型表现</h3>
+<div class="card-grid">
+  <div class="mini"><h4>技术多样性</h4><p>虚拟化安全、容器安全、Serverless 安全、API 安全、数据安全、网络安全——每种技术栈有完全不同的威胁模型和防护手段。</p></div>
+  <div class="mini"><h4>合规多样性</h4><p>中国《网络安全法》《数据安全法》《个人信息保护法》及等级保护 2.0 等要求不同行业（金融、医疗、政务）有不同合规标准。</p></div>
+  <div class="mini"><h4>威胁来源多样性</h4><p>外部攻击者（黑客、竞争对手、APT 组织）、内部人员（恶意/疏忽）、第三方（供应商、合作伙伴）——三条防线缺一不可。</p></div>
+  <div class="mini"><h4>数据生命周期多样性</h4><p>数据在<b>创建→存储→使用→共享→归档→销毁</b>全生命周期中，每个阶段面临不同的安全风险，需分层防护。</p></div>
+</div>
+</section>
+
+<!-- 三、云安全对云计算的重要性 -->
+<section>
+<h2>三、云安全对于云计算的重要性 <span class="badge must">掌握</span></h2>
+
+<div class="core"><span class="lab"></span>安全是云计算的<b>生命线和信任基石</b>。没有安全，就没有云的规模化。</div>
+
+<h3>3.1 安全是新业务上云的首要考量</h3>
+<ul>
+  <li><b>企业决策层面</b>：IDC 调研显示，超过 70% 的企业将"数据安全与合规"列为上云的最大顾虑。安全问题直接决定企业"是否上云、上什么云、怎么上云"。</li>
+  <li><b>合规层面</b>：金融、医疗、政务等强监管行业，一旦发生安全事件，面临的法律处罚和品牌损失远超过 IT 成本。</li>
+  <li><b>经济层面</b>：IBM 2023 数据泄露成本报告显示，云环境中数据泄露的平均成本超过 450 万美元。一次重大安全事件足以击穿一家中小企业的现金流。</li>
+</ul>
+
+<h3>3.2 安全的五个维度重要性</h3>
+<table class="tbl">
+  <tr><th>维度</th><th>重要性说明</th></tr>
+  <tr><td><b>① 信任基石</b></td><td>用户将核心数据和业务系统托管到云平台，本质上是<b>对 CSP 的信任投票</b>。安全能力是 CSP 最核心的竞争力指标，也是品牌溢价的来源。</td></tr>
+  <tr><td><b>② 业务连续性</b></td><td>安全事件（DDoS、勒索软件、数据泄露）是云上业务中断的头号原因。没有安全保障，SLA（99.99% 可用性）无法兑现。</td></tr>
+  <tr><td><b>③ 合规底线</b></td><td>《网络安全法》第 21 条规定网络运营者必须履行安全保护义务；《数据安全法》第 27 条要求数据处理者采取安全保护措施。不合规 = 不合法的业务。</td></tr>
+  <tr><td><b>④ 数据资产保护</b></td><td>数据是数字时代的核心资产。云端数据集中存储意味着"单点攻击面"更大——一次突破就可能获取全部数据。加密、备份、访问控制是不可或缺的保护层。</td></tr>
+  <tr><td><b>⑤ 生态安全</b></td><td>云平台的客户之间形成安全"木桶效应"——一个租户被攻破可能影响整个平台的信誉，甚至通过共享资源漏洞波及其他租户。</td></tr>
+</table>
+
+<div class="ex"><span class="lab"></span>2020 年某大型银行上云评估：安全团队列出 127 项安全检查项，涵盖网络隔离、数据加密、身份认证、审计日志等，任何一项不达标都可能导致董事会否决上云方案。这说明安全不是"锦上添花"，而是上云的<b>准入门槛</b>。</div>
+
+<h3>3.3 责任共担再强调</h3>
+<div class="warn"><span class="lab">⚠ 核心结论：</span>云安全不是 CSP 单方面的责任。无论哪种服务模式，<b>用户始终对自己的数据、配置和身份负责</b>。"责任共担"是理解云安全全部知识点的起点和主线。</div>
+<p>具体责任划分详见 <b>6.2 常见安全防护措施及相关安全策略</b> 中的责任共担模型。</p>
+
+</section>
+
+
+</div>
+<div class="colfoot"><a class="prev" href="5-4.html"><div class="lab">上一篇</div><div class="ttl">5.4 容灾备份</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-2.html"><div class="lab">下一篇</div><div class="ttl">6.2 安全防护与策略</div></a></div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>7.1 7.1中国云计算产业发展现状 · 云计算复习专栏</title>
+<title>7.1 中国云计算产业发展现状 · 云计算复习专栏</title>
 <style>
 /* 独立分章页基础排版（与专栏 SPA 统一） */
 .wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
@@ -30,66 +30,38 @@
 .ch-head .ch-ttl{font-size:18px;font-weight:700}
 
   :root{
-    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
-    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
-    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d; --line:#e5e7eb;
+    --brand:#2563eb; --brand2:#0ea5e9; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
-  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 70px}
-  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
-    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
-  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
-  header.hero p{margin:0;opacity:.92;font-size:14px}
-  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
-    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
-  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
-  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
-  h2 .num{background:var(--brand);color:#fff;width:32px;height:32px;border-radius:8px;
-    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+    background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  h1{font-size:22px;margin:0 0 6px;color:var(--brand)}
+  h2{font-size:19px;margin:0 0 12px;padding:10px 14px;border-left:5px solid var(--brand);background:var(--card);border-radius:0 10px 10px 0;border:1px solid var(--line)}
   h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
-  h4{font-size:14.5px;margin:14px 0 6px;color:#1e3a8a}
+  h4{font-size:14.5px;margin:12px 0 6px;color:var(--ink)}
   p{margin:8px 0;color:var(--sub)}
   b{color:var(--ink)}
   ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
   li{margin:5px 0}
-  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
-  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
-  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
-  .mini p{margin:0;font-size:13.5px;color:#374151}
-  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
-  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
-  th{background:#f1f5f9;color:#0f172a}
-  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
-  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
-  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 3px rgba(15,23,42,.04)}
   .kv b{color:var(--brand)}
-  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
-  .tip b{color:#b45309}
-  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
-  .threat b{color:var(--warn)}
-  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
-  .safe b{color:var(--ok)}
-  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-  @media(max-width:640px){.map{grid-template-columns:1fr}}
-  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
-  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
-  .silo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
-  .silo .mini{background:linear-gradient(135deg,#eef2ff,#f8fafc)}
-  .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-top:22px}
-  .toc h3{margin:0 0 10px;color:var(--brand)}
-  .toc a{color:#2563eb;text-decoration:none}
-  .toc a:hover{text-decoration:underline}
-  .toc ol{padding-left:20px}
-  .diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+  table th,table td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  table th{background:var(--chip);color:#1e3a8a;font-weight:700}
+  table tr:nth-child(even) td{background:#fafcff}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:12px 0}
+  .mini{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(15,23,42,.04)}
+  .mini h4{margin:0 0 6px;font-size:14px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px}
   .diagram svg{max-width:100%;height:auto}
-  .cap{font-size:12.5px;color:#94a3b8;margin-top:6px}
+  img{max-width:100%;border-radius:10px}
   .pill{display:inline-block;font-size:12px;border-radius:999px;padding:2px 10px;margin-right:6px}
   .pill.blue{background:var(--chip);color:#3730a3}
   .pill.green{background:var(--okbg);color:#15803d}
-  .pill.red{background:var(--warnbg);color:#b91c1c}
+  .tip{background:#fef9c3;border:1px solid #fde047;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:14px}
+  .diagram{margin:12px 0;text-align:center}
 
 </style>
 <link rel="stylesheet" href="assets/nav.css">
@@ -98,10 +70,10 @@
 <nav class="colnav"><div class="inner">
 <a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
 <div class="chips">
-<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
-<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
-<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
-<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 云计算的特点及优势</a>
 <a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
 <a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
 <a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
@@ -119,19 +91,19 @@
 <a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
 <a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
 <a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全的概念及重要性</a>
-<a class="chip" href="6-2.html"><span class="num">6.2</span> 常见安全防护措施及相关安全策略</a>
-<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份、授权和访问管理（IAM）</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
 <a class="chip" href="6-4.html"><span class="num">6.4</span> 数据加密与密钥管理</a>
-<a class="chip active" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
-<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
-<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+<a class="chip active" href="7-1.html"><span class="num">7.1</span> 中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 云计算发展及挑战</a>
 </div>
 </div></nav>
 <div class="wrap">
-<div class="ch-head"><span class="ch-num">7.1</span><span class="ch-ttl">7.1中国云计算产业发展现状</span></div>
-<h2>7.1中国云计算产业发展现状</h2>
+<div class="ch-head"><span class="ch-num">7.1</span><span class="ch-ttl">中国云计算产业发展现状</span></div>
 
-  <h3>7.1.1 中国云计算发展概况</h3>
+<h1>7.1 中国云计算产业发展现状</h1>
+<h3>7.1.1 中国云计算发展概况</h3>
   <div class="kv">
     <b>核心判断：</b>中国云计算起步于 <b>2009 年前后</b>（阿里云成立为标志性事件），历经"概念引入—技术积累—规模应用—价值深化"四个阶段，
     现已进入以<b>云原生、信创、一体化算力</b>为特征的深化阶段，是全球仅次于北美的第二大云服务市场。
@@ -246,12 +218,8 @@
     <tr><td>差异化优势</td><td>以电商、音视频、AI 等技术能力切入</td><td>直播/短剧/电商云方案出海</td></tr>
   </table>
   <div class="safe"><b>小结：</b>中国云厂商全球化并非简单"卖算力"，而是以<b>技术能力 + 本地合规 + 生态共建</b>参与国际竞争，同时面临地缘政治与数据主权约束。</div>
-</section>
 
-<!-- ========== 7.2 ========== -->
-<section>
-  
 </div>
-<div class="colfoot"><a class="prev" href="6-4.html"><div class="lab">上一篇</div><div class="ttl">6.4 数据加密与密钥管理</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="7-2.html"><div class="lab">下一篇</div><div class="ttl">7.2 7.2云计算的行业应用</div></a></div>
+<div class="colfoot"><a class="prev" href="6-4.html"><div class="lab">上一篇</div><div class="ttl">6.4 数据加密与密钥管理</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="7-2.html"><div class="lab">下一篇</div><div class="ttl">7.2 云计算的行业应用</div></a></div>
 </body>
 </html>
