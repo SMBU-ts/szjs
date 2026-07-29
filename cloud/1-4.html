@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.4 1.4云计算的特点及优势 · 云计算复习专栏</title>
+<style>
+
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-top:22px;font-size:14px}
+  .toc b{color:var(--brand)}
+  .toc a{color:var(--sub);text-decoration:none}
+  .toc a:hover{color:var(--brand)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}
+  .flow .step{background:var(--chip);border:1px solid #dfe6ff;border-radius:10px;padding:8px 14px;font-size:13.5px;color:#1e3a8a}
+  .flow .arrow{color:var(--brand);font-weight:700}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
+<a class="chip active" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+</div>
+</div></nav>
+<div class="wrap">
+<h2>1.4云计算的特点及优势</h2>
+
+  <h3>一、核心特征（在实际应用中的体现）</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>弹性伸缩</h4><p>双十一流量暴涨自动扩容，过后缩容，资源不浪费（如电商大促）。</p></div>
+    <div class="mini"><h4>按需自助</h4><p>开发者控制台几分钟开通一台服务器，无需采购审批。</p></div>
+    <div class="mini"><h4>资源池化共享</h4><p>多部门共用同一资源池，提升整体利用率。</p></div>
+    <div class="mini"><h4>广泛的网络访问</h4><p>手机、PC、平板随时接入同一套云上系统。</p></div>
+    <div class="mini"><h4>可计量计费</h4><p>按 CPU 小时、流量、存储 GB 精确计费，成本透明。</p></div>
+    <div class="mini"><h4>高可用 / 容灾</h4><p>多可用区部署，单机房故障业务不中断。</p></div>
+  </div>
+
+  <h3>二、云计算的优势</h3>
+  <table>
+    <tr><th>优势</th><th>说明</th><th>体现</th></tr>
+    <tr><td><b>降低 CAPEX</b></td><td>无需前期巨额硬件采购，转为运营支出（OPEX）</td><td>初创公司零门槛起步</td></tr>
+    <tr><td><b>弹性与可扩展性</b></td><td>随业务峰谷即时扩缩，不再"为峰值买单"</td><td class="ct">大促/活动时平滑扛压</td></tr>
+    <tr><td><b>高资源利用率</b></td><td>资源池化 + 虚拟化，闲置率大幅下降</td><td>绿色节能、降本</td></tr>
+    <tr><td><b>快速部署上线</b></td><td>分钟级交付环境，加速创新迭代</td><td>产品上线周期从月→天</td></tr>
+    <tr><td><b>高可靠与容灾</b></td><td>多副本、多可用区，避免单点故障</td><td>数据持久性达 99.9999999%</td></tr>
+    <tr><td><b>全球可达与协同</b></td><td>就近接入、全球加速、团队异地协作</td><td>远程办公、跨国业务</td></tr>
+    <tr><td><b>聚焦核心业务</b></td><td>把底层运维交给云商，专注业务创新</td><td>企业 IT 人力转向价值创造</td></tr>
+  </table>
+
+  <h3>三、典型应用场景</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>网站与 Web 应用</h4><p>企业官网、电商平台、门户，弹性应对访问波动。</p></div>
+    <div class="mini"><h4>大数据与 AI</h4><p>海量数据存储、离线计算、机器学习训练与推理。</p></div>
+    <div class="mini"><h4>备份与容灾</h4><p>数据异地多副本备份，RPO/RTO 大幅缩短。</p></div>
+    <div class="mini"><h4>开发与测试</h4><p>按需拉起/释放环境，DevOps、CI/CD 流水线。</p></div>
+    <div class="mini"><h4>协同办公 SaaS</h4><p>文档、邮箱、IM、视频会议等随时协作。</p></div>
+    <div class="mini"><h4>物联网（IoT）与边缘</h4><p>海量设备接入、数据汇聚与云端分析。</p></div>
+  </div>
+
+  <div class="safe"><b>总结：</b>云计算的核心价值可概括为 <b>"降本、增效、弹性、可靠、聚焦创新"</b>。
+  它是虚拟化、分布式、宽带网络等技术成熟后的必然产物，已成为数字经济的核心基础设施。</div>
+
+  <div class="threat"><b>易错提醒：</b>① 云计算 ≠ 虚拟化（虚拟化是底层技术，云是交付模式）；
+  ② IaaS/PaaS/SaaS 是<b>服务模式</b>，公有/私有/混合/社区云是<b>部署模式</b>，二者维度不同、可任意组合
+  （如"公有云上的 SaaS""私有云上的 IaaS"）；③ "社区云"也叫行业云，不要与"混合云"混淆。</div>
+</section>
+
+<footer>云计算概述（1.1–1.4）详细讲解 ｜ 配合《2025考纲》与《核心知识点详解》使用 · 备考专用</footer>
+
+
+</div>
+<div class="colfoot"><a class="prev" href="1-3.html"><div class="lab">上一篇</div><div class="ttl">1.3 1.3云计算的部署模式</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="2-1.html"><div class="lab">下一篇</div><div class="ttl">2.1 虚拟化技术</div></a></div>
+</body>
+</html>

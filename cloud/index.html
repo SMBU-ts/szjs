@@ -28,6 +28,26 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 .chapter{max-width:940px;margin:0 auto;display:none;font-size:15px;line-height:1.75;color:#1f2937}
 .chapter.active{display:block;animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* ===== 统一标题栏（每个板块一致） ===== */
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.22);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+/* ===== 统一基础排版（富文本一致呈现） ===== */
+.content h1,.content h2,.content h3,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.content h1{font-size:24px}.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.content h3{font-size:17px}.content h4{font-size:15px}
+.content p{margin:9px 0;line-height:1.85;color:#334155}
+.content ul,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.content li{margin:5px 0;line-height:1.8}
+.content a{color:#2563eb;text-decoration:none}.content a:hover{text-decoration:underline}
+.content strong,.content b{color:#0f172a}
+.content table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.content th,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.content th{background:#eff6ff;color:#1e3a8a;font-weight:700}
+.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.content blockquote{border-left:4px solid #2563eb;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.content img{max-width:100%;border-radius:10px}
 .cf{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
 .overlay{display:none}
 @media(max-width:820px){
@@ -39,19 +59,17 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
   .content{padding:14px}
   .chapter{max-width:100%}
 }
-/* ===== 各章节样式（已按章节作用域隔离，互不干扰） ===== */
-/* === 1 云计算概述 === */
+/* ===== 各章节样式（已按作用域隔离，互不干扰） ===== */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
     --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
   }*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}#ch-1 .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}#ch-1 header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
-    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}#ch-1 header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}#ch-1 header.hero p{margin:0;opacity:.92;font-size:14px}#ch-1 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
-    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-1 .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-top:22px;font-size:14px}#ch-1 .toc b{color:var(--brand)}#ch-1 .toc a{color:var(--sub);text-decoration:none}#ch-1 .toc a:hover{color:var(--brand)}#ch-1 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-1 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-1 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
-    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-1 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-1 p{margin:8px 0;color:var(--sub)}#ch-1 b{color:var(--ink)}#ch-1 ul,#ch-1 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-1 li{margin:5px 0}#ch-1 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-1 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-1 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-1 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-1 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-1 th,#ch-1 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-1 th{background:#f1f5f9;color:#0f172a}#ch-1 td:first-child,#ch-1 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-1 .vm{background:var(--warnbg)}#ch-1 .ct{background:var(--okbg)}#ch-1 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-1 .kv b{color:var(--brand)}#ch-1 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-1 .tip b{color:#b45309}#ch-1 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-1 .threat b{color:var(--warn)}#ch-1 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-1 .safe b{color:var(--ok)}#ch-1 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-1 .map{grid-template-columns:1fr}}#ch-1 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-1 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-1 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}#ch-1 .flow .step{background:var(--chip);border:1px solid #dfe6ff;border-radius:10px;padding:8px 14px;font-size:13.5px;color:#1e3a8a}#ch-1 .flow .arrow{color:var(--brand);font-weight:700}
-/* === 2-1 虚拟化技术 === */
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}.ch1 .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}.ch1 header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}.ch1 header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}.ch1 header.hero p{margin:0;opacity:.92;font-size:14px}.ch1 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}.ch1 .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-top:22px;font-size:14px}.ch1 .toc b{color:var(--brand)}.ch1 .toc a{color:var(--sub);text-decoration:none}.ch1 .toc a:hover{color:var(--brand)}.ch1 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}.ch1 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}.ch1 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}.ch1 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}.ch1 p{margin:8px 0;color:var(--sub)}.ch1 b{color:var(--ink)}.ch1 ul,.ch1 ol{margin:8px 0;padding-left:22px;color:var(--sub)}.ch1 li{margin:5px 0}.ch1 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}.ch1 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}.ch1 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}.ch1 .mini p{margin:0;font-size:13.5px;color:#374151}.ch1 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}.ch1 th,.ch1 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}.ch1 th{background:#f1f5f9;color:#0f172a}.ch1 td:first-child,.ch1 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}.ch1 .vm{background:var(--warnbg)}.ch1 .ct{background:var(--okbg)}.ch1 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}.ch1 .kv b{color:var(--brand)}.ch1 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}.ch1 .tip b{color:#b45309}.ch1 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}.ch1 .threat b{color:var(--warn)}.ch1 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}.ch1 .safe b{color:var(--ok)}.ch1 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){.ch1 .map{grid-template-columns:1fr}}.ch1 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}.ch1 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}.ch1 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}.ch1 .flow .step{background:var(--chip);border:1px solid #dfe6ff;border-radius:10px;padding:8px 14px;font-size:13.5px;color:#1e3a8a}.ch1 .flow .arrow{color:var(--brand);font-weight:700}
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -62,7 +80,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-2-1 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-2-1 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-2-1 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-2-1 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-2-1 p{margin:8px 0;color:var(--sub)}#ch-2-1 b{color:var(--ink)}#ch-2-1 ul,#ch-2-1 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-2-1 li{margin:5px 0}#ch-2-1 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-2-1 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-2-1 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-2-1 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-2-1 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-2-1 th,#ch-2-1 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-2-1 th{background:#f1f5f9;color:#0f172a}#ch-2-1 td:first-child,#ch-2-1 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-2-1 .vm{background:var(--warnbg)}#ch-2-1 .ct{background:var(--okbg)}#ch-2-1 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-2-1 .kv b{color:var(--brand)}#ch-2-1 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-2-1 .tip b{color:#b45309}#ch-2-1 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-2-1 .threat b{color:var(--warn)}#ch-2-1 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-2-1 .safe b{color:var(--ok)}#ch-2-1 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-2-1 .map{grid-template-columns:1fr}}#ch-2-1 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-2-1 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
-/* === 2-2 分布式技术 === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -73,7 +90,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-2-2 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-2-2 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-2-2 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-2-2 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-2-2 p{margin:8px 0;color:var(--sub)}#ch-2-2 b{color:var(--ink)}#ch-2-2 ul,#ch-2-2 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-2-2 li{margin:5px 0}#ch-2-2 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-2-2 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-2-2 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-2-2 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-2-2 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-2-2 th,#ch-2-2 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-2-2 th{background:#f1f5f9;color:#0f172a}#ch-2-2 td:first-child,#ch-2-2 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-2-2 .vm{background:var(--warnbg)}#ch-2-2 .ct{background:var(--okbg)}#ch-2-2 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-2-2 .kv b{color:var(--brand)}#ch-2-2 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-2-2 .tip b{color:#b45309}#ch-2-2 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-2-2 .threat b{color:var(--warn)}#ch-2-2 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-2-2 .safe b{color:var(--ok)}#ch-2-2 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-2-2 .map{grid-template-columns:1fr}}#ch-2-2 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-2-2 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-2-2 .layer{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-2-2 .layer{grid-template-columns:1fr}}
-/* === 2-3 SDN 与 NFV === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -85,7 +101,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-2-3 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-2-3 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-2-3 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-2-3 p{margin:8px 0;color:var(--sub)}#ch-2-3 b{color:var(--ink)}#ch-2-3 ul,#ch-2-3 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-2-3 li{margin:5px 0}#ch-2-3 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-2-3 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-2-3 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-2-3 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-2-3 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-2-3 th,#ch-2-3 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-2-3 th{background:#f1f5f9;color:#0f172a}#ch-2-3 td:first-child,#ch-2-3 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-2-3 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-2-3 .kv b{color:var(--brand)}#ch-2-3 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-2-3 .tip b{color:#b45309}#ch-2-3 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-2-3 .threat b{color:var(--warn)}#ch-2-3 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-2-3 .safe b{color:var(--ok)}#ch-2-3 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-2-3 .map{grid-template-columns:1fr}}#ch-2-3 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-2-3 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-2-3 .layer{display:grid;gap:0;margin:14px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}#ch-2-3 .layer .row{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}#ch-2-3 .layer .row:last-child{border-bottom:none}#ch-2-3 .layer .lab{width:130px;flex:0 0 auto;background:#eef2ff;color:#1e3a8a;font-weight:600;
     display:flex;align-items:center;justify-content:center;padding:14px 10px;font-size:14px;text-align:center}#ch-2-3 .layer .body{flex:1;padding:12px 16px}#ch-2-3 .layer .body h4{margin:0 0 4px;font-size:14.5px;color:#0f172a}#ch-2-3 .layer .body p{margin:0;font-size:13.5px}#ch-2-3 .arrow{text-align:center;color:var(--brand);font-weight:700;font-size:13px;padding:4px 0}
-/* === 3-1 Google 云计算 === */
 :root{
     --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
     --cloud:#2563eb; --cloud-soft:#eaf1ff; --green:#0f6e56; --green-soft:#e1f5ee;
@@ -95,7 +110,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
   }*{box-sizing:border-box;}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
     background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px;}#ch-3-1 header{background:linear-gradient(120deg,#1d4ed8,#3b82f6);color:#fff;padding:16px 26px;box-shadow:var(--shadow);}#ch-3-1 header h1{margin:0;font-size:19px;font-weight:700;}#ch-3-1 header .sub{font-size:12.5px;opacity:.92;margin-top:4px;}#ch-3-1 main{max-width:1000px;margin:0 auto;padding:22px 24px 70px;}#ch-3-1 .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow);}#ch-3-1 .kp h3{margin:0 0 10px;font-size:16.5px;color:var(--ink);border-left:5px solid var(--cloud);padding-left:10px;}#ch-3-1 .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;background:var(--green);vertical-align:middle;margin-left:8px;}#ch-3-1 .block{margin:10px 0;}#ch-3-1 .block .t{font-weight:700;font-size:13.5px;color:var(--cloud);display:flex;align-items:center;gap:6px;margin-bottom:4px;}#ch-3-1 .block .t::before{content:"";width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block;}#ch-3-1 .block p{margin:4px 0;color:var(--ink-soft);}#ch-3-1 .block ul{margin:4px 0;padding-left:20px;color:var(--ink-soft);}#ch-3-1 .block ul li{margin:3px 0;}#ch-3-1 .key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:4px solid var(--key-ink);
     border-radius:8px;padding:9px 13px;margin:11px 0;color:var(--key-ink);font-size:13.5px;}#ch-3-1 .key b{color:var(--key-ink);}#ch-3-1 table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}#ch-3-1 th,#ch-3-1 td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}#ch-3-1 th{background:var(--cloud-soft);color:var(--ink);}#ch-3-1 .pill{display:inline-block;font-size:12px;background:var(--cloud-soft);color:var(--cloud);padding:2px 10px;border-radius:999px;margin:2px 4px 2px 0;}#ch-3-1 .timeline{position:relative;margin:12px 0 4px;padding-left:22px;}#ch-3-1 .timeline::before{content:"";position:absolute;left:7px;top:4px;bottom:4px;width:2px;background:var(--cloud);}#ch-3-1 .timeline li{list-style:none;margin:10px 0;position:relative;}#ch-3-1 .timeline li::before{content:"";position:absolute;left:-19px;top:7px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--cloud);}#ch-3-1 .timeline ul{padding-left:0;}#ch-3-1 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:24px;border-top:1px solid var(--line);}#ch-3-1 .tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0;}#ch-3-1 .tech-card{background:var(--cloud-soft);border:1px solid #b5d4f4;border-radius:10px;padding:12px 14px;}#ch-3-1 .tech-card h4{margin:0 0 6px;font-size:14.5px;color:var(--cloud);}#ch-3-1 .tech-card p{margin:2px 0;font-size:12.5px;color:var(--ink-soft);}
-/* === 3-2 亚马逊 AWS === */
 :root{
     --bg:#f4f6fb;
     --panel:#ffffff;
@@ -123,7 +137,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}#ch-3-2 .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:100px;}#ch-3-2 .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}#ch-3-2 .kp-head h4{margin:0;font-size:15.5px;color:var(--ink);}#ch-3-2 .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}#ch-3-2 .lv2{background:var(--lv2);}#ch-3-2 .block{margin:10px 0;}#ch-3-2 .block .t{font-weight:700;font-size:13.5px;color:var(--cloud);display:flex;align-items:center;gap:6px;margin-bottom:4px;}#ch-3-2 .block .t::before{content:"";width:7px;height:7px;border-radius:2px;background:currentColor;display:inline-block;}#ch-3-2 .block p{margin:4px 0;color:var(--ink-soft);}#ch-3-2 .block ul{margin:4px 0;padding-left:20px;color:var(--ink-soft);}#ch-3-2 .block ul li{margin:3px 0;}#ch-3-2 .key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:4px solid var(--key-ink);
     border-radius:8px;padding:9px 13px;margin:11px 0;color:var(--key-ink);font-size:13.5px;}#ch-3-2 .key b{color:var(--key-ink);}#ch-3-2 .warn{background:var(--warn-bg);border:1px solid var(--warn-bd);border-left:4px solid var(--warn-ink);
     border-radius:8px;padding:9px 13px;margin:11px 0;color:var(--warn-ink);font-size:13.5px;}#ch-3-2 .sample{background:#fbfcff;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:13px;color:var(--ink-soft);}#ch-3-2 .sample b{color:var(--ink);}#ch-3-2 table.dt{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px;}#ch-3-2 table.dt th{background:var(--cloud-soft);color:var(--cloud);text-align:left;padding:8px 10px;border:1px solid var(--line);font-weight:700;}#ch-3-2 table.dt td{padding:8px 10px;border:1px solid var(--line);color:var(--ink-soft);vertical-align:top;}#ch-3-2 .digi{margin:14px 0;text-align:center;}#ch-3-2 .digi svg{max-width:100%;height:auto;}#ch-3-2 .cap{font-size:12px;color:var(--ink-soft);margin-top:4px;}@media(max-width:920px){#ch-3-2 nav.toc{display:none;}#ch-3-2 .container{display:block;}#ch-3-2 main{padding:16px;}}
-/* === 3-3 华为云 === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -134,7 +147,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-3-3 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-3-3 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-3-3 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-3-3 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-3-3 p{margin:8px 0;color:var(--sub)}#ch-3-3 b{color:var(--ink)}#ch-3-3 ul,#ch-3-3 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-3-3 li{margin:5px 0}#ch-3-3 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-3-3 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-3-3 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-3-3 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-3-3 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-3-3 th,#ch-3-3 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-3-3 th{background:#f1f5f9;color:#0f172a}#ch-3-3 td:first-child,#ch-3-3 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-3-3 .vm{background:var(--warnbg)}#ch-3-3 .ct{background:var(--okbg)}#ch-3-3 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-3-3 .kv b{color:var(--brand)}#ch-3-3 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-3-3 .tip b{color:#b45309}#ch-3-3 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-3-3 .threat b{color:var(--warn)}#ch-3-3 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-3-3 .safe b{color:var(--ok)}#ch-3-3 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-3-3 .map{grid-template-columns:1fr}}#ch-3-3 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-3-3 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-3-3 .silo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}#ch-3-3 .silo .mini{background:linear-gradient(135deg,#eef2ff,#f8fafc)}
-/* === 3-4 百度云 === */
 :root{
     --blue:#185FA5; --blue-50:#E6F1FB; --blue-200:#85B7EB;
     --teal:#0F6E56; --teal-200:#5DCAA5;
@@ -157,12 +169,10 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff; font-size:12px;
     display:flex; align-items:center; justify-content:center;}#ch-3-4 .tag{display:inline-block; background:var(--blue-50); color:var(--blue); border:1px solid #B5D4F4;
     border-radius:6px; padding:1px 8px; font-size:12px; margin:2px 4px 2px 0;}#ch-3-4 footer{margin-top:40px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:12px;}@media (max-width:640px){#ch-3-4 .grid4{grid-template-columns:repeat(2,1fr);}#ch-3-4 .ind{grid-template-columns:1fr;}}@media print{body{font-size:12px;}#ch-3-4 .wrap{max-width:none;}#ch-3-4 .arch,#ch-3-4 .ind .card,#ch-3-4 table{break-inside:avoid;}}
-/* === 3-5 云平台选择比较 === */
 :root{--bg:#f4f6fb;--panel:#fff;--ink:#1f2a44;--ink-soft:#56607a;--line:#e3e8f2;--shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
 --cloud:#2563eb;--cloud-soft:#eaf1ff;
 --lv1:#64748b;--lv2:#0d9488;--lv3:#dc2626;
 --key-bg:#fff1f0;--key-bd:#ff9c8a;--key-ink:#b42318;--ex-bg:#eefaf2;--ex-bd:#22a06b;--ex-ink:#0f6b3c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px}#ch-3-5 header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1d4ed8,#3b82f6);color:#fff;padding:13px 24px;box-shadow:var(--shadow)}#ch-3-5 .top h1{margin:0;font-size:18px;font-weight:700}#ch-3-5 .top .sub{font-size:12.5px;opacity:.92;margin-top:3px}#ch-3-5 main{max-width:1080px;margin:0 auto;padding:20px 26px 80px}#ch-3-5 .sec-hd{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:86px;z-index:20;margin-bottom:18px}#ch-3-5 .sec-hd .num{background:rgba(255,255,255,.22);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}#ch-3-5 .sec-hd h2{margin:0;font-size:18px}#ch-3-5 .chapter{margin-top:22px;scroll-margin-top:150px}#ch-3-5 .chapter>h3{font-size:16px;margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow)}#ch-3-5 .kp{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0;box-shadow:var(--shadow)}#ch-3-5 .kp>h4{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}#ch-3-5 .kp>h4 .badge{font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;color:#fff}#ch-3-5 .lv1{background:var(--lv1)}#ch-3-5 .lv2{background:var(--lv2)}#ch-3-5 .lv3{background:var(--lv3)}#ch-3-5 .block{margin:8px 0}#ch-3-5 .block p,#ch-3-5 .block ul{margin:4px 0;color:var(--ink-soft)}#ch-3-5 .block ul{padding-left:18px}#ch-3-5 .block ul li{margin:3px 0}#ch-3-5 .block .t{font-weight:700;font-size:13px;display:flex;align-items:center;gap:5px;margin-bottom:3px;color:var(--cloud)}#ch-3-5 .block .t::before{content:"";width:6px;height:6px;border-radius:2px;background:currentColor;display:inline-block}#ch-3-5 .deep{background:#fffdf7;border:1px solid #e8dcc0;border-left:4px solid #b8860b;border-radius:8px;padding:10px 13px;margin:10px 0}#ch-3-5 .deep .dlab{font-weight:700;font-size:12.5px;color:#7a5f2a;margin-bottom:4px}#ch-3-5 .deep p,#ch-3-5 .deep ul{margin:3px 0;color:#5c4033;line-height:1.7}#ch-3-5 .deep ul{padding-left:18px}#ch-3-5 .deep ul li{margin:2px 0}#ch-3-5 .deep table{border-collapse:collapse;width:100%;margin:6px 0;font-size:13px}#ch-3-5 .deep th{background:#f5eed8;color:#6b4f1a;padding:5px 8px;text-align:left;border:1px solid #d4b896}#ch-3-5 .deep td{padding:5px 8px;border:1px solid #d4b896;color:#5c4033;vertical-align:top}#ch-3-5 .key{background:var(--key-bg);border:1px solid var(--key-bd);border-left:3px solid var(--key-ink);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--key-ink);font-size:13px}#ch-3-5 .key b{color:var(--key-ink)}#ch-3-5 .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:3px solid var(--ex-bd);border-radius:6px;padding:8px 12px;margin:8px 0;color:var(--ex-ink);font-size:13px}#ch-3-5 .ex .lab{font-weight:700;display:block;margin-bottom:3px}#ch-3-5 .ex .lab::before{content:"💡 示例"}#ch-3-5 .toc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 18px;margin:14px 0;box-shadow:var(--shadow)}#ch-3-5 .toc b{color:var(--cloud)}#ch-3-5 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);margin-top:30px}
-/* === 4-1 Web 文档服务 === */
 :root{
     --blue:#185FA5; --blue-bg:#E6F1FB;
     --green:#3B6D11; --green-bg:#EAF3DE;
@@ -204,7 +214,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     background:#FFF7E6; border:1px solid #FAC775; border-radius:12px;
     padding:16px 20px; margin:20px 0;
   }#ch-4-1 .exam h3{margin:0 0 8px; color:#854F0B;}#ch-4-1 footer{color:var(--muted); font-size:12px; text-align:center; margin-top:32px;}
-/* === 4-2 Web 服务与协议 === */
 :root{
     --bg:#f7f9fc; --card:#ffffff; --ink:#1f2933; --muted:#5b6775;
     --line:#e3e8ef; --brand:#2563eb; --brand-soft:#eff4ff;
@@ -216,7 +225,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:24px 26px;margin:20px 0;box-shadow:0 2px 10px rgba(16,24,40,.04)}#ch-4-2 h2{font-size:21px;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--brand-soft);color:var(--brand)}#ch-4-2 h3{font-size:17px;margin:22px 0 10px;color:var(--ink)}#ch-4-2 p{margin:10px 0}#ch-4-2 ul,#ch-4-2 ol{margin:10px 0;padding-left:22px}#ch-4-2 li{margin:6px 0}#ch-4-2 .lead{color:var(--muted);background:var(--brand-soft);border-left:4px solid var(--brand);
     padding:12px 16px;border-radius:8px;margin:14px 0}#ch-4-2 .box{border-radius:10px;padding:14px 18px;margin:14px 0;border:1px solid}#ch-4-2 .box.pros{border-color:#bbf7d0;background:var(--green-soft)}#ch-4-2 .box.cons{border-color:#fecaca;background:var(--red-soft)}#ch-4-2 .box.note{border-color:#fed7aa;background:var(--amber-soft)}#ch-4-2 .box.key{border-color:#ddd6fe;background:var(--purple-soft)}#ch-4-2 .box b{display:block;margin-bottom:6px}#ch-4-2 .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:999px;margin-right:6px}#ch-4-2 .tag.g{background:var(--green-soft);color:var(--green)}#ch-4-2 .tag.r{background:var(--red-soft);color:var(--red)}#ch-4-2 .tag.b{background:var(--brand-soft);color:var(--brand)}#ch-4-2 .tag.a{background:var(--amber-soft);color:var(--amber)}#ch-4-2 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-4-2 th,#ch-4-2 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-4-2 th{background:var(--brand-soft);color:var(--brand)}#ch-4-2 tr:nth-child(even) td{background:#fafbfe}#ch-4-2 pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.6}#ch-4-2 code{font-family:"SFMono-Regular",Consolas,monospace;background:#eef2f7;padding:1px 6px;border-radius:5px;font-size:13px}#ch-4-2 pre code{background:none;padding:0}#ch-4-2 .diagram{background:#fbfcfe;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;text-align:center}#ch-4-2 .diagram svg{width:100%;height:auto;max-width:680px}#ch-4-2 .cap{font-size:12px;color:var(--muted);margin-top:8px}#ch-4-2 .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:680px){#ch-4-2 .twocol{grid-template-columns:1fr}}#ch-4-2 .pill{display:inline-block;background:var(--brand-soft);color:var(--brand);font-weight:600;
     padding:2px 12px;border-radius:999px;font-size:13px;margin:2px 0}#ch-4-2 footer{text-align:center;color:var(--muted);font-size:13px;margin-top:30px}
-/* === 4-3 面向服务架构 SOA === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -228,7 +236,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-4-3 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-4-3 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-4-3 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-4-3 p{margin:8px 0;color:var(--sub)}#ch-4-3 b{color:var(--ink)}#ch-4-3 ul,#ch-4-3 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-4-3 li{margin:5px 0}#ch-4-3 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-4-3 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-4-3 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-4-3 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-4-3 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-4-3 th,#ch-4-3 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-4-3 th{background:#f1f5f9;color:#0f172a}#ch-4-3 td:first-child,#ch-4-3 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-4-3 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-4-3 .kv b{color:var(--brand)}#ch-4-3 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-4-3 .tip b{color:#b45309}#ch-4-3 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-4-3 .threat b{color:var(--warn)}#ch-4-3 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-4-3 .safe b{color:var(--ok)}#ch-4-3 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-4-3 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-4-3 /* 架构分层图 */
   .arch{display:flex;flex-direction:column;gap:0;margin:16px 0;align-items:stretch}#ch-4-3 .arch-row{display:flex;align-items:stretch;gap:12px}#ch-4-3 .arch-box{flex:1;border-radius:10px;padding:12px 14px;font-size:13.5px;color:#fff}#ch-4-3 .arch-box b{color:#fff}#ch-4-3 .arch-box small{display:block;opacity:.92;font-weight:400;margin-top:3px}#ch-4-3 .b-eb{background:linear-gradient(135deg,#7c3aed,#a855f7)}#ch-4-3 .b-app{background:linear-gradient(135deg,#0ea5e9,#06b6d4)}#ch-4-3 .b-svc{background:linear-gradient(135deg,#2563eb,#3b82f6)}#ch-4-3 .b-inf{background:linear-gradient(135deg,#16a34a,#22c55e);color:#06301a}#ch-4-3 .b-inf b{color:#06301a}#ch-4-3 .arch-conn{text-align:center;color:#94a3b8;font-size:12px;padding:3px 0}#ch-4-3 .pill{display:inline-block;background:#eef2ff;color:#3730a3;border:1px solid #dfe6ff;border-radius:999px;padding:2px 10px;font-size:12.5px;margin:3px 3px 0 0}
-/* === 4-4 微服务架构 === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -240,7 +247,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-4-4 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-4-4 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-4-4 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-4-4 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-4-4 p{margin:8px 0;color:var(--sub)}#ch-4-4 b{color:var(--ink)}#ch-4-4 ul,#ch-4-4 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-4-4 li{margin:5px 0}#ch-4-4 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}#ch-4-4 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-4-4 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-4-4 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-4-4 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-4-4 th,#ch-4-4 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-4-4 th{background:#f1f5f9;color:#0f172a}#ch-4-4 td:first-child,#ch-4-4 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-4-4 .vm{background:var(--warnbg)}#ch-4-4 .ct{background:var(--okbg)}#ch-4-4 .pp{background:var(--purplebg)}#ch-4-4 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-4-4 .kv b{color:var(--brand)}#ch-4-4 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-4-4 .tip b{color:#b45309}#ch-4-4 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-4-4 .threat b{color:var(--warn)}#ch-4-4 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-4-4 .safe b{color:var(--ok)}#ch-4-4 .pbox{background:var(--purplebg);border:1px solid #ddd6fe;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-4-4 .pbox b{color:var(--purple)}#ch-4-4 .layer{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}#ch-4-4 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-4-4 .layer,#ch-4-4 .map{grid-template-columns:1fr}}#ch-4-4 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-4-4 .fig{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:16px 0;text-align:center}#ch-4-4 .fig svg{width:100%;height:auto;max-width:680px}#ch-4-4 .figcap{font-size:12.5px;color:#64748b;margin-top:8px}
-/* === 5-1 数据中心概念特征 === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -251,7 +257,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-5-1 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-5-1 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-5-1 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-5-1 h3{font-size:16.5px;margin:20px 0 8px;color:var(--ink)}#ch-5-1 h4{font-size:15px;margin:14px 0 6px;color:#1e3a8a}#ch-5-1 p{margin:8px 0;color:var(--sub)}#ch-5-1 b{color:var(--ink)}#ch-5-1 ul,#ch-5-1 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-5-1 li{margin:5px 0}#ch-5-1 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}#ch-5-1 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-5-1 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-5-1 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-5-1 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-5-1 th,#ch-5-1 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-5-1 th{background:#f1f5f9;color:#0f172a}#ch-5-1 td:first-child,#ch-5-1 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-5-1 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-5-1 .kv b{color:var(--brand)}#ch-5-1 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-5-1 .tip b{color:#b45309}#ch-5-1 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-5-1 .threat b{color:var(--warn)}#ch-5-1 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-5-1 .safe b{color:var(--ok)}#ch-5-1 .flow{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:16px;margin:14px 0;text-align:center}#ch-5-1 .flow svg{width:100%;height:auto;max-width:760px}#ch-5-1 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-5-1 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-5-1 .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-top:22px}#ch-5-1 .toc b{color:var(--brand)}#ch-5-1 .toc ol{margin:6px 0}
-/* === 5-2 数据中心关键服务 === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -262,7 +267,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-5-2 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-5-2 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-5-2 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-5-2 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-5-2 p{margin:8px 0;color:var(--sub)}#ch-5-2 b{color:var(--ink)}#ch-5-2 ul,#ch-5-2 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-5-2 li{margin:5px 0}#ch-5-2 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}#ch-5-2 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-5-2 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-5-2 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-5-2 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-5-2 th,#ch-5-2 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-5-2 th{background:#f1f5f9;color:#0f172a}#ch-5-2 td:first-child,#ch-5-2 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-5-2 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-5-2 .kv b{color:var(--brand)}#ch-5-2 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-5-2 .tip b{color:#b45309}#ch-5-2 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-5-2 .threat b{color:var(--warn)}#ch-5-2 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-5-2 .safe b{color:var(--ok)}#ch-5-2 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-5-2 .map{grid-template-columns:1fr}}#ch-5-2 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-5-2 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-5-2 .figure{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;text-align:center}#ch-5-2 .figure svg{max-width:100%;height:auto}#ch-5-2 .figcap{font-size:13px;color:#64748b;margin-top:8px}
-/* === 5-3 绿色节能技术 === */
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -274,7 +278,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-5-3 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-5-3 h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
     display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-5-3 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-5-3 p{margin:8px 0;color:var(--sub)}#ch-5-3 b{color:var(--ink)}#ch-5-3 ul,#ch-5-3 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-5-3 li{margin:5px 0}#ch-5-3 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}#ch-5-3 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-5-3 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-5-3 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-5-3 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-5-3 th,#ch-5-3 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-5-3 th{background:#f1f5f9;color:#0f172a}#ch-5-3 td:first-child,#ch-5-3 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-5-3 .vm{background:var(--warnbg)}#ch-5-3 .ct{background:var(--okbg)}#ch-5-3 .kv{background:#f0fdf4;border-left:4px solid var(--ok);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-5-3 .kv b{color:var(--ok)}#ch-5-3 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-5-3 .tip b{color:#b45309}#ch-5-3 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-5-3 .threat b{color:var(--warn)}#ch-5-3 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-5-3 .safe b{color:var(--ok)}#ch-5-3 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-5-3 .map{grid-template-columns:1fr}}#ch-5-3 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-5-3 .tag{display:inline-block;font-size:12px;background:#dcfce7;color:#166534;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-5-3 .formula{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:14px 18px;margin:12px 0;
     font-family:"SFMono-Regular",Consolas,monospace;font-size:15px;text-align:center}#ch-5-3 .formula b{color:#7dd3fc}
-/* === 5-4 容灾备份 === */
 :root{
     --blue:#185FA5; --blue-l:#E6F1FB; --blue-m:#85B7EB;
     --green:#3B6D11; --green-l:#EAF3DE;
@@ -297,7 +300,6 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     padding:10px 14px; margin:12px 0; font-size:14px;}#ch-5-4 table{width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px;}#ch-5-4 th,#ch-5-4 td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}#ch-5-4 th{background:#f1f5f9; font-weight:600;}#ch-5-4 tr:nth-child(even) td{background:#fafbfc;}#ch-5-4 .fig{background:#fbfdff; border:1px solid var(--line); border-radius:10px;
     padding:14px; margin:14px 0; text-align:center;}#ch-5-4 .fig svg{width:100%; height:auto; max-width:680px;}#ch-5-4 .fig .cap{font-size:12px; color:var(--muted); margin-top:8px;}#ch-5-4 .cols{display:flex; gap:14px; flex-wrap:wrap;}#ch-5-4 .cols .col{flex:1 1 240px; background:var(--blue-l); border-radius:10px; padding:12px 14px;}#ch-5-4 .cols .col.g{background:var(--green-l);}#ch-5-4 .cols .col.a{background:var(--amber-l);}#ch-5-4 .cols .col h4{margin:0 0 6px; font-size:14px;}#ch-5-4 .tag{display:inline-block; font-size:11px; padding:1px 8px; border-radius:6px;
     background:#eef2f6; color:var(--muted); margin-right:4px;}#ch-5-4 footer{text-align:center; color:var(--muted); font-size:12px; margin-top:10px;}@media print{body{background:#fff;}#ch-5-4 .card,#ch-5-4 .fig{break-inside:avoid;}#ch-5-4 .wrap{padding:0;}}
-/* === 6 云安全 === */
 :root{
     --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
     --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
@@ -305,18 +307,34 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
     --warn:#d97706;
     --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
-  }*{box-sizing:border-box;}html{scroll-behavior:smooth;}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}#ch-6 header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}#ch-6 header.top h1{margin:0;font-size:19px;font-weight:700;}#ch-6 header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}#ch-6 header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}#ch-6 header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}#ch-6 .search-wrap{position:absolute;right:24px;top:14px;}#ch-6 .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}#ch-6 .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}#ch-6 nav.toc{position:sticky;top:96px;width:280px;flex:0 0 280px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}#ch-6 nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}#ch-6 nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}#ch-6 nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}#ch-6 nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}#ch-6 nav.toc a.sub{padding-left:22px;font-size:12.5px;}#ch-6 main{flex:1;min-width:0;padding:22px 26px 80px;}#ch-6 .section{margin-bottom:40px;scroll-margin-top:100px;}#ch-6 .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}#ch-6 .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}#ch-6 .section-head h2{margin:0;font-size:20px;}#ch-6 .chapter{margin-top:22px;scroll-margin-top:160px;}#ch-6 .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}#ch-6 .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}#ch-6 .kp.hide{display:none;}#ch-6 .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}#ch-6 .kp-head h4{margin:0;font-size:15.5px;}#ch-6 .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}#ch-6 .lv1{background:var(--lv1);}#ch-6 .lv2{background:var(--lv2);}#ch-6 .lv3{background:var(--lv3);}#ch-6 .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}#ch-6 .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}#ch-6 .core .lab::before{content:"★ 核心知识点：";}#ch-6 .core b{color:var(--ink);}#ch-6 .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}#ch-6 .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}#ch-6 .ex .lab::before{content:"💡 示例：";}#ch-6 .ex ul{margin:5px 0;padding-left:20px;}#ch-6 .ex li{margin:3px 0;}#ch-6 .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}#ch-6 .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}#ch-6 .warn .lab{font-weight:700;}#ch-6 table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}#ch-6 table.tbl th,#ch-6 table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}#ch-6 table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}#ch-6 table.tbl tr:nth-child(even) td{background:#fafcff;}#ch-6 .fig{margin:14px 0;text-align:center;}#ch-6 .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}#ch-6 .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}#ch-6 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}#ch-6 #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}#ch-6 .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}@media(max-width:920px){#ch-6 nav.toc{display:none;}#ch-6 .container{display:block;}#ch-6 main{padding:16px;}#ch-6 .search-wrap{position:static;margin-top:10px;}#ch-6 .search-wrap input{width:100%;}}
-/* === 7 产业应用与发展 === */
+  }*{box-sizing:border-box;}html{scroll-behavior:smooth;}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;font-size:15px;}#ch-6-1 header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}#ch-6-1 header.top h1{margin:0;font-size:19px;font-weight:700;}#ch-6-1 header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}#ch-6-1 header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}#ch-6-1 header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}#ch-6-1 .search-wrap{position:absolute;right:24px;top:14px;}#ch-6-1 .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}#ch-6-1 .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}#ch-6-1 nav.toc{position:sticky;top:96px;width:290px;flex:0 0 290px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}#ch-6-1 nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}#ch-6-1 nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}#ch-6-1 nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}#ch-6-1 nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}#ch-6-1 nav.toc a.sub{padding-left:22px;font-size:12.5px;}#ch-6-1 main{flex:1;min-width:0;padding:22px 26px 80px;}#ch-6-1 .section{margin-bottom:40px;scroll-margin-top:100px;}#ch-6-1 .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}#ch-6-1 .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}#ch-6-1 .section-head h2{margin:0;font-size:20px;}#ch-6-1 .section-head .desc{font-size:12.5px;opacity:.92;margin-top:2px;}#ch-6-1 .chapter{margin-top:22px;scroll-margin-top:160px;}#ch-6-1 .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}#ch-6-1 .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}#ch-6-1 .kp.hide{display:none;}#ch-6-1 .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}#ch-6-1 .kp-head h4{margin:0;font-size:15.5px;}#ch-6-1 .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}#ch-6-1 .lv1{background:var(--lv1);}#ch-6-1 .lv2{background:var(--lv2);}#ch-6-1 .lv3{background:var(--lv3);}#ch-6-1 .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}#ch-6-1 .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}#ch-6-1 .core .lab::before{content:"★ 核心知识点：";}#ch-6-1 .core b{color:var(--ink);}#ch-6-1 .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}#ch-6-1 .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}#ch-6-1 .ex .lab::before{content:"💡 示例：";}#ch-6-1 .ex ul{margin:5px 0;padding-left:20px;}#ch-6-1 .ex li{margin:3px 0;}#ch-6-1 .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}#ch-6-1 .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}#ch-6-1 .warn .lab{font-weight:700;}#ch-6-1 table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}#ch-6-1 table.tbl th,#ch-6-1 table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}#ch-6-1 table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}#ch-6-1 table.tbl tr:nth-child(even) td{background:#fafcff;}#ch-6-1 .fig{margin:14px 0;text-align:center;}#ch-6-1 .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}#ch-6-1 .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}#ch-6-1 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}#ch-6-1 #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}#ch-6-1 .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}@media(max-width:920px){#ch-6-1 nav.toc{display:none;}#ch-6-1 .container{display:block;}#ch-6-1 main{padding:16px;}#ch-6-1 .search-wrap{position:static;margin-top:10px;}#ch-6-1 .search-wrap input{width:100%;}}
+:root{
+    --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
+    --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
+    --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
+    --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
+    --warn:#d97706;
+    --shield:#7c3aed; --shield-soft:#f3edff;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }*{box-sizing:border-box;}html{scroll-behavior:smooth;}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}#ch-6-2 header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}#ch-6-2 header.top h1{margin:0;font-size:19px;font-weight:700;}#ch-6-2 header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}#ch-6-2 header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}#ch-6-2 header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}#ch-6-2 .search-wrap{position:absolute;right:24px;top:14px;}#ch-6-2 .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}#ch-6-2 .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}#ch-6-2 nav.toc{position:sticky;top:96px;width:288px;flex:0 0 288px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}#ch-6-2 nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}#ch-6-2 nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}#ch-6-2 nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}#ch-6-2 nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}#ch-6-2 nav.toc a.sub{padding-left:22px;font-size:12.5px;}#ch-6-2 nav.toc a.sub2{padding-left:34px;font-size:12px;color:#7b86a0;}#ch-6-2 main{flex:1;min-width:0;padding:22px 26px 80px;}#ch-6-2 .section{margin-bottom:40px;scroll-margin-top:100px;}#ch-6-2 .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}#ch-6-2 .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}#ch-6-2 .section-head h2{margin:0;font-size:20px;}#ch-6-2 .chapter{margin-top:22px;scroll-margin-top:160px;}#ch-6-2 .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}#ch-6-2 .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}#ch-6-2 .kp.hide{display:none;}#ch-6-2 .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}#ch-6-2 .kp-head h4{margin:0;font-size:15.5px;}#ch-6-2 .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}#ch-6-2 .lv1{background:var(--lv1);}#ch-6-2 .lv2{background:var(--lv2);}#ch-6-2 .lv3{background:var(--lv3);}#ch-6-2 .lv4{background:var(--shield);}#ch-6-2 .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}#ch-6-2 .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}#ch-6-2 .core .lab::before{content:"★ 核心知识点：";}#ch-6-2 .core b{color:var(--ink);}#ch-6-2 .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}#ch-6-2 .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}#ch-6-2 .ex .lab::before{content:"💡 示例：";}#ch-6-2 .ex ul{margin:5px 0;padding-left:20px;}#ch-6-2 .ex li{margin:3px 0;}#ch-6-2 .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}#ch-6-2 .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}#ch-6-2 .warn .lab{font-weight:700;}#ch-6-2 .tip{background:var(--shield-soft);border:1px solid var(--shield);border-left:4px solid var(--shield);border-radius:8px;padding:10px 14px;margin:11px 0;color:#5b21b6;font-size:13.5px;}#ch-6-2 .tip .lab{font-weight:700;}#ch-6-2 table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}#ch-6-2 table.tbl th,#ch-6-2 table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}#ch-6-2 table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}#ch-6-2 table.tbl tr:nth-child(even) td{background:#fafcff;}#ch-6-2 .fig{margin:14px 0;text-align:center;}#ch-6-2 .fig svg{width:100%;max-width:720px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}#ch-6-2 .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}#ch-6-2 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}#ch-6-2 #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}#ch-6-2 .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}#ch-6-2 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;}@media(max-width:920px){#ch-6-2 nav.toc{display:none;}#ch-6-2 .container{display:block;}#ch-6-2 main{padding:16px;}#ch-6-2 .search-wrap{position:static;margin-top:10px;}#ch-6-2 .search-wrap input{width:100%;}#ch-6-2 .grid2{grid-template-columns:1fr;}}
+:root{
+    --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
+    --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
+    --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
+    --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
+    --warn:#d97706;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }*{box-sizing:border-box;}html{scroll-behavior:smooth;}body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;font-size:15px;}#ch-6-3 header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}#ch-6-3 header.top h1{margin:0;font-size:19px;font-weight:700;}#ch-6-3 header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}#ch-6-3 header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}#ch-6-3 header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}#ch-6-3 .search-wrap{position:absolute;right:24px;top:14px;}#ch-6-3 .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}#ch-6-3 .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}#ch-6-3 nav.toc{position:sticky;top:96px;width:290px;flex:0 0 290px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}#ch-6-3 nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}#ch-6-3 nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}#ch-6-3 nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}#ch-6-3 nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}#ch-6-3 nav.toc a.sub{padding-left:22px;font-size:12.5px;}#ch-6-3 main{flex:1;min-width:0;padding:22px 26px 80px;}#ch-6-3 .section{margin-bottom:40px;scroll-margin-top:100px;}#ch-6-3 .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}#ch-6-3 .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}#ch-6-3 .section-head h2{margin:0;font-size:20px;}#ch-6-3 .section-head .desc{font-size:12.5px;opacity:.92;margin-top:2px;}#ch-6-3 .chapter{margin-top:22px;scroll-margin-top:160px;}#ch-6-3 .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}#ch-6-3 .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}#ch-6-3 .kp.hide{display:none;}#ch-6-3 .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}#ch-6-3 .kp-head h4{margin:0;font-size:15.5px;}#ch-6-3 .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}#ch-6-3 .lv1{background:var(--lv1);}#ch-6-3 .lv2{background:var(--lv2);}#ch-6-3 .lv3{background:var(--lv3);}#ch-6-3 .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}#ch-6-3 .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}#ch-6-3 .core .lab::before{content:"★ 核心知识点：";}#ch-6-3 .core b{color:var(--ink);}#ch-6-3 .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}#ch-6-3 .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}#ch-6-3 .ex .lab::before{content:"💡 示例：";}#ch-6-3 .ex ul{margin:5px 0;padding-left:20px;}#ch-6-3 .ex li{margin:3px 0;}#ch-6-3 .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}#ch-6-3 .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}#ch-6-3 .warn .lab{font-weight:700;}#ch-6-3 table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}#ch-6-3 table.tbl th,#ch-6-3 table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}#ch-6-3 table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}#ch-6-3 table.tbl tr:nth-child(even) td{background:#fafcff;}#ch-6-3 .fig{margin:14px 0;text-align:center;}#ch-6-3 .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}#ch-6-3 .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}#ch-6-3 footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}#ch-6-3 #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}#ch-6-3 .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}@media(max-width:920px){#ch-6-3 nav.toc{display:none;}#ch-6-3 .container{display:block;}#ch-6-3 main{padding:16px;}#ch-6-3 .search-wrap{position:static;margin-top:10px;}#ch-6-3 .search-wrap input{width:100%;}}
 :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
     --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
   }*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}#ch-7 .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 70px}#ch-7 header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
-    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}#ch-7 header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}#ch-7 header.hero p{margin:0;opacity:.92;font-size:14px}#ch-7 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
-    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}#ch-7 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}#ch-7 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}#ch-7 h2 .num{background:var(--brand);color:#fff;width:32px;height:32px;border-radius:8px;
-    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}#ch-7 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}#ch-7 h4{font-size:14.5px;margin:14px 0 6px;color:#1e3a8a}#ch-7 p{margin:8px 0;color:var(--sub)}#ch-7 b{color:var(--ink)}#ch-7 ul,#ch-7 ol{margin:8px 0;padding-left:22px;color:var(--sub)}#ch-7 li{margin:5px 0}#ch-7 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}#ch-7 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}#ch-7 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}#ch-7 .mini p{margin:0;font-size:13.5px;color:#374151}#ch-7 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}#ch-7 th,#ch-7 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}#ch-7 th{background:#f1f5f9;color:#0f172a}#ch-7 td:first-child,#ch-7 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}#ch-7 .vm{background:var(--warnbg)}#ch-7 .ct{background:var(--okbg)}#ch-7 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}#ch-7 .kv b{color:var(--brand)}#ch-7 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}#ch-7 .tip b{color:#b45309}#ch-7 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-7 .threat b{color:var(--warn)}#ch-7 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}#ch-7 .safe b{color:var(--ok)}#ch-7 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){#ch-7 .map{grid-template-columns:1fr}}#ch-7 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}#ch-7 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}#ch-7 .silo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}#ch-7 .silo .mini{background:linear-gradient(135deg,#eef2ff,#f8fafc)}#ch-7 .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-top:22px}#ch-7 .toc h3{margin:0 0 10px;color:var(--brand)}#ch-7 .toc a{color:#2563eb;text-decoration:none}#ch-7 .toc a:hover{text-decoration:underline}#ch-7 .toc ol{padding-left:20px}#ch-7 .diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}#ch-7 .diagram svg{max-width:100%;height:auto}#ch-7 .cap{font-size:12.5px;color:#94a3b8;margin-top:6px}#ch-7 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:2px 10px;margin-right:6px}#ch-7 .pill.blue{background:var(--chip);color:#3730a3}#ch-7 .pill.green{background:var(--okbg);color:#15803d}#ch-7 .pill.red{background:var(--warnbg);color:#b91c1c}
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}.ch7 .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 70px}.ch7 header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}.ch7 header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}.ch7 header.hero p{margin:0;opacity:.92;font-size:14px}.ch7 .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}.ch7 section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}.ch7 h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}.ch7 h2 .num{background:var(--brand);color:#fff;width:32px;height:32px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}.ch7 h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}.ch7 h4{font-size:14.5px;margin:14px 0 6px;color:#1e3a8a}.ch7 p{margin:8px 0;color:var(--sub)}.ch7 b{color:var(--ink)}.ch7 ul,.ch7 ol{margin:8px 0;padding-left:22px;color:var(--sub)}.ch7 li{margin:5px 0}.ch7 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}.ch7 .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}.ch7 .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}.ch7 .mini p{margin:0;font-size:13.5px;color:#374151}.ch7 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}.ch7 th,.ch7 td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}.ch7 th{background:#f1f5f9;color:#0f172a}.ch7 td:first-child,.ch7 th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}.ch7 .vm{background:var(--warnbg)}.ch7 .ct{background:var(--okbg)}.ch7 .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}.ch7 .kv b{color:var(--brand)}.ch7 .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}.ch7 .tip b{color:#b45309}.ch7 .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}.ch7 .threat b{color:var(--warn)}.ch7 .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}.ch7 .safe b{color:var(--ok)}.ch7 .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}@media(max-width:640px){.ch7 .map{grid-template-columns:1fr}}.ch7 footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}.ch7 .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}.ch7 .silo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}.ch7 .silo .mini{background:linear-gradient(135deg,#eef2ff,#f8fafc)}.ch7 .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-top:22px}.ch7 .toc h3{margin:0 0 10px;color:var(--brand)}.ch7 .toc a{color:#2563eb;text-decoration:none}.ch7 .toc a:hover{text-decoration:underline}.ch7 .toc ol{padding-left:20px}.ch7 .diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}.ch7 .diagram svg{max-width:100%;height:auto}.ch7 .cap{font-size:12.5px;color:#94a3b8;margin-top:6px}.ch7 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:2px 10px;margin-right:6px}.ch7 .pill.blue{background:var(--chip);color:#3730a3}.ch7 .pill.green{background:var(--okbg);color:#15803d}.ch7 .pill.red{background:var(--warnbg);color:#b91c1c}
 </style>
 </head>
 <body>
@@ -329,37 +347,18 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
   <aside class="sidebar" id="sidebar">
     <div class="side-head">复习目录 · 2025 考纲 1–7 章</div>
     <nav class="toc" id="toc">
-<div class="group"><div class="group-label">一、云计算概述</div><a class="nav-item active" data-target="1"><span class="nav-num">1</span><span class="nav-ttl">云计算概述</span></a></div>
+<div class="group"><div class="group-label">一、云计算概述</div><a class="nav-item active" data-target="1-1"><span class="nav-num">1.1</span><span class="nav-ttl">1.1云计算的概念及发展</span></a><a class="nav-item" data-target="1-2"><span class="nav-num">1.2</span><span class="nav-ttl">1.2云计算的服务模式</span></a><a class="nav-item" data-target="1-3"><span class="nav-num">1.3</span><span class="nav-ttl">1.3云计算的部署模式</span></a><a class="nav-item" data-target="1-4"><span class="nav-num">1.4</span><span class="nav-ttl">1.4云计算的特点及优势</span></a></div>
 <div class="group"><div class="group-label">二、云计算关键技术</div><a class="nav-item" data-target="2-1"><span class="nav-num">2.1</span><span class="nav-ttl">虚拟化技术</span></a><a class="nav-item" data-target="2-2"><span class="nav-num">2.2</span><span class="nav-ttl">分布式技术</span></a><a class="nav-item" data-target="2-3"><span class="nav-num">2.3</span><span class="nav-ttl">SDN 与 NFV</span></a></div>
 <div class="group"><div class="group-label">三、典型云计算平台</div><a class="nav-item" data-target="3-1"><span class="nav-num">3.1</span><span class="nav-ttl">Google 云计算</span></a><a class="nav-item" data-target="3-2"><span class="nav-num">3.2</span><span class="nav-ttl">亚马逊 AWS</span></a><a class="nav-item" data-target="3-3"><span class="nav-num">3.3</span><span class="nav-ttl">华为云</span></a><a class="nav-item" data-target="3-4"><span class="nav-num">3.4</span><span class="nav-ttl">百度云</span></a><a class="nav-item" data-target="3-5"><span class="nav-num">3.5</span><span class="nav-ttl">云平台选择比较</span></a></div>
 <div class="group"><div class="group-label">四、面向服务的分布式计算</div><a class="nav-item" data-target="4-1"><span class="nav-num">4.1</span><span class="nav-ttl">Web 文档服务</span></a><a class="nav-item" data-target="4-2"><span class="nav-num">4.2</span><span class="nav-ttl">Web 服务与协议</span></a><a class="nav-item" data-target="4-3"><span class="nav-num">4.3</span><span class="nav-ttl">面向服务架构 SOA</span></a><a class="nav-item" data-target="4-4"><span class="nav-num">4.4</span><span class="nav-ttl">微服务架构</span></a></div>
 <div class="group"><div class="group-label">五、云计算数据中心</div><a class="nav-item" data-target="5-1"><span class="nav-num">5.1</span><span class="nav-ttl">数据中心概念特征</span></a><a class="nav-item" data-target="5-2"><span class="nav-num">5.2</span><span class="nav-ttl">数据中心关键服务</span></a><a class="nav-item" data-target="5-3"><span class="nav-num">5.3</span><span class="nav-ttl">绿色节能技术</span></a><a class="nav-item" data-target="5-4"><span class="nav-num">5.4</span><span class="nav-ttl">容灾备份</span></a></div>
-<div class="group"><div class="group-label">六、云计算安全</div><a class="nav-item" data-target="6"><span class="nav-num">6</span><span class="nav-ttl">云安全</span></a></div>
-<div class="group"><div class="group-label">七、云计算产业发展</div><a class="nav-item" data-target="7"><span class="nav-num">7</span><span class="nav-ttl">产业应用与发展</span></a></div>
+<div class="group"><div class="group-label">六、云计算安全</div><a class="nav-item" data-target="6-1"><span class="nav-num">6.1</span><span class="nav-ttl">云安全概念与威胁</span></a><a class="nav-item" data-target="6-2"><span class="nav-num">6.2</span><span class="nav-ttl">安全防护与策略</span></a><a class="nav-item" data-target="6-3"><span class="nav-num">6.3</span><span class="nav-ttl">身份授权与访问管理</span></a></div>
+<div class="group"><div class="group-label">七、云计算产业发展</div><a class="nav-item" data-target="7-1"><span class="nav-num">7.1</span><span class="nav-ttl">7.1中国云计算产业发展现状</span></a><a class="nav-item" data-target="7-2"><span class="nav-num">7.2</span><span class="nav-ttl">7.2云计算的行业应用</span></a><a class="nav-item" data-target="7-3"><span class="nav-num">7.3</span><span class="nav-ttl">7.3云计算发展及挑战</span></a></div>
     </nav>
   </aside>
   <div class="overlay" id="overlay"></div>
   <main class="content" id="content">
-<section class="chapter active" id="ch-1">
-
-
-<header class="hero">
-  <h1>1.0 云计算概述 · 详细讲解</h1>
-  <p>云计算的概念与发展、服务模式、部署模式、特点与优势（核心 · 掌握）｜ 备考要点 + 对比 + 典型案例</p>
-  <span class="badge">考纲要求：掌握</span>
-</header>
-
-<div class="toc">
-  <b>目录</b>：&nbsp;
-  <a href="#s1">1.1 概念及发展</a> ｜
-  <a href="#s2">1.2 服务模式</a> ｜
-  <a href="#s3">1.3 部署模式</a> ｜
-  <a href="#s4">1.4 特点及优势</a>
-</div>
-
-<!-- ========== 1.1 ========== -->
-<section id="s1">
-  <h2><span class="num">1.1</span>云计算的概念及发展</h2>
+<section class="chapter ch1 active" id="ch-1-1"><div class="ch-head"><span class="ch-num">1.1</span><span class="ch-ttl">1.1云计算的概念及发展</span></div>
 
   <h3>一、什么是云计算（定义）</h3>
   <div class="kv">
@@ -420,7 +419,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 
 <!-- ========== 1.2 ========== -->
 <section id="s2">
-  <h2><span class="num">1.2</span>云计算的服务模式</h2>
+  </section>
+<section class="chapter ch1" id="ch-1-2"><div class="ch-head"><span class="ch-num">1.2</span><span class="ch-ttl">1.2云计算的服务模式</span></div>
   <p>服务模式回答的是"<b>云把哪一层交给你来管</b>"。从底层到上层，抽象程度递增、用户运维负担递减：</p>
 
   <div class="flow">
@@ -484,7 +484,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 
 <!-- ========== 1.3 ========== -->
 <section id="s3">
-  <h2><span class="num">1.3</span>云计算的部署模式</h2>
+  </section>
+<section class="chapter ch1" id="ch-1-3"><div class="ch-head"><span class="ch-num">1.3</span><span class="ch-ttl">1.3云计算的部署模式</span></div>
   <p>部署模式回答的是"<b>云建在谁的地盘、给谁用</b>"，即云基础设施的归属、位置与访问范围。</p>
 
   <h3>① 公共云（Public Cloud）</h3>
@@ -545,7 +546,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 
 <!-- ========== 1.4 ========== -->
 <section id="s4">
-  <h2><span class="num">1.4</span>云计算的特点及优势</h2>
+  </section>
+<section class="chapter ch1" id="ch-1-4"><div class="ch-head"><span class="ch-num">1.4</span><span class="ch-ttl">1.4云计算的特点及优势</span></div>
 
   <h3>一、核心特征（在实际应用中的体现）</h3>
   <div class="card-grid">
@@ -589,10 +591,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 
 <footer>云计算概述（1.1–1.4）详细讲解 ｜ 配合《2025考纲》与《核心知识点详解》使用 · 备考专用</footer>
 
-
 </section>
-<section class="chapter" id="ch-2-1">
-
+<section class="chapter" id="ch-2-1"><div class="ch-head"><span class="ch-num">2.1</span><span class="ch-ttl">虚拟化技术</span></div>
 
 <header class="hero">
   <h1>2.1 虚拟化技术 · 详细讲解</h1>
@@ -782,10 +782,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 </section>
 
 <footer>本讲解对应考纲 2.1 虚拟化技术（掌握）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
-
 </section>
-<section class="chapter" id="ch-2-2">
-
+<section class="chapter" id="ch-2-2"><div class="ch-head"><span class="ch-num">2.2</span><span class="ch-ttl">分布式技术</span></div>
 
 <header class="hero">
   <h1>2.2 分布式技术 · 详细讲解</h1>
@@ -1047,10 +1045,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 </section>
 
 <footer>本讲解对应考纲 2.2 分布式技术（掌握）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
-
 </section>
-<section class="chapter" id="ch-2-3">
-
+<section class="chapter" id="ch-2-3"><div class="ch-head"><span class="ch-num">2.3</span><span class="ch-ttl">SDN 与 NFV</span></div>
 
 <header class="hero">
   <h1>2.3 软件定义网络和网络功能虚拟化 · 详细讲解</h1>
@@ -1281,15 +1277,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 </section>
 
 <footer>本讲解对应考纲 2.3 软件定义网络和网络功能虚拟化等网络技术（掌握）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
-
 </section>
-<section class="chapter" id="ch-3-1">
-
-<header>
-  <h1>3.1 Google云计算 · 详解复习卡</h1>
-  <div class="sub">考纲要求：📗 熟悉 ｜ 配套《湖南省数字技术应用能力水平考试（2025版）》云计算·典型平台章节</div>
-</header>
-<main>
+<section class="chapter" id="ch-3-1"><div class="ch-head"><span class="ch-num">3.1</span><span class="ch-ttl">Google 云计算</span></div>
 
 <div class="kp">
   <h3>一、背景及起源 <span class="badge">熟悉</span></h3>
@@ -1406,31 +1395,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
   </div>
 </div>
 
-</main>
-<footer>本复习卡依据《湖南省数字技术应用能力水平考试大纲 · 2025版》整理 ｜ 3.1 Google云计算（熟悉级）｜ 仅供个人学习使用</footer>
-
 </section>
-<section class="chapter" id="ch-3-2">
-
-<header class="top">
-  <h1>3.2 亚马逊云计算 AWS · 详细讲解</h1>
-  <div class="sub">2025 考纲「云计算」板块 · 典型云计算平台 · 要求层级：熟悉（lv2）</div>
-  <div class="legend"><span>📘 了解</span><span>📗 熟悉（本节点）</span><span>📕 掌握</span></div>
-</header>
-
-<div class="container">
-<nav class="toc">
-  <h2>本节导航</h2>
-  <a href="#s1">① AWS 概述</a>
-  <a href="#s2">② 基础存储架构 Dynamo</a>
-  <a href="#s3">③ 主要服务四件套</a>
-  <a href="#s4">④ Dynamo 的影响</a>
-  <a href="#key">考试重点</a>
-  <a href="#warn">易错点</a>
-  <a href="#sample">样题自测</a>
-</nav>
-
-<main>
+<section class="chapter" id="ch-3-2"><div class="ch-head"><span class="ch-num">3.2</span><span class="ch-ttl">亚马逊 AWS</span></div>
 <div class="chapter">
   <h3>3 典型云计算平台 · 3.2 亚马逊 AWS</h3>
 
@@ -1611,12 +1577,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     3. 简述 Dynamo 的「永远可写」是如何实现的。<br>
     <b>要点：</b>去中心化 + N 份复制（R+W&gt;N 的 Quorum）+ Hinted Handoff（副本节点宕机时由其他节点临时代管、恢复后移交）+ Gossip 故障检测，使部分节点失效时写入仍能被接受。
   </div>
-</main>
-</div>
-
 </section>
-<section class="chapter" id="ch-3-3">
-
+<section class="chapter" id="ch-3-3"><div class="ch-head"><span class="ch-num">3.3</span><span class="ch-ttl">华为云</span></div>
 
 <header class="hero">
   <h1>3.3 华为云 · 详细讲解</h1>
@@ -1802,10 +1764,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 </section>
 
 <footer>本讲解对应考纲 3.3 华为云（熟悉）｜ 配合《完整复习手册》《核心知识点详解》使用效果更佳</footer>
-
 </section>
-<section class="chapter" id="ch-3-4">
-
+<section class="chapter" id="ch-3-4"><div class="ch-head"><span class="ch-num">3.4</span><span class="ch-ttl">百度云</span></div>
 
   <header>
     <h1>3.4 百度云</h1>
@@ -1926,13 +1886,8 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
     复习卡片 · 对应《云计算》考试大纲 3.4 百度云 · 内容基于课堂讲解整理，数值型图表为相对成熟度示意，非精确统计。
   </footer>
 
-
 </section>
-<section class="chapter" id="ch-3-5">
-
-<header class="top"><h1>3.5 典型云平台的选择与比较 · 详解</h1><div class="sub">湖南省数字技术应用能力水平考试（2025考纲）· 云计算 第3章 · 标注「📗 熟悉」（命题重点）</div></header>
-
-<main>
+<section class="chapter" id="ch-3-5"><div class="ch-head"><span class="ch-num">3.5</span><span class="ch-ttl">云平台选择比较</span></div>
 
 <div class="toc">
 <b>本页目录</b>：一、为什么要“选” · 二、常见云服务平台全景 · 三、平台对比的七大维度 · 四、需求→平台 决策框架 · 五、考试要点与样题
@@ -2084,11 +2039,8 @@ A. 阿里云　B. <b>百度智能云（飞桨/Apollo）</b>　C. <b>华为云（
 </div>
 
 <footer>本页依据《湖南省数字技术应用能力水平考试大纲（2025版）》云计算第3章 3.5 整理 · 与《完整复习手册》《数字技术应用能力复习》配套 · 仅供个人学习使用</footer>
-</main>
-
 </section>
-<section class="chapter" id="ch-4-1">
-
+<section class="chapter" id="ch-4-1"><div class="ch-head"><span class="ch-num">4.1</span><span class="ch-ttl">Web 文档服务</span></div>
   <header>
     <h1>4.1 Web文档服务</h1>
     <p class="sub">第四章 面向服务的分布式计算 · <span class="badge">掌握要求：熟悉</span></p>
@@ -2284,10 +2236,8 @@ A. 阿里云　B. <b>百度智能云（飞桨/Apollo）</b>　C. <b>华为云（
   </div>
 
   <footer>整理自 4.1 Web文档服务 · 配套复习卡片 · 建议结合 4.2 Web服务与 SOAP/REST 一起复习</footer>
-
 </section>
-<section class="chapter" id="ch-4-2">
-
+<section class="chapter" id="ch-4-2"><div class="ch-head"><span class="ch-num">4.2</span><span class="ch-ttl">Web 服务与协议</span></div>
 
 <header class="hero">
   <h1>4.2 Web 服务与协议</h1>
@@ -2654,10 +2604,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 </section>
 
 <footer>4.2 Web 服务与协议 · 复习讲义 · 建议结合「核心知识点详解」配套练习</footer>
-
 </section>
-<section class="chapter" id="ch-4-3">
-
+<section class="chapter" id="ch-4-3"><div class="ch-head"><span class="ch-num">4.3</span><span class="ch-ttl">面向服务架构 SOA</span></div>
 
 <header class="hero">
   <h1>4.3 面向服务的体系结构（SOA）· 详细讲解</h1>
@@ -2861,10 +2809,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 
 <footer>技术考试复习 · 4.3 面向服务的体系结构（SOA）· 详细讲解 · 与 2.x / 3.x 系列风格一致</footer>
 
-
 </section>
-<section class="chapter" id="ch-4-4">
-
+<section class="chapter" id="ch-4-4"><div class="ch-head"><span class="ch-num">4.4</span><span class="ch-ttl">微服务架构</span></div>
 
 <header class="hero">
   <h1>4.4 微服务的体系结构 · 详细讲解</h1>
@@ -3195,10 +3141,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 </section>
 
 <footer>本讲解对应考纲 4.4 微服务的体系结构（掌握）｜ 配合《2.2 分布式技术》《完整复习手册》《核心知识点详解》使用效果更佳</footer>
-
 </section>
-<section class="chapter" id="ch-5-1">
-
+<section class="chapter" id="ch-5-1"><div class="ch-head"><span class="ch-num">5.1</span><span class="ch-ttl">数据中心概念特征</span></div>
 
 <header class="hero">
   <h1>5.1 云计算数据中心的概念及特征</h1>
@@ -3416,10 +3360,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 
 <footer>5.1 云计算数据中心的概念及特征 · 详细讲解（与《完整复习手册》《核心知识点详解》配套）</footer>
 
-
 </section>
-<section class="chapter" id="ch-5-2">
-
+<section class="chapter" id="ch-5-2"><div class="ch-head"><span class="ch-num">5.2</span><span class="ch-ttl">数据中心关键服务</span></div>
 
 <header class="hero">
   <h1>5.2 数据中心提供的关键服务和技术 · 详细讲解</h1>
@@ -3635,10 +3577,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 
 <footer>5.2 数据中心提供的关键服务和技术 · 配套《云计算基础知识及应用》考纲（2025版）｜ 了解层次</footer>
 
-
 </section>
-<section class="chapter" id="ch-5-3">
-
+<section class="chapter" id="ch-5-3"><div class="ch-head"><span class="ch-num">5.3</span><span class="ch-ttl">绿色节能技术</span></div>
 
 <header class="hero">
   <h1>5.3 绿色节能技术 · 详细讲解</h1>
@@ -3857,10 +3797,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 </section>
 
 <footer>云计算技术考试 · 配套讲解 · 5.3 绿色节能技术 ｜ 建议结合 2.1 虚拟化、3.x 主流云一起复习</footer>
-
 </section>
-<section class="chapter" id="ch-5-4">
-
+<section class="chapter" id="ch-5-4"><div class="ch-head"><span class="ch-num">5.4</span><span class="ch-ttl">容灾备份</span></div>
 
   <header class="top">
     <h1>5.4 容灾备份 · 复习卡片<span class="badge">了解</span></h1>
@@ -4012,146 +3950,373 @@ DELETE /users/1001  →  204 No Content</code></pre>
   </section>
 
   <footer>复习卡片 · 5.4 容灾备份 · 依据 2025 考纲（了解层级）整理</footer>
-
 </section>
-<section class="chapter" id="ch-6">
+<section class="chapter" id="ch-6-1"><div class="ch-head"><span class="ch-num">6.1</span><span class="ch-ttl">云安全概念与威胁</span></div>
+<!-- ============ 一、定义与常见威胁 ============ -->
+<section class="section" id="c61a">
+  <div class="section-head"><div class="num">6.1</div><h2>一、云安全的定义与常见威胁</h2></div>
 
-<div class="progress" id="progress"></div>
-<header class="top">
-  <h1>第六章 云安全 · 详细讲解</h1>
-  <div class="sub">云安全的概念及重要性 ｜ 常见安全防护措施与安全策略 ｜ 身份·授权·访问管理（IAM）｜ 数据加密与密钥管理（配合《复习指南》使用）</div>
-  <div class="legend">
-    <span>📘 了解</span><span>📗 熟悉</span><span>📕 掌握</span>
-    <span>★ = 本知识点最该记住的核心</span><span>💡 = 对应示例</span>
+  <div class="kp" id="d61">
+    <div class="kp-head"><h4>6.1.1 云安全的定义</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>云安全（Cloud Security）= 一套融合"技术 + 策略 + 运维"的体系，用于保护云计算环境中的数据、应用、平台、基础设施与账号，保障其机密性、完整性、可用性（CIA 三性），并应对云计算特有风险（多租户、虚拟化、弹性、责任共担）带来的安全挑战。</b></div>
+    <p class="note">要理解云安全，先要把握三层含义：</p>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>① 目标层面（CIA 三性）：</b>安全的本质目标始终围绕三件事——
+        <br>· <b>机密性（Confidentiality）：</b>数据"不该看的人看不到"（防泄露）；
+        <br>· <b>完整性（Integrity）：</b>数据"不被篡改、不被伪造"（防篡改）；
+        <br>· <b>可用性（Availability）：</b>授权用户"需要时能正常用"（防中断）。
+        <br>这三者被统称为 <b>CIA 三元组</b>，是信息安全（含云安全）最基础、最常考的概念。</li>
+      <li><b>② 范围层面：</b>云安全覆盖"云上的一切"——底层物理机房与网络、虚拟化层、操作系统、数据库、应用、API、账号与密钥，乃至客户的使用配置。它不是某一款"云防火墙"产品，而是一整套防护组合。</li>
+      <li><b>③ 风险层面：</b>云安全在传统信息安全基础上，叠加了云计算独有的新问题：多租户隔离、资源弹性伸缩、责任在厂商与客户间分割、数据跨境等。这是它与传统 IT 安全的根本区别。</li>
+    </ul>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>传统安全 vs 云安全（对比记忆）：</b>传统安全以"边界防火墙 + 内网可信"为核心假设；云安全因为资源弹性伸缩、边界模糊、访问来自任意地点，更强调"<b>身份即边界</b>"和"<b>零信任</b>（默认不信任，持续验证）"。</li>
+        <li><b>一句话范围示例：</b>云安全既管"别人能不能偷看你的数据库"（机密性），也管"数据被改了没"（完整性），还管"服务卡顿打不开怎么办"（可用性）。</li>
+      </ul>
+    </div>
   </div>
-  <div class="search-wrap"><input id="search" type="text" placeholder="🔍 搜索知识点…"></div>
-</header>
 
-<div class="container">
-<nav class="toc" id="toc">
-  <h2>目录</h2>
-  <a href="#c61" class="sec">6.1 云安全概念及重要性</a>
-  <a href="#c61a" class="sub">定义与常见威胁</a><a href="#c61b" class="sub">复杂性与多样性</a><a href="#c61c" class="sub">云安全的重要性</a>
-  <a href="#c62" class="sec">6.2 防护措施与安全策略</a>
-  <a href="#c62a" class="sub">核心架构安全</a><a href="#c62b" class="sub">责任共担模型</a><a href="#c62c" class="sub">IaaS/PaaS/SaaS防护</a>
-  <a href="#c62d" class="sub">应用安全策略</a><a href="#c62e" class="sub">评估CSP安全性</a>
-  <a href="#c63" class="sec">6.3 身份·授权·访问管理</a>
-  <a href="#c63a" class="sub">基本概念</a><a href="#c63b" class="sub">重要性</a><a href="#c63c" class="sub">实现方式</a>
-  <a href="#c64" class="sec">6.4 数据加密与密钥管理</a>
-  <a href="#c64a" class="sub">加密的必要性</a><a href="#c64b" class="sub">常见加密方法</a><a href="#c64c" class="sub">密钥管理</a>
-</nav>
+  <div class="kp" id="d62">
+    <div class="kp-head"><h4>6.1.2 常见云安全威胁（CSA 云安全威胁清单）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>最高频的云威胁：配置错误（Misconfiguration）、身份凭证泄露/弱认证、不安全的接口与 API、账户劫持、内部威胁、共享技术漏洞、数据泄露与丢失、拒绝服务（DoS/DDoS）、滥用云服务。</b></div>
+    <p class="note">下面按"威胁 → 本质 → 典型场景"逐条拆解，建议优先记前 6 项（考试高频）：</p>
+    <table class="tbl">
+      <tr><th style="width:18%">威胁</th><th style="width:42%">说明（本质）</th><th style="width:40%">典型场景</th></tr>
+      <tr><td><b>① 配置错误</b><br>Misconfiguration</td><td>存储桶/安全组/端口被错误开放为公网。<b>云上"头号"事故源</b>，且多属客户责任</td><td>对象存储设为公开可读，导致用户数据被全网爬取；数据库端口对 0.0.0.0/0 开放无密码</td></tr>
+      <tr><td><b>② 身份凭证泄露<br>/ 弱认证</b></td><td>密钥、密码、AccessKey/SecretKey 泄露，且无 MFA 保护</td><td>开发者把 AK/SK 提交到 GitHub，被恶意扫描利用来挖矿；长期密钥写进前端代码</td></tr>
+      <tr><td><b>③ 不安全的接口/API</b></td><td>API 未鉴权、未限流、存在越权/注入漏洞</td><td>越权接口可遍历他人订单 ID 获取隐私；未限流接口被刷爆</td></tr>
+      <tr><td><b>④ 账户劫持</b><br>Account Hijacking</td><td>通过钓鱼/撞库夺取管理员或用户账号</td><td>钓鱼邮件骗取控制台登录，进后台删库勒索</td></tr>
+      <tr><td><b>⑤ 内部威胁</b><br>（恶意/失误）</td><td>内部人员越权访问、数据外泄或误操作</td><td>离职员工带走数据；运维误删生产数据库</td></tr>
+      <tr><td><b>⑥ 共享技术漏洞</b></td><td>底层虚拟化/容器隔离被突破，跨租户越权</td><td>同宿主机"邻居"通过侧信道或漏洞读到你的内存数据</td></tr>
+      <tr><td><b>⑦ 数据泄露 / 丢失</b></td><td>数据被窃取，或误删、无备份导致永久丢失</td><td>勒索软件加密数据；误删库且无备份</td></tr>
+      <tr><td><b>⑧ 拒绝服务</b><br>DoS / DDoS</td><td>海量流量打满入口，导致服务不可用</td><td>大规模请求冲垮 Web 入口，业务停摆</td></tr>
+      <tr><td><b>⑨ 滥用云服务</b></td><td>用盗用的云资源做攻击跳板（挖矿、钓鱼、外发垃圾）</td><td>攻击者用盗用的账号对外发起攻击</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>配置错误示例：</b>某公司把云数据库 3306 端口对 0.0.0.0/0 开放且未设密码，被勒索组织拖库——这是"客户侧责任"，云服务商（CSP）不背锅。</li>
+        <li><b>凭证泄露示例：</b>把长期有效的 Secret Key 写进前端代码，等于把家门钥匙挂在门口任人取用。</li>
+      </ul>
+    </div>
+  </div>
 
-<main>
-<!-- ================= 6.1 ================= -->
+  <div class="kp" id="d62b">
+    <div class="kp-head"><h4>6.1.2（补）威胁全景与典型攻击链条</h4><span class="badge lv1">了解</span></div>
+    <p class="note">把上面 9 类威胁放进一张图，能直观看到云上风险"从外到内、由浅入深"的层次：</p>
+    <div class="fig">
+      <svg viewBox="0 0 680 330" role="img" aria-label="云安全威胁全景">
+        <!-- 中心云 -->
+        <ellipse cx="340" cy="165" rx="78" ry="48" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></ellipse>
+        <text x="340" y="160" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">云计算</text>
+        <text x="340" y="180" font-size="13" text-anchor="middle" fill="#1d4ed8">环境</text>
+        <!-- 外部威胁圈 -->
+        <g font-size="11.5" fill="#1f2a44">
+          <rect x="20" y="40" width="150" height="46" rx="8" fill="#fff7ed" stroke="#d97706"></rect>
+          <text x="95" y="60" text-anchor="middle" font-weight="700" fill="#9a3412">① 配置错误</text>
+          <text x="95" y="77" text-anchor="middle" fill="#9a3412">对外暴露资产</text>
+
+          <rect x="20" y="245" width="150" height="46" rx="8" fill="#fff7ed" stroke="#d97706"></rect>
+          <text x="95" y="265" text-anchor="middle" font-weight="700" fill="#9a3412">② 凭证泄露</text>
+          <text x="95" y="282" text-anchor="middle" fill="#9a3412">密钥/弱口令</text>
+
+          <rect x="510" y="40" width="150" height="46" rx="8" fill="#fee2e2" stroke="#dc2626"></rect>
+          <text x="585" y="60" text-anchor="middle" font-weight="700" fill="#b91c1c">③ 不安全 API</text>
+          <text x="585" y="77" text-anchor="middle" fill="#b91c1c">越权/未鉴权</text>
+
+          <rect x="510" y="245" width="150" height="46" rx="8" fill="#fee2e2" stroke="#dc2626"></rect>
+          <text x="585" y="265" text-anchor="middle" font-weight="700" fill="#b91c1c">④ 账户劫持</text>
+          <text x="585" y="282" text-anchor="middle" fill="#b91c1c">钓鱼/撞库</text>
+
+          <rect x="270" y="12" width="140" height="40" rx="8" fill="#ede9fe" stroke="#7c3aed"></rect>
+          <text x="340" y="37" text-anchor="middle" font-weight="700" fill="#6d28d9">⑧ DDoS / 拒服</text>
+
+          <rect x="270" y="280" width="140" height="40" rx="8" fill="#ede9fe" stroke="#7c3aed"></rect>
+          <text x="340" y="305" text-anchor="middle" font-weight="700" fill="#6d28d9">⑨ 滥用云服务</text>
+
+          <rect x="150" y="150" width="120" height="40" rx="8" fill="#dcfce7" stroke="#22a06b"></rect>
+          <text x="210" y="175" text-anchor="middle" font-weight="700" fill="#0f6b3c">⑤ 内部威胁</text>
+
+          <rect x="410" y="150" width="120" height="40" rx="8" fill="#dcfce7" stroke="#22a06b"></rect>
+          <text x="470" y="175" text-anchor="middle" font-weight="700" fill="#0f6b3c">⑥ 共享技术漏洞</text>
+        </g>
+        <!-- ⑦ 数据泄露在中心 -->
+        <text x="340" y="200" font-size="11" text-anchor="middle" fill="#b91c1c" font-weight="700">⑦ 数据泄露/丢失（结果）</text>
+        <!-- 连接线 -->
+        <g stroke="#94a3b8" stroke-width="1.4" fill="none">
+          <line x1="170" y1="63" x2="265" y2="140"></line>
+          <line x1="170" y1="268" x2="265" y2="190"></line>
+          <line x1="510" y1="63" x2="415" y2="140"></line>
+          <line x1="510" y1="268" x2="415" y2="190"></line>
+          <line x1="340" y1="52" x2="340" y2="117"></line>
+          <line x1="340" y1="278" x2="340" y2="213"></line>
+          <line x1="210" y1="150" x2="262" y2="158"></line>
+          <line x1="470" y1="150" x2="418" y2="158"></line>
+        </g>
+      </svg>
+      <div class="cap">图 6-1（6.1）云安全威胁全景：多数威胁最终都会指向"⑦ 数据泄露/丢失"这一结果</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>典型攻击链条：</b>开发者泄露 AK/SK（②）→ 攻击者拿到控制台权限 → 误配置的资源被利用（①）→ 提权劫持管理员账号（④）→ 拖库造成数据泄露（⑦）。可见威胁之间常常"连锁反应"。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 二、复杂性与多样性 ============ -->
+<section class="section" id="c61b">
+  <div class="section-head"><div class="num">6.1</div><h2>二、云计算环境中安全问题的复杂性与多样性</h2></div>
+
+  <div class="kp" id="d63">
+    <div class="kp-head"><h4>6.1.3 复杂性与多样性的来源</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>云安全"更复杂、更多样"的根本原因：边界消失、多租户共享、责任共担、资源弹性、合规跨境、攻击面叠加（虚拟化 + 容器 + API + 供应链）。这六个因素叠加，使云安全远难于传统 IT 安全。</b></div>
+    <p class="note">逐一理解每个来源为何"制造难度"：</p>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>① 边界模糊（去边界化）：</b>传统安全靠"内网可信、外网危险"划边界；云上访问来自任意终端、任意地点、任意网络，固定边界失效 → 必须转向"<b>零信任</b>"（默认不信任、持续验证）。</li>
+      <li><b>② 多租户隔离：</b>同一物理机/同一套虚拟化平台跑着多家客户的数据。隔离机制（虚拟化、容器、网络微隔离）一旦失效，就会"串门"，对底层技术安全提出极高要求。</li>
+      <li><b>③ 责任共担：</b>安全职责在 CSP 与客户之间分割，双方都容易以为"对方负责" → 出现"<b>责任真空</b>"（谁都没管的那块）。</li>
+      <li><b>④ 弹性与动态：</b>资源随时创建/销毁，资产盘点、日志审计、配置基线难以稳定，<b>影子 IT</b>（未被纳管的临时资源）丛生，攻击面随时变化。</li>
+      <li><b>⑤ 合规与数据主权：</b>数据可能落在境外机房，要同时满足等保、《网络安全法》《数据安全法》《个人信息保护法》以及境外的 GDPR 等多套法规，冲突时还需权衡。</li>
+      <li><b>⑥ 攻击面叠加：</b>IaaS 的虚拟化层、PaaS 的运行时、SaaS 的接口，再加第三方依赖/开源组件/供应链，攻击面比传统 IT 更广、更碎。</li>
+    </ul>
+    <div class="fig">
+      <svg viewBox="0 0 680 250" role="img" aria-label="复杂性六大来源">
+        <g font-size="12.5" fill="#fff" text-anchor="middle">
+          <rect x="30" y="30" width="180" height="64" rx="10" fill="#2563eb"></rect>
+          <text x="120" y="58" font-weight="700">① 边界模糊</text>
+          <text x="120" y="78">去边界 / 零信任</text>
+
+          <rect x="250" y="30" width="180" height="64" rx="10" fill="#0d9488"></rect>
+          <text x="340" y="58" font-weight="700">② 多租户隔离</text>
+          <text x="340" y="78">跨租户风险</text>
+
+          <rect x="470" y="30" width="180" height="64" rx="10" fill="#7c3aed"></rect>
+          <text x="560" y="58" font-weight="700">③ 责任共担</text>
+          <text x="560" y="78">责任真空</text>
+
+          <rect x="30" y="150" width="180" height="64" rx="10" fill="#d97706"></rect>
+          <text x="120" y="178" font-weight="700">④ 弹性动态</text>
+          <text x="120" y="198">影子 IT</text>
+
+          <rect x="250" y="150" width="180" height="64" rx="10" fill="#dc2626"></rect>
+          <text x="340" y="178" font-weight="700">⑤ 合规跨境</text>
+          <text x="340" y="198">多法规冲突</text>
+
+          <rect x="470" y="150" width="180" height="64" rx="10" fill="#0891b2"></rect>
+          <text x="560" y="178" font-weight="700">⑥ 攻击面叠加</text>
+          <text x="560" y="198">供应链/API</text>
+        </g>
+        <ellipse cx="340" cy="120" rx="0" ry="0" fill="none"></ellipse>
+      </svg>
+      <div class="cap">图 6-2（6.1）复杂性六大来源：六因素相互交织，使云安全难度倍增</div>
+    </div>
+  </div>
+
+  <div class="kp" id="d63b">
+    <div class="kp-head"><h4>6.1.4 复杂性在实践中的具体表现（"多样性"体现在哪）</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>多样性 = 同样的"上云"，不同服务模型（IaaS/PaaS/SaaS）、不同行业、不同部署形态（公有/私有/混合）面临的安全工作天差地别，不存在"一套方案包打天下"。</b></div>
+    <table class="tbl">
+      <tr><th>维度</th><th>带来的"多样性"</th><th>安全重心差异</th></tr>
+      <tr><td><b>服务模型不同</b></td><td>IaaS 客户要自己管 OS/补丁；SaaS 几乎全交给厂商</td><td>IaaS 重系统层，SaaS 重账号与使用配置</td></tr>
+      <tr><td><b>行业合规不同</b></td><td>金融/政务强合规，电商/个人应用相对宽松</td><td>前者要等保三级 + 密钥自管(BYOK)，后者可简化</td></tr>
+      <tr><td><b>部署形态不同</b></td><td>公有云、私有云、混合云</td><td>混合云要额外解决"跨云统一身份与策略"难题</td></tr>
+      <tr><td><b>数据敏感度不同</b></td><td>公开资料 vs 个人敏感信息 vs 国家机密</td><td>敏感数据需加密、脱敏、分级访问</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>多样性示例：</b>同样叫"上云"，用 IaaS 自己装系统（客户责任大、要会的多）和用 SaaS（只管账号）面临的安全工作量天差地别——这就是"多样性"。</li>
+        <li><b>复杂性示例：</b>一家跨国企业用公有云 + 本地私有云的混合架构，既要防外部攻击，又要满足"中国数据不出境、欧盟满足 GDPR"，还要统一身份——复杂度陡增。</li>
+      </ul>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>"复杂性与多样性"是云安全<b>区别于传统安全的核心特征</b>，答题时务必点出"责任共担 + 多租户 + 边界消失"这几个关键词，不能只泛泛说"网络有风险"。</div>
+  </div>
+</section>
+
+<!-- ============ 三、云安全的重要性 ============ -->
+<section class="section" id="c61c">
+  <div class="section-head"><div class="num">6.1</div><h2>三、云安全对于云计算的重要性</h2></div>
+
+  <div class="kp" id="d64">
+    <div class="kp-head"><h4>6.1.5 为什么云安全是云计算的"生命线"</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>没有安全就没有信任，没有信任就没有上云——云安全直接决定了云计算能否被采用、能否合规、能否持续运营。它是云计算的"生命线"。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>① 数据是核心资产：</b>云上集中存放大量敏感数据（用户隐私、商业机密、资金信息），一旦泄露代价极高——声誉受损、监管罚款、法律诉讼，往往不可逆。</li>
+      <li><b>② 业务连续性依赖可用性：</b>越来越多的核心业务跑在云上，一次 DDoS 或勒索导致的中断，直接转化为营收损失与客户流失。</li>
+      <li><b>③ 合规是硬约束：</b>金融、政务、医疗、教育等行业上云必须满足等保/行业监管，安全不达标就"不能上线"，云安全是准入门槛而非可选项。</li>
+      <li><b>④ 信任是采用前提：</b>企业是否敢把核心系统搬到云，取决于对云服务商安全能力的信任；安全事件会直接动摇整个市场的采用意愿。</li>
+      <li><b>⑤ 共享放大效应：</b>云的"多租户"特性意味着一处基础性漏洞可能影响大量客户，安全已成为云生态的公共基础设施。</li>
+    </ul>
+    <div class="fig">
+      <svg viewBox="0 0 680 200" role="img" aria-label="云安全重要性金字塔">
+        <polygon points="340,20 540,150 140,150" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></polygon>
+        <text x="340" y="70" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">信任（采用前提）</text>
+        <text x="340" y="98" font-size="12" text-anchor="middle" fill="#1d4ed8">↕</text>
+        <text x="340" y="120" font-size="12.5" font-weight="700" text-anchor="middle" fill="#1d4ed8">合规 · 可用性 · 数据资产</text>
+        <text x="340" y="142" font-size="12" text-anchor="middle" fill="#1d4ed8">云安全 = 生命线</text>
+        <line x1="140" y1="160" x2="540" y2="160" stroke="#94a3b8" stroke-width="1.5"></line>
+        <text x="140" y="180" font-size="11" text-anchor="middle" fill="#56607a">无安全 = 无信任</text>
+        <text x="540" y="180" font-size="11" text-anchor="middle" fill="#56607a">无信任 = 不上云</text>
+      </svg>
+      <div class="cap">图 6-3（6.1）云安全重要性：底层是生命线，向上支撑资产/合规/可用性，最顶层是信任</div>
+    </div>
+  </div>
+
+  <div class="kp" id="d64b">
+    <div class="kp-head"><h4>6.1.6 再强调：安全是"双方责任"，不是买云就自动安全</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>云安全的核心原则——责任共担：CSP 负责"云本身的安全"（底层基础设施、硬件、虚拟化），客户负责"云中的安全"（操作系统、应用、数据、身份与访问配置）。安全不会因为你买了云服务而自动生效。</b></div>
+    <table class="tbl">
+      <tr><th style="width:42%">云服务商（CSP）负责"云本身安全"</th><th style="width:58%">客户负责"云中安全"</th></tr>
+      <tr><td>物理机房、电力、网络骨干</td><td>自身业务系统、应用的漏洞与配置</td></tr>
+      <tr><td>虚拟化层 / Hypervisor</td><td>Guest OS、补丁、主机加固</td></tr>
+      <tr><td>底层硬件与存储可靠性</td><td>数据库中的数据、数据加密与备份策略</td></tr>
+      <tr><td>云控制台平台自身的安全</td><td>账号、密码、访问密钥、权限分配（IAM）</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 考试易错点（必考）：</span>无论哪种服务模型（IaaS/PaaS/SaaS），"<b>数据加密与客户端配置、身份管理</b>"始终属于<b>客户责任</b>——云厂商不会替你设好密码和权限。把"配置错误""密钥泄露"当成了"厂商的问题"，是考试中最典型的错误理解。</div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>一句话总结重要性：</b>云安全做不好 → 数据泄露/业务中断 → 不合规不能上线、客户不信任 → 云计算的价值（弹性、低成本、敏捷）就无从谈起。所以"安全是云计算的生命线"。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>6.1 云安全的概念及重要性 · 详细讲解（2025考纲）｜ 本节为《第六章 云安全》开篇，建议结合 6.2 防护措施、6.3 IAM、6.4 加密密钥管理 一起复习</footer>
+</section>
+<section class="chapter" id="ch-6-2"><div class="ch-head"><span class="ch-num">6.2</span><span class="ch-ttl">安全防护与策略</span></div>
+
+<!-- ================= 0 概念辨析 ================= -->
+<section class="section" id="c00">
+  <div class="section-head"><div class="num">0</div><h2>概念辨析：常见安全防护措施 vs 安全策略</h2></div>
+
+  <div class="chapter" id="c00a"><h3>先分清两个常被混用的词</h3>
+    <div class="kp" id="d00">
+      <div class="kp-head"><h4>6.2-0 防护措施 与 安全策略 的关系</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>"安全防护措施"是"用什么手段防"（技术/管理的落地动作）；"安全策略"是"按什么规则防"（制度/原则/基线）。策略决定措施，措施落实策略——两者缺一不可。</b></div>
+      <div class="grid2">
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>🔧 安全防护措施（防护手段）</h4></div>
+          <p class="note">看得见、摸得着的"动作与工具"：</p>
+          <ul class="note">
+            <li><b>技术措施：</b>防火墙、WAF、加密、防病毒、入侵检测、漏洞扫描、访问控制列表。</li>
+            <li><b>管理措施：</b>安全培训、应急预案演练、账号审批、日志审计制度。</li>
+            <li>特点：可部署、可检测、可量化（如"每周漏扫一次"）。</li>
+          </ul>
+        </div>
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>📜 安全策略（防护规则）</h4></div>
+          <p class="note">看不见但指导一切的"原则与要求"：</p>
+          <ul class="note">
+            <li><b>总体策略：</b>最小权限、纵深防御、默认拒绝、零信任。</li>
+            <li><b>具体策略：</b>"所有对外端口必须审批""密钥不得硬编码""离职 24 小时内回收账号"。</li>
+            <li>特点：是制度文件，决定"该上哪些措施"。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>策略→措施的关系：</b>策略规定"敏感数据必须加密存储"（规则）→ 措施就是"对数据库开启 TDE 透明加密 + 使用 KMS 托管密钥"（动作）。没有策略，措施会"为了做而做"；没有措施，策略只是空话。</li>
+        </ul>
+      </div>
+      <div class="tip"><span class="lab">📌 考试答题套路：</span>题目问"安全策略"时答<b>原则/制度/基线</b>（如最小权限、责任共担）；问"防护措施"时答<b>具体技术/管理手段</b>（如 WAF、加密、审计）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 1 核心架构安全 ================= -->
 <section class="section" id="c61">
-  <div class="section-head"><div class="num">6.1</div><h2>云安全的概念及重要性</h2></div>
+  <div class="section-head"><div class="num">一</div><h2>云计算核心架构安全（纵深防御）</h2></div>
 
-  <div class="chapter" id="c61a"><h3>一、云安全的定义与常见威胁</h3>
-
+  <div class="chapter" id="c61a"><h3>1.1 纵深防御（Defense in Depth）分层架构</h3>
     <div class="kp" id="d61">
-      <div class="kp-head"><h4>6.1.1 云安全的定义</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云安全 = 保护云计算环境（数据、应用、平台、基础设施、账号）的机密性、完整性、可用性（CIA三性），并融合云计算特有风险（多租户、虚拟化、责任共担）而形成的安全体系</b>。</div>
-      <p class="note">云安全不是某一款产品，而是一套"技术 + 策略 + 运维"的组合：既包括传统信息安全（网络安全、主机安全、数据安全），又叠加了云特有的责任共担、多租户隔离、弹性资源等新问题。</p>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>传统安全 vs 云安全：</b>传统安全以"边界防火墙"为核心；云安全因为资源弹性伸缩、边界模糊，更强调"身份即边界"和"零信任"。</li>
-          <li><b>范围示例：</b>云安全既管"别人能不能偷看你的数据库"（机密性），也管"数据被改了没"（完整性），还管"服务卡顿打不开"（可用性）。</li>
-        </ul>
+      <div class="kp-head"><h4>6.2.1 核心架构安全 = 七层纵深防御</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>云安全不能只靠单点防护，而要从"物理层 → 网络层 → 主机/计算层 → 应用层 → 数据层 → 身份层 → 安全运维层"层层设防；任意一层被突破，仍有其他层兜底。</b></div>
+      <div class="fig">
+        <svg viewBox="0 0 720 360" role="img" aria-label="云安全纵深防御七层模型">
+          <!-- 层叠梯形 -->
+          <polygon points="60,40 660,40 700,330 20,330" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6"/>
+          <!-- 各层 -->
+          <g font-size="13" text-anchor="middle">
+            <!-- 物理 -->
+            <rect x="90" y="46" width="540" height="34" rx="8" fill="#1e3a8a"/>
+            <text x="360" y="68" fill="#fff" font-weight="700">物理安全 · 机房/电力/防灾/门禁（多为 CSP 负责）</text>
+            <!-- 网络 -->
+            <rect x="110" y="92" width="500" height="34" rx="8" fill="#2563eb"/>
+            <text x="360" y="114" fill="#fff" font-weight="700">网络安全 · VPC/安全组/微隔离/WAF/DDoS</text>
+            <!-- 主机 -->
+            <rect x="130" y="138" width="460" height="34" rx="8" fill="#0d9488"/>
+            <text x="360" y="160" fill="#fff" font-weight="700">主机/计算安全 · 镜像加固/补丁/堡垒机/HIDS</text>
+            <!-- 应用 -->
+            <rect x="150" y="184" width="420" height="34" rx="8" fill="#7c3aed"/>
+            <text x="360" y="206" fill="#fff" font-weight="700">应用安全 · 安全SDLC/API鉴权/漏洞扫描</text>
+            <!-- 数据 -->
+            <rect x="170" y="230" width="380" height="34" rx="8" fill="#d97706"/>
+            <text x="360" y="252" fill="#fff" font-weight="700">数据安全 · 加密/脱敏/备份/DLP</text>
+            <!-- 身份 -->
+            <rect x="190" y="276" width="340" height="34" rx="8" fill="#dc2626"/>
+            <text x="360" y="298" fill="#fff" font-weight="700">身份安全 · IAM/MFA/最小权限/SSO</text>
+          </g>
+          <!-- 运维侧 -->
+          <rect x="540" y="46" width="150" height="264" rx="8" fill="#334155" opacity="0.92"/>
+          <text x="615" y="120" fill="#fff" font-size="13" font-weight="700" writing-mode="tb" transform="rotate(0 615 120)" text-anchor="middle">安全运维：日志审计 / SIEM / SOC / 应急响应</text>
+          <text x="615" y="320" fill="#fff" font-size="11" text-anchor="middle">贯穿全层的"眼睛"</text>
+        </svg>
+        <div class="cap">图 6-2 七层纵深防御：安全运维（最右）横向贯穿所有层，提供持续监测与响应</div>
       </div>
-    </div>
-
-    <div class="kp" id="d62">
-      <div class="kp-head"><h4>6.1.2 常见云安全威胁（CSA 云安全威胁清单）</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>最高频的云威胁：配置错误（Misconfiguration）、身份凭证泄露/弱认证、不安全的接口与 API、账户劫持、内部威胁、共享技术漏洞、数据泄露与丢失</b>。</div>
       <table class="tbl">
-        <tr><th>威胁</th><th>说明</th><th>典型场景</th></tr>
-        <tr><td><b>配置错误</b></td><td>存储桶/安全组/端口被错误开放为公网（云上"头号"事故源）</td><td>对象存储设为公开可读，导致用户数据被全网爬取</td></tr>
-        <tr><td><b>身份凭证泄露 / 弱认证</b></td><td>密钥、密码、AK/SK 泄露，无 MFA 保护</td><td>开发者把 AccessKey 提交到 GitHub，被恶意扫描利用挖矿</td></tr>
-        <tr><td><b>不安全的接口/API</b></td><td>API 未鉴权、未限流、存在越权漏洞</td><td>越权接口可遍历他人订单 ID 获取隐私</td></tr>
-        <tr><td><b>账户劫持</b></td><td>钓鱼/撞库夺取管理员账号</td><td>钓鱼邮件骗取控制台登录，删库勒索</td></tr>
-        <tr><td><b>内部威胁（恶意/失误）</b></td><td>内部人员越权访问或误操作</td><td>离职员工带走数据，或误删生产库</td></tr>
-        <tr><td><b>共享技术漏洞</b></td><td>虚拟化/容器隔离被突破，跨租户越权</td><td>同宿主机的邻居通过侧信道或漏洞读到你的内存</td></tr>
-        <tr><td><b>数据泄露 / 数据丢失</b></td><td>被窃取或误删、未备份</td><td>勒索软件加密数据；误删且无备份</td></tr>
-        <tr><td><b>拒绝服务（DoS/DDoS）</b></td><td>流量打满导致服务不可用</td><td>大规模请求冲垮 Web 入口</td></tr>
-        <tr><td><b>滥用云服务</b></td><td>用云资源做攻击跳板（挖矿、钓鱼）</td><td>攻击者用盗用的账号发起对外攻击</td></tr>
+        <tr><th style="width:18%">层级</th><th style="width:30%">防护重点</th><th style="width:52%">常见措施（含云原生服务）</th></tr>
+        <tr><td>物理安全</td><td>机房、电力、防灾、人员进出</td><td>门禁、视频监控、冗余供电/制冷、防灾演练（绝大多数为 CSP 责任）</td></tr>
+        <tr><td>网络安全</td><td>隔离与访问控制</td><td><b>VPC 私有网络</b>、安全组/ACL、微隔离、<b>WAF 应用防火墙</b>、DDoS 高防、VPN/专线</td></tr>
+        <tr><td>主机/计算</td><td>系统与运行环境</td><td>镜像/模板加固、及时打补丁、<b>堡垒机</b>、HIDS 主机入侵检测、容器镜像扫描</td></tr>
+        <tr><td>应用安全</td><td>代码与接口</td><td>安全开发生命周期（SDLC）、<b>API 鉴权与限流</b>、代码/依赖漏洞扫描、RASP</td></tr>
+        <tr><td>数据安全</td><td>数据全生命周期</td><td>静态/传输加密、脱敏、备份与容灾、<b>DLP 数据防泄露</b>、分类分级</td></tr>
+        <tr><td>身份安全</td><td>人/程序身份</td><td><b>IAM</b>、强制 MFA、最小权限、SSO、临时凭证（STS）</td></tr>
+        <tr><td>安全运维</td><td>监测、审计与响应</td><td>集中日志、<b>SIEM/SOC</b>、态势感知、应急响应预案、定期渗透测试</td></tr>
       </table>
       <div class="ex"><span class="lab"></span>
         <ul>
-          <li><b>配置错误示例：</b>某公司将云数据库 3306 端口对 0.0.0.0/0 开放且无密码，被勒索组织拖库——这是"客户侧责任"，CSP 不背锅。</li>
-          <li><b>凭证泄露示例：</b>把长期有效的 Secret Key 写进前端代码，等于把家门钥匙挂在门口。</li>
+          <li><b>纵深防御示例：</b>黑客利用 0day 拿下 Web 应用（应用层破）→ 仍受网络微隔离限制拿不到数据库网段 → 即便拖到数据也是密文（数据安全）→ 异常行为被 SIEM 告警（运维层）。多层拦截，单点失守不等于全面沦陷。</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="chapter" id="c61b"><h3>二、云计算环境中安全问题的复杂性与多样性</h3>
-    <div class="kp" id="d63">
-      <div class="kp-head"><h4>6.1.3 复杂性与多样性的来源</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云安全"更复杂"的根本原因：边界消失、多租户共享、责任共担、资源弹性、合规跨境、攻击面叠加（虚拟化+容器+API+供应链）</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>边界模糊：</b>传统"内网可信"假设失效，访问来自任意终端/任意地点 → 必须"零信任"（默认不信任、持续验证）。</li>
-        <li><b>多租户隔离：</b>同一物理机跑多家客户的数据，隔离一旦失效就会"串门"，对底层虚拟化/容器安全提出极高要求。</li>
-        <li><b>责任共担：</b>安全职责在 CSP 与客户之间分割，双方都以为对方负责 → 出现"责任真空"。</li>
-        <li><b>弹性与动态：</b>资源随时创建/销毁，资产盘点、日志审计、配置基线难以稳定，影子 IT（未纳管资源）丛生。</li>
-        <li><b>合规与数据主权：</b>数据可能落在境外机房，要同时满足等保、GDPR、《数据安全法》《个人信息保护法》等多套法规。</li>
-        <li><b>攻击面叠加：</b>IaaS 的虚拟化、PaaS 的运行时、SaaS 的接口、加上第三方依赖/供应链，攻击面比传统 IT 更广。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>多样性示例：</b>同样叫"上云"，用 IaaS 自己装系统（客户责任大）和用 SaaS（几乎全交给厂商）面临的安全工作天差地别——这就是"多样性"。</li>
-        </ul>
+  <div class="chapter" id="c61b"><h3>1.2 零信任架构与微隔离</h3>
+    <div class="kp" id="d62">
+      <div class="kp-head"><h4>6.2.2 云原生时代的两大关键思想</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>① 零信任（Zero Trust）："永不信任，持续验证"——不再默认"内网即安全"，每次访问都需认证、授权、加密。② 微隔离（Micro-segmentation）：把大网络切成细粒度安全域，东西向流量也受控，限制攻击横向移动。</b></div>
+      <div class="grid2">
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>🔐 零信任三大原则</h4></div>
+          <ul class="note">
+            <li><b>身份即边界：</b>用身份代替 IP/网段作为信任根。</li>
+            <li><b>持续验证：</b>每次请求都重新评估风险（设备、位置、行为）。</li>
+            <li><b>最小权限 + 默认拒绝：</b>只放行明确授权的访问。</li>
+          </ul>
+        </div>
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>🧱 微隔离的价值</h4></div>
+          <ul class="note">
+            <li>把 Web 区、App 区、DB 区彻底隔开，即使 Web 被控也无法"平推"到数据库。</li>
+            <li>常用手段：安全组、K8s NetworkPolicy、服务网格 mTLS。</li>
+            <li>直接支撑"纵深防御"的横向拦截。</li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div class="chapter" id="c61c"><h3>三、云安全对于云计算的重要性</h3>
-    <div class="kp" id="d64">
-      <div class="kp-head"><h4>6.1.4 为什么云安全是云计算的"生命线"</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>没有安全就没有信任，没有信任就没有上云——云安全决定了云计算能否被采用、能否合规、能否持续运营</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>数据是核心资产：</b>云上集中存放大量敏感数据，一旦泄露代价极高（声誉、罚款、诉讼）。</li>
-        <li><b>业务连续性依赖可用性：</b>云是业务关键底座，DDoS/勒索导致中断即直接损失营收。</li>
-        <li><b>合规硬约束：</b>金融、政务、医疗等行业上云必须满足等保/行业监管，否则不能上线。</li>
-        <li><b>信任基础：</b>企业是否敢把核心系统搬到云，取决于对 CSP 安全能力的信任。</li>
-      </ul>
-      <div class="warn"><span class="lab">⚠ 考试易错点：</span>云安全不是"买了云就自动安全"。CSP 负责"云本身安全"（基础设施），客户负责"云中安全"（配置、数据、身份）——安全是双方共同责任。</div>
+      <div class="warn"><span class="lab">⚠ 考试易错点：</span>传统安全以"边界防火墙"为核心、默认内网可信；云安全<b>边界模糊、资源弹性</b>，因此更强调"身份即边界"和"零信任"，不能再假设"进了内网就安全"。</div>
     </div>
   </div>
 </section>
 
-<!-- ================= 6.2 ================= -->
 <section class="section" id="c62">
-  <div class="section-head"><div class="num">6.2</div><h2>常见安全防护措施及相关安全策略</h2></div>
+  <div class="section-head"><div class="num">二</div><h2>责任共担模型（Shared Responsibility）</h2></div>
 
-  <div class="chapter" id="c62a"><h3>一、云计算核心架构安全（纵深防御）</h3>
-    <div class="kp" id="d65">
-      <div class="kp-head"><h4>6.2.1 核心架构安全分层</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云安全遵循"纵深防御（Defense in Depth）"：从物理层 → 网络层 → 主机/计算层 → 应用层 → 数据层 → 身份层 → 安全运维，层层设防、任一单层被破仍有其他层兜底</b>。</div>
-      <table class="tbl">
-        <tr><th>层级</th><th>防护重点</th><th>常见措施</th></tr>
-        <tr><td>物理安全</td><td>机房、电力、防灾</td><td>门禁、监控、冗余供电（多为 CSP 负责）</td></tr>
-        <tr><td>网络安全</td><td>隔离与访问控制</td><td>VPC 私有网络、安全组、微隔离、WAF、DDoS 防护</td></tr>
-        <tr><td>主机/计算安全</td><td>系统与应用运行环境</td><td>镜像加固、补丁、堡垒机、主机入侵检测 HIDS</td></tr>
-        <tr><td>应用安全</td><td>代码与接口</td><td>安全开发生命周期（SDLC）、API 鉴权、漏洞扫描</td></tr>
-        <tr><td>数据安全</td><td>数据全生命周期</td><td>加密、脱敏、备份、DLP 数据防泄露</td></tr>
-        <tr><td>身份安全</td><td>人/程序身份</td><td>IAM、MFA、最小权限、SSO</td></tr>
-        <tr><td>安全运维</td><td>监测与响应</td><td>日志审计、SIEM/SOC、态势感知、应急响应</td></tr>
-      </table>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>纵深防御示例：</b>即使黑客拿到一个 Web 应用权限（应用层破），仍要面对网络微隔离（拿不到数据库网段）、数据加密（读到的也是密文）、审计告警（行为被记录）——多层拦截。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="chapter" id="c62b"><h3>二、责任共担模型（Shared Responsibility）</h3>
-    <div class="kp" id="d66">
-      <div class="kp-head"><h4>6.2.2 云安全责任如何划分</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>核心规则：CSP 负责"云本身的安全"（Hypervisor、网络、物理）；客户负责"云中的安全"（操作系统、应用、数据、身份与访问配置）。服务模型越往上（IaaS→PaaS→SaaS），CSP 承担越多，客户责任越少</b>。</div>
+  <div class="chapter" id="c62a"><h3>2.1 安全责任如何划分</h3>
+    <div class="kp" id="d63">
+      <div class="kp-head"><h4>6.2.3 云安全责任分割规则</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>CSP 负责"云本身的安全"（Hypervisor、网络、物理、底层硬件）；客户负责"云中的安全"（操作系统、应用、数据、身份与访问配置）。服务模型越往上（IaaS→PaaS→SaaS），CSP 承担越多，客户责任越少。</b></div>
       <div class="fig">
         <svg viewBox="0 0 680 360" role="img" aria-label="责任共担模型">
-          <!-- legend -->
           <rect x="40" y="20" width="16" height="16" rx="3" fill="#2563eb"></rect>
           <text x="62" y="33" font-size="13" fill="#1f2a44">CSP 负责的"云本身安全"</text>
           <rect x="300" y="20" width="16" height="16" rx="3" fill="#f59e0b"></rect>
@@ -4160,9 +4325,9 @@ DELETE /users/1001  →  204 No Content</code></pre>
           <text x="130" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">IaaS</text>
           <rect x="40" y="70" width="180" height="216" fill="#f59e0b" rx="8"></rect>
           <rect x="40" y="286" width="180" height="54" fill="#2563eb" rx="8"></rect>
-          <text x="130" y="180" font-size="12.5" fill="#fff" text-anchor="middle">客户：OS / 应用</text>
-          <text x="130" y="200" font-size="12.5" fill="#fff" text-anchor="middle">/ 数据 / 网络配置</text>
-          <text x="130" y="318" font-size="12.5" fill="#fff" text-anchor="middle">CSP：虚拟化/硬件/机房</text>
+          <text x="130" y="172" font-size="12.5" fill="#fff" text-anchor="middle">客户：Guest OS / 应用</text>
+          <text x="130" y="192" font-size="12.5" fill="#fff" text-anchor="middle">/ 数据 / 网络配置</text>
+          <text x="130" y="315" font-size="12.5" fill="#fff" text-anchor="middle">CSP：虚拟化/硬件/机房</text>
           <!-- PaaS -->
           <text x="350" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">PaaS</text>
           <rect x="260" y="70" width="180" height="135" fill="#f59e0b" rx="8"></rect>
@@ -4178,284 +4343,689 @@ DELETE /users/1001  →  204 No Content</code></pre>
           <text x="570" y="232" font-size="12" fill="#fff" text-anchor="middle">CSP：应用/运行时/</text>
           <text x="570" y="250" font-size="12" fill="#fff" text-anchor="middle">OS/网络/硬件</text>
         </svg>
-        <div class="cap">图 6-1 责任共担模型：越往上（SaaS）CSP 责任越大</div>
+        <div class="cap">图 6-3 责任共担模型：越往上（SaaS）CSP 责任占比越大，客户剩余责任越少</div>
       </div>
-      <div class="warn"><span class="lab">⚠ 考试易错点：</span>无论哪种服务模型，"<b>数据加密与客户端配置、身份管理</b>"始终属于客户责任——CSP 不会替你设好密码和权限。</div>
+      <table class="tbl">
+        <tr><th>服务模型</th><th>CSP 负责</th><th>客户负责</th></tr>
+        <tr><td><b>IaaS</b></td><td>物理、网络基础设施、Hypervisor/虚拟化、部分网络控制</td><td>Guest OS、中间件、应用、数据、身份、安全组配置、补丁</td></tr>
+        <tr><td><b>PaaS</b></td><td>在 IaaS 基础上 + 运行时、数据库引擎、OS</td><td>应用代码、数据内容、访问密钥、配置、部分身份</td></tr>
+        <tr><td><b>SaaS</b></td><td>几乎全部（应用、运行时、OS、网络、物理）</td><td>账号与权限、使用配置、终端安全、数据分类、DLP 策略</td></tr>
+      </table>
     </div>
   </div>
 
-  <div class="chapter" id="c62c"><h3>三、IaaS / PaaS / SaaS 安全防护措施与策略要求</h3>
+  <div class="chapter" id="c62b"><h3>2.2 "责任真空"陷阱</h3>
+    <div class="kp" id="d64">
+      <div class="kp-head"><h4>6.2.4 最容易被忽视的安全盲区</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>双方都以为对方负责 → 出现"责任真空"（无人防护的灰色地带）。最典型：数据加密与密钥管理、身份与访问配置、客户端安全基线——无论哪种模型都始终属于客户责任。</b></div>
+      <div class="warn"><span class="lab">⚠ 考试必记：</span>无论 IaaS/PaaS/SaaS，以下<b>永远属于客户责任</b>：
+        <ul style="margin:6px 0 0;padding-left:20px;">
+          <li><b>数据加密与密钥管理</b>（CSP 不会替你设密码/密钥策略）；</li>
+          <li><b>身份、认证与访问配置</b>（账号、权限、MFA 由客户自己管）；</li>
+          <li><b>客户端配置与合规落地</b>（如安全组是否开 0.0.0.0/0、是否启用审计）。</li>
+        </ul>
+      </div>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>责任真空示例：</b>某公司将云数据库 3306 端口对 0.0.0.0/0 开放且无密码 → 被勒索拖库。这属于"客户侧网络配置责任"，CSP 不背锅；但客户又误以为"上云就有 CSP 兜底"，于是放任不管 → 事故。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 IaaS/PaaS/SaaS ================= -->
+<section class="section" id="c63">
+  <div class="section-head"><div class="num">三</div><h2>IaaS / PaaS / SaaS 安全防护措施与策略要求</h2></div>
+
+  <div class="chapter" id="c63a"><h3>3.1 IaaS（基础设施即服务）安全防护</h3>
+    <div class="kp" id="d65">
+      <div class="kp-head"><h4>6.2.5 IaaS：防护重心在"系统层"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>IaaS 把"裸"的计算/存储/网络给你，客户几乎要自己管 Guest OS 及以上所有东西。防护重点：主机加固、补丁、网络安全组、堡垒机、磁盘加密、操作审计。</b></div>
+      <table class="tbl">
+        <tr><th style="width:24%">防护维度</th><th>措施与策略要求</th></tr>
+        <tr><td>网络安全</td><td>用 <b>VPC</b> 隔离；安全组遵循<b>最小化</b>（默认拒绝，只开必要端口）；禁止 0.0.0.0/0 全开；用 WAF/DDoS 高防保护公网入口</td></tr>
+        <tr><td>主机加固</td><td>使用<b>加固镜像/模板</b>；及时打系统补丁（开启自动更新或定期巡检）；关闭无用服务与端口；部署 <b>HIDS</b> 主机入侵检测</td></tr>
+        <tr><td>访问控制</td><td>通过<b>堡垒机</b>统一运维入口；SSH 禁止密码登录改密钥；禁用 root 直接远程；操作全程审计录像</td></tr>
+        <tr><td>数据安全</td><td>云盘/数据库开启<b>静态加密（TDE/KMS）</b>；定期快照与异地备份；敏感配置文件加密存储</td></tr>
+        <tr><td>账号与密钥</td><td>AccessKey 最小权限、定期轮转、不写入代码；使用 STS 临时凭证；开启操作日志（CloudTrail/操作审计）</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>IaaS 场景：</b>自己用云服务器搭网站——你得自己装防火墙、打系统补丁、配安全组、管数据库密码、做磁盘加密。相当于"租了带水电的毛坯房，装修安防全自己来"。</li>
+        </ul>
+      </div>
+      <div class="tip"><span class="lab">📌 IaaS 策略基线口诀：</span>网不过宽、机必加固、补及时打、盘必加密、管走堡垒、钥要轮转。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63b"><h3>3.2 PaaS（平台即服务）安全防护</h3>
+    <div class="kp" id="d66">
+      <div class="kp-head"><h4>6.2.6 PaaS：防护重心在"应用与配置"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>PaaS 帮你管好了 OS 和运行时，你只管"应用代码 + 数据 + 配置"。防护重点：安全开发生命周期、依赖/组件漏洞扫描、密钥管理、API 安全、配置基线。</b></div>
+      <table class="tbl">
+        <tr><th style="width:24%">防护维度</th><th>措施与策略要求</th></tr>
+        <tr><td>应用安全(SDLC)</td><td>把安全嵌入开发全流程：需求安全评审、代码审计、<b>依赖/组件漏洞扫描</b>（防 Log4j 类供应链漏洞）、上线前安全测试</td></tr>
+        <tr><td>密钥管理</td><td>密钥/证书统一进 <b>KMS/密钥库</b>，<b>严禁硬编码</b>进代码与镜像；使用环境变量或密钥服务动态注入；支持 BYOK 自管密钥</td></tr>
+        <tr><td>API 安全</td><td>所有 API 必须鉴权（OAuth2/签名）；限流防刷；输入校验防注入；敏感接口加审计；网关统一管控</td></tr>
+        <tr><td>配置基线</td><td><b>默认安全配置</b>（关闭公开访问、最小权限）；CI/CD 设<b>安全门禁</b>（扫描不过不让发布）；环境隔离（dev/test/prod）</td></tr>
+        <tr><td>运行时</td><td>函数计算/容器启用最小权限运行身份；限制出站连接；监控异常调用</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>PaaS 场景：</b>用云数据库 + 函数计算写业务——底层系统由厂商管，你只需管好访问密钥、SQL 权限、代码里的依赖库版本。相当于"租了精装房带物业，你只管布置软装与门锁密码"。</li>
+        </ul>
+      </div>
+      <div class="warn"><span class="lab">⚠ 易错点：</span>PaaS 看似"省心"，但<b>应用层漏洞（注入、越权、依赖漏洞）和密钥泄露仍由客户负责</b>。把 AK 写进前端代码、用含漏洞的旧版组件，是 PaaS 最常见翻车点。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63c"><h3>3.3 SaaS（软件即服务）安全防护</h3>
     <div class="kp" id="d67">
-      <div class="kp-head"><h4>6.2.3 三类服务模型的安全重点</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>IaaS 重"系统层"，PaaS 重"应用与配置"，SaaS 重"使用与账号"——防护重心随责任转移而不同</b>。</div>
+      <div class="kp-head"><h4>6.2.7 SaaS：防护重心在"账号与使用"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>SaaS 几乎全由厂商运维，客户最该管的是"人、账号、权限、外发内容"。防护重点：SSO、强制 MFA、最小权限、DLP 数据防泄露、租户隔离、登录与操作审计。</b></div>
+      <table class="tbl">
+        <tr><th style="width:24%">防护维度</th><th>措施与策略要求</th></tr>
+        <tr><td>身份与认证</td><td>对接企业 <b>SSO</b>（统一身份）；<b>强制 MFA</b>（防账号被盗）；禁用共享账号；弱密码策略</td></tr>
+        <tr><td>权限管理</td><td><b>最小权限 + RBAC</b>；按角色授权；<b>账号生命周期管理</b>（入职开通、调岗变更、离职 24h 内回收）</td></tr>
+        <tr><td>数据防泄露</td><td>配置 <b>DLP</b> 策略限制文件外发/下载/打印；敏感操作二次审批；水印溯源</td></tr>
+        <tr><td>租户隔离</td><td>确认厂商多租户<b>逻辑隔离</b>充分（跨租户越权是 SaaS 头号风险）；关注厂商隔离架构说明</td></tr>
+        <tr><td>审计与合规</td><td>开启登录与操作审计日志；定期访问复查；用 <b>CASB</b>（云访问安全代理）统一管控多 SaaS</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>SaaS 场景：</b>用在线办公/邮箱/CRM——你重点管好员工账号（开 MFA）、按岗授权、限制文件外发。相当于"用别人运营好的酒店，你只管房卡发给谁、能进哪间房"。</li>
+        </ul>
+      </div>
+      <div class="tip"><span class="lab">📌 SaaS 客户三件事：</span>① 账号谁能用（SSO+MFA）；② 能看/能下什么（最小权限+DLP）；③ 出事能追谁（审计+CASB）。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63d"><h3>3.4 三类模型防护对比总表</h3>
+    <div class="kp" id="d68">
+      <div class="kp-head"><h4>6.2.8 一表看清责任与防护重心</h4><span class="badge lv2">熟悉</span></div>
       <table class="tbl">
         <tr><th>维度</th><th>IaaS（基础设施）</th><th>PaaS（平台）</th><th>SaaS（软件）</th></tr>
-        <tr><td>客户主要<br>责任面</td><td>Guest OS、应用、数据、网络 ACL</td><td>应用代码、数据、配置</td><td>账号、权限、使用配置、DLP</td></tr>
-        <tr><td>关键防护措施</td><td>镜像/主机加固、及时打补丁、安全组最小化、堡垒机、磁盘加密、操作审计</td><td>安全 SDLC、依赖/组件漏洞扫描、密钥管理、API 安全、配置基线</td><td>SSO、强制 MFA、最小权限、数据防泄露、登录与操作审计</td></tr>
-        <tr><td>策略要求</td><td>禁止 0.0.0.0/0 全开；定期漏洞扫描；变更需审批</td><td>默认安全配置；密钥不得硬编码；CI/CD 安全门禁</td><td>账号生命周期管理（入职/离职回收）；外发内容管控</td></tr>
+        <tr><td>客户主责面</td><td>Guest OS、应用、数据、网络 ACL</td><td>应用代码、数据、配置</td><td>账号、权限、使用配置、DLP</td></tr>
+        <tr><td>关键防护</td><td>镜像/主机加固、补丁、安全组最小化、堡垒机、磁盘加密、操作审计</td><td>安全 SDLC、依赖扫描、密钥管理、API 安全、配置基线</td><td>SSO、强制 MFA、最小权限、DLP、登录与操作审计</td></tr>
+        <tr><td>策略要求</td><td>禁止 0.0.0.0/0 全开；定期漏洞扫描；变更需审批</td><td>默认安全配置；密钥不硬编码；CI/CD 安全门禁</td><td>账号生命周期管理；外发内容管控；定期权限复查</td></tr>
+        <tr><td>客户工作量</td><td><b>最大</b>（自建自运维）</td><td>中等</td><td><b>最小</b>（主要管人）</td></tr>
       </table>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>IaaS 示例：</b>自己用云服务器搭网站——你得自己装防火墙、打系统补丁、管数据库密码。</li>
-          <li><b>PaaS 示例：</b>用云上的数据库/函数计算——你只需管好访问密钥和 SQL 权限，底层系统由厂商管。</li>
-          <li><b>SaaS 示例：</b>用在线办公/邮箱——你重点管好员工账号、开启 MFA、限制文件外发。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="chapter" id="c62d"><h3>四、不同云计算应用的安全策略与部署重点</h3>
-    <div class="kp" id="d68">
-      <div class="kp-head"><h4>6.2.4 按业务场景定策略</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>没有"放之四海皆准"的安全策略，应按应用特征（是否对外、是否含敏感数据、是否强合规）确定部署重点</b>。</div>
-      <table class="tbl">
-        <tr><th>应用类型</th><th>部署重点</th></tr>
-        <tr><td>对外 Web / 电商</td><td>WAF + DDoS 防护 + HTTPS + 防爬防刷 + 应用层限流</td></tr>
-        <tr><td>数据密集型 / 大数据</td><td>静态加密 + 备份容灾 + 脱敏 + 访问分级 + 跨区域复制</td></tr>
-        <tr><td>金融 / 政务（强合规）</td><td>等保三级 + 专属/私有云或专区 + 密钥自管(BYOK) + 全量审计</td></tr>
-        <tr><td>IoT / 边缘</td><td>设备身份认证 + 设备证书 + 网关加密 + 固件签名校验</td></tr>
-        <tr><td>DevOps / 研发</td><td>CI/CD 安全门禁 + 密钥不进代码库 + 镜像扫描 + 最小权限流水线</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="chapter" id="c62e"><h3>五、如何评估 CSP（云服务提供商）安全性</h3>
-    <div class="kp" id="d69">
-      <div class="kp-head"><h4>6.2.5 评估 CSP 安全性的维度</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>看"证书 + 透明度 + 数据主权 + SLA + 加密可控 + 事件响应"六方面；优先选择有第三方审计背书、合规齐全的厂商</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>合规认证：</b>ISO 27001、SOC 2 Type II、PCI DSS、国内等保三级/四级、CSA STAR——这些是"第三方替你审过"的依据。</li>
-        <li><b>安全透明度：</b>是否公开安全白皮书、合规报告（如 SOC 2 报告）、是否接受渗透测试与漏洞披露。</li>
-        <li><b>数据位置与主权：</b>数据中心地域是否可选、是否满足数据不出境/本地化要求。</li>
-        <li><b>SLA 与持久性：</b>可用性 SLA（如 99.95%）、数据持久性（如 99.999999999%）、故障赔付条款。</li>
-        <li><b>加密与密钥控制：</b>是否支持客户自管密钥（BYOK / HYOK）、是否提供 KMS/HSM。</li>
-        <li><b>事件响应：</b>是否有明确的安全事件通知时效（如 24 小时内告知）、应急与溯源能力。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>评估示例：</b>金融客户选型时，先卡"是否具备等保三级 + 金融云专区 + 支持 BYOK"，再比 SLA 与事故赔付，最后看透明度报告。</li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= 6.3 ================= -->
-<section class="section" id="c63">
-  <div class="section-head"><div class="num">6.3</div><h2>身份、授权和访问管理（IAM）</h2></div>
-
-  <div class="chapter" id="c63a"><h3>一、基本概念：认证 · 授权 · MFA</h3>
-    <div class="kp" id="d610">
-      <div class="kp-head"><h4>6.3.1 身份认证 / 权限管理 / MFA</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>认证（Authentication）回答"你是谁"；授权（Authorization）回答"你能干什么"；MFA（多因素认证）用两种以上因素证明身份，防止单点凭证泄露</b>。</div>
-      <table class="tbl">
-        <tr><th>概念</th><th>本质问题</th><th>常见手段</th></tr>
-        <tr><td>身份认证<br>(Authentication)</td><td>你是谁？</td><td>密码、数字证书、生物特征、硬件 Token、单点登录</td></tr>
-        <tr><td>权限管理 / 授权<br>(Authorization)</td><td>你能做什么？</td><td>RBAC（基于角色）、ABAC（基于属性）、最小权限、默认拒绝</td></tr>
-        <tr><td>MFA 多因素认证</td><td>再加一道保险</td><td>知识(密码) + 持有(手机/令牌) + 固有(指纹/人脸)</td></tr>
-      </table>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>认证三要素（MFA 的"因素"）：</b>① 你知道的（密码/PIN）；② 你拥有的（手机/硬件 Key/U 盾）；③ 你本身的（指纹/人脸/声纹）。满足两类即"多因素"。</li>
-        <li><b>最小权限原则：</b>只给完成工作所必需的最小权限，默认拒绝一切未明确放开的访问。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>MFA 示例：</b>登录时输密码（知识）+ 手机验证码/Authenticator 动态码（持有），即使密码泄露也登不进。</li>
-          <li><b>RBAC 示例：</b>"只读分析师"角色只能查数据不能删，新员工按角色批量授权，离职一键回收。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="chapter" id="c63b"><h3>二、IAM 在云计算环境中的重要性</h3>
-    <div class="kp" id="d611">
-      <div class="kp-head"><h4>6.3.2 为什么云上 IAM 是"第一道防线"</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>云时代"身份即边界"：传统防火墙守不住分散访问，凭证泄露又是头号云威胁，因此管好"谁能访问什么"比以往任何时候都关键</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li>云资源由 API/控制台远程访问，没有固定内网边界 → 身份成为唯一可靠的访问控制点。</li>
-        <li>大量攻击（账户劫持、AK 泄露）都从"冒用合法身份"入手，IAM 是阻断此类攻击的核心。</li>
-        <li>集中式 IAM 带来统一认证、统一授权、统一审计，满足合规对"账号可追溯"的要求。</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="chapter" id="c63c"><h3>三、IAM 的实现方式</h3>
-    <div class="kp" id="d612">
-      <div class="kp-head"><h4>6.3.3 云中 IAM 的落地手段</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>主流实现：目录服务(AD/Entra ID) + SSO(单点登录) + 联合身份(Federation) + 角色/策略(临时凭证 STS) + 特权访问管理(PAM) + 零信任持续验证</b>。</div>
-      <div class="fig">
-        <svg viewBox="0 0 680 300" role="img" aria-label="SSO与MFA认证流程">
-          <defs>
-            <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
-              <path d="M0,0 L8,3 L0,6 Z" fill="#475569"></path>
-            </marker>
-          </defs>
-          <rect x="20" y="110" width="120" height="70" rx="10" fill="#eaf1ff" stroke="#2563eb"></rect>
-          <text x="80" y="138" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">用户</text>
-          <text x="80" y="158" font-size="11" text-anchor="middle" fill="#475569">浏览器/App</text>
-
-          <rect x="190" y="110" width="140" height="70" rx="10" fill="#eaf1ff" stroke="#2563eb"></rect>
-          <text x="260" y="135" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">身份提供商 IdP</text>
-          <text x="260" y="155" font-size="11" text-anchor="middle" fill="#475569">SSO / 目录(AD)</text>
-
-          <rect x="400" y="40" width="150" height="60" rx="10" fill="#fff7ed" stroke="#d97706"></rect>
-          <text x="475" y="66" font-size="12.5" font-weight="700" text-anchor="middle" fill="#9a3412">MFA 校验</text>
-          <text x="475" y="86" font-size="11" text-anchor="middle" fill="#9a3412">手机/令牌/生物</text>
-
-          <rect x="400" y="170" width="150" height="60" rx="10" fill="#eefaf2" stroke="#22a06b"></rect>
-          <text x="475" y="196" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0f6b3c">签发令牌</text>
-          <text x="475" y="216" font-size="11" text-anchor="middle" fill="#0f6b3c">STS 临时凭证</text>
-
-          <rect x="600" y="110" width="70" height="70" rx="10" fill="#f3e8ff" stroke="#7c3aed"></rect>
-          <text x="635" y="138" font-size="12" font-weight="700" text-anchor="middle" fill="#6d28d9">云资源</text>
-          <text x="635" y="158" font-size="10.5" text-anchor="middle" fill="#6d28d9">按策略鉴权</text>
-
-          <line x1="140" y1="145" x2="185" y2="145" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="260" y1="125" x2="395" y2="78" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="260" y1="155" x2="395" y2="195" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="550" y1="100" x2="585" y2="130" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="550" y1="200" x2="585" y2="160" stroke="#475569" stroke-width="2" marker-end="url(#ar)"></line>
-          <text x="300" y="100" font-size="10.5" fill="#475569">① 发起登录</text>
-          <text x="300" y="215" font-size="10.5" fill="#475569">② 通过则签发</text>
-        </svg>
-        <div class="cap">图 6-2 典型云身份流程：SSO 统一认证 + MFA 加强 + 临时凭证(STS)访问云资源</div>
-      </div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>SSO（单点登录）：</b>一次登录通行多个系统，常用 SAML、OIDC 协议，减少密码散落。</li>
-        <li><b>联合身份（Federation）：</b>用企业自有 IdP（如 AD）信任云厂商，员工用公司账号登云，离职即失效。</li>
-        <li><b>角色与 STS 临时凭证：</b>程序/人临时代入角色拿到短期有效的临时密钥，避免长期 AK 泄露风险。</li>
-        <li><b>PAM（特权访问管理）：</b>对管理员等高权限账号做审批、录像、时限控制。</li>
-        <li><b>零信任：</b>"从不信任、持续验证"，每次访问都重新评估身份、设备、环境风险。</li>
-      </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>最佳实践示例：</b>用企业微信/AD 做 SSO 登录云控制台，强制 MFA，给运维开"仅工作时间、仅特定网段、需审批"的临时角色，全程留痕。</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 6.4 ================= -->
+<!-- ================= 4 应用安全策略 ================= -->
 <section class="section" id="c64">
-  <div class="section-head"><div class="num">6.4</div><h2>数据加密与密钥管理</h2></div>
+  <div class="section-head"><div class="num">四</div><h2>不同云计算应用的安全策略与部署重点</h2></div>
 
-  <div class="chapter" id="c64a"><h3>一、数据在存储、传输、使用中应用加密的必要性</h3>
-    <div class="kp" id="d613">
-      <div class="kp-head"><h4>6.4.1 加密三态：静态 / 传输中 / 使用中</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>数据有"三种状态"需分别防护：静态（存储）防磁盘/备份泄露；传输中（网络）防窃听/中间人；使用中（计算/内存）防运行时泄露——"全态加密"才是真正闭环</b>。</div>
-      <div class="fig">
-        <svg viewBox="0 0 680 230" role="img" aria-label="数据加密三态">
-          <rect x="20" y="40" width="190" height="150" rx="12" fill="#eaf1ff" stroke="#2563eb"></rect>
-          <text x="115" y="75" font-size="14" font-weight="700" text-anchor="middle" fill="#1d4ed8">① 静态 (At Rest)</text>
-          <text x="115" y="105" font-size="12" text-anchor="middle" fill="#475569">磁盘 / 数据库</text>
-          <text x="115" y="125" font-size="12" text-anchor="middle" fill="#475569">/ 备份 / 对象存储</text>
-          <text x="115" y="160" font-size="11.5" text-anchor="middle" fill="#0f6b3c">手段：AES-256 磁盘</text>
-          <text x="115" y="178" font-size="11.5" text-anchor="middle" fill="#0f6b3c">加密 / 透明加密</text>
+  <div class="kp" id="d69">
+    <div class="kp-head"><h4>6.2.9 没有"放之四海皆准"的策略</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>应按应用特征——是否对外暴露、是否含敏感数据、是否强合规、是否海量设备——来确定"部署在哪、重点防什么"。</b></div>
+  </div>
 
-          <rect x="245" y="40" width="190" height="150" rx="12" fill="#eefaf2" stroke="#22a06b"></rect>
-          <text x="340" y="75" font-size="14" font-weight="700" text-anchor="middle" fill="#0f6b3c">② 传输中 (In Transit)</text>
-          <text x="340" y="105" font-size="12" text-anchor="middle" fill="#475569">网络 / API</text>
-          <text x="340" y="125" font-size="12" text-anchor="middle" fill="#475569">/ 跨机房</text>
-          <text x="340" y="160" font-size="11.5" text-anchor="middle" fill="#0f6b3c">手段：TLS 1.2+/HTTPS</text>
-          <text x="340" y="178" font-size="11.5" text-anchor="middle" fill="#0f6b3c">/ VPN / 专线</text>
-
-          <rect x="470" y="40" width="190" height="150" rx="12" fill="#fff7ed" stroke="#d97706"></rect>
-          <text x="565" y="75" font-size="14" font-weight="700" text-anchor="middle" fill="#9a3412">③ 使用中 (In Use)</text>
-          <text x="565" y="105" font-size="12" text-anchor="middle" fill="#475569">内存 / 计算</text>
-          <text x="565" y="125" font-size="12" text-anchor="middle" fill="#475569">/ 运行时处理</text>
-          <text x="565" y="160" font-size="11.5" text-anchor="middle" fill="#9a3412">手段：机密计算</text>
-          <text x="565" y="178" font-size="11.5" text-anchor="middle" fill="#9a3412">/ 同态加密(前沿)</text>
-
-          <line x1="210" y1="115" x2="243" y2="115" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"></line>
-          <line x1="435" y1="115" x2="468" y2="115" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar)"></line>
-        </svg>
-        <div class="cap">图 6-3 数据加密三态：覆盖"存、传、算"才能形成闭环</div>
-      </div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>静态加密必要性：</b>磁盘/备份盘丢失或被盗、存储桶误公开、内部人员越权读取时，密文无法被直接利用。</li>
-        <li><b>传输加密必要性：</b>公网传输若明文，易被中间人窃听、篡改、重放；TLS 保证"只有收发双方看得懂"。</li>
-        <li><b>使用中加密必要性（进阶）：</b>数据在计算/内存时是明文，机密计算（如可信执行环境 TEE）让数据"用的时候也不裸奔"，是前沿重点。</li>
+  <div class="chapter" id="c64a"><h3>4.1 对外 Web / 电商</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：扛流量、防暴露面</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>WAF + DDoS 高防 + 全站 HTTPS + 防爬防刷 + 应用层限流 + 异地多活。</li>
+        <li><b>部署：</b>入口挂 CDN/高防；Web 与 DB 分属不同安全域（微隔离）；敏感交易走多因子校验。</li>
+        <li><b>合规：</b>支付涉及 PCI DSS；用户隐私遵循个人信息保护法。</li>
       </ul>
-      <div class="warn"><span class="lab">⚠ 考试易错点：</span>"传输加密"指网络传输用 TLS，不等于"存储加密"；两者都要做，不能互相替代。</div>
     </div>
   </div>
 
-  <div class="chapter" id="c64b"><h3>二、常见加密方法</h3>
-    <div class="kp" id="d614">
-      <div class="kp-head"><h4>6.4.2 对称 / 非对称 / 哈希 / 信封加密</h4><span class="badge lv3">掌握</span></div>
-      <div class="core"><span class="lab"></span><b>对称加密快（AES/SM4）用于大数据；非对称加密(RSA/ECC/SM2)用于密钥交换与签名；哈希(SHA/SM3)用于完整性；实际系统用"信封加密"把三者结合</b>。</div>
+  <div class="chapter" id="c64b"><h3>4.2 数据密集型 / 大数据</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：加密、备份、分级</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>静态加密 + 备份容灾 + 脱敏 + 访问分级 + 跨区域复制。</li>
+        <li><b>部署：</b>数据仓库/湖开启加密与审计；计算结果脱敏后对外；冷热数据分层存储降低成本。</li>
+        <li><b>重点：</b>防止"大数据平台被当成提数后门"——严格字段级权限。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64c"><h3>4.3 金融 / 政务（强合规）</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：合规与主权优先</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>等保三级/四级 + 专属/私有云或金融/政务专区 + 密钥自管（BYOK）+ 全量审计。</li>
+        <li><b>部署：</b>优先选符合监管的行业云专区；数据本地化不出境；密钥掌握在客户侧 HSM。</li>
+        <li><b>重点：</b>满足监管审计与数据主权，可审计、可追溯、可证明。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64d"><h3>4.4 IoT / 边缘计算</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：设备身份与固件可信</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>设备身份认证 + 设备证书 + 网关加密 + 固件签名校验 + 异常设备隔离。</li>
+        <li><b>部署：</b>每台设备发唯一证书；边缘网关做安全接入；海量设备用物联网平台统一管控。</li>
+        <li><b>重点：</b>设备数量大、防护弱，易被当成"肉鸡"——设备身份是核心。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64e"><h3>4.5 DevOps / 研发上云</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：流水线安全门禁</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>CI/CD 安全门禁 + 密钥不进代码库 + 镜像扫描 + 最小权限流水线。</li>
+        <li><b>部署：</b>代码扫描、依赖扫描、镜像扫描串联进流水线；密钥由 Vault/KMS 注入；制品库签名。</li>
+        <li><b>重点：</b>"左移"——安全问题在开发阶段就挡住，而非上线后救火。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64f"><h3>4.6 混合云 / 多云</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：一致策略与统一身份</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>统一身份（联邦 SSO）+ 一致安全策略 + 跨云集中审计 + 数据同步加密。</li>
+        <li><b>部署：</b>用统一 CSPM（云安全态势管理）看多朵云风险；避免"云间策略不一致留缺口"。</li>
+        <li><b>重点：</b>多云最怕"东边墙厚西边墙薄"——策略要拉平。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 评估 CSP ================= -->
+<section class="section" id="c65">
+  <div class="section-head"><div class="num">五</div><h2>如何评估 CSP（云服务提供商）安全性</h2></div>
+
+  <div class="chapter" id="c65a"><h3>5.1 评估的六大维度</h3>
+    <div class="kp" id="d610">
+      <div class="kp-head"><h4>6.2.10 看"证书+透明度+主权+SLA+加密可控+事件响应"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>优先选择有第三方审计背书、合规齐全、透明度高的厂商：从"合规认证、安全透明度、数据主权、SLA 与持久性、加密与密钥控制、事件响应"六个方面系统评估。</b></div>
       <table class="tbl">
-        <tr><th>类型</th><th>特点</th><th>代表算法</th><th>用途</th></tr>
-        <tr><td>对称加密</td><td>加解密用同一把密钥，速度快</td><td>AES-256、国密 SM4</td><td>大批量数据静态加密、磁盘加密</td></tr>
-        <tr><td>非对称加密</td><td>公钥加密/私钥解密，或私钥签名/公钥验签</td><td>RSA、ECC、国密 SM2</td><td>密钥协商、数字签名、证书</td></tr>
-        <tr><td>哈希/摘要</td><td>单向不可逆，固定长度指纹</td><td>SHA-256、国密 SM3</td><td>完整性校验、口令存储（加盐哈希）</td></tr>
-        <tr><td>信封加密</td><td>数据密钥(DEK)加密数据，主密钥(CMK)加密 DEK</td><td>AES + KMS</td><td>云上规模化加密（见下节）</td></tr>
+        <tr><th style="width:20%">维度</th><th style="width:80%">看什么 / 怎么判断</th></tr>
+        <tr><td>① 合规认证</td><td>ISO 27001、SOC 2 Type II、PCI DSS、国内<b>等保三级/四级</b>、CSA STAR——这些是"第三方替你审过"的依据</td></tr>
+        <tr><td>② 安全透明度</td><td>是否公开安全白皮书、合规报告（SOC 2 报告）、是否接受渗透测试与漏洞披露（有漏洞赏金计划更佳）</td></tr>
+        <tr><td>③ 数据位置与主权</td><td>数据中心地域是否可选、是否满足数据不出境/本地化要求、跨境传输是否有合规机制</td></tr>
+        <tr><td>④ SLA 与持久性</td><td>可用性 SLA（如 99.95%）、数据持久性（如 11 个 9 = 99.999999999%）、故障赔付条款是否明确</td></tr>
+        <tr><td>⑤ 加密与密钥控制</td><td>是否支持<b>客户自管密钥（BYOK / HYOK）</b>、是否提供 KMS/HSM、是否默认传输加密</td></tr>
+        <tr><td>⑥ 事件响应</td><td>是否有明确安全事件通知时效（如 24h 内告知）、应急与溯源能力、事后复盘报告</td></tr>
       </table>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>为什么需要非对称 + 对称结合？</b>非对称安全但慢，不适合加密大文件；所以先用非对称"安全地交换"一把对称密钥，再用这把对称密钥高速加密数据（TLS 正是如此）。</li>
-        <li><b>国密算法：</b>国内合规常用 SM2（非对称）/SM3（哈希）/SM4（对称），金融、政务上云常要求支持国密。</li>
-      </ul>
+      <div class="fig">
+        <svg viewBox="0 0 720 230" role="img" aria-label="CSP 安全性六维评估雷达示意">
+          <polygon points="360,30 540,90 600,200 360,210 120,200 180,90" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"/>
+          <polygon points="360,70 500,105 545,180 360,188 215,180 220,105" fill="#2563eb" opacity="0.45"/>
+          <g font-size="13" fill="#1f2a44" text-anchor="middle" font-weight="600">
+            <text x="360" y="20">合规认证</text>
+            <text x="560" y="82">透明度</text>
+            <text x="618" y="212">数据主权</text>
+            <text x="360" y="228">SLA/持久性</text>
+            <text x="102" y="212">加密可控</text>
+            <text x="160" y="82">事件响应</text>
+          </g>
+        </svg>
+        <div class="cap">图 6-4 CSP 安全性六维评估示意：六维越均衡饱满，整体越可信</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c65b"><h3>5.2 评估流程与检查清单</h3>
+    <div class="kp" id="d611">
+      <div class="kp-head"><h4>6.2.11 一套可落地的评估步骤</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>评估不是"看广告"，而是"看证据"：先卡合规门槛 → 核透明度 → 验数据主权 → 比 SLA 与赔付 → 测加密可控 → 查事件响应 → 做 PoC 验证。</b></div>
+      <ol class="note">
+        <li><b>明确需求与合规门槛：</b>先定行业（金融/政务要等保+专区）、数据敏感度、是否出境。</li>
+        <li><b>查合规证书：</b>索要 ISO 27001 / SOC 2 / 等保测评报告原件，核对适用范围。</li>
+        <li><b>核透明度：</b>要安全白皮书、SOC 2 报告（可签 NDA 后看）、漏洞披露政策。</li>
+        <li><b>验数据主权：</b>确认地域可选、跨境机制、是否支持本地化部署。</li>
+        <li><b>比 SLA 与赔付：</b>可用性/持久性指标 + 违约赔付是否真有约束力。</li>
+        <li><b>测加密可控：</b>是否 BYOK/HSM、默认加密、密钥轮换机制。</li>
+        <li><b>查事件响应：</b>通知时效、应急流程、历史事故公开度。</li>
+        <li><b>PoC 验证：</b>实际测安全组、审计、MFA、密钥注入等能力是否如描述。</li>
+      </ol>
       <div class="ex"><span class="lab"></span>
         <ul>
-          <li><b>信封加密示例：</b>上传文件时，系统用随机生成的"数据密钥"把文件 AES 加密（快）；再用 KMS 里的"主密钥"把该数据密钥加密后和密文一起存。解密时反向操作——主密钥永不离开 KMS，安全性与性能兼得。</li>
+          <li><b>金融客户选型：</b>先卡"是否具备等保三级 + 金融云专区 + 支持 BYOK"，再比 SLA 与事故赔付，最后看透明度报告——门槛不过直接淘汰。</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="chapter" id="c64c"><h3>三、密钥管理（KMS / HSM / BYOK）</h3>
-    <div class="kp" id="d615">
-      <div class="kp-head"><h4>6.4.3 密钥比数据更该被保护</h4><span class="badge lv2">熟悉</span></div>
-      <div class="core"><span class="lab"></span><b>"密钥管理不好，加密等于没加密"：密钥需集中管理(KMS)、硬件保护(HSM)、定期轮换、分级隔离，并支持客户自管(BYOK)</b>。</div>
-      <ul class="note" style="margin:8px 0;">
-        <li><b>KMS（密钥管理服务）：</b>集中生成、存储、轮换密钥，主密钥(CMK)不离开硬件边界；应用只调 API 加解密。</li>
-        <li><b>HSM（硬件安全模块）：</b>专用硬件保护密钥，防提取、防篡改，金融级高安全场景使用。</li>
-        <li><b>密钥轮换：</b>定期更换密钥，降低单把密钥泄露的影响面。</li>
-        <li><b>分级与隔离：</b>主密钥(CMK)与数据密钥(DEK)分离；不同业务用不同密钥，避免"一把钥匙开所有门"。</li>
-        <li><b>BYOK / HYOK：</b>客户自带密钥(BYOK)或持有自己密钥(HYOK)，云厂商看不到明文密钥，满足强合规与"密钥自管"诉求。</li>
+  <div class="chapter" id="c65c"><h3>5.3 第三方报告怎么读</h3>
+    <div class="kp" id="d612">
+      <div class="kp-head"><h4>6.2.12 别被"有认证"三个字糊弄</h4><span class="badge lv2">熟悉</span></div>
+      <ul class="note">
+        <li><b>ISO 27001：</b>看"认证范围"是否覆盖你用的服务（很多只认证了某几个区域/产品）。</li>
+        <li><b>SOC 2 Type II：</b>比 Type I 更有说服力（Type II 是"一段时期的持续合规"证据，Type I 只是"某一时点的状态"）。</li>
+        <li><b>CSA STAR：</b>云安全联盟的成熟度认证，可结合 CAIQ 问卷看控制项覆盖。</li>
+        <li><b>国内等保：</b>看测评机构资质 + 备案级别（三级及以上为重要系统）。</li>
       </ul>
-      <div class="ex"><span class="lab"></span>
-        <ul>
-          <li><b>BYOK 示例：</b>银行把自有的主密钥导入云 KMS，云上数据用这把密钥加密；即使云厂商被攻破，没有银行的密钥也解不开数据。</li>
-          <li><b>轮换示例：</b>每年自动轮换一次主密钥，旧密文仍可用旧密钥解密、新数据用新密钥——平滑无感。</li>
+      <div class="tip"><span class="lab">📌 读报告要点：</span>盯住"适用范围（Scope）"和"有效期"，认证过期或范围不含你的业务 = 等于没有。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c65d"><h3>5.4 评估常见陷阱</h3>
+    <div class="kp" id="d613">
+      <div class="kp-head"><h4>6.2.13 别踩这些坑</h4><span class="badge lv3">掌握</span></div>
+      <div class="warn"><span class="lab">⚠ 考试/实战易错：</span>
+        <ul style="margin:6px 0 0;padding-left:20px;">
+          <li>只看"有认证"不看<b>适用范围与有效期</b>；</li>
+          <li>把"可用性 SLA 高"误当"<b>安全能力强</b>"——SLA 管的是"能不能用"，不是"安不安全"；</li>
+          <li>忽略<b>数据主权</b>：境外 CSP 可能不满足数据出境合规；</li>
+          <li>假设 CSP "全包安全"——忘了责任共担里客户自留的那部分；</li>
+          <li>不问<b>事件通知时效</b>，出事才发现厂商 7 天都不告诉你。</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<footer>第六章 云安全 · 详细讲解（2025考纲）｜ 配套复习资料 · 建议结合《复习指南》与题库演练</footer>
-</main>
-</div>
+<!-- ================= 6 速记 ================= -->
+<section class="section" id="c66">
+  <div class="section-head"><div class="num">六</div><h2>考试速记与易错点汇总</h2></div>
 
-<button id="toTop" title="回到顶部">↑</button>
-
+  <div class="kp" id="d614">
+    <div class="kp-head"><h4>6.2-总结 一条主线串起来</h4><span class="badge lv4">速记</span></div>
+    <div class="core"><span class="lab"></span><b>策略定规则 → 架构做纵深 → 责任划清边界 → 按服务模型落地防护 → 按应用特征定重点 → 用六维评估选 CSP。</b></div>
+    <table class="tbl">
+      <tr><th style="width:30%">主题</th><th style="width:70%">一句话考点</th></tr>
+      <tr><td>防护措施 vs 策略</td><td>措施=手段（WAF/加密）；策略=规则（最小权限/默认拒绝）</td></tr>
+      <tr><td>核心架构安全</td><td>七层纵深防御 + 零信任（身份即边界）+ 微隔离（限横向移动）</td></tr>
+      <tr><td>责任共担</td><td>CSP 管"云本身"，客户管"云中"；越往上 CSP 管越多；数据/身份/配置永远客户管</td></tr>
+      <tr><td>IaaS</td><td>重系统层：加固、补丁、安全组、堡垒机、磁盘加密、审计</td></tr>
+      <tr><td>PaaS</td><td>重应用配置：SDLC、依赖扫描、密钥管理、API 安全、CI/CD 门禁</td></tr>
+      <tr><td>SaaS</td><td>重账号使用：SSO、MFA、最小权限、DLP、租户隔离、CASB</td></tr>
+      <tr><td>应用策略</td><td>按对外/敏感/合规/设备/研发/多云特征定部署重点</td></tr>
+      <tr><td>评估 CSP</td><td>六维：合规、透明度、主权、SLA、加密可控、事件响应；看范围与有效期</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 高频易错（务必记牢）：</span>
+      <ul style="margin:6px 0 0;padding-left:20px;">
+        <li>云安全 ≠ "买云就自动安全"；安全是 CSP 与客户<b>共同责任</b>。</li>
+        <li>无论哪种模型，<b>数据加密、身份管理、客户端配置</b>始终归客户。</li>
+        <li>SLA 高 ≠ 安全强；认证要看<b>适用范围与有效期</b>。</li>
+        <li>IaaS 客户责任<b>最大</b>，SaaS 客户责任<b>最小</b>（主要管人）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 </section>
-<section class="chapter" id="ch-7">
+<section class="chapter" id="ch-6-3"><div class="ch-head"><span class="ch-num">6.3</span><span class="ch-ttl">身份授权与访问管理</span></div>
+<!-- ============ 一、基本概念总览 ============ -->
+<section class="section" id="c63a">
+  <div class="section-head"><div class="num">6.3</div><h2>一、基本概念总览：什么是身份、授权和访问管理（IAM）</h2></div>
 
+  <div class="kp" id="d631">
+    <div class="kp-head"><h4>6.3.1 身份、授权和访问管理（IAM）的定义</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>IAM（Identity and Access Management，身份与访问管理）= 一套确保"正确的人 / 服务，在正确的条件下，用正确的权限，访问正确的资源"的框架与体系。它由三大支柱构成：身份（Identity）、认证（Authentication）、授权（Authorization）。</b></div>
+    <p class="note">理解 IAM 要抓住"一句总纲 + 三块拼图"：</p>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>总纲：</b>"你是谁（身份）→ 证明你是谁（认证）→ 你能干什么（授权）"。</li>
+      <li><b>① 身份（Identity）：</b>为每个用户、设备、应用、服务分配一个唯一且可识别的"身份"（账号、角色、服务主体），是一切安全控制的锚点。</li>
+      <li><b>② 认证（Authentication）：</b>验证"声称的这个身份"确实是本人——解决"<b>你是谁</b>"的问题。</li>
+      <li><b>③ 授权（Authorization）：</b>在身份被确认后，决定"这个身份能做什么、能碰哪些资源"——解决"<b>你能干什么</b>"的问题。</li>
+    </ul>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>生活比喻：</b>坐飞机——登机牌上的名字是<b>身份</b>，过安检刷身份证+人脸是<b>认证</b>，头等舱能进休息室、经济舱不能，就是<b>授权</b>。</li>
+        <li><b>云上对应：</b>一个 RAM 子用户（身份）→ 输入密码+短信验证码登录（认证）→ 被策略允许读取某 OSS 桶但不允许删除（授权）。</li>
+      </ul>
+    </div>
+  </div>
 
-<header class="hero">
-  <h1>第 7 章 · 云计算产业、应用与发展</h1>
-  <p>考纲 7.1 中国云计算产业发展现状 ｜ 7.2 云计算的行业应用 ｜ 7.3 云计算发展及挑战</p>
-  <span class="badge">考纲要求：了解 / 熟悉 ｜ 技术考试复习专用</span>
-</header>
+  <div class="kp" id="d631b">
+    <div class="kp-head"><h4>6.3.1（补）认证 vs 授权：最易混淆的一对概念</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>认证（Authentication）= "你是谁"（验证身份，常缩写为 AuthN）；授权（Authorization）= "你能做什么"（赋予权限，常缩写为 AuthZ）。先认证、后授权，二者顺序不可颠倒，且相互独立。</b></div>
+    <table class="tbl">
+      <tr><th style="width:20%">维度</th><th style="width:40%">认证 Authentication（AuthN）</th><th style="width:40%">授权 Authorization（AuthZ）</th></tr>
+      <tr><td><b>回答的问题</b></td><td>"你是谁？是不是本人？"</td><td>"你被允许做什么？能访问哪份资源？"</td></tr>
+      <tr><td><b>发生时机</b></td><td>登录 / 调用接口的第一步</td><td>在认证通过之后</td></tr>
+      <tr><td><b>常见手段</b></td><td>密码、指纹、短信码、MFA</td><td>角色、策略、ACL（访问控制列表）、权限矩阵</td></tr>
+      <tr><td><b>失败表现</b></td><td>拒绝登录（身份不成立）</td><td>登录成功但操作被拒（没权限）</td></tr>
+      <tr><td><b>经典英文</b></td><td>"Who are you?"</td><td>"What can you do?"</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>很多人把"输入密码"叫做"授权"，这是错误的——输入密码是在<b>认证</b>；只有系统随后判断"该账号能不能删库"才叫<b>授权</b>。考题常混淆二者，务必分清"验证身份"和"赋予权限"。</div>
+  </div>
+</section>
 
-<div class="toc">
-  <h3>本章导航</h3>
-  <ol>
-    <li><b>7.1 中国云计算产业发展现状</b>：发展概况 · 市场格局 · 技术应用 · 云存储与大数据库 · 厂商全球化策略</li>
-    <li><b>7.2 云计算的行业应用</b>：金融 / 医疗 / 教育 / 零售应用模式 · 数字化转型价值 · 成功案例</li>
-    <li><b>7.3 云计算发展及挑战</b>：商业方案特点 · 开源系统 · 主要挑战 · 发展趋势</li>
-  </ol>
-  <p class="tip" style="margin-bottom:0"><b>复习建议：</b>本章以"识记 + 理解"为主，重点掌握<b>市场格局</b>、<b>信创/国产化</b>、<b>东数西算</b>、<b>四大行业应用模式</b>、
-  <b>主流开源系统</b>及<b>挑战/趋势</b>四组对比。论述题常考"行业应用价值"与"发展趋势"。</p>
-</div>
+<!-- ============ 二、身份认证 ============ -->
+<section class="section" id="c63b">
+  <div class="section-head"><div class="num">6.3</div><h2>二、身份认证（Authentication）：验证"你是谁"</h2></div>
 
-<!-- ========== 7.1 ========== -->
-<section>
-  <h2><span class="num">7.1</span>中国云计算产业发展现状</h2>
+  <div class="kp" id="d632">
+    <div class="kp-head"><h4>6.3.2 身份认证的三大类因素（认证因子）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>身份认证依据三类"因子"：① 你知道什么（知识因子，如密码/PIN）；② 你拥有什么（持有因子，如手机/硬件令牌/智能卡）；③ 你是什么（固有因子，如指纹/人脸/声纹）。单一因子叫单因素认证，两类及以上组合即构成 MFA（见第四节）。</b></div>
+    <p class="note">逐一拆解三类因子（考试高频，会让你判断某个认证属于哪类）：</p>
+    <table class="tbl">
+      <tr><th style="width:18%">因子类别</th><th style="width:30%">英文 / 别名</th><th style="width:34%">典型例子</th><th style="width:18%">特点</th></tr>
+      <tr><td><b>① 知识因子</b><br>Knowledge</td><td>你知道什么<br>What you know</td><td>口令、密码、PIN 码、安全问题答案</td><td>最常用、最弱；易被钓鱼/撞库/泄露</td></tr>
+      <tr><td><b>② 持有因子</b><br>Possession</td><td>你拥有什么<br>What you have</td><td>手机（短信/TOTP App）、U 盾、智能卡、硬件令牌</td><td>需物理持有；可能丢失/被 SIM 劫持</td></tr>
+      <tr><td><b>③ 固有因子</b><br>Inherence</td><td>你是什么<br>What you are</td><td>指纹、人脸、虹膜、声纹（生物特征）</td><td>便捷难伪造；存在隐私与误识率</td></tr>
+    </table>
+    <div class="fig">
+      <svg viewBox="0 0 680 220" role="img" aria-label="身份认证三大因素">
+        <g font-size="13" text-anchor="middle">
+          <rect x="30" y="60" width="180" height="110" rx="12" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="120" y="92" font-weight="700" fill="#1d4ed8">① 知识因子</text>
+          <text x="120" y="116" fill="#1f2a44">你知道什么</text>
+          <text x="120" y="138" fill="#56607a" font-size="11.5">密码 / PIN /</text>
+          <text x="120" y="156" fill="#56607a" font-size="11.5">安全问题</text>
+
+          <rect x="250" y="60" width="180" height="110" rx="12" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"></rect>
+          <text x="340" y="92" font-weight="700" fill="#0e7490">② 持有因子</text>
+          <text x="340" y="116" fill="#1f2a44">你拥有什么</text>
+          <text x="340" y="138" fill="#56607a" font-size="11.5">手机 / 令牌 /</text>
+          <text x="340" y="156" fill="#56607a" font-size="11.5">智能卡 / U盾</text>
+
+          <rect x="470" y="60" width="180" height="110" rx="12" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="560" y="92" font-weight="700" fill="#0f6b3c">③ 固有因子</text>
+          <text x="560" y="116" fill="#1f2a44">你是什么</text>
+          <text x="560" y="138" fill="#56607a" font-size="11.5">指纹 / 人脸 /</text>
+          <text x="560" y="156" fill="#56607a" font-size="11.5">虹膜 / 声纹</text>
+
+          <text x="340" y="36" font-size="12.5" fill="#56607a">三类因子单独使用 = 单因素认证；两类及以上组合 = 多因素认证（MFA）</text>
+          <line x1="210" y1="115" x2="250" y2="115" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"></line>
+          <line x1="430" y1="115" x2="470" y2="115" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"></line>
+        </g>
+      </svg>
+      <div class="cap">图 6-4（6.3）身份认证三大因素：知识 / 持有 / 固有</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>判断练习：</b>"用指纹解锁手机"→ ③ 固有因子；"输银行卡密码"→ ① 知识因子；"收短信验证码"→ ② 持有因子（手机在你手上）。</li>
+        <li><b>新趋势：</b>业界正从"知识因子为主"转向"无密码（Passwordless）"，如 FIDO2/Passkey——直接用设备内置的生物识别+公私钥，密码本身不再传输，大幅降低钓鱼风险。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d632b">
+    <div class="kp-head"><h4>6.3.2（补）常见认证方式与协议</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>认证协议解决"怎么安全地交换凭证并确认身份"：最基础的是"用户名+密码"；进阶有基于令牌的 Token 认证（如 JWT）、单点登录（SSO）、以及联合身份协议 SAML / OAuth 2.0 / OIDC（详见第六节）。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>静态口令：</b>最常见的单因素认证，缺点是易弱口令、易泄露、易撞库。</li>
+      <li><b>基于令牌（Token）：</b>登录后服务端签发一个短期有效的令牌（如 JWT、访问令牌），后续请求携带令牌即可，避免反复传密码。</li>
+      <li><b>证书 / 密钥对：</b>机器与机器（服务间）常用——用私钥签名、公钥验签，无需人类输入密码（云上 AK/SK、SSH Key 即此类）。</li>
+    </ul>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>云环境里"长期 AccessKey/SecretKey"本质是<b>静态凭证</b>，一旦泄露危害极大。安全实践要求优先使用<b>临时凭证（STS）</b>和<b>角色扮演</b>，而非把长期密钥写死在代码里。</div>
+  </div>
+</section>
+
+<!-- ============ 三、权限管理 ============ -->
+<section class="section" id="c63c">
+  <div class="section-head"><div class="num">6.3</div><h2>三、权限管理（Authorization）：决定"你能干什么"</h2></div>
+
+  <div class="kp" id="d633">
+    <div class="kp-head"><h4>6.3.3 授权模型：DAC / MAC / RBAC / ABAC</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>授权（Authorization）= 在身份被确认后，依据"策略/规则"决定其可执行的动作与可访问的资源。主流模型有：DAC（自主访问控制）、MAC（强制访问控制）、RBAC（基于角色的访问控制，云上最常用）、ABAC（基于属性的访问控制，最细粒度）。</b></div>
+    <table class="tbl">
+      <tr><th style="width:16%">模型</th><th style="width:30%">核心思想</th><th style="width:34%">例子</th><th style="width:20%">适用</th></tr>
+      <tr><td><b>DAC</b><br>自主访问控制</td><td>资源拥有者自己决定把权限给谁</td><td>文件右键"共享给某人"</td><td>小型/个人</td></tr>
+      <tr><td><b>MAC</b><br>强制访问控制</td><td>系统按固定安全级别统一强制规定，用户无法自改</td><td>军方机密分级，低密级不能读高密级</td><td>高安全/政务</td></tr>
+      <tr><td><b>RBAC</b><br>基于角色<br>（⭐云上主流）</td><td>把权限"打包成角色"，给用户/服务分配角色</td><td>"只读角色"只能看不能改；"管理员角色"全权</td><td>企业/云</td></tr>
+      <tr><td><b>ABAC</b><br>基于属性</td><td>按"用户属性+资源属性+环境属性"动态算权限</td><td>"仅工作时间内、来自公司 IP 的运维才能删库"</td><td>细粒度/动态</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>RBAC 示例（最该记）：</b>公司把权限拆成「只读」「开发」「运维管理员」三个角色；新来的小王被加进"只读"角色，他立刻拥有只读权限——不用逐条给他配资源。这就是 RBAC「角色 = 权限集合」的精髓。</li>
+        <li><b>ABAC 示例：</b>同一个人，在公司内网+工作时间可被授权删除，深夜从境外 IP 登录则被拒绝。权限随"属性"动态变化。</li>
+      </ul>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>RBAC 的"R"是 <b>Role（角色）</b>，不是 Rule。常考：云厂商的 IAM 控制台里你建立的是<b>角色/策略</b>，给用户绑定角色即可，而不是给用户逐个资源配权限——这正是 RBAC 相对于"逐用户配 ACL"的优势（好管理、不易错）。</div>
+  </div>
+
+  <div class="kp" id="d633b">
+    <div class="kp-head"><h4>6.3.3（补）最小权限原则（PoLP）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>最小权限原则（Principle of Least Privilege, PoLP）= 每个身份只被授予"完成工作所必需的最小权限集"，不多给、不默认给、权限过期即回收。它是授权设计的第一原则，也是云安全合规的硬性要求（等保、GDPR 均强调）。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>做法：</b>默认拒绝（deny by default），显式按需开通；避免直接给"管理员/FullAccess"这种大权限；定期审计并回收不再需要的权限（权限衰减）。</li>
+      <li><b>为什么关键：</b>一旦某账号被攻破，泄露面被限制在最小范围，避免"一个弱口令拖垮整个云账户"。</li>
+    </ul>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>反例（危险）：</b>给一个只用来读日志的脚本授予 AdministratorAccess 全权限——脚本密钥泄露即等于交出整座云。</li>
+        <li><b>正例：</b>该脚本仅绑定"只读日志"角色，且用临时凭证，泄露后影响极小。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 四、多因素认证 MFA ============ -->
+<section class="section" id="c63d">
+  <div class="section-head"><div class="num">6.3</div><h2>四、多因素认证（MFA）：给认证加一道保险</h2></div>
+
+  <div class="kp" id="d634">
+    <div class="kp-head"><h4>6.3.4 MFA 的定义与"多因素"的含义</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>MFA（Multi-Factor Authentication，多因素认证）= 在认证时要求同时提供"两类或以上不同类型因子"（通常至少来自知识/持有/固有中的两类），即使其中一类被攻破，攻击者仍因缺另一类而无法登录。它显著提升账号抗钓鱼、抗泄露的能力。</b></div>
+    <p class="note">关键细节（考试常问）：</p>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>"多因素"必须跨"类型"：</b>仅"密码 + 安全问题"仍是两类<b>知识因子</b>，不算真正的 MFA；必须混合不同类型（如 密码 + 手机验证码 = 知识+持有）。</li>
+      <li><b>2FA ≠ 一定安全：</b>两步验证（2FA）若两步都是同一类因子，安全增益有限；真正有效的是"跨因子组合"。</li>
+      <li><b>价值：</b>即便密码已泄露（撞库/钓鱼），没有第二因子攻击者依旧进不去——这是抵御"账户劫持"最有效的单点措施。</li>
+    </ul>
+    <div class="fig">
+      <svg viewBox="0 0 680 200" role="img" aria-label="MFA 双因子叠加防护">
+        <g font-size="12.5" text-anchor="middle">
+          <rect x="40" y="55" width="170" height="90" rx="12" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="125" y="90" font-weight="700" fill="#1d4ed8">因子 A</text>
+          <text x="125" y="112" fill="#56607a" font-size="11.5">如 密码</text>
+          <text x="125" y="130" fill="#56607a" font-size="11.5">（知识）</text>
+
+          <text x="255" y="100" font-size="22" fill="#64748b">+</text>
+
+          <rect x="285" y="55" width="170" height="90" rx="12" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="370" y="90" font-weight="700" fill="#0f6b3c">因子 B</text>
+          <text x="370" y="112" fill="#56607a" font-size="11.5">如 手机验证码</text>
+          <text x="370" y="130" fill="#56607a" font-size="11.5">（持有）</text>
+
+          <text x="500" y="100" font-size="22" fill="#64748b">=</text>
+
+          <rect x="525" y="55" width="130" height="90" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"></rect>
+          <text x="590" y="90" font-weight="700" fill="#9a3412">MFA</text>
+          <text x="590" y="112" fill="#9a3412" font-size="11.5">双重防护</text>
+          <text x="590" y="130" fill="#9a3412" font-size="11.5">防钓鱼</text>
+
+          <path d="M210 100 C 240 100 240 100 255 100" stroke="#94a3b8" stroke-width="1.5" fill="none"></path>
+          <text x="340" y="180" font-size="11.5" fill="#56607a">两类不同因子叠加 → 单点泄露不再等于被攻破</text>
+        </g>
+      </svg>
+      <div class="cap">图 6-5（6.3）MFA = 两类不同因子叠加，破解一道仍有另一道</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>实例：</b>登录云控制台，先输密码（知识因子），再要求手机 TOTP 动态码或短信码（持有因子）。即便密码在别处泄露，攻击者没有你的手机，依旧进不去。</li>
+        <li><b>考试典型题：</b>"仅使用密码 + 图形验证码"属于 MFA 吗？→ 不属于，两者本质都是"知识/系统挑战"类，未跨越因子类型；需叠加持有或固有因子。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d634b">
+    <div class="kp-head"><h4>6.3.4（补）MFA 的常见实现形式</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>MFA 第二因子的常见落地：① 软件令牌（TOTP，如 Google Authenticator / 微软验证器，离线 30 秒滚动码）；② 短信 / 语音验证码（持有手机号）；③ 硬件令牌 / U 盾 / FIDO 安全密钥（U2F）；④ 推送确认（手机 App 弹出"是否允许登录"）；⑤ 生物识别 + 设备绑定（手机指纹解锁后授权）。</b></div>
+    <table class="tbl">
+      <tr><th style="width:24%">形式</th><th style="width:40%">原理</th><th style="width:36%">安全性评价</th></tr>
+      <tr><td><b>TOTP 软件令牌</b></td><td>App 基于共享密钥+时间生成 6 位动态码</td><td>较安全、离线可用；需保护好种子密钥</td></tr>
+      <tr><td><b>短信 / 语音码</b></td><td>下发到注册手机</td><td>便捷但可被 SIM 交换攻击拦截，安全性较弱</td></tr>
+      <tr><td><b>硬件令牌 / U2F</b></td><td>物理密钥（如 YubiKey），基于公钥加密</td><td>最强，抗钓鱼；需物理持有设备</td></tr>
+      <tr><td><b>App 推送确认</b></td><td>手机收到登录请求，点击允许/拒绝</td><td>体验好；依赖手机安全</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>短信验证码 MFA 虽常见，但<b>不是最安全</b>的 MFA（存在 SIM 劫持风险）。在金融、核心云管理等<b>高安全场景应优先采用硬件密钥（U2F/FIDO2）</b>或 TOTP。考题若问"最抗钓鱼的 MFA"，答案是基于公钥的硬件安全密钥。</div>
+  </div>
+</section>
+
+<!-- ============ 五、云环境中 IAM 的重要性 ============ -->
+<section class="section" id="c63e">
+  <div class="section-head"><div class="num">6.3</div><h2>五、身份访问管理在云计算环境中的重要性</h2></div>
+
+  <div class="kp" id="d635">
+    <div class="kp-head"><h4>6.3.5 为什么云环境特别需要 IAM</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>在云环境中，IAM 不是"可选项"而是"地基"：云去边界化（访问来自任意地点）、多租户共享、责任共担、API 驱动运维、以及凭证泄露是头号威胁——这五点使"管好身份与权限"成为云安全的第一道、也是最关键的一道闸门。</b></div>
+    <table class="tbl">
+      <tr><th style="width:26%">云环境特征</th><th style="width:46%">带来的安全挑战</th><th style="width:28%">IAM 如何化解</th></tr>
+      <tr><td><b>去边界化</b></td><td>没有固定内网边界，访问来自全球任意终端</td><td>以"身份"代替"IP/位置"作为信任锚（身份即边界）</td></tr>
+      <tr><td><b>多租户共享</b></td><td>同平台跑多家客户，越权即串门</td><td>严格身份隔离 + 细粒度授权，防跨租户访问</td></tr>
+      <tr><td><b>责任共担</b></td><td>"云中安全"归客户，配置权限属客户责任</td><td>IAM 是客户侧最该自己把控的安全抓手</td></tr>
+      <tr><td><b>API 驱动</b></td><td>一切操作经 API/密钥，凭证泄露=全网失守</td><td>强制 MFA + 临时凭证 + 密钥轮换 + 最小权限</td></tr>
+      <tr><td><b>凭证泄露为头号威胁</b></td><td>AK/SK 泄露常被用于挖矿、拖库、勒索</td><td>IAM 集中管控身份、审计每一次访问</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>呼应 6.1：</b>在 6.1 列出的云安全头号威胁中，"配置错误"和"身份凭证泄露/弱认证"均排前列，而二者都直接落在 IAM 的管辖范围——可见 IAM 是云安全的"总开关"。</li>
+        <li><b>真实事故：</b>某公司将含长期 AK/SK 的代码传 GitHub，被扫描到后攻击者用其开通大量机器挖矿，账单飙升。若当时用了 IAM 最小权限 + 临时凭证 + MFA，损失可大幅降低。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d635b">
+    <div class="kp-head"><h4>6.3.5（补）"身份即边界"与零信任</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>"身份即边界"（Identity as the New Perimeter）= 在云时代，不再依赖网络位置（IP/内网）判断可信，而是以"经过强认证的身份 + 当前上下文"作为访问决策的核心依据。这与"零信任（Zero Trust：默认不信任、持续验证）"一脉相承，而 IAM 正是零信任的落地支撑。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>传统思路：</b>"在内网 = 可信"，靠防火墙划边界 → 云上边界消失，思路失效。</li>
+      <li><b>云思路：</b>"无论你在哪，都必须证明身份、且权限合规才放行"，每一次访问都重新评估。这就是 IAM 在云中"顶替防火墙成为新边界"的含义。</li>
+    </ul>
+    <div class="fig">
+      <svg viewBox="0 0 680 190" role="img" aria-label="身份即边界替代网络边界">
+        <g font-size="12.5" text-anchor="middle">
+          <rect x="30" y="55" width="200" height="80" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"></rect>
+          <text x="130" y="88" font-weight="700" fill="#b91c1c">传统：网络边界</text>
+          <text x="130" y="110" fill="#9a3412" font-size="11.5">内网=可信（失效）</text>
+
+          <text x="275" y="98" font-size="22" fill="#64748b">→</text>
+
+          <rect x="305" y="55" width="200" height="80" rx="12" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="405" y="88" font-weight="700" fill="#1d4ed8">云：身份即边界</text>
+          <text x="405" y="110" fill="#1d4ed8" font-size="11.5">身份+上下文=信任</text>
+
+          <text x="545" y="98" font-size="22" fill="#64748b">→</text>
+
+          <rect x="555" y="55" width="110" height="80" rx="12" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="610" y="88" font-weight="700" fill="#0f6b3c">零信任</text>
+          <text x="610" y="110" fill="#0f6b3c" font-size="11.5">持续验证</text>
+
+          <text x="340" y="170" font-size="11.5" fill="#56607a">IAM 是把"身份即边界 / 零信任"落到实处的核心能力</text>
+        </g>
+      </svg>
+      <div class="cap">图 6-6（6.3）从"网络边界"到"身份即边界 / 零信任"，IAM 是承载体</div>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>说"云安全不再需要边界"是错的——准确说法是<b>传统"网络位置边界"失效，取而代之的是"身份边界"</b>。IAM 让身份成为新的信任锚点。</div>
+  </div>
+</section>
+
+<!-- ============ 六、IAM 的实现方式 ============ -->
+<section class="section" id="c63f">
+  <div class="section-head"><div class="num">6.3</div><h2>六、身份访问管理在云计算环境中的实现方式</h2></div>
+
+  <div class="kp" id="d636">
+    <div class="kp-head"><h4>6.3.6 IAM 系统的整体架构（四大组件）</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>一个完整的云 IAM 实现通常包含四块：① 身份目录（Identity Store，集中管理用户/角色/服务主体）；② 认证服务（Authentication，校验凭证、签发令牌、强制 MFA）；③ 授权引擎（Authorization，依据策略判定允许/拒绝）；④ 审计日志（Accounting/Audit，记录"谁、何时、对什么、做了什么"）。即常说的 IAAA（Identification 身份标识 / Authentication 认证 / Authorization 授权 / Accountability 可审计）。</b></div>
+    <div class="fig">
+      <svg viewBox="0 0 680 250" role="img" aria-label="IAM 四组件与访问流程">
+        <defs>
+          <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#64748b"></path>
+          </marker>
+        </defs>
+        <g font-size="12" text-anchor="middle">
+          <!-- 用户 -->
+          <rect x="20" y="100" width="90" height="50" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"></rect>
+          <text x="65" y="122" font-weight="700" fill="#6d28d9">用户/服务</text>
+          <text x="65" y="140" fill="#6d28d9" font-size="11">发起请求</text>
+
+          <!-- 身份目录 -->
+          <rect x="150" y="20" width="150" height="48" rx="10" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="225" y="42" font-weight="700" fill="#1d4ed8">① 身份目录</text>
+          <text x="225" y="60" fill="#1d4ed8" font-size="11">用户/角色/主体</text>
+
+          <!-- 认证 -->
+          <rect x="150" y="100" width="150" height="48" rx="10" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"></rect>
+          <text x="225" y="122" font-weight="700" fill="#0e7490">② 认证服务</text>
+          <text x="225" y="140" fill="#0e7490" font-size="11">验凭证+MFA→令牌</text>
+
+          <!-- 授权 -->
+          <rect x="150" y="180" width="150" height="48" rx="10" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="225" y="202" font-weight="700" fill="#0f6b3c">③ 授权引擎</text>
+          <text x="225" y="220" fill="#0f6b3c" font-size="11">策略判定 允许/拒绝</text>
+
+          <!-- 资源 -->
+          <rect x="500" y="100" width="100" height="50" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"></rect>
+          <text x="550" y="122" font-weight="700" fill="#9a3412">目标资源</text>
+          <text x="550" y="140" fill="#9a3412" font-size="11">数据/API</text>
+
+          <!-- 审计 -->
+          <rect x="340" y="20" width="150" height="48" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"></rect>
+          <text x="415" y="42" font-weight="700" fill="#475569">④ 审计日志</text>
+          <text x="415" y="60" fill="#475569" font-size="11">记录每次访问</text>
+
+          <line x1="110" y1="125" x2="148" y2="125" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"></line>
+          <line x1="300" y1="124" x2="498" y2="124" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"></line>
+          <line x1="225" y1="68" x2="225" y2="98" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"></line>
+          <line x1="225" y1="148" x2="225" y2="178" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"></line>
+          <line x1="300" y1="44" x2="338" y2="44" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"></line>
+        </g>
+      </svg>
+      <div class="cap">图 6-7（6.3）IAM 访问流程：请求 → 认证 → 授权 → 资源，全程审计留痕</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>流程串联：</b>用户请求 → 认证服务核对密码+MFA，签发短期令牌 → 授权引擎按 RBAC 策略判断"该角色能否读此资源" → 允许则访问，同时审计日志记录此次行为，便于事后追溯与异常发现。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d636b">
+    <div class="kp-head"><h4>6.3.6（补）单点登录（SSO）、联邦身份与标准协议</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>为兼顾"安全"与"好用"，云 IAM 普遍采用：① SSO（单点登录，一次登录可访问多个系统）；② 联邦身份（Federation，用企业已有身份源如 AD/钉钉/企业微信直接登录云，无需在云上另建账号）；③ 标准协议 SAML 2.0（企业 SSO 传统标准）、OAuth 2.0（授权委托，常用于 App 授权）、OIDC（在 OAuth 上叠加身份认证，现代主流）。</b></div>
+    <table class="tbl">
+      <tr><th style="width:20%">协议</th><th style="width:40%">定位</th><th style="width:40%">典型场景</th></tr>
+      <tr><td><b>SAML 2.0</b></td><td>基于 XML 的跨域身份断言（认证为主）</td><td>企业员工用公司账号登录云控制台</td></tr>
+      <tr><td><b>OAuth 2.0</b></td><td>授权委托框架（"代我访问某资源"）</td><td>第三方 App 申请"读取你的头像"</td></tr>
+      <tr><td><b>OIDC</b></td><td>OAuth 2.0 之上加身份认证（ID Token）</td><td>现代 Web/移动端登录（如微信/Google 登录）</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>SSO 好处：</b>员工只需记一套企业密码；离职时在企业侧停用账号，云上权限同步失效，避免"影子账号"残留。</li>
+        <li><b>联邦身份示例：</b>公司用 Azure AD 管员工，配置联合后，员工用 AD 账号+企业 MFA 直接登云控制台，云上不再单独存一份密码。</li>
+      </ul>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>OAuth 2.0 本质是<b>授权</b>协议不是<b>认证</b>协议；要做"身份认证"应在其上加 <b>OIDC</b>。考题常混淆"OAuth 用来登录"——更准确是"OIDC（基于 OAuth）用来认证登录"。</div>
+  </div>
+
+  <div class="kp" id="d636c">
+    <div class="kp-head"><h4>6.3.6（补）主流云平台 IAM 的落地示例</h4><span class="badge lv1">了解</span></div>
+    <div class="core"><span class="lab"></span><b>各云厂商对 IAM 的命名与实现内核一致：AWS = IAM（用户/组/角色 + 策略 + MFA + STS 临时凭证）；阿里云 = RAM（资源访问管理，用户/角色/权限策略）；华为云 = IAM（用户/用户组/委托 + 策略）；腾讯云 = CAM。核心都围绕"身份 + 认证(MFA) + 授权(策略/RBAC) + 审计"。</b></div>
+    <table class="tbl">
+      <tr><th style="width:18%">云厂商</th><th style="width:30%">IAM 产品名</th><th style="width:52%">关键能力对照</th></tr>
+      <tr><td><b>AWS</b></td><td>IAM</td><td>用户/组/角色；JSON 策略；MFA；STS 临时凭证；角色扮演（跨账号）</td></tr>
+      <tr><td><b>阿里云</b></td><td>RAM</td><td>子用户/用户组/角色；权限策略；MFA；RAM 角色（ECS 实例扮演）</td></tr>
+      <tr><td><b>华为云</b></td><td>IAM</td><td>用户/用户组/委托；细粒度策略；MFA；企业联邦（ADFS）</td></tr>
+      <tr><td><b>腾讯云</b></td><td>CAM</td><td>子账号/角色；策略；MFA；联合身份</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>统一理解：</b>不管是哪个云，考题给的"用户/角色/策略/MFA/临时凭证"指的都是同一套 IAM 逻辑，换名字不影响答题——抓住"身份、认证、授权、审计"四要素即可。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d636d">
+    <div class="kp-head"><h4>6.3.6（补）审计、监控与最佳实践（落地闭环）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>IAM 落地的安全闭环 = 强认证（全量 MFA）+ 最小权限（RBAC/默认拒绝）+ 临时凭证（STS、避免长期密钥）+ 密钥定期轮换 + 集中审计与异常告警（如异地登录、高频失败、越权尝试）+ 定期权限复查回收。六点缺一不可。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>① 全员 MFA：</b>尤其管理员与高权限账号强制 MFA。</li>
+      <li><b>② 最小权限：</b>用角色而非直接 FullAccess；默认拒绝。</li>
+      <li><b>③ 临时凭证优先：</b>服务间用角色扮演拿 STS 临时令牌，避免长期 AK/SK 写代码。</li>
+      <li><b>④ 密钥轮换：</b>长期密钥定期更换、泄露即吊销。</li>
+      <li><b>⑤ 审计告警：</b>开启云审计（如 CloudTrail / 操作审计），对异常行为实时告警。</li>
+      <li><b>⑥ 权限复查：</b>定期清理离职/闲置账号与多余权限（权限衰减）。</li>
+    </ul>
+    <div class="warn"><span class="lab">⚠ 考试易错点（综合必考）：</span>"买了云就安全了"是错的——IAM 的<b>正确配置是客户责任</b>（呼应 6.1 责任共担）。把长期密钥硬编码到代码、给脚本配管理员权限、高权账号不开 MFA，都是典型的"客户侧配置失误"，属于<b>可避免</b>的安全事故。</div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>一句话总结实现方式：</b>用"集中身份目录 + 强认证(MFA) + 基于角色的细粒度授权 + 临时凭证 + 全程审计"这一整套机制，把云上的"谁能进、进后能做什么、做了什么"完全管起来——这就是 IAM 在云计算中的实现方式。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>6.3 身份、授权和访问管理（IAM） · 详细讲解（2025考纲）｜ 本节是《第六章 云安全》的核心落子，建议结合 6.1 云安全概念、6.2 安全防护、6.4 加密与密钥管理 一起复习</footer>
+</section>
+<section class="chapter ch7" id="ch-7-1"><div class="ch-head"><span class="ch-num">7.1</span><span class="ch-ttl">7.1中国云计算产业发展现状</span></div>
 
   <h3>7.1.1 中国云计算发展概况</h3>
   <div class="kv">
@@ -4576,7 +5146,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 
 <!-- ========== 7.2 ========== -->
 <section>
-  <h2><span class="num">7.2</span>云计算的行业应用</h2>
+  </section>
+<section class="chapter ch7" id="ch-7-2"><div class="ch-head"><span class="ch-num">7.2</span><span class="ch-ttl">7.2云计算的行业应用</span></div>
 
   <h3>7.2.1 四大行业的云计算应用模式</h3>
   <div class="map">
@@ -4643,7 +5214,8 @@ DELETE /users/1001  →  204 No Content</code></pre>
 
 <!-- ========== 7.3 ========== -->
 <section>
-  <h2><span class="num">7.3</span>云计算发展及挑战</h2>
+  </section>
+<section class="chapter ch7" id="ch-7-3"><div class="ch-head"><span class="ch-num">7.3</span><span class="ch-ttl">7.3云计算发展及挑战</span></div>
 
   <h3>7.3.1 当前主流商业云计算解决方案的特点</h3>
   <table>
@@ -4707,7 +5279,6 @@ DELETE /users/1001  →  204 No Content</code></pre>
 <footer>
   第 7 章 云计算产业、应用与发展 · 详细讲解 ｜ 配套 2025 考纲 ｜ 与 workspace 中"2.x/3.x/4.x 详细讲解"系列同源
 </footer>
-
 
 </section>
     <footer class="cf">云计算复习专栏 · 备考专用 · 配合《2025考纲》使用</footer>

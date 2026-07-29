@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7.2 7.2云计算的行业应用 · 云计算复习专栏</title>
+<style>
+
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:32px;height:32px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  h4{font-size:14.5px;margin:14px 0 6px;color:#1e3a8a}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+  .silo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+  .silo .mini{background:linear-gradient(135deg,#eef2ff,#f8fafc)}
+  .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 24px;margin-top:22px}
+  .toc h3{margin:0 0 10px;color:var(--brand)}
+  .toc a{color:#2563eb;text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc ol{padding-left:20px}
+  .diagram{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+  .diagram svg{max-width:100%;height:auto}
+  .cap{font-size:12.5px;color:#94a3b8;margin-top:6px}
+  .pill{display:inline-block;font-size:12px;border-radius:999px;padding:2px 10px;margin-right:6px}
+  .pill.blue{background:var(--chip);color:#3730a3}
+  .pill.green{background:var(--okbg);color:#15803d}
+  .pill.red{background:var(--warnbg);color:#b91c1c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
+<a class="chip active" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+</div>
+</div></nav>
+<div class="wrap">
+<h2>7.2云计算的行业应用</h2>
+
+  <h3>7.2.1 四大行业的云计算应用模式</h3>
+  <div class="map">
+    <div class="diagram" style="text-align:left">
+      <h4 style="margin-top:4px">🏦 金融</h4>
+      <ul>
+        <li><b>核心系统分布式改造</b>：主机下移、单元化架构。</li>
+        <li><b>互联网银行/移动银行</b>：弹性支撑秒杀、开门红。</li>
+        <li><b>智能风控</b>：实时反欺诈、大数据征信。</li>
+        <li><b>监管报送与信创</b>：满足等保与自主可控。</li>
+      </ul>
+    </div>
+    <div class="diagram" style="text-align:left">
+      <h4 style="margin-top:4px">🏥 医疗</h4>
+      <ul>
+        <li><b>区域卫生云/政务健康云</b>：跨机构数据共享。</li>
+        <li><b>医学影像云</b>：PACS 上云、AI 辅助阅片。</li>
+        <li><b>互联网医院</b>：线上问诊、处方流转。</li>
+        <li><b>医保云</b>：结算、控费、监管。</li>
+      </ul>
+    </div>
+    <div class="diagram" style="text-align:left">
+      <h4 style="margin-top:4px">🎓 教育</h4>
+      <ul>
+        <li><b>教育新基建/教育云</b>：资源平台、管理平台。</li>
+        <li><b>在线教学</b>：直播、录播、弹性扩容。</li>
+        <li><b>智慧校园</b>：一卡通、安防、物联网。</li>
+        <li><b>科研云</b>：高性能计算、数据协同。</li>
+      </ul>
+    </div>
+    <div class="diagram" style="text-align:left">
+      <h4 style="margin-top:4px">🛒 零售</h4>
+      <ul>
+        <li><b>新零售/全渠道</b>：线上线下一体化中台。</li>
+        <li><b>大促弹性</b>：秒杀、双11 弹性扩容。</li>
+        <li><b>智能营销</b>：用户画像、推荐、CRM。</li>
+        <li><b>供应链云</b>：库存、物流协同。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>7.2.2 行业数字化转型中的云计算价值</h3>
+  <div class="card-grid">
+    <div class="mini"><h4>降本增效</h4><p>从"买资源"变"用资源"，按需付费，减少机房与运维投入。</p></div>
+    <div class="mini"><h4>弹性伸缩</h4><p>应对业务峰谷（大促、开盘、开学），秒级扩缩容。</p></div>
+    <div class="mini"><h4>敏捷创新</h4><p>云原生 + PaaS 缩短应用上线周期，支撑快速试错。</p></div>
+    <div class="mini"><h4>数据驱动</h4><p>汇聚数据、统一计算，沉淀 AI 与数据资产。</p></div>
+    <div class="mini"><h4>安全合规</h4><p>集中安全能力、等保合规、灾备与高可用。</p></div>
+    <div class="mini"><h4>生态协同</h4><p>打通上下游与产业链，支撑平台化运营。</p></div>
+  </div>
+
+  <h3>7.2.3 行业成功案例（理解记忆）</h3>
+  <table>
+    <tr><th>行业</th><th>代表性案例方向</th><th>云带来的价值</th></tr>
+    <tr><td>金融</td><td>网商银行/微众银行全分布式核心；城商行核心下移</td><td>高并发、低成本的普惠金融，去 IOE</td></tr>
+    <tr><td>金融</td><td>头部券商/保险上云与混合云</td><td>行情高并发、灾备、敏捷业务</td></tr>
+    <tr><td>医疗</td><td>区域影像云、健康码/疫情防控平台</td><td>跨院调阅、弹性并发、数据共享</td></tr>
+    <tr><td>教育</td><td>大规模在线课堂（疫情期）、国家/省级教育云平台</td><td>千万级并发、资源普惠</td></tr>
+    <tr><td>零售</td><td>电商平台双11、连锁零售全渠道中台</td><td>峰值弹性、库存一盘货、精准营销</td></tr>
+    <tr><td>制造/政务</td><td>工业互联网平台、城市大脑/政务云</td><td>设备上云、城市治理数字化</td></tr>
+  </table>
+  <div class="tip"><b>答题模板（行业应用价值题）：</b>"以 <b>×行业</b> 为例，云计算通过<b>弹性算力/数据汇聚/云原生平台</b>，解决了<b>峰值压力/数据孤岛/上线慢</b>等痛点，实现了<b>降本、增效、创新</b>三方面的价值，典型案例是……"</div>
+</section>
+
+<!-- ========== 7.3 ========== -->
+<section>
+  
+</div>
+<div class="colfoot"><a class="prev" href="7-1.html"><div class="lab">上一篇</div><div class="ttl">7.1 7.1中国云计算产业发展现状</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="7-3.html"><div class="lab">下一篇</div><div class="ttl">7.3 7.3云计算发展及挑战</div></a></div>
+</body>
+</html>

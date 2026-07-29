@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>6.2 安全防护与策略 · 云计算复习专栏</title>
+<style>
+
+  :root{
+    --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
+    --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
+    --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
+    --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
+    --warn:#d97706;
+    --shield:#7c3aed; --shield-soft:#f3edff;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}
+  header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
+  header.top h1{margin:0;font-size:19px;font-weight:700;}
+  header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}
+  header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
+  header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}
+  .search-wrap{position:absolute;right:24px;top:14px;}
+  .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
+  .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:96px;width:288px;flex:0 0 288px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
+  nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
+  nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}
+  nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}
+  nav.toc a.sub{padding-left:22px;font-size:12.5px;}
+  nav.toc a.sub2{padding-left:34px;font-size:12px;color:#7b86a0;}
+  main{flex:1;min-width:0;padding:22px 26px 80px;}
+  .section{margin-bottom:40px;scroll-margin-top:100px;}
+  .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}
+  .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
+  .section-head h2{margin:0;font-size:20px;}
+  .chapter{margin-top:22px;scroll-margin-top:160px;}
+  .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
+  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}
+  .kp.hide{display:none;}
+  .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .kp-head h4{margin:0;font-size:15.5px;}
+  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}
+  .lv1{background:var(--lv1);} .lv2{background:var(--lv2);} .lv3{background:var(--lv3);} .lv4{background:var(--shield);}
+  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}
+  .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}
+  .core .lab::before{content:"★ 核心知识点：";}
+  .core b{color:var(--ink);}
+  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}
+  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}
+  .ex .lab::before{content:"💡 示例：";}
+  .ex ul{margin:5px 0;padding-left:20px;}
+  .ex li{margin:3px 0;}
+  .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}
+  .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}
+  .warn .lab{font-weight:700;}
+  .tip{background:var(--shield-soft);border:1px solid var(--shield);border-left:4px solid var(--shield);border-radius:8px;padding:10px 14px;margin:11px 0;color:#5b21b6;font-size:13.5px;}
+  .tip .lab{font-weight:700;}
+  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
+  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}
+  table.tbl tr:nth-child(even) td{background:#fafcff;}
+  .fig{margin:14px 0;text-align:center;}
+  .fig svg{width:100%;max-width:720px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}
+  .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}
+  #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}
+  .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0;}
+  @media(max-width:920px){nav.toc{display:none;} .container{display:block;} main{padding:16px;} .search-wrap{position:static;margin-top:10px;} .search-wrap input{width:100%;} .grid2{grid-template-columns:1fr;}}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
+<a class="chip active" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+</div>
+</div></nav>
+<main>
+
+
+<!-- ================= 0 概念辨析 ================= -->
+<section class="section" id="c00">
+  <div class="section-head"><div class="num">0</div><h2>概念辨析：常见安全防护措施 vs 安全策略</h2></div>
+
+  <div class="chapter" id="c00a"><h3>先分清两个常被混用的词</h3>
+    <div class="kp" id="d00">
+      <div class="kp-head"><h4>6.2-0 防护措施 与 安全策略 的关系</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>"安全防护措施"是"用什么手段防"（技术/管理的落地动作）；"安全策略"是"按什么规则防"（制度/原则/基线）。策略决定措施，措施落实策略——两者缺一不可。</b></div>
+      <div class="grid2">
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>🔧 安全防护措施（防护手段）</h4></div>
+          <p class="note">看得见、摸得着的"动作与工具"：</p>
+          <ul class="note">
+            <li><b>技术措施：</b>防火墙、WAF、加密、防病毒、入侵检测、漏洞扫描、访问控制列表。</li>
+            <li><b>管理措施：</b>安全培训、应急预案演练、账号审批、日志审计制度。</li>
+            <li>特点：可部署、可检测、可量化（如"每周漏扫一次"）。</li>
+          </ul>
+        </div>
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>📜 安全策略（防护规则）</h4></div>
+          <p class="note">看不见但指导一切的"原则与要求"：</p>
+          <ul class="note">
+            <li><b>总体策略：</b>最小权限、纵深防御、默认拒绝、零信任。</li>
+            <li><b>具体策略：</b>"所有对外端口必须审批""密钥不得硬编码""离职 24 小时内回收账号"。</li>
+            <li>特点：是制度文件，决定"该上哪些措施"。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>策略→措施的关系：</b>策略规定"敏感数据必须加密存储"（规则）→ 措施就是"对数据库开启 TDE 透明加密 + 使用 KMS 托管密钥"（动作）。没有策略，措施会"为了做而做"；没有措施，策略只是空话。</li>
+        </ul>
+      </div>
+      <div class="tip"><span class="lab">📌 考试答题套路：</span>题目问"安全策略"时答<b>原则/制度/基线</b>（如最小权限、责任共担）；问"防护措施"时答<b>具体技术/管理手段</b>（如 WAF、加密、审计）。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 1 核心架构安全 ================= -->
+<section class="section" id="c61">
+  <div class="section-head"><div class="num">一</div><h2>云计算核心架构安全（纵深防御）</h2></div>
+
+  <div class="chapter" id="c61a"><h3>1.1 纵深防御（Defense in Depth）分层架构</h3>
+    <div class="kp" id="d61">
+      <div class="kp-head"><h4>6.2.1 核心架构安全 = 七层纵深防御</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>云安全不能只靠单点防护，而要从"物理层 → 网络层 → 主机/计算层 → 应用层 → 数据层 → 身份层 → 安全运维层"层层设防；任意一层被突破，仍有其他层兜底。</b></div>
+      <div class="fig">
+        <svg viewBox="0 0 720 360" role="img" aria-label="云安全纵深防御七层模型">
+          <!-- 层叠梯形 -->
+          <polygon points="60,40 660,40 700,330 20,330" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6"/>
+          <!-- 各层 -->
+          <g font-size="13" text-anchor="middle">
+            <!-- 物理 -->
+            <rect x="90" y="46" width="540" height="34" rx="8" fill="#1e3a8a"/>
+            <text x="360" y="68" fill="#fff" font-weight="700">物理安全 · 机房/电力/防灾/门禁（多为 CSP 负责）</text>
+            <!-- 网络 -->
+            <rect x="110" y="92" width="500" height="34" rx="8" fill="#2563eb"/>
+            <text x="360" y="114" fill="#fff" font-weight="700">网络安全 · VPC/安全组/微隔离/WAF/DDoS</text>
+            <!-- 主机 -->
+            <rect x="130" y="138" width="460" height="34" rx="8" fill="#0d9488"/>
+            <text x="360" y="160" fill="#fff" font-weight="700">主机/计算安全 · 镜像加固/补丁/堡垒机/HIDS</text>
+            <!-- 应用 -->
+            <rect x="150" y="184" width="420" height="34" rx="8" fill="#7c3aed"/>
+            <text x="360" y="206" fill="#fff" font-weight="700">应用安全 · 安全SDLC/API鉴权/漏洞扫描</text>
+            <!-- 数据 -->
+            <rect x="170" y="230" width="380" height="34" rx="8" fill="#d97706"/>
+            <text x="360" y="252" fill="#fff" font-weight="700">数据安全 · 加密/脱敏/备份/DLP</text>
+            <!-- 身份 -->
+            <rect x="190" y="276" width="340" height="34" rx="8" fill="#dc2626"/>
+            <text x="360" y="298" fill="#fff" font-weight="700">身份安全 · IAM/MFA/最小权限/SSO</text>
+          </g>
+          <!-- 运维侧 -->
+          <rect x="540" y="46" width="150" height="264" rx="8" fill="#334155" opacity="0.92"/>
+          <text x="615" y="120" fill="#fff" font-size="13" font-weight="700" writing-mode="tb" transform="rotate(0 615 120)" text-anchor="middle">安全运维：日志审计 / SIEM / SOC / 应急响应</text>
+          <text x="615" y="320" fill="#fff" font-size="11" text-anchor="middle">贯穿全层的"眼睛"</text>
+        </svg>
+        <div class="cap">图 6-2 七层纵深防御：安全运维（最右）横向贯穿所有层，提供持续监测与响应</div>
+      </div>
+      <table class="tbl">
+        <tr><th style="width:18%">层级</th><th style="width:30%">防护重点</th><th style="width:52%">常见措施（含云原生服务）</th></tr>
+        <tr><td>物理安全</td><td>机房、电力、防灾、人员进出</td><td>门禁、视频监控、冗余供电/制冷、防灾演练（绝大多数为 CSP 责任）</td></tr>
+        <tr><td>网络安全</td><td>隔离与访问控制</td><td><b>VPC 私有网络</b>、安全组/ACL、微隔离、<b>WAF 应用防火墙</b>、DDoS 高防、VPN/专线</td></tr>
+        <tr><td>主机/计算</td><td>系统与运行环境</td><td>镜像/模板加固、及时打补丁、<b>堡垒机</b>、HIDS 主机入侵检测、容器镜像扫描</td></tr>
+        <tr><td>应用安全</td><td>代码与接口</td><td>安全开发生命周期（SDLC）、<b>API 鉴权与限流</b>、代码/依赖漏洞扫描、RASP</td></tr>
+        <tr><td>数据安全</td><td>数据全生命周期</td><td>静态/传输加密、脱敏、备份与容灾、<b>DLP 数据防泄露</b>、分类分级</td></tr>
+        <tr><td>身份安全</td><td>人/程序身份</td><td><b>IAM</b>、强制 MFA、最小权限、SSO、临时凭证（STS）</td></tr>
+        <tr><td>安全运维</td><td>监测、审计与响应</td><td>集中日志、<b>SIEM/SOC</b>、态势感知、应急响应预案、定期渗透测试</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>纵深防御示例：</b>黑客利用 0day 拿下 Web 应用（应用层破）→ 仍受网络微隔离限制拿不到数据库网段 → 即便拖到数据也是密文（数据安全）→ 异常行为被 SIEM 告警（运维层）。多层拦截，单点失守不等于全面沦陷。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c61b"><h3>1.2 零信任架构与微隔离</h3>
+    <div class="kp" id="d62">
+      <div class="kp-head"><h4>6.2.2 云原生时代的两大关键思想</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>① 零信任（Zero Trust）："永不信任，持续验证"——不再默认"内网即安全"，每次访问都需认证、授权、加密。② 微隔离（Micro-segmentation）：把大网络切成细粒度安全域，东西向流量也受控，限制攻击横向移动。</b></div>
+      <div class="grid2">
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>🔐 零信任三大原则</h4></div>
+          <ul class="note">
+            <li><b>身份即边界：</b>用身份代替 IP/网段作为信任根。</li>
+            <li><b>持续验证：</b>每次请求都重新评估风险（设备、位置、行为）。</li>
+            <li><b>最小权限 + 默认拒绝：</b>只放行明确授权的访问。</li>
+          </ul>
+        </div>
+        <div class="kp" style="margin:0;">
+          <div class="kp-head"><h4>🧱 微隔离的价值</h4></div>
+          <ul class="note">
+            <li>把 Web 区、App 区、DB 区彻底隔开，即使 Web 被控也无法"平推"到数据库。</li>
+            <li>常用手段：安全组、K8s NetworkPolicy、服务网格 mTLS。</li>
+            <li>直接支撑"纵深防御"的横向拦截。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="warn"><span class="lab">⚠ 考试易错点：</span>传统安全以"边界防火墙"为核心、默认内网可信；云安全<b>边界模糊、资源弹性</b>，因此更强调"身份即边界"和"零信任"，不能再假设"进了内网就安全"。</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="c62">
+  <div class="section-head"><div class="num">二</div><h2>责任共担模型（Shared Responsibility）</h2></div>
+
+  <div class="chapter" id="c62a"><h3>2.1 安全责任如何划分</h3>
+    <div class="kp" id="d63">
+      <div class="kp-head"><h4>6.2.3 云安全责任分割规则</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>CSP 负责"云本身的安全"（Hypervisor、网络、物理、底层硬件）；客户负责"云中的安全"（操作系统、应用、数据、身份与访问配置）。服务模型越往上（IaaS→PaaS→SaaS），CSP 承担越多，客户责任越少。</b></div>
+      <div class="fig">
+        <svg viewBox="0 0 680 360" role="img" aria-label="责任共担模型">
+          <rect x="40" y="20" width="16" height="16" rx="3" fill="#2563eb"></rect>
+          <text x="62" y="33" font-size="13" fill="#1f2a44">CSP 负责的"云本身安全"</text>
+          <rect x="300" y="20" width="16" height="16" rx="3" fill="#f59e0b"></rect>
+          <text x="322" y="33" font-size="13" fill="#1f2a44">客户负责的"云中安全"</text>
+          <!-- IaaS -->
+          <text x="130" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">IaaS</text>
+          <rect x="40" y="70" width="180" height="216" fill="#f59e0b" rx="8"></rect>
+          <rect x="40" y="286" width="180" height="54" fill="#2563eb" rx="8"></rect>
+          <text x="130" y="172" font-size="12.5" fill="#fff" text-anchor="middle">客户：Guest OS / 应用</text>
+          <text x="130" y="192" font-size="12.5" fill="#fff" text-anchor="middle">/ 数据 / 网络配置</text>
+          <text x="130" y="315" font-size="12.5" fill="#fff" text-anchor="middle">CSP：虚拟化/硬件/机房</text>
+          <!-- PaaS -->
+          <text x="350" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">PaaS</text>
+          <rect x="260" y="70" width="180" height="135" fill="#f59e0b" rx="8"></rect>
+          <rect x="260" y="205" width="180" height="135" fill="#2563eb" rx="8"></rect>
+          <text x="350" y="142" font-size="12.5" fill="#fff" text-anchor="middle">客户：应用 / 数据</text>
+          <text x="350" y="262" font-size="12" fill="#fff" text-anchor="middle">CSP：运行时/OS/</text>
+          <text x="350" y="280" font-size="12" fill="#fff" text-anchor="middle">网络/硬件</text>
+          <!-- SaaS -->
+          <text x="570" y="62" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">SaaS</text>
+          <rect x="480" y="70" width="180" height="54" fill="#f59e0b" rx="8"></rect>
+          <rect x="480" y="124" width="180" height="216" fill="#2563eb" rx="8"></rect>
+          <text x="570" y="100" font-size="12.5" fill="#fff" text-anchor="middle">客户：使用配置/用户</text>
+          <text x="570" y="232" font-size="12" fill="#fff" text-anchor="middle">CSP：应用/运行时/</text>
+          <text x="570" y="250" font-size="12" fill="#fff" text-anchor="middle">OS/网络/硬件</text>
+        </svg>
+        <div class="cap">图 6-3 责任共担模型：越往上（SaaS）CSP 责任占比越大，客户剩余责任越少</div>
+      </div>
+      <table class="tbl">
+        <tr><th>服务模型</th><th>CSP 负责</th><th>客户负责</th></tr>
+        <tr><td><b>IaaS</b></td><td>物理、网络基础设施、Hypervisor/虚拟化、部分网络控制</td><td>Guest OS、中间件、应用、数据、身份、安全组配置、补丁</td></tr>
+        <tr><td><b>PaaS</b></td><td>在 IaaS 基础上 + 运行时、数据库引擎、OS</td><td>应用代码、数据内容、访问密钥、配置、部分身份</td></tr>
+        <tr><td><b>SaaS</b></td><td>几乎全部（应用、运行时、OS、网络、物理）</td><td>账号与权限、使用配置、终端安全、数据分类、DLP 策略</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="chapter" id="c62b"><h3>2.2 "责任真空"陷阱</h3>
+    <div class="kp" id="d64">
+      <div class="kp-head"><h4>6.2.4 最容易被忽视的安全盲区</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>双方都以为对方负责 → 出现"责任真空"（无人防护的灰色地带）。最典型：数据加密与密钥管理、身份与访问配置、客户端安全基线——无论哪种模型都始终属于客户责任。</b></div>
+      <div class="warn"><span class="lab">⚠ 考试必记：</span>无论 IaaS/PaaS/SaaS，以下<b>永远属于客户责任</b>：
+        <ul style="margin:6px 0 0;padding-left:20px;">
+          <li><b>数据加密与密钥管理</b>（CSP 不会替你设密码/密钥策略）；</li>
+          <li><b>身份、认证与访问配置</b>（账号、权限、MFA 由客户自己管）；</li>
+          <li><b>客户端配置与合规落地</b>（如安全组是否开 0.0.0.0/0、是否启用审计）。</li>
+        </ul>
+      </div>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>责任真空示例：</b>某公司将云数据库 3306 端口对 0.0.0.0/0 开放且无密码 → 被勒索拖库。这属于"客户侧网络配置责任"，CSP 不背锅；但客户又误以为"上云就有 CSP 兜底"，于是放任不管 → 事故。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3 IaaS/PaaS/SaaS ================= -->
+<section class="section" id="c63">
+  <div class="section-head"><div class="num">三</div><h2>IaaS / PaaS / SaaS 安全防护措施与策略要求</h2></div>
+
+  <div class="chapter" id="c63a"><h3>3.1 IaaS（基础设施即服务）安全防护</h3>
+    <div class="kp" id="d65">
+      <div class="kp-head"><h4>6.2.5 IaaS：防护重心在"系统层"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>IaaS 把"裸"的计算/存储/网络给你，客户几乎要自己管 Guest OS 及以上所有东西。防护重点：主机加固、补丁、网络安全组、堡垒机、磁盘加密、操作审计。</b></div>
+      <table class="tbl">
+        <tr><th style="width:24%">防护维度</th><th>措施与策略要求</th></tr>
+        <tr><td>网络安全</td><td>用 <b>VPC</b> 隔离；安全组遵循<b>最小化</b>（默认拒绝，只开必要端口）；禁止 0.0.0.0/0 全开；用 WAF/DDoS 高防保护公网入口</td></tr>
+        <tr><td>主机加固</td><td>使用<b>加固镜像/模板</b>；及时打系统补丁（开启自动更新或定期巡检）；关闭无用服务与端口；部署 <b>HIDS</b> 主机入侵检测</td></tr>
+        <tr><td>访问控制</td><td>通过<b>堡垒机</b>统一运维入口；SSH 禁止密码登录改密钥；禁用 root 直接远程；操作全程审计录像</td></tr>
+        <tr><td>数据安全</td><td>云盘/数据库开启<b>静态加密（TDE/KMS）</b>；定期快照与异地备份；敏感配置文件加密存储</td></tr>
+        <tr><td>账号与密钥</td><td>AccessKey 最小权限、定期轮转、不写入代码；使用 STS 临时凭证；开启操作日志（CloudTrail/操作审计）</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>IaaS 场景：</b>自己用云服务器搭网站——你得自己装防火墙、打系统补丁、配安全组、管数据库密码、做磁盘加密。相当于"租了带水电的毛坯房，装修安防全自己来"。</li>
+        </ul>
+      </div>
+      <div class="tip"><span class="lab">📌 IaaS 策略基线口诀：</span>网不过宽、机必加固、补及时打、盘必加密、管走堡垒、钥要轮转。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63b"><h3>3.2 PaaS（平台即服务）安全防护</h3>
+    <div class="kp" id="d66">
+      <div class="kp-head"><h4>6.2.6 PaaS：防护重心在"应用与配置"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>PaaS 帮你管好了 OS 和运行时，你只管"应用代码 + 数据 + 配置"。防护重点：安全开发生命周期、依赖/组件漏洞扫描、密钥管理、API 安全、配置基线。</b></div>
+      <table class="tbl">
+        <tr><th style="width:24%">防护维度</th><th>措施与策略要求</th></tr>
+        <tr><td>应用安全(SDLC)</td><td>把安全嵌入开发全流程：需求安全评审、代码审计、<b>依赖/组件漏洞扫描</b>（防 Log4j 类供应链漏洞）、上线前安全测试</td></tr>
+        <tr><td>密钥管理</td><td>密钥/证书统一进 <b>KMS/密钥库</b>，<b>严禁硬编码</b>进代码与镜像；使用环境变量或密钥服务动态注入；支持 BYOK 自管密钥</td></tr>
+        <tr><td>API 安全</td><td>所有 API 必须鉴权（OAuth2/签名）；限流防刷；输入校验防注入；敏感接口加审计；网关统一管控</td></tr>
+        <tr><td>配置基线</td><td><b>默认安全配置</b>（关闭公开访问、最小权限）；CI/CD 设<b>安全门禁</b>（扫描不过不让发布）；环境隔离（dev/test/prod）</td></tr>
+        <tr><td>运行时</td><td>函数计算/容器启用最小权限运行身份；限制出站连接；监控异常调用</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>PaaS 场景：</b>用云数据库 + 函数计算写业务——底层系统由厂商管，你只需管好访问密钥、SQL 权限、代码里的依赖库版本。相当于"租了精装房带物业，你只管布置软装与门锁密码"。</li>
+        </ul>
+      </div>
+      <div class="warn"><span class="lab">⚠ 易错点：</span>PaaS 看似"省心"，但<b>应用层漏洞（注入、越权、依赖漏洞）和密钥泄露仍由客户负责</b>。把 AK 写进前端代码、用含漏洞的旧版组件，是 PaaS 最常见翻车点。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63c"><h3>3.3 SaaS（软件即服务）安全防护</h3>
+    <div class="kp" id="d67">
+      <div class="kp-head"><h4>6.2.7 SaaS：防护重心在"账号与使用"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>SaaS 几乎全由厂商运维，客户最该管的是"人、账号、权限、外发内容"。防护重点：SSO、强制 MFA、最小权限、DLP 数据防泄露、租户隔离、登录与操作审计。</b></div>
+      <table class="tbl">
+        <tr><th style="width:24%">防护维度</th><th>措施与策略要求</th></tr>
+        <tr><td>身份与认证</td><td>对接企业 <b>SSO</b>（统一身份）；<b>强制 MFA</b>（防账号被盗）；禁用共享账号；弱密码策略</td></tr>
+        <tr><td>权限管理</td><td><b>最小权限 + RBAC</b>；按角色授权；<b>账号生命周期管理</b>（入职开通、调岗变更、离职 24h 内回收）</td></tr>
+        <tr><td>数据防泄露</td><td>配置 <b>DLP</b> 策略限制文件外发/下载/打印；敏感操作二次审批；水印溯源</td></tr>
+        <tr><td>租户隔离</td><td>确认厂商多租户<b>逻辑隔离</b>充分（跨租户越权是 SaaS 头号风险）；关注厂商隔离架构说明</td></tr>
+        <tr><td>审计与合规</td><td>开启登录与操作审计日志；定期访问复查；用 <b>CASB</b>（云访问安全代理）统一管控多 SaaS</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>SaaS 场景：</b>用在线办公/邮箱/CRM——你重点管好员工账号（开 MFA）、按岗授权、限制文件外发。相当于"用别人运营好的酒店，你只管房卡发给谁、能进哪间房"。</li>
+        </ul>
+      </div>
+      <div class="tip"><span class="lab">📌 SaaS 客户三件事：</span>① 账号谁能用（SSO+MFA）；② 能看/能下什么（最小权限+DLP）；③ 出事能追谁（审计+CASB）。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c63d"><h3>3.4 三类模型防护对比总表</h3>
+    <div class="kp" id="d68">
+      <div class="kp-head"><h4>6.2.8 一表看清责任与防护重心</h4><span class="badge lv2">熟悉</span></div>
+      <table class="tbl">
+        <tr><th>维度</th><th>IaaS（基础设施）</th><th>PaaS（平台）</th><th>SaaS（软件）</th></tr>
+        <tr><td>客户主责面</td><td>Guest OS、应用、数据、网络 ACL</td><td>应用代码、数据、配置</td><td>账号、权限、使用配置、DLP</td></tr>
+        <tr><td>关键防护</td><td>镜像/主机加固、补丁、安全组最小化、堡垒机、磁盘加密、操作审计</td><td>安全 SDLC、依赖扫描、密钥管理、API 安全、配置基线</td><td>SSO、强制 MFA、最小权限、DLP、登录与操作审计</td></tr>
+        <tr><td>策略要求</td><td>禁止 0.0.0.0/0 全开；定期漏洞扫描；变更需审批</td><td>默认安全配置；密钥不硬编码；CI/CD 安全门禁</td><td>账号生命周期管理；外发内容管控；定期权限复查</td></tr>
+        <tr><td>客户工作量</td><td><b>最大</b>（自建自运维）</td><td>中等</td><td><b>最小</b>（主要管人）</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4 应用安全策略 ================= -->
+<section class="section" id="c64">
+  <div class="section-head"><div class="num">四</div><h2>不同云计算应用的安全策略与部署重点</h2></div>
+
+  <div class="kp" id="d69">
+    <div class="kp-head"><h4>6.2.9 没有"放之四海皆准"的策略</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>应按应用特征——是否对外暴露、是否含敏感数据、是否强合规、是否海量设备——来确定"部署在哪、重点防什么"。</b></div>
+  </div>
+
+  <div class="chapter" id="c64a"><h3>4.1 对外 Web / 电商</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：扛流量、防暴露面</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>WAF + DDoS 高防 + 全站 HTTPS + 防爬防刷 + 应用层限流 + 异地多活。</li>
+        <li><b>部署：</b>入口挂 CDN/高防；Web 与 DB 分属不同安全域（微隔离）；敏感交易走多因子校验。</li>
+        <li><b>合规：</b>支付涉及 PCI DSS；用户隐私遵循个人信息保护法。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64b"><h3>4.2 数据密集型 / 大数据</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：加密、备份、分级</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>静态加密 + 备份容灾 + 脱敏 + 访问分级 + 跨区域复制。</li>
+        <li><b>部署：</b>数据仓库/湖开启加密与审计；计算结果脱敏后对外；冷热数据分层存储降低成本。</li>
+        <li><b>重点：</b>防止"大数据平台被当成提数后门"——严格字段级权限。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64c"><h3>4.3 金融 / 政务（强合规）</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：合规与主权优先</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>等保三级/四级 + 专属/私有云或金融/政务专区 + 密钥自管（BYOK）+ 全量审计。</li>
+        <li><b>部署：</b>优先选符合监管的行业云专区；数据本地化不出境；密钥掌握在客户侧 HSM。</li>
+        <li><b>重点：</b>满足监管审计与数据主权，可审计、可追溯、可证明。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64d"><h3>4.4 IoT / 边缘计算</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：设备身份与固件可信</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>设备身份认证 + 设备证书 + 网关加密 + 固件签名校验 + 异常设备隔离。</li>
+        <li><b>部署：</b>每台设备发唯一证书；边缘网关做安全接入；海量设备用物联网平台统一管控。</li>
+        <li><b>重点：</b>设备数量大、防护弱，易被当成"肉鸡"——设备身份是核心。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64e"><h3>4.5 DevOps / 研发上云</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：流水线安全门禁</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>CI/CD 安全门禁 + 密钥不进代码库 + 镜像扫描 + 最小权限流水线。</li>
+        <li><b>部署：</b>代码扫描、依赖扫描、镜像扫描串联进流水线；密钥由 Vault/KMS 注入；制品库签名。</li>
+        <li><b>重点：</b>"左移"——安全问题在开发阶段就挡住，而非上线后救火。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter" id="c64f"><h3>4.6 混合云 / 多云</h3>
+    <div class="kp" style="margin:12px 0;">
+      <div class="kp-head"><h4>部署重点：一致策略与统一身份</h4></div>
+      <ul class="note">
+        <li><b>策略：</b>统一身份（联邦 SSO）+ 一致安全策略 + 跨云集中审计 + 数据同步加密。</li>
+        <li><b>部署：</b>用统一 CSPM（云安全态势管理）看多朵云风险；避免"云间策略不一致留缺口"。</li>
+        <li><b>重点：</b>多云最怕"东边墙厚西边墙薄"——策略要拉平。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5 评估 CSP ================= -->
+<section class="section" id="c65">
+  <div class="section-head"><div class="num">五</div><h2>如何评估 CSP（云服务提供商）安全性</h2></div>
+
+  <div class="chapter" id="c65a"><h3>5.1 评估的六大维度</h3>
+    <div class="kp" id="d610">
+      <div class="kp-head"><h4>6.2.10 看"证书+透明度+主权+SLA+加密可控+事件响应"</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>优先选择有第三方审计背书、合规齐全、透明度高的厂商：从"合规认证、安全透明度、数据主权、SLA 与持久性、加密与密钥控制、事件响应"六个方面系统评估。</b></div>
+      <table class="tbl">
+        <tr><th style="width:20%">维度</th><th style="width:80%">看什么 / 怎么判断</th></tr>
+        <tr><td>① 合规认证</td><td>ISO 27001、SOC 2 Type II、PCI DSS、国内<b>等保三级/四级</b>、CSA STAR——这些是"第三方替你审过"的依据</td></tr>
+        <tr><td>② 安全透明度</td><td>是否公开安全白皮书、合规报告（SOC 2 报告）、是否接受渗透测试与漏洞披露（有漏洞赏金计划更佳）</td></tr>
+        <tr><td>③ 数据位置与主权</td><td>数据中心地域是否可选、是否满足数据不出境/本地化要求、跨境传输是否有合规机制</td></tr>
+        <tr><td>④ SLA 与持久性</td><td>可用性 SLA（如 99.95%）、数据持久性（如 11 个 9 = 99.999999999%）、故障赔付条款是否明确</td></tr>
+        <tr><td>⑤ 加密与密钥控制</td><td>是否支持<b>客户自管密钥（BYOK / HYOK）</b>、是否提供 KMS/HSM、是否默认传输加密</td></tr>
+        <tr><td>⑥ 事件响应</td><td>是否有明确安全事件通知时效（如 24h 内告知）、应急与溯源能力、事后复盘报告</td></tr>
+      </table>
+      <div class="fig">
+        <svg viewBox="0 0 720 230" role="img" aria-label="CSP 安全性六维评估雷达示意">
+          <polygon points="360,30 540,90 600,200 360,210 120,200 180,90" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"/>
+          <polygon points="360,70 500,105 545,180 360,188 215,180 220,105" fill="#2563eb" opacity="0.45"/>
+          <g font-size="13" fill="#1f2a44" text-anchor="middle" font-weight="600">
+            <text x="360" y="20">合规认证</text>
+            <text x="560" y="82">透明度</text>
+            <text x="618" y="212">数据主权</text>
+            <text x="360" y="228">SLA/持久性</text>
+            <text x="102" y="212">加密可控</text>
+            <text x="160" y="82">事件响应</text>
+          </g>
+        </svg>
+        <div class="cap">图 6-4 CSP 安全性六维评估示意：六维越均衡饱满，整体越可信</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c65b"><h3>5.2 评估流程与检查清单</h3>
+    <div class="kp" id="d611">
+      <div class="kp-head"><h4>6.2.11 一套可落地的评估步骤</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>评估不是"看广告"，而是"看证据"：先卡合规门槛 → 核透明度 → 验数据主权 → 比 SLA 与赔付 → 测加密可控 → 查事件响应 → 做 PoC 验证。</b></div>
+      <ol class="note">
+        <li><b>明确需求与合规门槛：</b>先定行业（金融/政务要等保+专区）、数据敏感度、是否出境。</li>
+        <li><b>查合规证书：</b>索要 ISO 27001 / SOC 2 / 等保测评报告原件，核对适用范围。</li>
+        <li><b>核透明度：</b>要安全白皮书、SOC 2 报告（可签 NDA 后看）、漏洞披露政策。</li>
+        <li><b>验数据主权：</b>确认地域可选、跨境机制、是否支持本地化部署。</li>
+        <li><b>比 SLA 与赔付：</b>可用性/持久性指标 + 违约赔付是否真有约束力。</li>
+        <li><b>测加密可控：</b>是否 BYOK/HSM、默认加密、密钥轮换机制。</li>
+        <li><b>查事件响应：</b>通知时效、应急流程、历史事故公开度。</li>
+        <li><b>PoC 验证：</b>实际测安全组、审计、MFA、密钥注入等能力是否如描述。</li>
+      </ol>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>金融客户选型：</b>先卡"是否具备等保三级 + 金融云专区 + 支持 BYOK"，再比 SLA 与事故赔付，最后看透明度报告——门槛不过直接淘汰。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c65c"><h3>5.3 第三方报告怎么读</h3>
+    <div class="kp" id="d612">
+      <div class="kp-head"><h4>6.2.12 别被"有认证"三个字糊弄</h4><span class="badge lv2">熟悉</span></div>
+      <ul class="note">
+        <li><b>ISO 27001：</b>看"认证范围"是否覆盖你用的服务（很多只认证了某几个区域/产品）。</li>
+        <li><b>SOC 2 Type II：</b>比 Type I 更有说服力（Type II 是"一段时期的持续合规"证据，Type I 只是"某一时点的状态"）。</li>
+        <li><b>CSA STAR：</b>云安全联盟的成熟度认证，可结合 CAIQ 问卷看控制项覆盖。</li>
+        <li><b>国内等保：</b>看测评机构资质 + 备案级别（三级及以上为重要系统）。</li>
+      </ul>
+      <div class="tip"><span class="lab">📌 读报告要点：</span>盯住"适用范围（Scope）"和"有效期"，认证过期或范围不含你的业务 = 等于没有。</div>
+    </div>
+  </div>
+
+  <div class="chapter" id="c65d"><h3>5.4 评估常见陷阱</h3>
+    <div class="kp" id="d613">
+      <div class="kp-head"><h4>6.2.13 别踩这些坑</h4><span class="badge lv3">掌握</span></div>
+      <div class="warn"><span class="lab">⚠ 考试/实战易错：</span>
+        <ul style="margin:6px 0 0;padding-left:20px;">
+          <li>只看"有认证"不看<b>适用范围与有效期</b>；</li>
+          <li>把"可用性 SLA 高"误当"<b>安全能力强</b>"——SLA 管的是"能不能用"，不是"安不安全"；</li>
+          <li>忽略<b>数据主权</b>：境外 CSP 可能不满足数据出境合规；</li>
+          <li>假设 CSP "全包安全"——忘了责任共担里客户自留的那部分；</li>
+          <li>不问<b>事件通知时效</b>，出事才发现厂商 7 天都不告诉你。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6 速记 ================= -->
+<section class="section" id="c66">
+  <div class="section-head"><div class="num">六</div><h2>考试速记与易错点汇总</h2></div>
+
+  <div class="kp" id="d614">
+    <div class="kp-head"><h4>6.2-总结 一条主线串起来</h4><span class="badge lv4">速记</span></div>
+    <div class="core"><span class="lab"></span><b>策略定规则 → 架构做纵深 → 责任划清边界 → 按服务模型落地防护 → 按应用特征定重点 → 用六维评估选 CSP。</b></div>
+    <table class="tbl">
+      <tr><th style="width:30%">主题</th><th style="width:70%">一句话考点</th></tr>
+      <tr><td>防护措施 vs 策略</td><td>措施=手段（WAF/加密）；策略=规则（最小权限/默认拒绝）</td></tr>
+      <tr><td>核心架构安全</td><td>七层纵深防御 + 零信任（身份即边界）+ 微隔离（限横向移动）</td></tr>
+      <tr><td>责任共担</td><td>CSP 管"云本身"，客户管"云中"；越往上 CSP 管越多；数据/身份/配置永远客户管</td></tr>
+      <tr><td>IaaS</td><td>重系统层：加固、补丁、安全组、堡垒机、磁盘加密、审计</td></tr>
+      <tr><td>PaaS</td><td>重应用配置：SDLC、依赖扫描、密钥管理、API 安全、CI/CD 门禁</td></tr>
+      <tr><td>SaaS</td><td>重账号使用：SSO、MFA、最小权限、DLP、租户隔离、CASB</td></tr>
+      <tr><td>应用策略</td><td>按对外/敏感/合规/设备/研发/多云特征定部署重点</td></tr>
+      <tr><td>评估 CSP</td><td>六维：合规、透明度、主权、SLA、加密可控、事件响应；看范围与有效期</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 高频易错（务必记牢）：</span>
+      <ul style="margin:6px 0 0;padding-left:20px;">
+        <li>云安全 ≠ "买云就自动安全"；安全是 CSP 与客户<b>共同责任</b>。</li>
+        <li>无论哪种模型，<b>数据加密、身份管理、客户端配置</b>始终归客户。</li>
+        <li>SLA 高 ≠ 安全强；认证要看<b>适用范围与有效期</b>。</li>
+        <li>IaaS 客户责任<b>最大</b>，SaaS 客户责任<b>最小</b>（主要管人）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="6-1.html"><div class="lab">上一篇</div><div class="ttl">6.1 云安全概念与威胁</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-3.html"><div class="lab">下一篇</div><div class="ttl">6.3 身份授权与访问管理</div></a></div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.2 1.2云计算的服务模式 · 云计算复习专栏</title>
+<style>
+
+  :root{
+    --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
+    --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
+    --line:#e5e7eb; --chip:#eef2ff; --warnbg:#fef2f2; --okbg:#f0fdf4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff;
+    border-radius:16px;padding:28px 30px;box-shadow:0 10px 30px rgba(37,99,235,.25)}
+  header.hero h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  header.hero p{margin:0;opacity:.92;font-size:14px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+    padding:2px 10px;border-radius:999px;font-size:12px;margin-top:10px}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 22px;margin-top:22px;font-size:14px}
+  .toc b{color:var(--brand)}
+  .toc a{color:var(--sub);text-decoration:none}
+  .toc a:hover{color:var(--brand)}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-top:22px;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  h2{font-size:20px;margin:0 0 14px;color:var(--brand);display:flex;align-items:center;gap:10px}
+  h2 .num{background:var(--brand);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+  h3{font-size:16px;margin:18px 0 8px;color:var(--ink)}
+  p{margin:8px 0;color:var(--sub)}
+  b{color:var(--ink)}
+  ul,ol{margin:8px 0;padding-left:22px;color:var(--sub)}
+  li{margin:5px 0}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:14px 0}
+  .mini{background:var(--chip);border:1px solid #dfe6ff;border-radius:12px;padding:14px 16px}
+  .mini h4{margin:0 0 6px;font-size:15px;color:#1e3a8a}
+  .mini p{margin:0;font-size:13.5px;color:#374151}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:#f1f5f9;color:#0f172a}
+  td:first-child,th:first-child{font-weight:600;background:#fafbff;white-space:nowrap}
+  .vm{background:var(--warnbg)} .ct{background:var(--okbg)}
+  .kv{background:#f8fafc;border-left:4px solid var(--brand);padding:10px 14px;border-radius:8px;margin:12px 0}
+  .kv b{color:var(--brand)}
+  .tip{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin:14px 0;font-size:14px}
+  .tip b{color:#b45309}
+  .threat{background:var(--warnbg);border:1px solid #fecaca;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .threat b{color:var(--warn)}
+  .safe{background:var(--okbg);border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin:10px 0}
+  .safe b{color:var(--ok)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  @media(max-width:640px){.map{grid-template-columns:1fr}}
+  footer{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:26px}
+  .tag{display:inline-block;font-size:12px;background:#e0e7ff;color:#3730a3;border-radius:6px;padding:1px 8px;margin:0 2px}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}
+  .flow .step{background:var(--chip);border:1px solid #dfe6ff;border-radius:10px;padding:8px 14px;font-size:13.5px;color:#1e3a8a}
+  .flow .arrow{color:var(--brand);font-weight:700}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
+<a class="chip active" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+</div>
+</div></nav>
+<div class="wrap">
+<h2>1.2云计算的服务模式</h2>
+  <p>服务模式回答的是"<b>云把哪一层交给你来管</b>"。从底层到上层，抽象程度递增、用户运维负担递减：</p>
+
+  <div class="flow">
+    <span class="step">① IaaS 基础设施</span><span class="arrow">→</span>
+    <span class="step">② PaaS 平台</span><span class="arrow">→</span>
+    <span class="step">③ SaaS 软件</span>
+  </div>
+  <p>三者并非替代关系，而是<b>层级叠加</b>：PaaS 通常构建在 IaaS 之上，SaaS 通常构建在 PaaS（或 IaaS）之上。</p>
+
+  <h3>① IaaS — 基础设施即服务（Infrastructure as a Service）</h3>
+  <div class="kv">
+    <b>概念：</b>把<b>最底层的基础设施</b>（虚拟机、存储、网络、负载均衡等）以服务形式提供。
+    云商拥有并维护硬件与虚拟化层，用户租用"虚拟服务器/磁盘/网络"，并自行安装操作系统、中间件与应用。
+  </div>
+  <ul>
+    <li><b>用户管什么：</b>操作系统、运行时、数据、应用、部分网络配置。</li>
+    <li><b>云商管什么：</b>服务器、存储、网络硬件、虚拟化、机房。</li>
+    <li><b>适用场景：</b>需要完全控制底层环境的企业应用、灾备、测试/开发环境、可弹性扩缩的 Web 服务、大数据处理。</li>
+    <li><b>典型案例：</b>AWS EC2、阿里云 ECS、腾讯云 CVM、Azure Virtual Machines、Google Compute Engine、OpenStack。</li>
+  </ul>
+
+  <h3>② PaaS — 平台即服务（Platform as a Service）</h3>
+  <div class="kv">
+    <b>概念：</b>在 IaaS 之上再向上提供<b>开发与运行平台</b>：操作系统、编程语言运行时、数据库、中间件、部署工具等
+    由云商托管。用户只需<b>上传代码与数据</b>，专注于应用开发与业务逻辑。
+  </div>
+  <ul>
+    <li><b>用户管什么：</b>应用代码、数据、配置。</li>
+    <li><b>云商管什么：</b>从硬件到运行时环境、扩容、补丁等全部基础设施与平台软件。</li>
+    <li><b>适用场景：</b>快速开发部署、团队协作开发、不想运维底层、需要弹性伸缩的 Web/移动应用后端、AI 训练平台。</li>
+    <li><b>典型案例：</b>Google App Engine、Heroku、Cloud Foundry、阿里云 SAE / 函数计算、Azure App Service、腾讯云 TCB。</li>
+  </ul>
+
+  <h3>③ SaaS — 软件即服务（Software as a Service）</h3>
+  <div class="kv">
+    <b>概念：</b>把<b>完整的应用软件</b>通过互联网以服务形式直接提供给最终用户。用户无需安装与维护，
+    打开浏览器或 App 即可使用，<b>数据与软件都在云端</b>。
+  </div>
+  <ul>
+    <li><b>用户管什么：</b>几乎只管"使用"和自己的业务数据。</li>
+    <li><b>云商管什么：</b>从硬件到软件、运维、升级、安全的全部环节。</li>
+    <li><b>适用场景：</b>通用办公协作、CRM、ERP、邮件、视频会议、财务等标准化程度高的业务。</li>
+    <li><b>典型案例：</b>钉钉、企业微信、飞书、Salesforce、Office 365、Google Workspace、腾讯文档、Netflix（流媒体 SaaS）。</li>
+  </ul>
+
+  <h3>三种服务模式对比</h3>
+  <table>
+    <tr><th>维度</th><th>IaaS</th><th>PaaS</th><th>SaaS</th></tr>
+    <tr><td>提供内容</td><td>虚拟机 / 存储 / 网络</td><td>开发运行平台</td><td>完整应用软件</td></tr>
+    <tr><td>用户控制度</td><td class="vm">高（接近裸机）</td><td>中（管应用与数据）</td><td class="ct">低（开箱即用）</td></tr>
+    <tr><td>运维负担</td><td>重</td><td>中</td><td class="ct">最轻</td></tr>
+    <tr><td>适用对象</td><td>IT/运维/架构师</td><td>开发者</td><td>最终业务用户</td></tr>
+    <tr><td>典型比喻</td><td>租"毛坯房+地皮"</td><td>租"精装房，带家具"</td><td>住"酒店/服务式公寓"</td></tr>
+  </table>
+  <div class="tip"><b>记忆口诀：</b>IaaS=租基础设施，PaaS=租开发平台，SaaS=直接用软件。
+  抽象的层次越高，云商管得越多，用户越省心。考试常让判断"某场景/产品属于哪一类"。</div>
+
+  <div class="safe"><b>补充（了解）：</b>在 IaaS/PaaS/SaaS 之外，还有更细分的 XaaS 概念，
+  如 <b>FaaS/Serverless</b>（函数即服务）、<b>DaaS</b>（数据即服务）、<b>BaaS</b>（后端即服务）等，本质都是"SaaS 化"理念的延伸。</div>
+</section>
+
+<!-- ========== 1.3 ========== -->
+<section id="s3">
+  
+</div>
+<div class="colfoot"><a class="prev" href="1-1.html"><div class="lab">上一篇</div><div class="ttl">1.1 1.1云计算的概念及发展</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="1-3.html"><div class="lab">下一篇</div><div class="ttl">1.3 1.3云计算的部署模式</div></a></div>
+</body>
+</html>

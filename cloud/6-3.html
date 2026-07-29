@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>6.3 身份授权与访问管理 · 云计算复习专栏</title>
+<style>
+
+  :root{
+    --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
+    --cloud:#2563eb; --cloud-soft:#eaf1ff; --cloud-deep:#1d4ed8;
+    --ex-bd:#22a06b; --ex-bg:#eefaf2; --ex-ink:#0f6b3c;
+    --lv1:#64748b; --lv2:#0d9488; --lv3:#dc2626;
+    --warn:#d97706;
+    --shadow:0 1px 3px rgba(20,40,80,.06),0 6px 18px rgba(20,40,80,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;font-size:15px;}
+  header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
+  header.top h1{margin:0;font-size:19px;font-weight:700;}
+  header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}
+  header.top .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12px;}
+  header.top .legend span{background:rgba(255,255,255,.16);padding:2px 9px;border-radius:999px;}
+  .search-wrap{position:absolute;right:24px;top:14px;}
+  .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
+  .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:96px;width:290px;flex:0 0 290px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
+  nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
+  nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}
+  nav.toc a.active{background:var(--cloud-soft);color:var(--cloud);border-left-color:var(--cloud);font-weight:600;}
+  nav.toc a.sub{padding-left:22px;font-size:12.5px;}
+  main{flex:1;min-width:0;padding:22px 26px 80px;}
+  .section{margin-bottom:40px;scroll-margin-top:100px;}
+  .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}
+  .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
+  .section-head h2{margin:0;font-size:20px;}
+  .section-head .desc{font-size:12.5px;opacity:.92;margin-top:2px;}
+  .chapter{margin-top:22px;scroll-margin-top:160px;}
+  .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
+  .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}
+  .kp.hide{display:none;}
+  .kp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+  .kp-head h4{margin:0;font-size:15.5px;}
+  .badge{font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;color:#fff;}
+  .lv1{background:var(--lv1);} .lv2{background:var(--lv2);} .lv3{background:var(--lv3);}
+  .core{background:var(--cloud-soft);border-radius:9px;padding:10px 14px;margin:10px 0;}
+  .core .lab{font-weight:700;font-size:13px;color:var(--cloud);}
+  .core .lab::before{content:"★ 核心知识点：";}
+  .core b{color:var(--ink);}
+  .ex{background:var(--ex-bg);border:1px solid var(--ex-bd);border-left:4px solid var(--ex-bd);border-radius:8px;padding:10px 14px;margin:11px 0;color:var(--ex-ink);}
+  .ex .lab{font-weight:700;font-size:13px;display:block;margin-bottom:4px;}
+  .ex .lab::before{content:"💡 示例：";}
+  .ex ul{margin:5px 0;padding-left:20px;}
+  .ex li{margin:3px 0;}
+  .note{font-size:13px;color:var(--ink-soft);margin:6px 0;}
+  .warn{background:#fff7ed;border:1px solid var(--warn);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;margin:11px 0;color:#9a3412;font-size:13.5px;}
+  .warn .lab{font-weight:700;}
+  table.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;background:var(--panel);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top;}
+  table.tbl th{background:var(--cloud-soft);color:var(--cloud-deep);font-weight:700;}
+  table.tbl tr:nth-child(even) td{background:#fafcff;}
+  .fig{margin:14px 0;text-align:center;}
+  .fig svg{width:100%;max-width:680px;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);}
+  .fig .cap{font-size:12.5px;color:var(--ink-soft);margin-top:6px;}
+  footer{text-align:center;color:var(--ink-soft);font-size:12.5px;padding:30px;border-top:1px solid var(--line);}
+  #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:none;background:var(--cloud);color:#fff;font-size:20px;cursor:pointer;box-shadow:var(--shadow);display:none;z-index:60;}
+  .progress{position:fixed;top:0;left:0;height:3px;background:#fbbf24;width:0;z-index:100;}
+  @media(max-width:920px){nav.toc{display:none;} .container{display:block;} main{padding:16px;} .search-wrap{position:static;margin-top:10px;} .search-wrap input{width:100%;}}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> Google 云计算</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 亚马逊 AWS</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> 华为云</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 百度云</a>
+<a class="chip" href="3-5.html"><span class="num">3.5</span> 云平台选择比较</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> Web 文档服务</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> Web 服务与协议</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 面向服务架构 SOA</a>
+<a class="chip" href="4-4.html"><span class="num">4.4</span> 微服务架构</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 数据中心概念特征</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip active" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
+</div>
+</div></nav>
+<main>
+
+<!-- ============ 一、基本概念总览 ============ -->
+<section class="section" id="c63a">
+  <div class="section-head"><div class="num">6.3</div><h2>一、基本概念总览：什么是身份、授权和访问管理（IAM）</h2></div>
+
+  <div class="kp" id="d631">
+    <div class="kp-head"><h4>6.3.1 身份、授权和访问管理（IAM）的定义</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>IAM（Identity and Access Management，身份与访问管理）= 一套确保"正确的人 / 服务，在正确的条件下，用正确的权限，访问正确的资源"的框架与体系。它由三大支柱构成：身份（Identity）、认证（Authentication）、授权（Authorization）。</b></div>
+    <p class="note">理解 IAM 要抓住"一句总纲 + 三块拼图"：</p>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>总纲：</b>"你是谁（身份）→ 证明你是谁（认证）→ 你能干什么（授权）"。</li>
+      <li><b>① 身份（Identity）：</b>为每个用户、设备、应用、服务分配一个唯一且可识别的"身份"（账号、角色、服务主体），是一切安全控制的锚点。</li>
+      <li><b>② 认证（Authentication）：</b>验证"声称的这个身份"确实是本人——解决"<b>你是谁</b>"的问题。</li>
+      <li><b>③ 授权（Authorization）：</b>在身份被确认后，决定"这个身份能做什么、能碰哪些资源"——解决"<b>你能干什么</b>"的问题。</li>
+    </ul>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>生活比喻：</b>坐飞机——登机牌上的名字是<b>身份</b>，过安检刷身份证+人脸是<b>认证</b>，头等舱能进休息室、经济舱不能，就是<b>授权</b>。</li>
+        <li><b>云上对应：</b>一个 RAM 子用户（身份）→ 输入密码+短信验证码登录（认证）→ 被策略允许读取某 OSS 桶但不允许删除（授权）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d631b">
+    <div class="kp-head"><h4>6.3.1（补）认证 vs 授权：最易混淆的一对概念</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>认证（Authentication）= "你是谁"（验证身份，常缩写为 AuthN）；授权（Authorization）= "你能做什么"（赋予权限，常缩写为 AuthZ）。先认证、后授权，二者顺序不可颠倒，且相互独立。</b></div>
+    <table class="tbl">
+      <tr><th style="width:20%">维度</th><th style="width:40%">认证 Authentication（AuthN）</th><th style="width:40%">授权 Authorization（AuthZ）</th></tr>
+      <tr><td><b>回答的问题</b></td><td>"你是谁？是不是本人？"</td><td>"你被允许做什么？能访问哪份资源？"</td></tr>
+      <tr><td><b>发生时机</b></td><td>登录 / 调用接口的第一步</td><td>在认证通过之后</td></tr>
+      <tr><td><b>常见手段</b></td><td>密码、指纹、短信码、MFA</td><td>角色、策略、ACL（访问控制列表）、权限矩阵</td></tr>
+      <tr><td><b>失败表现</b></td><td>拒绝登录（身份不成立）</td><td>登录成功但操作被拒（没权限）</td></tr>
+      <tr><td><b>经典英文</b></td><td>"Who are you?"</td><td>"What can you do?"</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>很多人把"输入密码"叫做"授权"，这是错误的——输入密码是在<b>认证</b>；只有系统随后判断"该账号能不能删库"才叫<b>授权</b>。考题常混淆二者，务必分清"验证身份"和"赋予权限"。</div>
+  </div>
+</section>
+
+<!-- ============ 二、身份认证 ============ -->
+<section class="section" id="c63b">
+  <div class="section-head"><div class="num">6.3</div><h2>二、身份认证（Authentication）：验证"你是谁"</h2></div>
+
+  <div class="kp" id="d632">
+    <div class="kp-head"><h4>6.3.2 身份认证的三大类因素（认证因子）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>身份认证依据三类"因子"：① 你知道什么（知识因子，如密码/PIN）；② 你拥有什么（持有因子，如手机/硬件令牌/智能卡）；③ 你是什么（固有因子，如指纹/人脸/声纹）。单一因子叫单因素认证，两类及以上组合即构成 MFA（见第四节）。</b></div>
+    <p class="note">逐一拆解三类因子（考试高频，会让你判断某个认证属于哪类）：</p>
+    <table class="tbl">
+      <tr><th style="width:18%">因子类别</th><th style="width:30%">英文 / 别名</th><th style="width:34%">典型例子</th><th style="width:18%">特点</th></tr>
+      <tr><td><b>① 知识因子</b><br>Knowledge</td><td>你知道什么<br>What you know</td><td>口令、密码、PIN 码、安全问题答案</td><td>最常用、最弱；易被钓鱼/撞库/泄露</td></tr>
+      <tr><td><b>② 持有因子</b><br>Possession</td><td>你拥有什么<br>What you have</td><td>手机（短信/TOTP App）、U 盾、智能卡、硬件令牌</td><td>需物理持有；可能丢失/被 SIM 劫持</td></tr>
+      <tr><td><b>③ 固有因子</b><br>Inherence</td><td>你是什么<br>What you are</td><td>指纹、人脸、虹膜、声纹（生物特征）</td><td>便捷难伪造；存在隐私与误识率</td></tr>
+    </table>
+    <div class="fig">
+      <svg viewBox="0 0 680 220" role="img" aria-label="身份认证三大因素">
+        <g font-size="13" text-anchor="middle">
+          <rect x="30" y="60" width="180" height="110" rx="12" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="120" y="92" font-weight="700" fill="#1d4ed8">① 知识因子</text>
+          <text x="120" y="116" fill="#1f2a44">你知道什么</text>
+          <text x="120" y="138" fill="#56607a" font-size="11.5">密码 / PIN /</text>
+          <text x="120" y="156" fill="#56607a" font-size="11.5">安全问题</text>
+
+          <rect x="250" y="60" width="180" height="110" rx="12" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"></rect>
+          <text x="340" y="92" font-weight="700" fill="#0e7490">② 持有因子</text>
+          <text x="340" y="116" fill="#1f2a44">你拥有什么</text>
+          <text x="340" y="138" fill="#56607a" font-size="11.5">手机 / 令牌 /</text>
+          <text x="340" y="156" fill="#56607a" font-size="11.5">智能卡 / U盾</text>
+
+          <rect x="470" y="60" width="180" height="110" rx="12" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="560" y="92" font-weight="700" fill="#0f6b3c">③ 固有因子</text>
+          <text x="560" y="116" fill="#1f2a44">你是什么</text>
+          <text x="560" y="138" fill="#56607a" font-size="11.5">指纹 / 人脸 /</text>
+          <text x="560" y="156" fill="#56607a" font-size="11.5">虹膜 / 声纹</text>
+
+          <text x="340" y="36" font-size="12.5" fill="#56607a">三类因子单独使用 = 单因素认证；两类及以上组合 = 多因素认证（MFA）</text>
+          <line x1="210" y1="115" x2="250" y2="115" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"></line>
+          <line x1="430" y1="115" x2="470" y2="115" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"></line>
+        </g>
+      </svg>
+      <div class="cap">图 6-4（6.3）身份认证三大因素：知识 / 持有 / 固有</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>判断练习：</b>"用指纹解锁手机"→ ③ 固有因子；"输银行卡密码"→ ① 知识因子；"收短信验证码"→ ② 持有因子（手机在你手上）。</li>
+        <li><b>新趋势：</b>业界正从"知识因子为主"转向"无密码（Passwordless）"，如 FIDO2/Passkey——直接用设备内置的生物识别+公私钥，密码本身不再传输，大幅降低钓鱼风险。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d632b">
+    <div class="kp-head"><h4>6.3.2（补）常见认证方式与协议</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>认证协议解决"怎么安全地交换凭证并确认身份"：最基础的是"用户名+密码"；进阶有基于令牌的 Token 认证（如 JWT）、单点登录（SSO）、以及联合身份协议 SAML / OAuth 2.0 / OIDC（详见第六节）。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>静态口令：</b>最常见的单因素认证，缺点是易弱口令、易泄露、易撞库。</li>
+      <li><b>基于令牌（Token）：</b>登录后服务端签发一个短期有效的令牌（如 JWT、访问令牌），后续请求携带令牌即可，避免反复传密码。</li>
+      <li><b>证书 / 密钥对：</b>机器与机器（服务间）常用——用私钥签名、公钥验签，无需人类输入密码（云上 AK/SK、SSH Key 即此类）。</li>
+    </ul>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>云环境里"长期 AccessKey/SecretKey"本质是<b>静态凭证</b>，一旦泄露危害极大。安全实践要求优先使用<b>临时凭证（STS）</b>和<b>角色扮演</b>，而非把长期密钥写死在代码里。</div>
+  </div>
+</section>
+
+<!-- ============ 三、权限管理 ============ -->
+<section class="section" id="c63c">
+  <div class="section-head"><div class="num">6.3</div><h2>三、权限管理（Authorization）：决定"你能干什么"</h2></div>
+
+  <div class="kp" id="d633">
+    <div class="kp-head"><h4>6.3.3 授权模型：DAC / MAC / RBAC / ABAC</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>授权（Authorization）= 在身份被确认后，依据"策略/规则"决定其可执行的动作与可访问的资源。主流模型有：DAC（自主访问控制）、MAC（强制访问控制）、RBAC（基于角色的访问控制，云上最常用）、ABAC（基于属性的访问控制，最细粒度）。</b></div>
+    <table class="tbl">
+      <tr><th style="width:16%">模型</th><th style="width:30%">核心思想</th><th style="width:34%">例子</th><th style="width:20%">适用</th></tr>
+      <tr><td><b>DAC</b><br>自主访问控制</td><td>资源拥有者自己决定把权限给谁</td><td>文件右键"共享给某人"</td><td>小型/个人</td></tr>
+      <tr><td><b>MAC</b><br>强制访问控制</td><td>系统按固定安全级别统一强制规定，用户无法自改</td><td>军方机密分级，低密级不能读高密级</td><td>高安全/政务</td></tr>
+      <tr><td><b>RBAC</b><br>基于角色<br>（⭐云上主流）</td><td>把权限"打包成角色"，给用户/服务分配角色</td><td>"只读角色"只能看不能改；"管理员角色"全权</td><td>企业/云</td></tr>
+      <tr><td><b>ABAC</b><br>基于属性</td><td>按"用户属性+资源属性+环境属性"动态算权限</td><td>"仅工作时间内、来自公司 IP 的运维才能删库"</td><td>细粒度/动态</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>RBAC 示例（最该记）：</b>公司把权限拆成「只读」「开发」「运维管理员」三个角色；新来的小王被加进"只读"角色，他立刻拥有只读权限——不用逐条给他配资源。这就是 RBAC「角色 = 权限集合」的精髓。</li>
+        <li><b>ABAC 示例：</b>同一个人，在公司内网+工作时间可被授权删除，深夜从境外 IP 登录则被拒绝。权限随"属性"动态变化。</li>
+      </ul>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>RBAC 的"R"是 <b>Role（角色）</b>，不是 Rule。常考：云厂商的 IAM 控制台里你建立的是<b>角色/策略</b>，给用户绑定角色即可，而不是给用户逐个资源配权限——这正是 RBAC 相对于"逐用户配 ACL"的优势（好管理、不易错）。</div>
+  </div>
+
+  <div class="kp" id="d633b">
+    <div class="kp-head"><h4>6.3.3（补）最小权限原则（PoLP）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>最小权限原则（Principle of Least Privilege, PoLP）= 每个身份只被授予"完成工作所必需的最小权限集"，不多给、不默认给、权限过期即回收。它是授权设计的第一原则，也是云安全合规的硬性要求（等保、GDPR 均强调）。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>做法：</b>默认拒绝（deny by default），显式按需开通；避免直接给"管理员/FullAccess"这种大权限；定期审计并回收不再需要的权限（权限衰减）。</li>
+      <li><b>为什么关键：</b>一旦某账号被攻破，泄露面被限制在最小范围，避免"一个弱口令拖垮整个云账户"。</li>
+    </ul>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>反例（危险）：</b>给一个只用来读日志的脚本授予 AdministratorAccess 全权限——脚本密钥泄露即等于交出整座云。</li>
+        <li><b>正例：</b>该脚本仅绑定"只读日志"角色，且用临时凭证，泄露后影响极小。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 四、多因素认证 MFA ============ -->
+<section class="section" id="c63d">
+  <div class="section-head"><div class="num">6.3</div><h2>四、多因素认证（MFA）：给认证加一道保险</h2></div>
+
+  <div class="kp" id="d634">
+    <div class="kp-head"><h4>6.3.4 MFA 的定义与"多因素"的含义</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>MFA（Multi-Factor Authentication，多因素认证）= 在认证时要求同时提供"两类或以上不同类型因子"（通常至少来自知识/持有/固有中的两类），即使其中一类被攻破，攻击者仍因缺另一类而无法登录。它显著提升账号抗钓鱼、抗泄露的能力。</b></div>
+    <p class="note">关键细节（考试常问）：</p>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>"多因素"必须跨"类型"：</b>仅"密码 + 安全问题"仍是两类<b>知识因子</b>，不算真正的 MFA；必须混合不同类型（如 密码 + 手机验证码 = 知识+持有）。</li>
+      <li><b>2FA ≠ 一定安全：</b>两步验证（2FA）若两步都是同一类因子，安全增益有限；真正有效的是"跨因子组合"。</li>
+      <li><b>价值：</b>即便密码已泄露（撞库/钓鱼），没有第二因子攻击者依旧进不去——这是抵御"账户劫持"最有效的单点措施。</li>
+    </ul>
+    <div class="fig">
+      <svg viewBox="0 0 680 200" role="img" aria-label="MFA 双因子叠加防护">
+        <g font-size="12.5" text-anchor="middle">
+          <rect x="40" y="55" width="170" height="90" rx="12" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="125" y="90" font-weight="700" fill="#1d4ed8">因子 A</text>
+          <text x="125" y="112" fill="#56607a" font-size="11.5">如 密码</text>
+          <text x="125" y="130" fill="#56607a" font-size="11.5">（知识）</text>
+
+          <text x="255" y="100" font-size="22" fill="#64748b">+</text>
+
+          <rect x="285" y="55" width="170" height="90" rx="12" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="370" y="90" font-weight="700" fill="#0f6b3c">因子 B</text>
+          <text x="370" y="112" fill="#56607a" font-size="11.5">如 手机验证码</text>
+          <text x="370" y="130" fill="#56607a" font-size="11.5">（持有）</text>
+
+          <text x="500" y="100" font-size="22" fill="#64748b">=</text>
+
+          <rect x="525" y="55" width="130" height="90" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"></rect>
+          <text x="590" y="90" font-weight="700" fill="#9a3412">MFA</text>
+          <text x="590" y="112" fill="#9a3412" font-size="11.5">双重防护</text>
+          <text x="590" y="130" fill="#9a3412" font-size="11.5">防钓鱼</text>
+
+          <path d="M210 100 C 240 100 240 100 255 100" stroke="#94a3b8" stroke-width="1.5" fill="none"></path>
+          <text x="340" y="180" font-size="11.5" fill="#56607a">两类不同因子叠加 → 单点泄露不再等于被攻破</text>
+        </g>
+      </svg>
+      <div class="cap">图 6-5（6.3）MFA = 两类不同因子叠加，破解一道仍有另一道</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>实例：</b>登录云控制台，先输密码（知识因子），再要求手机 TOTP 动态码或短信码（持有因子）。即便密码在别处泄露，攻击者没有你的手机，依旧进不去。</li>
+        <li><b>考试典型题：</b>"仅使用密码 + 图形验证码"属于 MFA 吗？→ 不属于，两者本质都是"知识/系统挑战"类，未跨越因子类型；需叠加持有或固有因子。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d634b">
+    <div class="kp-head"><h4>6.3.4（补）MFA 的常见实现形式</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>MFA 第二因子的常见落地：① 软件令牌（TOTP，如 Google Authenticator / 微软验证器，离线 30 秒滚动码）；② 短信 / 语音验证码（持有手机号）；③ 硬件令牌 / U 盾 / FIDO 安全密钥（U2F）；④ 推送确认（手机 App 弹出"是否允许登录"）；⑤ 生物识别 + 设备绑定（手机指纹解锁后授权）。</b></div>
+    <table class="tbl">
+      <tr><th style="width:24%">形式</th><th style="width:40%">原理</th><th style="width:36%">安全性评价</th></tr>
+      <tr><td><b>TOTP 软件令牌</b></td><td>App 基于共享密钥+时间生成 6 位动态码</td><td>较安全、离线可用；需保护好种子密钥</td></tr>
+      <tr><td><b>短信 / 语音码</b></td><td>下发到注册手机</td><td>便捷但可被 SIM 交换攻击拦截，安全性较弱</td></tr>
+      <tr><td><b>硬件令牌 / U2F</b></td><td>物理密钥（如 YubiKey），基于公钥加密</td><td>最强，抗钓鱼；需物理持有设备</td></tr>
+      <tr><td><b>App 推送确认</b></td><td>手机收到登录请求，点击允许/拒绝</td><td>体验好；依赖手机安全</td></tr>
+    </table>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>短信验证码 MFA 虽常见，但<b>不是最安全</b>的 MFA（存在 SIM 劫持风险）。在金融、核心云管理等<b>高安全场景应优先采用硬件密钥（U2F/FIDO2）</b>或 TOTP。考题若问"最抗钓鱼的 MFA"，答案是基于公钥的硬件安全密钥。</div>
+  </div>
+</section>
+
+<!-- ============ 五、云环境中 IAM 的重要性 ============ -->
+<section class="section" id="c63e">
+  <div class="section-head"><div class="num">6.3</div><h2>五、身份访问管理在云计算环境中的重要性</h2></div>
+
+  <div class="kp" id="d635">
+    <div class="kp-head"><h4>6.3.5 为什么云环境特别需要 IAM</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>在云环境中，IAM 不是"可选项"而是"地基"：云去边界化（访问来自任意地点）、多租户共享、责任共担、API 驱动运维、以及凭证泄露是头号威胁——这五点使"管好身份与权限"成为云安全的第一道、也是最关键的一道闸门。</b></div>
+    <table class="tbl">
+      <tr><th style="width:26%">云环境特征</th><th style="width:46%">带来的安全挑战</th><th style="width:28%">IAM 如何化解</th></tr>
+      <tr><td><b>去边界化</b></td><td>没有固定内网边界，访问来自全球任意终端</td><td>以"身份"代替"IP/位置"作为信任锚（身份即边界）</td></tr>
+      <tr><td><b>多租户共享</b></td><td>同平台跑多家客户，越权即串门</td><td>严格身份隔离 + 细粒度授权，防跨租户访问</td></tr>
+      <tr><td><b>责任共担</b></td><td>"云中安全"归客户，配置权限属客户责任</td><td>IAM 是客户侧最该自己把控的安全抓手</td></tr>
+      <tr><td><b>API 驱动</b></td><td>一切操作经 API/密钥，凭证泄露=全网失守</td><td>强制 MFA + 临时凭证 + 密钥轮换 + 最小权限</td></tr>
+      <tr><td><b>凭证泄露为头号威胁</b></td><td>AK/SK 泄露常被用于挖矿、拖库、勒索</td><td>IAM 集中管控身份、审计每一次访问</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>呼应 6.1：</b>在 6.1 列出的云安全头号威胁中，"配置错误"和"身份凭证泄露/弱认证"均排前列，而二者都直接落在 IAM 的管辖范围——可见 IAM 是云安全的"总开关"。</li>
+        <li><b>真实事故：</b>某公司将含长期 AK/SK 的代码传 GitHub，被扫描到后攻击者用其开通大量机器挖矿，账单飙升。若当时用了 IAM 最小权限 + 临时凭证 + MFA，损失可大幅降低。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d635b">
+    <div class="kp-head"><h4>6.3.5（补）"身份即边界"与零信任</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>"身份即边界"（Identity as the New Perimeter）= 在云时代，不再依赖网络位置（IP/内网）判断可信，而是以"经过强认证的身份 + 当前上下文"作为访问决策的核心依据。这与"零信任（Zero Trust：默认不信任、持续验证）"一脉相承，而 IAM 正是零信任的落地支撑。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>传统思路：</b>"在内网 = 可信"，靠防火墙划边界 → 云上边界消失，思路失效。</li>
+      <li><b>云思路：</b>"无论你在哪，都必须证明身份、且权限合规才放行"，每一次访问都重新评估。这就是 IAM 在云中"顶替防火墙成为新边界"的含义。</li>
+    </ul>
+    <div class="fig">
+      <svg viewBox="0 0 680 190" role="img" aria-label="身份即边界替代网络边界">
+        <g font-size="12.5" text-anchor="middle">
+          <rect x="30" y="55" width="200" height="80" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"></rect>
+          <text x="130" y="88" font-weight="700" fill="#b91c1c">传统：网络边界</text>
+          <text x="130" y="110" fill="#9a3412" font-size="11.5">内网=可信（失效）</text>
+
+          <text x="275" y="98" font-size="22" fill="#64748b">→</text>
+
+          <rect x="305" y="55" width="200" height="80" rx="12" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="405" y="88" font-weight="700" fill="#1d4ed8">云：身份即边界</text>
+          <text x="405" y="110" fill="#1d4ed8" font-size="11.5">身份+上下文=信任</text>
+
+          <text x="545" y="98" font-size="22" fill="#64748b">→</text>
+
+          <rect x="555" y="55" width="110" height="80" rx="12" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="610" y="88" font-weight="700" fill="#0f6b3c">零信任</text>
+          <text x="610" y="110" fill="#0f6b3c" font-size="11.5">持续验证</text>
+
+          <text x="340" y="170" font-size="11.5" fill="#56607a">IAM 是把"身份即边界 / 零信任"落到实处的核心能力</text>
+        </g>
+      </svg>
+      <div class="cap">图 6-6（6.3）从"网络边界"到"身份即边界 / 零信任"，IAM 是承载体</div>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>说"云安全不再需要边界"是错的——准确说法是<b>传统"网络位置边界"失效，取而代之的是"身份边界"</b>。IAM 让身份成为新的信任锚点。</div>
+  </div>
+</section>
+
+<!-- ============ 六、IAM 的实现方式 ============ -->
+<section class="section" id="c63f">
+  <div class="section-head"><div class="num">6.3</div><h2>六、身份访问管理在云计算环境中的实现方式</h2></div>
+
+  <div class="kp" id="d636">
+    <div class="kp-head"><h4>6.3.6 IAM 系统的整体架构（四大组件）</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>一个完整的云 IAM 实现通常包含四块：① 身份目录（Identity Store，集中管理用户/角色/服务主体）；② 认证服务（Authentication，校验凭证、签发令牌、强制 MFA）；③ 授权引擎（Authorization，依据策略判定允许/拒绝）；④ 审计日志（Accounting/Audit，记录"谁、何时、对什么、做了什么"）。即常说的 IAAA（Identification 身份标识 / Authentication 认证 / Authorization 授权 / Accountability 可审计）。</b></div>
+    <div class="fig">
+      <svg viewBox="0 0 680 250" role="img" aria-label="IAM 四组件与访问流程">
+        <defs>
+          <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L7,3 L0,6 Z" fill="#64748b"></path>
+          </marker>
+        </defs>
+        <g font-size="12" text-anchor="middle">
+          <!-- 用户 -->
+          <rect x="20" y="100" width="90" height="50" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"></rect>
+          <text x="65" y="122" font-weight="700" fill="#6d28d9">用户/服务</text>
+          <text x="65" y="140" fill="#6d28d9" font-size="11">发起请求</text>
+
+          <!-- 身份目录 -->
+          <rect x="150" y="20" width="150" height="48" rx="10" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="225" y="42" font-weight="700" fill="#1d4ed8">① 身份目录</text>
+          <text x="225" y="60" fill="#1d4ed8" font-size="11">用户/角色/主体</text>
+
+          <!-- 认证 -->
+          <rect x="150" y="100" width="150" height="48" rx="10" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"></rect>
+          <text x="225" y="122" font-weight="700" fill="#0e7490">② 认证服务</text>
+          <text x="225" y="140" fill="#0e7490" font-size="11">验凭证+MFA→令牌</text>
+
+          <!-- 授权 -->
+          <rect x="150" y="180" width="150" height="48" rx="10" fill="#dcfce7" stroke="#22a06b" stroke-width="2"></rect>
+          <text x="225" y="202" font-weight="700" fill="#0f6b3c">③ 授权引擎</text>
+          <text x="225" y="220" fill="#0f6b3c" font-size="11">策略判定 允许/拒绝</text>
+
+          <!-- 资源 -->
+          <rect x="500" y="100" width="100" height="50" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"></rect>
+          <text x="550" y="122" font-weight="700" fill="#9a3412">目标资源</text>
+          <text x="550" y="140" fill="#9a3412" font-size="11">数据/API</text>
+
+          <!-- 审计 -->
+          <rect x="340" y="20" width="150" height="48" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"></rect>
+          <text x="415" y="42" font-weight="700" fill="#475569">④ 审计日志</text>
+          <text x="415" y="60" fill="#475569" font-size="11">记录每次访问</text>
+
+          <line x1="110" y1="125" x2="148" y2="125" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"></line>
+          <line x1="300" y1="124" x2="498" y2="124" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"></line>
+          <line x1="225" y1="68" x2="225" y2="98" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"></line>
+          <line x1="225" y1="148" x2="225" y2="178" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"></line>
+          <line x1="300" y1="44" x2="338" y2="44" stroke="#94a3b8" stroke-width="1.4" stroke-dasharray="4 3"></line>
+        </g>
+      </svg>
+      <div class="cap">图 6-7（6.3）IAM 访问流程：请求 → 认证 → 授权 → 资源，全程审计留痕</div>
+    </div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>流程串联：</b>用户请求 → 认证服务核对密码+MFA，签发短期令牌 → 授权引擎按 RBAC 策略判断"该角色能否读此资源" → 允许则访问，同时审计日志记录此次行为，便于事后追溯与异常发现。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d636b">
+    <div class="kp-head"><h4>6.3.6（补）单点登录（SSO）、联邦身份与标准协议</h4><span class="badge lv2">熟悉</span></div>
+    <div class="core"><span class="lab"></span><b>为兼顾"安全"与"好用"，云 IAM 普遍采用：① SSO（单点登录，一次登录可访问多个系统）；② 联邦身份（Federation，用企业已有身份源如 AD/钉钉/企业微信直接登录云，无需在云上另建账号）；③ 标准协议 SAML 2.0（企业 SSO 传统标准）、OAuth 2.0（授权委托，常用于 App 授权）、OIDC（在 OAuth 上叠加身份认证，现代主流）。</b></div>
+    <table class="tbl">
+      <tr><th style="width:20%">协议</th><th style="width:40%">定位</th><th style="width:40%">典型场景</th></tr>
+      <tr><td><b>SAML 2.0</b></td><td>基于 XML 的跨域身份断言（认证为主）</td><td>企业员工用公司账号登录云控制台</td></tr>
+      <tr><td><b>OAuth 2.0</b></td><td>授权委托框架（"代我访问某资源"）</td><td>第三方 App 申请"读取你的头像"</td></tr>
+      <tr><td><b>OIDC</b></td><td>OAuth 2.0 之上加身份认证（ID Token）</td><td>现代 Web/移动端登录（如微信/Google 登录）</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>SSO 好处：</b>员工只需记一套企业密码；离职时在企业侧停用账号，云上权限同步失效，避免"影子账号"残留。</li>
+        <li><b>联邦身份示例：</b>公司用 Azure AD 管员工，配置联合后，员工用 AD 账号+企业 MFA 直接登云控制台，云上不再单独存一份密码。</li>
+      </ul>
+    </div>
+    <div class="warn"><span class="lab">⚠ 考试易错点：</span>OAuth 2.0 本质是<b>授权</b>协议不是<b>认证</b>协议；要做"身份认证"应在其上加 <b>OIDC</b>。考题常混淆"OAuth 用来登录"——更准确是"OIDC（基于 OAuth）用来认证登录"。</div>
+  </div>
+
+  <div class="kp" id="d636c">
+    <div class="kp-head"><h4>6.3.6（补）主流云平台 IAM 的落地示例</h4><span class="badge lv1">了解</span></div>
+    <div class="core"><span class="lab"></span><b>各云厂商对 IAM 的命名与实现内核一致：AWS = IAM（用户/组/角色 + 策略 + MFA + STS 临时凭证）；阿里云 = RAM（资源访问管理，用户/角色/权限策略）；华为云 = IAM（用户/用户组/委托 + 策略）；腾讯云 = CAM。核心都围绕"身份 + 认证(MFA) + 授权(策略/RBAC) + 审计"。</b></div>
+    <table class="tbl">
+      <tr><th style="width:18%">云厂商</th><th style="width:30%">IAM 产品名</th><th style="width:52%">关键能力对照</th></tr>
+      <tr><td><b>AWS</b></td><td>IAM</td><td>用户/组/角色；JSON 策略；MFA；STS 临时凭证；角色扮演（跨账号）</td></tr>
+      <tr><td><b>阿里云</b></td><td>RAM</td><td>子用户/用户组/角色；权限策略；MFA；RAM 角色（ECS 实例扮演）</td></tr>
+      <tr><td><b>华为云</b></td><td>IAM</td><td>用户/用户组/委托；细粒度策略；MFA；企业联邦（ADFS）</td></tr>
+      <tr><td><b>腾讯云</b></td><td>CAM</td><td>子账号/角色；策略；MFA；联合身份</td></tr>
+    </table>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>统一理解：</b>不管是哪个云，考题给的"用户/角色/策略/MFA/临时凭证"指的都是同一套 IAM 逻辑，换名字不影响答题——抓住"身份、认证、授权、审计"四要素即可。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="kp" id="d636d">
+    <div class="kp-head"><h4>6.3.6（补）审计、监控与最佳实践（落地闭环）</h4><span class="badge lv3">掌握</span></div>
+    <div class="core"><span class="lab"></span><b>IAM 落地的安全闭环 = 强认证（全量 MFA）+ 最小权限（RBAC/默认拒绝）+ 临时凭证（STS、避免长期密钥）+ 密钥定期轮换 + 集中审计与异常告警（如异地登录、高频失败、越权尝试）+ 定期权限复查回收。六点缺一不可。</b></div>
+    <ul class="note" style="margin:8px 0;">
+      <li><b>① 全员 MFA：</b>尤其管理员与高权限账号强制 MFA。</li>
+      <li><b>② 最小权限：</b>用角色而非直接 FullAccess；默认拒绝。</li>
+      <li><b>③ 临时凭证优先：</b>服务间用角色扮演拿 STS 临时令牌，避免长期 AK/SK 写代码。</li>
+      <li><b>④ 密钥轮换：</b>长期密钥定期更换、泄露即吊销。</li>
+      <li><b>⑤ 审计告警：</b>开启云审计（如 CloudTrail / 操作审计），对异常行为实时告警。</li>
+      <li><b>⑥ 权限复查：</b>定期清理离职/闲置账号与多余权限（权限衰减）。</li>
+    </ul>
+    <div class="warn"><span class="lab">⚠ 考试易错点（综合必考）：</span>"买了云就安全了"是错的——IAM 的<b>正确配置是客户责任</b>（呼应 6.1 责任共担）。把长期密钥硬编码到代码、给脚本配管理员权限、高权账号不开 MFA，都是典型的"客户侧配置失误"，属于<b>可避免</b>的安全事故。</div>
+    <div class="ex"><span class="lab"></span>
+      <ul>
+        <li><b>一句话总结实现方式：</b>用"集中身份目录 + 强认证(MFA) + 基于角色的细粒度授权 + 临时凭证 + 全程审计"这一整套机制，把云上的"谁能进、进后能做什么、做了什么"完全管起来——这就是 IAM 在云计算中的实现方式。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>6.3 身份、授权和访问管理（IAM） · 详细讲解（2025考纲）｜ 本节是《第六章 云安全》的核心落子，建议结合 6.1 云安全概念、6.2 安全防护、6.4 加密与密钥管理 一起复习</footer>
+
+</main>
+<div class="colfoot"><a class="prev" href="6-2.html"><div class="lab">上一篇</div><div class="ttl">6.2 安全防护与策略</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="7-1.html"><div class="lab">下一篇</div><div class="ttl">7.1 7.1中国云计算产业发展现状</div></a></div>
+</body>
+</html>

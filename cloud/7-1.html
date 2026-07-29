@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7. 云计算产业、应用与发展 · 详细讲解</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7.1 7.1中国云计算产业发展现状 · 云计算复习专栏</title>
 <style>
+
   :root{
     --bg:#f7f9fc; --card:#fff; --ink:#1f2937; --sub:#52606d;
     --brand:#2563eb; --brand2:#0ea5e9; --warn:#dc2626; --ok:#16a34a;
@@ -66,14 +67,18 @@
   .pill.blue{background:var(--chip);color:#3730a3}
   .pill.green{background:var(--okbg);color:#15803d}
   .pill.red{background:var(--warnbg);color:#b91c1c}
+
 </style>
-  <link rel="stylesheet" href="assets/nav.css">
+<link rel="stylesheet" href="assets/nav.css">
 </head>
 <body>
 <nav class="colnav"><div class="inner">
 <a class="chip" href="index.html"><span class="num">☁</span> 云计算复习专栏</a>
 <div class="chips">
-<a class="chip" href="1.html"><span class="num">1</span> 云计算概述</a>
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 1.1云计算的概念及发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 1.2云计算的服务模式</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 1.3云计算的部署模式</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 1.4云计算的特点及优势</a>
 <a class="chip" href="2-1.html"><span class="num">2.1</span> 虚拟化技术</a>
 <a class="chip" href="2-2.html"><span class="num">2.2</span> 分布式技术</a>
 <a class="chip" href="2-3.html"><span class="num">2.3</span> SDN 与 NFV</a>
@@ -90,32 +95,16 @@
 <a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
 <a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
 <a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
-<a class="chip" href="6.html"><span class="num">6</span> 云安全</a>
-<a class="chip active" href="7.html"><span class="num">7</span> 产业应用与发展</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip active" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
 </div>
 </div></nav>
 <div class="wrap">
-
-<header class="hero">
-  <h1>第 7 章 · 云计算产业、应用与发展</h1>
-  <p>考纲 7.1 中国云计算产业发展现状 ｜ 7.2 云计算的行业应用 ｜ 7.3 云计算发展及挑战</p>
-  <span class="badge">考纲要求：了解 / 熟悉 ｜ 技术考试复习专用</span>
-</header>
-
-<div class="toc">
-  <h3>本章导航</h3>
-  <ol>
-    <li><b>7.1 中国云计算产业发展现状</b>：发展概况 · 市场格局 · 技术应用 · 云存储与大数据库 · 厂商全球化策略</li>
-    <li><b>7.2 云计算的行业应用</b>：金融 / 医疗 / 教育 / 零售应用模式 · 数字化转型价值 · 成功案例</li>
-    <li><b>7.3 云计算发展及挑战</b>：商业方案特点 · 开源系统 · 主要挑战 · 发展趋势</li>
-  </ol>
-  <p class="tip" style="margin-bottom:0"><b>复习建议：</b>本章以"识记 + 理解"为主，重点掌握<b>市场格局</b>、<b>信创/国产化</b>、<b>东数西算</b>、<b>四大行业应用模式</b>、
-  <b>主流开源系统</b>及<b>挑战/趋势</b>四组对比。论述题常考"行业应用价值"与"发展趋势"。</p>
-</div>
-
-<!-- ========== 7.1 ========== -->
-<section>
-  <h2><span class="num">7.1</span>中国云计算产业发展现状</h2>
+<h2>7.1中国云计算产业发展现状</h2>
 
   <h3>7.1.1 中国云计算发展概况</h3>
   <div class="kv">
@@ -236,139 +225,8 @@
 
 <!-- ========== 7.2 ========== -->
 <section>
-  <h2><span class="num">7.2</span>云计算的行业应用</h2>
-
-  <h3>7.2.1 四大行业的云计算应用模式</h3>
-  <div class="map">
-    <div class="diagram" style="text-align:left">
-      <h4 style="margin-top:4px">🏦 金融</h4>
-      <ul>
-        <li><b>核心系统分布式改造</b>：主机下移、单元化架构。</li>
-        <li><b>互联网银行/移动银行</b>：弹性支撑秒杀、开门红。</li>
-        <li><b>智能风控</b>：实时反欺诈、大数据征信。</li>
-        <li><b>监管报送与信创</b>：满足等保与自主可控。</li>
-      </ul>
-    </div>
-    <div class="diagram" style="text-align:left">
-      <h4 style="margin-top:4px">🏥 医疗</h4>
-      <ul>
-        <li><b>区域卫生云/政务健康云</b>：跨机构数据共享。</li>
-        <li><b>医学影像云</b>：PACS 上云、AI 辅助阅片。</li>
-        <li><b>互联网医院</b>：线上问诊、处方流转。</li>
-        <li><b>医保云</b>：结算、控费、监管。</li>
-      </ul>
-    </div>
-    <div class="diagram" style="text-align:left">
-      <h4 style="margin-top:4px">🎓 教育</h4>
-      <ul>
-        <li><b>教育新基建/教育云</b>：资源平台、管理平台。</li>
-        <li><b>在线教学</b>：直播、录播、弹性扩容。</li>
-        <li><b>智慧校园</b>：一卡通、安防、物联网。</li>
-        <li><b>科研云</b>：高性能计算、数据协同。</li>
-      </ul>
-    </div>
-    <div class="diagram" style="text-align:left">
-      <h4 style="margin-top:4px">🛒 零售</h4>
-      <ul>
-        <li><b>新零售/全渠道</b>：线上线下一体化中台。</li>
-        <li><b>大促弹性</b>：秒杀、双11 弹性扩容。</li>
-        <li><b>智能营销</b>：用户画像、推荐、CRM。</li>
-        <li><b>供应链云</b>：库存、物流协同。</li>
-      </ul>
-    </div>
-  </div>
-
-  <h3>7.2.2 行业数字化转型中的云计算价值</h3>
-  <div class="card-grid">
-    <div class="mini"><h4>降本增效</h4><p>从"买资源"变"用资源"，按需付费，减少机房与运维投入。</p></div>
-    <div class="mini"><h4>弹性伸缩</h4><p>应对业务峰谷（大促、开盘、开学），秒级扩缩容。</p></div>
-    <div class="mini"><h4>敏捷创新</h4><p>云原生 + PaaS 缩短应用上线周期，支撑快速试错。</p></div>
-    <div class="mini"><h4>数据驱动</h4><p>汇聚数据、统一计算，沉淀 AI 与数据资产。</p></div>
-    <div class="mini"><h4>安全合规</h4><p>集中安全能力、等保合规、灾备与高可用。</p></div>
-    <div class="mini"><h4>生态协同</h4><p>打通上下游与产业链，支撑平台化运营。</p></div>
-  </div>
-
-  <h3>7.2.3 行业成功案例（理解记忆）</h3>
-  <table>
-    <tr><th>行业</th><th>代表性案例方向</th><th>云带来的价值</th></tr>
-    <tr><td>金融</td><td>网商银行/微众银行全分布式核心；城商行核心下移</td><td>高并发、低成本的普惠金融，去 IOE</td></tr>
-    <tr><td>金融</td><td>头部券商/保险上云与混合云</td><td>行情高并发、灾备、敏捷业务</td></tr>
-    <tr><td>医疗</td><td>区域影像云、健康码/疫情防控平台</td><td>跨院调阅、弹性并发、数据共享</td></tr>
-    <tr><td>教育</td><td>大规模在线课堂（疫情期）、国家/省级教育云平台</td><td>千万级并发、资源普惠</td></tr>
-    <tr><td>零售</td><td>电商平台双11、连锁零售全渠道中台</td><td>峰值弹性、库存一盘货、精准营销</td></tr>
-    <tr><td>制造/政务</td><td>工业互联网平台、城市大脑/政务云</td><td>设备上云、城市治理数字化</td></tr>
-  </table>
-  <div class="tip"><b>答题模板（行业应用价值题）：</b>"以 <b>×行业</b> 为例，云计算通过<b>弹性算力/数据汇聚/云原生平台</b>，解决了<b>峰值压力/数据孤岛/上线慢</b>等痛点，实现了<b>降本、增效、创新</b>三方面的价值，典型案例是……"</div>
-</section>
-
-<!-- ========== 7.3 ========== -->
-<section>
-  <h2><span class="num">7.3</span>云计算发展及挑战</h2>
-
-  <h3>7.3.1 当前主流商业云计算解决方案的特点</h3>
-  <table>
-    <tr><th>厂商/方案</th><th>定位与特点</th><th>典型适用</th></tr>
-    <tr><td><b>AWS</b></td><td>服务最全、生态最成熟；EC2/S3/Lambda；全球覆盖广</td><td>出海、互联网、前沿技术探索</td></tr>
-    <tr><td><b>Microsoft Azure</b></td><td>与微软生态（Windows/Office/AD）无缝；混合云强（Azure Arc）</td><td>传统企业、混合云、跨国企业</td></tr>
-    <tr><td><b>阿里云</b></td><td>国内第一，全栈；电商/金融技术沉淀；亚太节点多</td><td>国内政企、电商、金融、出海</td></tr>
-    <tr><td><b>华为云</b></td><td>政企/运营商强；混合云 HCS；鲲鹏/昇腾底座；信创友好</td><td>政企、制造、国资、信创</td></tr>
-    <tr><td><b>腾讯云</b></td><td>社交/游戏/音视频；生态与开发者友好</td><td>游戏、文娱、社交、中小企业</td></tr>
-    <tr><td><b>运营商云</b>（天翼/移动/联通）</td><td>网络与边缘优势；政务与国央企背书</td><td>政务、国资、算力网络</td></tr>
-  </table>
-  <div class="kv"><b>共性特点：</b>① 全栈化（IaaS→PaaS→SaaS）；② 云原生化；③ 安全合规内建；④ AI/智算融合；⑤ 混合多云管理。</div>
-
-  <h3>7.3.2 主流开源云计算系统</h3>
-  <div class="card-grid">
-    <div class="mini"><h4>OpenStack</h4><p>最主流的开源 IaaS 平台，管理计算/网络/存储，是私有云基石。</p></div>
-    <div class="mini"><h4>Kubernetes (K8s)</h4><p>容器编排事实标准，云原生核心，支撑微服务与自动化运维。</p></div>
-    <div class="mini"><h4>Docker</h4><p>容器引擎，定义应用打包与运行的标准。</p></div>
-    <div class="mini"><h4>Cloud Foundry</h4><p>开源 PaaS 平台，屏蔽底层、聚焦应用部署。</p></div>
-    <div class="mini"><h4>CloudStack</h4><p>Apache 开源 IaaS，轻量易部署，常用于运营商/企业云。</p></div>
-    <div class="mini"><h4>Hadoop / Spark / Flink</h4><p>大数据与流计算生态，云上数据分析底座。</p></div>
-  </div>
-  <div class="tip"><b>辨析：</b>OpenStack 解决<b>"资源如何被池化供给"</b>（IaaS）；Kubernetes 解决<b>"应用如何在云上高效运行与调度"</b>（云原生编排）；两者常被结合使用构建企业云平台。</div>
-
-  <h3>7.3.3 云计算发展的主要挑战</h3>
-  <div class="silo">
-    <div class="mini"><h4>安全与合规</h4><p>数据泄露、多租户隔离、等保2.0、数据主权与跨境流动限制。</p></div>
-    <div class="mini"><h4>厂商锁定（Lock-in）</h4><p>专有 API/服务导致迁移成本高，多云互操作难。</p></div>
-    <div class="mini"><h4>标准与互操作</h4><p>接口/计量/运维标准不统一，混合多云管理复杂。</p></div>
-    <div class="mini"><h4>成本与治理</h4><p>资源浪费、账单失控，需 FinOps（云财务治理）。</p></div>
-    <div class="mini"><h4>人才缺口</h4><p>云架构、DevOps、SRE、安全复合型人才不足。</p></div>
-    <div class="mini"><h4>自主可控</h4><p>高端芯片、核心软件仍存在外部依赖，信创任重道远。</p></div>
-  </div>
-
-  <h3>7.3.4 云计算的发展趋势</h3>
-  <div class="map">
-    <div>
-      <h4>技术趋势</h4>
-      <ul>
-        <li><b>云原生深化</b>：容器、K8s、Serverless、服务网格成为默认范式。</li>
-        <li><b>混合云 / 多云</b>：统一管理、跨云调度成为常态。</li>
-        <li><b>边缘计算</b>：算力下沉，云边端协同。</li>
-        <li><b>AI 云 / MaaS</b>：大模型训练推理上云，模型即服务。</li>
-        <li><b>绿色计算</b>：液冷、低 PUE、低碳数据中心。</li>
-      </ul>
-    </div>
-    <div>
-      <h4>产业趋势</h4>
-      <ul>
-        <li><b>信创云</b>：国产软硬件栈全面适配。</li>
-        <li><b>一体化算力</b>：东数西算、算力网络调度。</li>
-        <li><b>行业云/专属云</b>：面向垂直行业的合规云。</li>
-        <li><b>Serverless 普及</b>：按用量计费、免运维。</li>
-        <li><b>云安全内建</b>：零信任、机密计算。</li>
-      </ul>
-    </div>
-  </div>
-  <div class="safe"><b>趋势一句话记忆：</b>"<b>原生、智能、边缘、混合、信创、绿色</b>"六词概括——架构走向云原生与 Serverless，能力走向 AI 化，部署走向边云协同与多云，底座走向信创与低碳。</div>
-</section>
-
-<footer>
-  第 7 章 云计算产业、应用与发展 · 详细讲解 ｜ 配套 2025 考纲 ｜ 与 workspace 中"2.x/3.x/4.x 详细讲解"系列同源
-</footer>
-
+  
 </div>
-<div class="colfoot"><a class="prev" href="6.html"><div class="lab">上一章</div><div class="ttl">云安全</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><span></span></div>
+<div class="colfoot"><a class="prev" href="6-3.html"><div class="lab">上一篇</div><div class="ttl">6.3 身份授权与访问管理</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="7-2.html"><div class="lab">下一篇</div><div class="ttl">7.2 7.2云计算的行业应用</div></a></div>
 </body>
 </html>

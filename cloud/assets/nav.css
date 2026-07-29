@@ -1,8 +1,7 @@
-/* 云计算复习专栏 — 共享导航样式（独立分章页用） */
+/* 独立分章页顶部/底部导航（专栏 SPA 不使用） */
 .colnav{position:sticky;top:0;z-index:100;background:linear-gradient(120deg,#1d4ed8,#3b82f6 60%,#0ea5e9);box-shadow:0 2px 10px rgba(20,40,80,.20)}
 .colnav .inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:7px 14px}
 .colnav .brand{font-weight:800;font-size:15px;white-space:nowrap;text-decoration:none;color:#fff;display:flex;align-items:center;gap:5px;flex:0 0 auto}
-.colnav .brand small{font-weight:500;opacity:.8;font-size:11px}
 .colnav .chips{display:flex;gap:6px;overflow-x:auto;flex:1;padding:2px 0;scrollbar-width:thin}
 .colnav .chips::-webkit-scrollbar{height:5px}
 .colnav .chips::-webkit-scrollbar-thumb{background:rgba(255,255,255,.4);border-radius:4px}

@@ -1,68 +1,146 @@
 # -*- coding: utf-8 -*-
 """
-云计算复习专栏构建脚本
-- 读取「技术考试」目录里分章讲解 HTML（含 3.2 亚马逊AWS / 3.4 百度云 / 4.1 Web文档服务 / 5.4 容灾备份）
-- 生成：
-    cloud/index.html  —— 左右分栏单页应用（左侧分组目录 + 右侧内容区，点击动态切换，选中高亮，移动端抽屉）
-    cloud/*.html      —— 各章独立页（保留，供直接分享/深链）
-    cloud/assets/nav.css
+云计算复习专栏构建脚本（左右分栏单页应用 + 独立分章页）
+- 读取「技术考试」目录里的分章讲解 HTML
+- 抽取每章正文（优先 <main>，回退 .wrap / <body>），避免无 .wrap 章节把自身 header/内部目录/footer 一并塞进内容区
+- 1、7 按 <h2> 自动拆成小板块；6 使用用户拆分好的 6.1/6.2/6.3
+- 每章样式按作用域隔离后内嵌，章节间互不干扰；统一标题栏 + 统一基础排版
 按《2025 湖南省数字技术应用能力考试 · 云计算基础知识及应用》考纲 1-7 章组织
 """
-import os, re
+import os, re, glob
 
 SRC = r"C:\Users\16148\Desktop\技术考试"
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-# (slug, 考纲编号, 标题, 简介, 所属分组)
-chapters = [
-    ("1",   "1",   "云计算概述",       "概念与发展 · 服务模式(IaaS/PaaS/SaaS) · 部署模式 · 特点优势",  "一、云计算概述"),
-    ("2-1", "2.1", "虚拟化技术",       "基本概念 · 常见虚拟化技术 · 容器 · 与虚拟机区别 · 安全",        "二、云计算关键技术"),
-    ("2-2", "2.2", "分布式技术",       "概念 · 在云中的应用 · 常见分布式技术 · 集群技术",              "二、云计算关键技术"),
-    ("2-3", "2.3", "SDN 与 NFV",      "软件定义网络 · 网络功能虚拟化 · 应用场景 · VPC 与网络隔离",    "二、云计算关键技术"),
-    ("3-1", "3.1", "Google 云计算",    "背景与场景 · 核心技术(GFS/MapReduce/BigTable等)",             "三、典型云计算平台"),
-    ("3-2", "3.2", "亚马逊 AWS",       "核心服务(EC2/S3/RDS等) · 应用场景",                           "三、典型云计算平台"),
-    ("3-3", "3.3", "华为云",           "核心技术与服务 · 各领域应用场景",                             "三、典型云计算平台"),
-    ("3-4", "3.4", "百度云",           "核心服务 · AI 与行业应用",                                   "三、典型云计算平台"),
-    ("3-5", "3.5", "云平台选择比较",   "各平台特点 · 针对需求选型方法",                               "三、典型云计算平台"),
-    ("4-1", "4.1", "Web 文档服务",    "定义 · 核心组件 · 与 Web 服务的区别",                         "四、面向服务的分布式计算"),
-    ("4-2", "4.2", "Web 服务与协议",  "核心组件 · SOAP · RESTful 原理与对比",                        "四、面向服务的分布式计算"),
-    ("4-3", "4.3", "面向服务架构 SOA", "概念 · 核心组件 · 在分布式计算中的优势",                      "四、面向服务的分布式计算"),
-    ("4-4", "4.4", "微服务架构",       "特性与架构 · 分布式数据管理 · 灵活扩展",                      "四、面向服务的分布式计算"),
-    ("5-1", "5.1", "数据中心概念特征", "概念 · 核心组件 · 分类与分级 · 协同原理",                     "五、云计算数据中心"),
-    ("5-2", "5.2", "数据中心关键服务", "DCaaS · 总体架构 · 设计与构建需求",                           "五、云计算数据中心"),
-    ("5-3", "5.3", "绿色节能技术",     "配电/空调节能 · 典型绿色数据中心",                            "五、云计算数据中心"),
-    ("5-4", "5.4", "容灾备份",         "容灾概念 · 备份策略 · RPO/RTO",                               "五、云计算数据中心"),
-    ("6",   "6",   "云安全",           "概念与威胁 · 分层安全(IaaS/PaaS/SaaS) · 身份访问管理",        "六、云计算安全"),
-    ("7",   "7",   "产业应用与发展",   "产业现状 · 行业应用 · 挑战与趋势",                            "七、云计算产业发展"),
-]
+GLOBAL_SELECTORS = {":root", "*", "html", "body"}
 
-SRC_FILE = {
-    "1":   "1.云计算概述_详细讲解.html",
-    "2-1": "2.1虚拟化技术_详细讲解.html",
-    "2-2": "2.2分布式技术_详细讲解.html",
-    "2-3": "2.3软件定义网络和网络功能虚拟化_详细讲解.html",
-    "3-1": "3.1Google云计算_详解.html",
-    "3-2": "3.2亚马逊AWS_详细讲解.html",
-    "3-3": "3.3华为云_详细讲解.html",
-    "3-4": "3.4百度云_复习.html",
-    "3-5": "3.5典型云平台的选择与比较_详解.html",
-    "4-1": "4.1_Web文档服务_复习.html",
-    "4-2": "4.2 Web服务与协议_详细讲解.html",
-    "4-3": "4.3面向服务的体系结构_详细讲解.html",
-    "4-4": "4.4微服务架构_详细讲解.html",
-    "5-1": "5.1云计算数据中心的概念及特征_详细讲解.html",
-    "5-2": "5.2数据中心提供的关键服务和技术_详细讲解.html",
-    "5-3": "5.3绿色节能技术_详细讲解.html",
-    "5-4": "5.4容灾备份_复习卡片.html",
-    "6":   "6_云安全_详细讲解.html",
-    "7":   "7.云计算产业应用与发展_详细讲解.html",
-}
+def read(rel):
+    with open(os.path.join(SRC, rel), "r", encoding="utf-8") as f:
+        return f.read()
 
-NAV_CSS = """/* 云计算复习专栏 — 共享导航样式（独立分章页用） */
+# ---------- 抽取与样式作用域隔离 ----------
+def extract_style(html):
+    return "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, re.S))
+
+def extract_main(html):
+    """取正文：优先 <main>，回退 .wrap（按 div 层级平衡），再回退 <body>。"""
+    m = re.search(r"<main[^>]*>(.*?)</main>", html, re.S)
+    if m:
+        return m.group(1)
+    mw = re.search(r'<div class="wrap">', html)
+    if mw:
+        start = mw.end(); depth = 0
+        for t in re.finditer(r"<(/?)div\b[^>]*>", html[start:]):
+            if t.group(1) == "/":
+                depth -= 1
+                if depth == -1:
+                    return html[start:start + t.start()]
+            else:
+                depth += 1
+        return html[start:]
+    mb = re.search(r"<body[^>]*>(.*)</body>", html, re.S)
+    return mb.group(1) if mb else html
+
+def split_by_h2(content):
+    ms = list(re.finditer(r"<h2[^>]*>(.*?)</h2>", content, re.S))
+    if not ms:
+        return [("全文", content)]
+    out = []
+    for i, m in enumerate(ms):
+        title = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+        start = m.end()
+        end = ms[i + 1].start() if i + 1 < len(ms) else len(content)
+        out.append((title, content[start:end]))
+    return out
+
+def scope_css(css, scope):
+    prefix = scope + " "
+    blocks, buf, depth = [], "", 0
+    for ch in css:
+        buf += ch
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                blocks.append(buf); buf = ""
+    out = []
+    for blk in blocks:
+        s = blk.strip()
+        if not s:
+            continue
+        if s.startswith("@"):
+            if s.startswith(("@keyframes", "@-webkit-keyframes", "@font-face")):
+                out.append(blk); continue
+            idx = s.index("{"); head = s[:idx]; body = s[idx + 1:s.rindex("}")]
+            out.append(head + "{" + scope_css(body, scope) + "}")
+        else:
+            idx = s.index("{"); sel = s[:idx]; body = s[idx + 1:s.rindex("}")]
+            sels = []
+            for part in sel.split(","):
+                p = part.strip()
+                if not p:
+                    continue
+                sels.append(p if p in GLOBAL_SELECTORS else prefix + p)
+            out.append(",".join(sels) + "{" + body + "}")
+    return "".join(out)
+
+# ---------- 构建章节条目（专栏导航的数据源） ----------
+def build_entries():
+    E = []
+    def add_single(slug, num, title, src, group, scope=None):
+        html = read(src)
+        E.append({
+            "slug": slug, "num": num, "title": title, "group": group,
+            "style": extract_style(html), "content": extract_main(html),
+            "scope": scope or ("#ch-" + slug), "wrap_based": ('class="wrap"' in html),
+        })
+    def add_split(base, chap_title, src, group):
+        html = read(src)
+        style = extract_style(html); content = extract_main(html)
+        for i, (t, b) in enumerate(split_by_h2(content)):
+            E.append({
+                "slug": f"{base}-{i+1}", "num": f"{base}.{i+1}", "title": t,
+                "group": group, "style": style, "content": b,
+                "scope": f".ch{base}", "wrap_based": ('class="wrap"' in html),
+            })
+
+    # 一、云计算概述（拆分）
+    add_split("1", "云计算概述", "1.云计算概述_详细讲解.html", "一、云计算概述")
+    # 二、云计算关键技术
+    add_single("2-1", "2.1", "虚拟化技术", "2.1虚拟化技术_详细讲解.html", "二、云计算关键技术")
+    add_single("2-2", "2.2", "分布式技术", "2.2分布式技术_详细讲解.html", "二、云计算关键技术")
+    add_single("2-3", "2.3", "SDN 与 NFV", "2.3软件定义网络和网络功能虚拟化_详细讲解.html", "二、云计算关键技术")
+    # 三、典型云计算平台
+    add_single("3-1", "3.1", "Google 云计算", "3.1Google云计算_详解.html", "三、典型云计算平台")
+    add_single("3-2", "3.2", "亚马逊 AWS", "3.2亚马逊AWS_详细讲解.html", "三、典型云计算平台")
+    add_single("3-3", "3.3", "华为云", "3.3华为云_详细讲解.html", "三、典型云计算平台")
+    add_single("3-4", "3.4", "百度云", "3.4百度云_复习.html", "三、典型云计算平台")
+    add_single("3-5", "3.5", "云平台选择比较", "3.5典型云平台的选择与比较_详解.html", "三、典型云计算平台")
+    # 四、面向服务的分布式计算
+    add_single("4-1", "4.1", "Web 文档服务", "4.1_Web文档服务_复习.html", "四、面向服务的分布式计算")
+    add_single("4-2", "4.2", "Web 服务与协议", "4.2 Web服务与协议_详细讲解.html", "四、面向服务的分布式计算")
+    add_single("4-3", "4.3", "面向服务架构 SOA", "4.3面向服务的体系结构_详细讲解.html", "四、面向服务的分布式计算")
+    add_single("4-4", "4.4", "微服务架构", "4.4微服务架构_详细讲解.html", "四、面向服务的分布式计算")
+    # 五、云计算数据中心
+    add_single("5-1", "5.1", "数据中心概念特征", "5.1云计算数据中心的概念及特征_详细讲解.html", "五、云计算数据中心")
+    add_single("5-2", "5.2", "数据中心关键服务", "5.2数据中心提供的关键服务和技术_详细讲解.html", "五、云计算数据中心")
+    add_single("5-3", "5.3", "绿色节能技术", "5.3绿色节能技术_详细讲解.html", "五、云计算数据中心")
+    add_single("5-4", "5.4", "容灾备份", "5.4容灾备份_复习卡片.html", "五、云计算数据中心")
+    # 六、云计算安全（使用用户拆分好的 6.1/6.2/6.3）
+    add_single("6-1", "6.1", "云安全概念与威胁", "6.1_云安全的概念及重要性_详细讲解.html", "六、云计算安全")
+    add_single("6-2", "6.2", "安全防护与策略", "6.2_常见安全防护措施及相关安全策略_详细讲解.html", "六、云计算安全")
+    add_single("6-3", "6.3", "身份授权与访问管理", "6.3_身份、授权和访问管理_详细讲解.html", "六、云计算安全")
+    # 七、云计算产业发展（拆分）
+    add_split("7", "产业应用与发展", "7.云计算产业应用与发展_详细讲解.html", "七、云计算产业发展")
+    return E
+
+ENTRIES = []
+
+NAV_CSS = """/* 独立分章页顶部/底部导航（专栏 SPA 不使用） */
 .colnav{position:sticky;top:0;z-index:100;background:linear-gradient(120deg,#1d4ed8,#3b82f6 60%,#0ea5e9);box-shadow:0 2px 10px rgba(20,40,80,.20)}
 .colnav .inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:7px 14px}
 .colnav .brand{font-weight:800;font-size:15px;white-space:nowrap;text-decoration:none;color:#fff;display:flex;align-items:center;gap:5px;flex:0 0 auto}
-.colnav .brand small{font-weight:500;opacity:.8;font-size:11px}
 .colnav .chips{display:flex;gap:6px;overflow-x:auto;flex:1;padding:2px 0;scrollbar-width:thin}
 .colnav .chips::-webkit-scrollbar{height:5px}
 .colnav .chips::-webkit-scrollbar-thumb{background:rgba(255,255,255,.4);border-radius:4px}
@@ -83,69 +161,11 @@ NAV_CSS = """/* 云计算复习专栏 — 共享导航样式（独立分章页�
 @media(max-width:560px){.colfoot a{flex:1 1 100%}.colfoot a.next{text-align:left}.colfoot a.home{flex:1 1 100%}}
 """
 
-# ---------- 抽取与样式作用域隔离 ----------
-def extract_style(html):
-    return "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, re.S))
-
-def extract_wrap(html):
-    """返回 <div class="wrap"> 内部 HTML（按 div 层级平衡截取）"""
-    m = re.search(r'<div class="wrap">', html)
-    if not m:
-        mb = re.search(r"<body[^>]*>(.*)</body>", html, re.S)
-        return mb.group(1) if mb else html
-    start = m.end()
-    depth = 0
-    for t in re.finditer(r"<(/?)div\b[^>]*>", html[start:]):
-        if t.group(1) == "/":
-            depth -= 1
-            if depth == -1:
-                return html[start:start + t.start()]
-        else:
-            depth += 1
-    return html[start:]
-
-GLOBAL_SELECTORS = {":root", "*", "html", "body"}
-def scope_css(css, scope):
-    """把一段 CSS 的所有选择器加上 #scope 前缀；:root/*/html/body 保持全局。"""
-    prefix = "#" + scope + " "
-    blocks, buf, depth = [], "", 0
-    for ch in css:
-        buf += ch
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                blocks.append(buf); buf = ""
-    out = []
-    for blk in blocks:
-        s = blk.strip()
-        if not s:
-            continue
-        if s.startswith("@"):
-            if s.startswith(("@keyframes", "@-webkit-keyframes", "@font-face")):
-                out.append(blk); continue
-            idx = s.index("{")
-            head, body = s[:idx], s[idx + 1:s.rindex("}")]
-            out.append(head + "{" + scope_css(body, scope) + "}")
-        else:
-            idx = s.index("{")
-            sel, body = s[:idx], s[idx + 1:s.rindex("}")]
-            sels = []
-            for part in sel.split(","):
-                p = part.strip()
-                if not p:
-                    continue
-                sels.append(p if p in GLOBAL_SELECTORS else prefix + p)
-            out.append(",".join(sels) + "{" + body + "}")
-    return "".join(out)
-
-# ---------- 独立分章页（保留，供深链/分享） ----------
 def nav_html(active, link_prefix, home_href, assets_href):
     chips = []
-    for slug, num, title, _, _ in chapters:
-        cls = "chip active" if slug == active else "chip"
-        chips.append(f'<a class="{cls}" href="{link_prefix}{slug}.html"><span class="num">{num}</span> {title}</a>')
+    for e in ENTRIES:
+        cls = "chip active" if e["slug"] == active else "chip"
+        chips.append(f'<a class="{cls}" href="{link_prefix}{e["slug"]}.html"><span class="num">{e["num"]}</span> {e["title"]}</a>')
     home_cls = "chip active" if active == "home" else "chip"
     return (
         f'<link rel="stylesheet" href="{assets_href}">\n'
@@ -155,37 +175,55 @@ def nav_html(active, link_prefix, home_href, assets_href):
     )
 
 def bottom_html(active, link_prefix, home_href):
-    idx = [c[0] for c in chapters].index(active)
-    prev = chapters[idx - 1] if idx > 0 else None
-    nxt = chapters[idx + 1] if idx < len(chapters) - 1 else None
+    idx = [e["slug"] for e in ENTRIES].index(active)
+    prev = ENTRIES[idx - 1] if idx > 0 else None
+    nxt = ENTRIES[idx + 1] if idx < len(ENTRIES) - 1 else None
     parts = []
     if prev:
-        parts.append(f'<a class="prev" href="{link_prefix}{prev[0]}.html"><div class="lab">上一章</div><div class="ttl">{prev[2]}</div></a>')
+        parts.append(f'<a class="prev" href="{link_prefix}{prev["slug"]}.html"><div class="lab">上一篇</div><div class="ttl">{prev["num"]} {prev["title"]}</div></a>')
     else:
         parts.append("<span></span>")
     parts.append(f'<a class="home" href="{home_href}">☁ 返回专栏首页</a>')
     if nxt:
-        parts.append(f'<a class="next" href="{link_prefix}{nxt[0]}.html"><div class="lab">下一章</div><div class="ttl">{nxt[2]}</div></a>')
+        parts.append(f'<a class="next" href="{link_prefix}{nxt["slug"]}.html"><div class="lab">下一篇</div><div class="ttl">{nxt["num"]} {nxt["title"]}</div></a>')
     else:
         parts.append("<span></span>")
     return '<div class="colfoot">' + "".join(parts) + "</div>"
 
-def build_chapter_pages():
-    os.makedirs(os.path.join(OUT, "cloud"), exist_ok=True)
-    for slug, num, title, _, _ in chapters:
-        src_path = os.path.join(SRC, SRC_FILE[slug])
-        with open(src_path, "r", encoding="utf-8") as f:
-            html = f.read()
-        nav_full = nav_html(slug, "", "index.html", "assets/nav.css")
-        nav_bar = nav_full.split("\n", 1)[1] if nav_full.startswith("<link") else nav_full
-        bottom_bar = bottom_html(slug, "", "index.html")
-        html = re.sub(r"</head>", '  <link rel="stylesheet" href="assets/nav.css">\n</head>', html, count=1)
-        html = re.sub(r"<body[^>]*>", lambda m: m.group(0) + "\n" + nav_bar, html, count=1)
-        html = re.sub(r"</body>", bottom_bar + "\n</body>", html, count=1)
-        out_path = os.path.join(OUT, "cloud", f"{slug}.html")
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(html)
-        print(f"[ok] cloud/{slug}.html  ({title})")
+# ---------- 独立分章页（供深链/分享） ----------
+def build_standalone(e):
+    nav = nav_html(e["slug"], "", "index.html", "assets/nav.css")
+    parts = nav.split("\n", 1)
+    head_link = parts[0] if parts[0].startswith("<link") else ""
+    nav_bar = parts[1] if len(parts) > 1 else parts[0]
+    bottom = bottom_html(e["slug"], "", "index.html")
+    cont_open = '<div class="wrap">' if e["wrap_based"] else "<main>"
+    cont_close = "</div>" if e["wrap_based"] else "</main>"
+    inner = e["content"]
+    if e["scope"].startswith("."):  # 拆分出的小板块：补上被切掉的 h2 标题
+        inner = f'<h2>{e["title"]}</h2>' + inner
+    html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{e['num']} {e['title']} · 云计算复习专栏</title>
+<style>
+{e['style']}
+</style>
+{head_link}
+</head>
+<body>
+{nav_bar}
+{cont_open}
+{inner}
+{cont_close}
+{bottom}
+</body>
+</html>"""
+    with open(os.path.join(OUT, "cloud", f"{e['slug']}.html"), "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"[ok] cloud/{e['slug']}.html  ({e['num']} {e['title']})")
 
 # ---------- 单页应用（左右分栏专栏） ----------
 SPA_CSS = """*{box-sizing:border-box}
@@ -211,6 +249,26 @@ body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-s
 .chapter{max-width:940px;margin:0 auto;display:none;font-size:15px;line-height:1.75;color:#1f2937}
 .chapter.active{display:block;animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* ===== 统一标题栏（每个板块一致） ===== */
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.22);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+/* ===== 统一基础排版（富文本一致呈现） ===== */
+.content h1,.content h2,.content h3,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.content h1{font-size:24px}.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.content h3{font-size:17px}.content h4{font-size:15px}
+.content p{margin:9px 0;line-height:1.85;color:#334155}
+.content ul,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.content li{margin:5px 0;line-height:1.8}
+.content a{color:#2563eb;text-decoration:none}.content a:hover{text-decoration:underline}
+.content strong,.content b{color:#0f172a}
+.content table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.content th,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.content th{background:#eff6ff;color:#1e3a8a;font-weight:700}
+.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.content blockquote{border-left:4px solid #2563eb;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.content img{max-width:100%;border-radius:10px}
 .cf{text-align:center;color:#94a3b8;font-size:12.5px;margin-top:30px}
 .overlay{display:none}
 @media(max-width:820px){
@@ -254,7 +312,7 @@ SPA_TEMPLATE = """<!DOCTYPE html>
 <title>云计算复习专栏 · 2025 考纲</title>
 <style>
 __BASECSS__
-/* ===== 各章节样式（已按章节作用域隔离，互不干扰） ===== */
+/* ===== 各章节样式（已按作用域隔离，互不干扰） ===== */
 __CHAPTERCSS__
 </style>
 </head>
@@ -283,43 +341,39 @@ __JS__
 </body>
 </html>"""
 
-def build_home():
-    # 左侧分组目录
-    groups, cur_label, cur_items = [], None, []
-    for slug, num, title, _, grp in chapters:
-        if grp != cur_label:
-            if cur_items:
-                groups.append((cur_label, cur_items))
-            cur_label, cur_items = grp, []
-        cur_items.append((slug, num, title))
-    if cur_items:
-        groups.append((cur_label, cur_items))
+def build_home(entries):
+    groups, cur, items = [], None, []
+    for e in entries:
+        if e["group"] != cur:
+            if items:
+                groups.append((cur, items))
+            cur, items = e["group"], []
+        items.append(e)
+    if items:
+        groups.append((cur, items))
 
-    side_parts, first = [], True
+    side, first = [], True
     for label, items in groups:
         lis = []
-        for i, (slug, num, title) in enumerate(items):
+        for e in items:
             act = " active" if first else ""
-            lis.append(f'<a class="nav-item{act}" data-target="{slug}"><span class="nav-num">{num}</span><span class="nav-ttl">{title}</span></a>')
+            lis.append(f'<a class="nav-item{act}" data-target="{e["slug"]}"><span class="nav-num">{e["num"]}</span><span class="nav-ttl">{e["title"]}</span></a>')
             first = False
-        side_parts.append('<div class="group"><div class="group-label">' + label + "</div>" + "".join(lis) + "</div>")
-    sidebar_html = "\n".join(side_parts)
+        side.append('<div class="group"><div class="group-label">' + label + "</div>" + "".join(lis) + "</div>")
+    sidebar_html = "\n".join(side)
 
-    # 右侧各章内容（内嵌 + 作用域隔离样式）
-    chap_parts, chap_css, first = [], [], True
-    for slug, num, title, _, _ in chapters:
-        with open(os.path.join(SRC, SRC_FILE[slug]), "r", encoding="utf-8") as f:
-            html = f.read()
-        style = extract_style(html)
-        wrap = extract_wrap(html)
-        wrap = re.sub(r"<script.*?</script>", "", wrap, flags=re.S)
-        scoped = scope_css(style, "ch-" + slug)
-        chap_css.append("/* === " + slug + " " + title + " === */\n" + scoped)
+    chap, cache, first = [], {}, True
+    for e in entries:
+        extra = (" " + e["scope"][1:]) if e["scope"].startswith(".") else ""
         act = " active" if first else ""
-        chap_parts.append(f'<section class="chapter{act}" id="ch-{slug}">\n{wrap}\n</section>')
+        tag = f'<section class="chapter{extra}{act}" id="ch-{e["slug"]}">'
+        head = f'<div class="ch-head"><span class="ch-num">{e["num"]}</span><span class="ch-ttl">{e["title"]}</span></div>'
+        chap.append(tag + head + e["content"] + "</section>")
+        if e["scope"] not in cache:
+            cache[e["scope"]] = scope_css(e["style"], e["scope"])
         first = False
-    chapters_html = "\n".join(chap_parts)
-    chapter_css = "\n".join(chap_css)
+    chapters_html = "\n".join(chap)
+    chapter_css = "\n".join(cache.values())
 
     html = (SPA_TEMPLATE
             .replace("__BASECSS__", SPA_CSS)
@@ -332,13 +386,24 @@ def build_home():
     print("[ok] cloud/index.html (左右分栏单页应用)")
 
 def main():
+    # 清理旧的 cloud/*.html，避免残留旧 slug（如 1.html / 6.html）
+    # 沙箱环境下 os.remove 可能被安全策略拦截，改为 best-effort，不因此中断构建
+    for f in glob.glob(os.path.join(OUT, "cloud", "*.html")):
+        try:
+            os.remove(f)
+        except Exception:
+            pass
     os.makedirs(os.path.join(OUT, "cloud", "assets"), exist_ok=True)
     with open(os.path.join(OUT, "cloud", "assets", "nav.css"), "w", encoding="utf-8") as f:
         f.write(NAV_CSS)
     print("[ok] cloud/assets/nav.css")
-    build_chapter_pages()
-    build_home()
-    print("\n全部生成完成。")
+
+    global ENTRIES
+    ENTRIES = build_entries()
+    for e in ENTRIES:
+        build_standalone(e)
+    build_home(ENTRIES)
+    print(f"\n共 {len(ENTRIES)} 个板块，全部生成完成。")
 
 if __name__ == "__main__":
     main()
