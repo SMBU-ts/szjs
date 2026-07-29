@@ -3,8 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>6.1 云安全概念与威胁 · 云计算复习专栏</title>
+<title>6.1 云安全的概念及重要性 · 云计算复习专栏</title>
 <style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#2563eb;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#eff6ff;color:#1e3a8a;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #2563eb;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+/* 统一标题栏（与 SPA 一致） */
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.22);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
 
   :root{
     --bg:#f4f6fb; --panel:#fff; --ink:#1f2a44; --ink-soft:#56607a; --line:#e3e8f2;
@@ -16,7 +39,7 @@
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.9;font-size:15px;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.85;font-size:15px;}
   header.top{position:sticky;top:0;z-index:50;background:linear-gradient(120deg,#1e3a8a,#2563eb 55%,#0d9488);color:#fff;padding:14px 26px;box-shadow:var(--shadow);}
   header.top h1{margin:0;font-size:19px;font-weight:700;}
   header.top .sub{font-size:12.5px;opacity:.92;margin-top:3px;}
@@ -25,7 +48,7 @@
   .search-wrap{position:absolute;right:24px;top:14px;}
   .search-wrap input{width:210px;padding:7px 12px;border-radius:999px;border:none;outline:none;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
   .container{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
-  nav.toc{position:sticky;top:96px;width:290px;flex:0 0 290px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
+  nav.toc{position:sticky;top:96px;width:280px;flex:0 0 280px;align-self:flex-start;max-height:calc(100vh - 110px);overflow-y:auto;padding:18px 12px 30px 18px;background:var(--panel);border-right:1px solid var(--line);border-radius:0 0 12px 0;}
   nav.toc h2{font-size:13px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
   nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13px;padding:5px 10px;border-radius:7px;margin:1px 0;border-left:3px solid transparent;}
   nav.toc a:hover{background:var(--cloud-soft);color:var(--cloud);}
@@ -36,7 +59,6 @@
   .section-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;color:#fff;background:linear-gradient(120deg,#1d4ed8,#3b82f6);box-shadow:var(--shadow);position:sticky;top:96px;z-index:20;}
   .section-head .num{background:rgba(255,255,255,.22);width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}
   .section-head h2{margin:0;font-size:20px;}
-  .section-head .desc{font-size:12.5px;opacity:.92;margin-top:2px;}
   .chapter{margin-top:22px;scroll-margin-top:160px;}
   .chapter > h3{font-size:17px;margin:0 0 12px;padding:10px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cloud);box-shadow:var(--shadow);}
   .kp{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow);scroll-margin-top:160px;}
@@ -96,248 +118,96 @@
 <a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
 <a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
 <a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
-<a class="chip active" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
-<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
-<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip active" href="6-1.html"><span class="num">6.1</span> 云安全的概念及重要性</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 常见安全防护措施及相关安全策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份、授权和访问管理（IAM）</a>
+<a class="chip" href="6-4.html"><span class="num">6.4</span> 数据加密与密钥管理</a>
 <a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
 <a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
 <a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
 </div>
 </div></nav>
 <main>
+<div class="ch-head"><span class="ch-num">6.1</span><span class="ch-ttl">云安全的概念及重要性</span></div>
+<h2>云安全的概念及重要性</h2></div>
 
-<!-- ============ 一、定义与常见威胁 ============ -->
-<section class="section" id="c61a">
-  <div class="section-head"><div class="num">6.1</div><h2>一、云安全的定义与常见威胁</h2></div>
+  <div class="chapter" id="c61a"><h3>一、云安全的定义与常见威胁</h3>
 
-  <div class="kp" id="d61">
-    <div class="kp-head"><h4>6.1.1 云安全的定义</h4><span class="badge lv2">熟悉</span></div>
-    <div class="core"><span class="lab"></span><b>云安全（Cloud Security）= 一套融合"技术 + 策略 + 运维"的体系，用于保护云计算环境中的数据、应用、平台、基础设施与账号，保障其机密性、完整性、可用性（CIA 三性），并应对云计算特有风险（多租户、虚拟化、弹性、责任共担）带来的安全挑战。</b></div>
-    <p class="note">要理解云安全，先要把握三层含义：</p>
-    <ul class="note" style="margin:8px 0;">
-      <li><b>① 目标层面（CIA 三性）：</b>安全的本质目标始终围绕三件事——
-        <br>· <b>机密性（Confidentiality）：</b>数据"不该看的人看不到"（防泄露）；
-        <br>· <b>完整性（Integrity）：</b>数据"不被篡改、不被伪造"（防篡改）；
-        <br>· <b>可用性（Availability）：</b>授权用户"需要时能正常用"（防中断）。
-        <br>这三者被统称为 <b>CIA 三元组</b>，是信息安全（含云安全）最基础、最常考的概念。</li>
-      <li><b>② 范围层面：</b>云安全覆盖"云上的一切"——底层物理机房与网络、虚拟化层、操作系统、数据库、应用、API、账号与密钥，乃至客户的使用配置。它不是某一款"云防火墙"产品，而是一整套防护组合。</li>
-      <li><b>③ 风险层面：</b>云安全在传统信息安全基础上，叠加了云计算独有的新问题：多租户隔离、资源弹性伸缩、责任在厂商与客户间分割、数据跨境等。这是它与传统 IT 安全的根本区别。</li>
-    </ul>
-    <div class="ex"><span class="lab"></span>
-      <ul>
-        <li><b>传统安全 vs 云安全（对比记忆）：</b>传统安全以"边界防火墙 + 内网可信"为核心假设；云安全因为资源弹性伸缩、边界模糊、访问来自任意地点，更强调"<b>身份即边界</b>"和"<b>零信任</b>（默认不信任，持续验证）"。</li>
-        <li><b>一句话范围示例：</b>云安全既管"别人能不能偷看你的数据库"（机密性），也管"数据被改了没"（完整性），还管"服务卡顿打不开怎么办"（可用性）。</li>
-      </ul>
+    <div class="kp" id="d61">
+      <div class="kp-head"><h4>6.1.1 云安全的定义</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>云安全 = 保护云计算环境（数据、应用、平台、基础设施、账号）的机密性、完整性、可用性（CIA三性），并融合云计算特有风险（多租户、虚拟化、责任共担）而形成的安全体系</b>。</div>
+      <p class="note">云安全不是某一款产品，而是一套"技术 + 策略 + 运维"的组合：既包括传统信息安全（网络安全、主机安全、数据安全），又叠加了云特有的责任共担、多租户隔离、弹性资源等新问题。</p>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>传统安全 vs 云安全：</b>传统安全以"边界防火墙"为核心；云安全因为资源弹性伸缩、边界模糊，更强调"身份即边界"和"零信任"。</li>
+          <li><b>范围示例：</b>云安全既管"别人能不能偷看你的数据库"（机密性），也管"数据被改了没"（完整性），还管"服务卡顿打不开"（可用性）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kp" id="d62">
+      <div class="kp-head"><h4>6.1.2 常见云安全威胁（CSA 云安全威胁清单）</h4><span class="badge lv3">掌握</span></div>
+      <div class="core"><span class="lab"></span><b>最高频的云威胁：配置错误（Misconfiguration）、身份凭证泄露/弱认证、不安全的接口与 API、账户劫持、内部威胁、共享技术漏洞、数据泄露与丢失</b>。</div>
+      <table class="tbl">
+        <tr><th>威胁</th><th>说明</th><th>典型场景</th></tr>
+        <tr><td><b>配置错误</b></td><td>存储桶/安全组/端口被错误开放为公网（云上"头号"事故源）</td><td>对象存储设为公开可读，导致用户数据被全网爬取</td></tr>
+        <tr><td><b>身份凭证泄露 / 弱认证</b></td><td>密钥、密码、AK/SK 泄露，无 MFA 保护</td><td>开发者把 AccessKey 提交到 GitHub，被恶意扫描利用挖矿</td></tr>
+        <tr><td><b>不安全的接口/API</b></td><td>API 未鉴权、未限流、存在越权漏洞</td><td>越权接口可遍历他人订单 ID 获取隐私</td></tr>
+        <tr><td><b>账户劫持</b></td><td>钓鱼/撞库夺取管理员账号</td><td>钓鱼邮件骗取控制台登录，删库勒索</td></tr>
+        <tr><td><b>内部威胁（恶意/失误）</b></td><td>内部人员越权访问或误操作</td><td>离职员工带走数据，或误删生产库</td></tr>
+        <tr><td><b>共享技术漏洞</b></td><td>虚拟化/容器隔离被突破，跨租户越权</td><td>同宿主机的邻居通过侧信道或漏洞读到你的内存</td></tr>
+        <tr><td><b>数据泄露 / 数据丢失</b></td><td>被窃取或误删、未备份</td><td>勒索软件加密数据；误删且无备份</td></tr>
+        <tr><td><b>拒绝服务（DoS/DDoS）</b></td><td>流量打满导致服务不可用</td><td>大规模请求冲垮 Web 入口</td></tr>
+        <tr><td><b>滥用云服务</b></td><td>用云资源做攻击跳板（挖矿、钓鱼）</td><td>攻击者用盗用的账号发起对外攻击</td></tr>
+      </table>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>配置错误示例：</b>某公司将云数据库 3306 端口对 0.0.0.0/0 开放且无密码，被勒索组织拖库——这是"客户侧责任"，CSP 不背锅。</li>
+          <li><b>凭证泄露示例：</b>把长期有效的 Secret Key 写进前端代码，等于把家门钥匙挂在门口。</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div class="kp" id="d62">
-    <div class="kp-head"><h4>6.1.2 常见云安全威胁（CSA 云安全威胁清单）</h4><span class="badge lv3">掌握</span></div>
-    <div class="core"><span class="lab"></span><b>最高频的云威胁：配置错误（Misconfiguration）、身份凭证泄露/弱认证、不安全的接口与 API、账户劫持、内部威胁、共享技术漏洞、数据泄露与丢失、拒绝服务（DoS/DDoS）、滥用云服务。</b></div>
-    <p class="note">下面按"威胁 → 本质 → 典型场景"逐条拆解，建议优先记前 6 项（考试高频）：</p>
-    <table class="tbl">
-      <tr><th style="width:18%">威胁</th><th style="width:42%">说明（本质）</th><th style="width:40%">典型场景</th></tr>
-      <tr><td><b>① 配置错误</b><br>Misconfiguration</td><td>存储桶/安全组/端口被错误开放为公网。<b>云上"头号"事故源</b>，且多属客户责任</td><td>对象存储设为公开可读，导致用户数据被全网爬取；数据库端口对 0.0.0.0/0 开放无密码</td></tr>
-      <tr><td><b>② 身份凭证泄露<br>/ 弱认证</b></td><td>密钥、密码、AccessKey/SecretKey 泄露，且无 MFA 保护</td><td>开发者把 AK/SK 提交到 GitHub，被恶意扫描利用来挖矿；长期密钥写进前端代码</td></tr>
-      <tr><td><b>③ 不安全的接口/API</b></td><td>API 未鉴权、未限流、存在越权/注入漏洞</td><td>越权接口可遍历他人订单 ID 获取隐私；未限流接口被刷爆</td></tr>
-      <tr><td><b>④ 账户劫持</b><br>Account Hijacking</td><td>通过钓鱼/撞库夺取管理员或用户账号</td><td>钓鱼邮件骗取控制台登录，进后台删库勒索</td></tr>
-      <tr><td><b>⑤ 内部威胁</b><br>（恶意/失误）</td><td>内部人员越权访问、数据外泄或误操作</td><td>离职员工带走数据；运维误删生产数据库</td></tr>
-      <tr><td><b>⑥ 共享技术漏洞</b></td><td>底层虚拟化/容器隔离被突破，跨租户越权</td><td>同宿主机"邻居"通过侧信道或漏洞读到你的内存数据</td></tr>
-      <tr><td><b>⑦ 数据泄露 / 丢失</b></td><td>数据被窃取，或误删、无备份导致永久丢失</td><td>勒索软件加密数据；误删库且无备份</td></tr>
-      <tr><td><b>⑧ 拒绝服务</b><br>DoS / DDoS</td><td>海量流量打满入口，导致服务不可用</td><td>大规模请求冲垮 Web 入口，业务停摆</td></tr>
-      <tr><td><b>⑨ 滥用云服务</b></td><td>用盗用的云资源做攻击跳板（挖矿、钓鱼、外发垃圾）</td><td>攻击者用盗用的账号对外发起攻击</td></tr>
-    </table>
-    <div class="ex"><span class="lab"></span>
-      <ul>
-        <li><b>配置错误示例：</b>某公司把云数据库 3306 端口对 0.0.0.0/0 开放且未设密码，被勒索组织拖库——这是"客户侧责任"，云服务商（CSP）不背锅。</li>
-        <li><b>凭证泄露示例：</b>把长期有效的 Secret Key 写进前端代码，等于把家门钥匙挂在门口任人取用。</li>
+  <div class="chapter" id="c61b"><h3>二、云计算环境中安全问题的复杂性与多样性</h3>
+    <div class="kp" id="d63">
+      <div class="kp-head"><h4>6.1.3 复杂性与多样性的来源</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>云安全"更复杂"的根本原因：边界消失、多租户共享、责任共担、资源弹性、合规跨境、攻击面叠加（虚拟化+容器+API+供应链）</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>边界模糊：</b>传统"内网可信"假设失效，访问来自任意终端/任意地点 → 必须"零信任"（默认不信任、持续验证）。</li>
+        <li><b>多租户隔离：</b>同一物理机跑多家客户的数据，隔离一旦失效就会"串门"，对底层虚拟化/容器安全提出极高要求。</li>
+        <li><b>责任共担：</b>安全职责在 CSP 与客户之间分割，双方都以为对方负责 → 出现"责任真空"。</li>
+        <li><b>弹性与动态：</b>资源随时创建/销毁，资产盘点、日志审计、配置基线难以稳定，影子 IT（未纳管资源）丛生。</li>
+        <li><b>合规与数据主权：</b>数据可能落在境外机房，要同时满足等保、GDPR、《数据安全法》《个人信息保护法》等多套法规。</li>
+        <li><b>攻击面叠加：</b>IaaS 的虚拟化、PaaS 的运行时、SaaS 的接口、加上第三方依赖/供应链，攻击面比传统 IT 更广。</li>
       </ul>
+      <div class="ex"><span class="lab"></span>
+        <ul>
+          <li><b>多样性示例：</b>同样叫"上云"，用 IaaS 自己装系统（客户责任大）和用 SaaS（几乎全交给厂商）面临的安全工作天差地别——这就是"多样性"。</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <div class="kp" id="d62b">
-    <div class="kp-head"><h4>6.1.2（补）威胁全景与典型攻击链条</h4><span class="badge lv1">了解</span></div>
-    <p class="note">把上面 9 类威胁放进一张图，能直观看到云上风险"从外到内、由浅入深"的层次：</p>
-    <div class="fig">
-      <svg viewBox="0 0 680 330" role="img" aria-label="云安全威胁全景">
-        <!-- 中心云 -->
-        <ellipse cx="340" cy="165" rx="78" ry="48" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></ellipse>
-        <text x="340" y="160" font-size="15" font-weight="700" text-anchor="middle" fill="#1d4ed8">云计算</text>
-        <text x="340" y="180" font-size="13" text-anchor="middle" fill="#1d4ed8">环境</text>
-        <!-- 外部威胁圈 -->
-        <g font-size="11.5" fill="#1f2a44">
-          <rect x="20" y="40" width="150" height="46" rx="8" fill="#fff7ed" stroke="#d97706"></rect>
-          <text x="95" y="60" text-anchor="middle" font-weight="700" fill="#9a3412">① 配置错误</text>
-          <text x="95" y="77" text-anchor="middle" fill="#9a3412">对外暴露资产</text>
-
-          <rect x="20" y="245" width="150" height="46" rx="8" fill="#fff7ed" stroke="#d97706"></rect>
-          <text x="95" y="265" text-anchor="middle" font-weight="700" fill="#9a3412">② 凭证泄露</text>
-          <text x="95" y="282" text-anchor="middle" fill="#9a3412">密钥/弱口令</text>
-
-          <rect x="510" y="40" width="150" height="46" rx="8" fill="#fee2e2" stroke="#dc2626"></rect>
-          <text x="585" y="60" text-anchor="middle" font-weight="700" fill="#b91c1c">③ 不安全 API</text>
-          <text x="585" y="77" text-anchor="middle" fill="#b91c1c">越权/未鉴权</text>
-
-          <rect x="510" y="245" width="150" height="46" rx="8" fill="#fee2e2" stroke="#dc2626"></rect>
-          <text x="585" y="265" text-anchor="middle" font-weight="700" fill="#b91c1c">④ 账户劫持</text>
-          <text x="585" y="282" text-anchor="middle" fill="#b91c1c">钓鱼/撞库</text>
-
-          <rect x="270" y="12" width="140" height="40" rx="8" fill="#ede9fe" stroke="#7c3aed"></rect>
-          <text x="340" y="37" text-anchor="middle" font-weight="700" fill="#6d28d9">⑧ DDoS / 拒服</text>
-
-          <rect x="270" y="280" width="140" height="40" rx="8" fill="#ede9fe" stroke="#7c3aed"></rect>
-          <text x="340" y="305" text-anchor="middle" font-weight="700" fill="#6d28d9">⑨ 滥用云服务</text>
-
-          <rect x="150" y="150" width="120" height="40" rx="8" fill="#dcfce7" stroke="#22a06b"></rect>
-          <text x="210" y="175" text-anchor="middle" font-weight="700" fill="#0f6b3c">⑤ 内部威胁</text>
-
-          <rect x="410" y="150" width="120" height="40" rx="8" fill="#dcfce7" stroke="#22a06b"></rect>
-          <text x="470" y="175" text-anchor="middle" font-weight="700" fill="#0f6b3c">⑥ 共享技术漏洞</text>
-        </g>
-        <!-- ⑦ 数据泄露在中心 -->
-        <text x="340" y="200" font-size="11" text-anchor="middle" fill="#b91c1c" font-weight="700">⑦ 数据泄露/丢失（结果）</text>
-        <!-- 连接线 -->
-        <g stroke="#94a3b8" stroke-width="1.4" fill="none">
-          <line x1="170" y1="63" x2="265" y2="140"></line>
-          <line x1="170" y1="268" x2="265" y2="190"></line>
-          <line x1="510" y1="63" x2="415" y2="140"></line>
-          <line x1="510" y1="268" x2="415" y2="190"></line>
-          <line x1="340" y1="52" x2="340" y2="117"></line>
-          <line x1="340" y1="278" x2="340" y2="213"></line>
-          <line x1="210" y1="150" x2="262" y2="158"></line>
-          <line x1="470" y1="150" x2="418" y2="158"></line>
-        </g>
-      </svg>
-      <div class="cap">图 6-1（6.1）云安全威胁全景：多数威胁最终都会指向"⑦ 数据泄露/丢失"这一结果</div>
-    </div>
-    <div class="ex"><span class="lab"></span>
-      <ul>
-        <li><b>典型攻击链条：</b>开发者泄露 AK/SK（②）→ 攻击者拿到控制台权限 → 误配置的资源被利用（①）→ 提权劫持管理员账号（④）→ 拖库造成数据泄露（⑦）。可见威胁之间常常"连锁反应"。</li>
+  <div class="chapter" id="c61c"><h3>三、云安全对于云计算的重要性</h3>
+    <div class="kp" id="d64">
+      <div class="kp-head"><h4>6.1.4 为什么云安全是云计算的"生命线"</h4><span class="badge lv2">熟悉</span></div>
+      <div class="core"><span class="lab"></span><b>没有安全就没有信任，没有信任就没有上云——云安全决定了云计算能否被采用、能否合规、能否持续运营</b>。</div>
+      <ul class="note" style="margin:8px 0;">
+        <li><b>数据是核心资产：</b>云上集中存放大量敏感数据，一旦泄露代价极高（声誉、罚款、诉讼）。</li>
+        <li><b>业务连续性依赖可用性：</b>云是业务关键底座，DDoS/勒索导致中断即直接损失营收。</li>
+        <li><b>合规硬约束：</b>金融、政务、医疗等行业上云必须满足等保/行业监管，否则不能上线。</li>
+        <li><b>信任基础：</b>企业是否敢把核心系统搬到云，取决于对 CSP 安全能力的信任。</li>
       </ul>
+      <div class="warn"><span class="lab">⚠ 考试易错点：</span>云安全不是"买了云就自动安全"。CSP 负责"云本身安全"（基础设施），客户负责"云中安全"（配置、数据、身份）——安全是双方共同责任。</div>
     </div>
   </div>
 </section>
 
-<!-- ============ 二、复杂性与多样性 ============ -->
-<section class="section" id="c61b">
-  <div class="section-head"><div class="num">6.1</div><h2>二、云计算环境中安全问题的复杂性与多样性</h2></div>
-
-  <div class="kp" id="d63">
-    <div class="kp-head"><h4>6.1.3 复杂性与多样性的来源</h4><span class="badge lv2">熟悉</span></div>
-    <div class="core"><span class="lab"></span><b>云安全"更复杂、更多样"的根本原因：边界消失、多租户共享、责任共担、资源弹性、合规跨境、攻击面叠加（虚拟化 + 容器 + API + 供应链）。这六个因素叠加，使云安全远难于传统 IT 安全。</b></div>
-    <p class="note">逐一理解每个来源为何"制造难度"：</p>
-    <ul class="note" style="margin:8px 0;">
-      <li><b>① 边界模糊（去边界化）：</b>传统安全靠"内网可信、外网危险"划边界；云上访问来自任意终端、任意地点、任意网络，固定边界失效 → 必须转向"<b>零信任</b>"（默认不信任、持续验证）。</li>
-      <li><b>② 多租户隔离：</b>同一物理机/同一套虚拟化平台跑着多家客户的数据。隔离机制（虚拟化、容器、网络微隔离）一旦失效，就会"串门"，对底层技术安全提出极高要求。</li>
-      <li><b>③ 责任共担：</b>安全职责在 CSP 与客户之间分割，双方都容易以为"对方负责" → 出现"<b>责任真空</b>"（谁都没管的那块）。</li>
-      <li><b>④ 弹性与动态：</b>资源随时创建/销毁，资产盘点、日志审计、配置基线难以稳定，<b>影子 IT</b>（未被纳管的临时资源）丛生，攻击面随时变化。</li>
-      <li><b>⑤ 合规与数据主权：</b>数据可能落在境外机房，要同时满足等保、《网络安全法》《数据安全法》《个人信息保护法》以及境外的 GDPR 等多套法规，冲突时还需权衡。</li>
-      <li><b>⑥ 攻击面叠加：</b>IaaS 的虚拟化层、PaaS 的运行时、SaaS 的接口，再加第三方依赖/开源组件/供应链，攻击面比传统 IT 更广、更碎。</li>
-    </ul>
-    <div class="fig">
-      <svg viewBox="0 0 680 250" role="img" aria-label="复杂性六大来源">
-        <g font-size="12.5" fill="#fff" text-anchor="middle">
-          <rect x="30" y="30" width="180" height="64" rx="10" fill="#2563eb"></rect>
-          <text x="120" y="58" font-weight="700">① 边界模糊</text>
-          <text x="120" y="78">去边界 / 零信任</text>
-
-          <rect x="250" y="30" width="180" height="64" rx="10" fill="#0d9488"></rect>
-          <text x="340" y="58" font-weight="700">② 多租户隔离</text>
-          <text x="340" y="78">跨租户风险</text>
-
-          <rect x="470" y="30" width="180" height="64" rx="10" fill="#7c3aed"></rect>
-          <text x="560" y="58" font-weight="700">③ 责任共担</text>
-          <text x="560" y="78">责任真空</text>
-
-          <rect x="30" y="150" width="180" height="64" rx="10" fill="#d97706"></rect>
-          <text x="120" y="178" font-weight="700">④ 弹性动态</text>
-          <text x="120" y="198">影子 IT</text>
-
-          <rect x="250" y="150" width="180" height="64" rx="10" fill="#dc2626"></rect>
-          <text x="340" y="178" font-weight="700">⑤ 合规跨境</text>
-          <text x="340" y="198">多法规冲突</text>
-
-          <rect x="470" y="150" width="180" height="64" rx="10" fill="#0891b2"></rect>
-          <text x="560" y="178" font-weight="700">⑥ 攻击面叠加</text>
-          <text x="560" y="198">供应链/API</text>
-        </g>
-        <ellipse cx="340" cy="120" rx="0" ry="0" fill="none"></ellipse>
-      </svg>
-      <div class="cap">图 6-2（6.1）复杂性六大来源：六因素相互交织，使云安全难度倍增</div>
-    </div>
-  </div>
-
-  <div class="kp" id="d63b">
-    <div class="kp-head"><h4>6.1.4 复杂性在实践中的具体表现（"多样性"体现在哪）</h4><span class="badge lv2">熟悉</span></div>
-    <div class="core"><span class="lab"></span><b>多样性 = 同样的"上云"，不同服务模型（IaaS/PaaS/SaaS）、不同行业、不同部署形态（公有/私有/混合）面临的安全工作天差地别，不存在"一套方案包打天下"。</b></div>
-    <table class="tbl">
-      <tr><th>维度</th><th>带来的"多样性"</th><th>安全重心差异</th></tr>
-      <tr><td><b>服务模型不同</b></td><td>IaaS 客户要自己管 OS/补丁；SaaS 几乎全交给厂商</td><td>IaaS 重系统层，SaaS 重账号与使用配置</td></tr>
-      <tr><td><b>行业合规不同</b></td><td>金融/政务强合规，电商/个人应用相对宽松</td><td>前者要等保三级 + 密钥自管(BYOK)，后者可简化</td></tr>
-      <tr><td><b>部署形态不同</b></td><td>公有云、私有云、混合云</td><td>混合云要额外解决"跨云统一身份与策略"难题</td></tr>
-      <tr><td><b>数据敏感度不同</b></td><td>公开资料 vs 个人敏感信息 vs 国家机密</td><td>敏感数据需加密、脱敏、分级访问</td></tr>
-    </table>
-    <div class="ex"><span class="lab"></span>
-      <ul>
-        <li><b>多样性示例：</b>同样叫"上云"，用 IaaS 自己装系统（客户责任大、要会的多）和用 SaaS（只管账号）面临的安全工作量天差地别——这就是"多样性"。</li>
-        <li><b>复杂性示例：</b>一家跨国企业用公有云 + 本地私有云的混合架构，既要防外部攻击，又要满足"中国数据不出境、欧盟满足 GDPR"，还要统一身份——复杂度陡增。</li>
-      </ul>
-    </div>
-    <div class="warn"><span class="lab">⚠ 考试易错点：</span>"复杂性与多样性"是云安全<b>区别于传统安全的核心特征</b>，答题时务必点出"责任共担 + 多租户 + 边界消失"这几个关键词，不能只泛泛说"网络有风险"。</div>
-  </div>
-</section>
-
-<!-- ============ 三、云安全的重要性 ============ -->
-<section class="section" id="c61c">
-  <div class="section-head"><div class="num">6.1</div><h2>三、云安全对于云计算的重要性</h2></div>
-
-  <div class="kp" id="d64">
-    <div class="kp-head"><h4>6.1.5 为什么云安全是云计算的"生命线"</h4><span class="badge lv2">熟悉</span></div>
-    <div class="core"><span class="lab"></span><b>没有安全就没有信任，没有信任就没有上云——云安全直接决定了云计算能否被采用、能否合规、能否持续运营。它是云计算的"生命线"。</b></div>
-    <ul class="note" style="margin:8px 0;">
-      <li><b>① 数据是核心资产：</b>云上集中存放大量敏感数据（用户隐私、商业机密、资金信息），一旦泄露代价极高——声誉受损、监管罚款、法律诉讼，往往不可逆。</li>
-      <li><b>② 业务连续性依赖可用性：</b>越来越多的核心业务跑在云上，一次 DDoS 或勒索导致的中断，直接转化为营收损失与客户流失。</li>
-      <li><b>③ 合规是硬约束：</b>金融、政务、医疗、教育等行业上云必须满足等保/行业监管，安全不达标就"不能上线"，云安全是准入门槛而非可选项。</li>
-      <li><b>④ 信任是采用前提：</b>企业是否敢把核心系统搬到云，取决于对云服务商安全能力的信任；安全事件会直接动摇整个市场的采用意愿。</li>
-      <li><b>⑤ 共享放大效应：</b>云的"多租户"特性意味着一处基础性漏洞可能影响大量客户，安全已成为云生态的公共基础设施。</li>
-    </ul>
-    <div class="fig">
-      <svg viewBox="0 0 680 200" role="img" aria-label="云安全重要性金字塔">
-        <polygon points="340,20 540,150 140,150" fill="#eaf1ff" stroke="#2563eb" stroke-width="2"></polygon>
-        <text x="340" y="70" font-size="13" font-weight="700" text-anchor="middle" fill="#1d4ed8">信任（采用前提）</text>
-        <text x="340" y="98" font-size="12" text-anchor="middle" fill="#1d4ed8">↕</text>
-        <text x="340" y="120" font-size="12.5" font-weight="700" text-anchor="middle" fill="#1d4ed8">合规 · 可用性 · 数据资产</text>
-        <text x="340" y="142" font-size="12" text-anchor="middle" fill="#1d4ed8">云安全 = 生命线</text>
-        <line x1="140" y1="160" x2="540" y2="160" stroke="#94a3b8" stroke-width="1.5"></line>
-        <text x="140" y="180" font-size="11" text-anchor="middle" fill="#56607a">无安全 = 无信任</text>
-        <text x="540" y="180" font-size="11" text-anchor="middle" fill="#56607a">无信任 = 不上云</text>
-      </svg>
-      <div class="cap">图 6-3（6.1）云安全重要性：底层是生命线，向上支撑资产/合规/可用性，最顶层是信任</div>
-    </div>
-  </div>
-
-  <div class="kp" id="d64b">
-    <div class="kp-head"><h4>6.1.6 再强调：安全是"双方责任"，不是买云就自动安全</h4><span class="badge lv3">掌握</span></div>
-    <div class="core"><span class="lab"></span><b>云安全的核心原则——责任共担：CSP 负责"云本身的安全"（底层基础设施、硬件、虚拟化），客户负责"云中的安全"（操作系统、应用、数据、身份与访问配置）。安全不会因为你买了云服务而自动生效。</b></div>
-    <table class="tbl">
-      <tr><th style="width:42%">云服务商（CSP）负责"云本身安全"</th><th style="width:58%">客户负责"云中安全"</th></tr>
-      <tr><td>物理机房、电力、网络骨干</td><td>自身业务系统、应用的漏洞与配置</td></tr>
-      <tr><td>虚拟化层 / Hypervisor</td><td>Guest OS、补丁、主机加固</td></tr>
-      <tr><td>底层硬件与存储可靠性</td><td>数据库中的数据、数据加密与备份策略</td></tr>
-      <tr><td>云控制台平台自身的安全</td><td>账号、密码、访问密钥、权限分配（IAM）</td></tr>
-    </table>
-    <div class="warn"><span class="lab">⚠ 考试易错点（必考）：</span>无论哪种服务模型（IaaS/PaaS/SaaS），"<b>数据加密与客户端配置、身份管理</b>"始终属于<b>客户责任</b>——云厂商不会替你设好密码和权限。把"配置错误""密钥泄露"当成了"厂商的问题"，是考试中最典型的错误理解。</div>
-    <div class="ex"><span class="lab"></span>
-      <ul>
-        <li><b>一句话总结重要性：</b>云安全做不好 → 数据泄露/业务中断 → 不合规不能上线、客户不信任 → 云计算的价值（弹性、低成本、敏捷）就无从谈起。所以"安全是云计算的生命线"。</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<footer>6.1 云安全的概念及重要性 · 详细讲解（2025考纲）｜ 本节为《第六章 云安全》开篇，建议结合 6.2 防护措施、6.3 IAM、6.4 加密密钥管理 一起复习</footer>
-
+<!-- ================= 6.2 ================= -->
+<section class="section" id="c62">
+  <div class="section-head"><div class="num">6.2</div>
 </main>
-<div class="colfoot"><a class="prev" href="5-4.html"><div class="lab">上一篇</div><div class="ttl">5.4 容灾备份</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-2.html"><div class="lab">下一篇</div><div class="ttl">6.2 安全防护与策略</div></a></div>
+<div class="colfoot"><a class="prev" href="5-4.html"><div class="lab">上一篇</div><div class="ttl">5.4 容灾备份</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="6-2.html"><div class="lab">下一篇</div><div class="ttl">6.2 常见安全防护措施及相关安全策略</div></a></div>
 </body>
 </html>

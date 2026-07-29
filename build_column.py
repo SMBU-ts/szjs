@@ -3,7 +3,7 @@
 云计算复习专栏构建脚本（左右分栏单页应用 + 独立分章页）
 - 读取「技术考试」目录里的分章讲解 HTML
 - 抽取每章正文（优先 <main>，回退 .wrap / <body>），避免无 .wrap 章节把自身 header/内部目录/footer 一并塞进内容区
-- 1、7 按 <h2> 自动拆成小板块；6 使用用户拆分好的 6.1/6.2/6.3
+- 1、7、6 按 <h2> 自动拆成小板块；6 从合并文件拆出 6.1–6.4（跳过「目录」）
 - 每章样式按作用域隔离后内嵌，章节间互不干扰；统一标题栏 + 统一基础排版
 按《2025 湖南省数字技术应用能力考试 · 云计算基础知识及应用》考纲 1-7 章组织
 """
@@ -23,23 +23,80 @@ def extract_style(html):
     return "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", html, re.S))
 
 def extract_main(html):
-    """取正文：优先 <main>，回退 .wrap（按 div 层级平衡），再回退 <body>。"""
+    """取正文：优先 <main>，回退 .wrap（按 div 层级平衡），再回退 <body>；
+    末尾统一剥离页面级 chrome（header.top / nav.toc / footer / 目录卡），避免套娃。"""
     m = re.search(r"<main[^>]*>(.*?)</main>", html, re.S)
     if m:
-        return m.group(1)
-    mw = re.search(r'<div class="wrap">', html)
-    if mw:
-        start = mw.end(); depth = 0
-        for t in re.finditer(r"<(/?)div\b[^>]*>", html[start:]):
-            if t.group(1) == "/":
-                depth -= 1
-                if depth == -1:
-                    return html[start:start + t.start()]
-            else:
+        raw = m.group(1)
+    else:
+        mw = re.search(r'<div class="wrap">', html)
+        if mw:
+            start = mw.end(); depth = 0
+            raw = html[start:]
+            for t in re.finditer(r"<(/?)div\b[^>]*>", html[start:]):
+                if t.group(1) == "/":
+                    depth -= 1
+                    if depth == -1:
+                        raw = html[start:start + t.start()]
+                        break
+                else:
+                    depth += 1
+        else:
+            mb = re.search(r"<body[^>]*>(.*)</body>", html, re.S)
+            raw = mb.group(1) if mb else html
+    return strip_chrome(raw)
+
+def _remove_tag_block(html, tag, cls_sub=None):
+    """删除带指定 class 的整块标签（支持标签嵌套）；
+    cls_sub 为 None 时删除任意该标签（如 footer）。"""
+    if cls_sub is None:
+        pat = re.compile(r"<%s\b[^>]*>" % tag, re.I)
+    else:
+        pat = re.compile(r"<%s\b[^>]*class=\"[^\"]*%s[^\"]*\"[^>]*>" % (tag, cls_sub), re.I)
+    out, i, n = [], 0, len(html)
+    close = "</%s>" % tag
+    tl = len(tag) + 1
+    while True:
+        m = pat.search(html, i)
+        if not m:
+            out.append(html[i:]); break
+        out.append(html[i:m.start()])
+        depth, k, matched = 0, m.end(), False
+        while k < n:
+            # 找下一个同标签起始（排除 <tagX），优先于结束标签
+            op, pos = -1, k
+            while True:
+                p = html.find("<%s" % tag, pos)
+                if p == -1:
+                    break
+                nxt = html[p + tl] if p + tl < n else ">"
+                if nxt in " \t\n>":
+                    op = p; break
+                pos = p + 1
+            cl = html.find(close, k)
+            if cl == -1:
+                break
+            if op != -1 and op < cl:
                 depth += 1
-        return html[start:]
-    mb = re.search(r"<body[^>]*>(.*)</body>", html, re.S)
-    return mb.group(1) if mb else html
+                k = op + tl
+            else:
+                if depth == 0:
+                    k = cl + len(close); matched = True; break
+                depth -= 1
+                k = cl + len(close)
+        if matched:
+            i = k
+        else:
+            out.append(html[m.start():]); break
+    return "".join(out)
+
+def strip_chrome(html):
+    """剥离页面级 chrome：顶部 banner、目录导航、页脚。"""
+    html = _remove_tag_block(html, "header", "top")
+    html = _remove_tag_block(html, "div", "toc")
+    html = _remove_tag_block(html, "nav", "toc")
+    html = re.sub(r"<footer\b[^>]*>.*?</footer>", "", html, flags=re.S | re.I)
+    return html
 
 def split_by_h2(content):
     ms = list(re.finditer(r"<h2[^>]*>(.*?)</h2>", content, re.S))
@@ -95,10 +152,13 @@ def build_entries():
             "style": extract_style(html), "content": extract_main(html),
             "scope": scope or ("#ch-" + slug), "wrap_based": ('class="wrap"' in html),
         })
-    def add_split(base, chap_title, src, group):
+    def add_split(base, chap_title, src, group, skip=None):
+        skip = skip or []
         html = read(src)
         style = extract_style(html); content = extract_main(html)
-        for i, (t, b) in enumerate(split_by_h2(content)):
+        subs = [(t, b) for (t, b) in split_by_h2(content)
+                if not any(k in t for k in skip)]
+        for i, (t, b) in enumerate(subs):
             E.append({
                 "slug": f"{base}-{i+1}", "num": f"{base}.{i+1}", "title": t,
                 "group": group, "style": style, "content": b,
@@ -127,10 +187,8 @@ def build_entries():
     add_single("5-2", "5.2", "数据中心关键服务", "5.2数据中心提供的关键服务和技术_详细讲解.html", "五、云计算数据中心")
     add_single("5-3", "5.3", "绿色节能技术", "5.3绿色节能技术_详细讲解.html", "五、云计算数据中心")
     add_single("5-4", "5.4", "容灾备份", "5.4容灾备份_复习卡片.html", "五、云计算数据中心")
-    # 六、云计算安全（使用用户拆分好的 6.1/6.2/6.3）
-    add_single("6-1", "6.1", "云安全概念与威胁", "6.1_云安全的概念及重要性_详细讲解.html", "六、云计算安全")
-    add_single("6-2", "6.2", "安全防护与策略", "6.2_常见安全防护措施及相关安全策略_详细讲解.html", "六、云计算安全")
-    add_single("6-3", "6.3", "身份授权与访问管理", "6.3_身份、授权和访问管理_详细讲解.html", "六、云计算安全")
+    # 六、云计算安全（按 <h2> 从合并文件拆成 6.1–6.4，跳过「目录」）
+    add_split("6", "云计算安全", "6_云安全_详细讲解.html", "六、云计算安全", skip=["目录"])
     # 七、云计算产业发展（拆分）
     add_split("7", "产业应用与发展", "7.云计算产业应用与发展_详细讲解.html", "七、云计算产业发展")
     return E
@@ -160,6 +218,31 @@ NAV_CSS = """/* 独立分章页顶部/底部导航（专栏 SPA 不使用） */
 .colfoot a.next .ttl::after{content:"  \\2192"}
 @media(max-width:560px){.colfoot a{flex:1 1 100%}.colfoot a.next{text-align:left}.colfoot a.home{flex:1 1 100%}}
 """
+
+# 独立分章页：统一标题栏 + 基础排版（与 SPA 一致），同时兼容 .wrap / .content 两种容器
+STANDALONE_CSS = """/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#2563eb;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#eff6ff;color:#1e3a8a;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #2563eb;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+/* 统一标题栏（与 SPA 一致） */
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.22);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}"""
 
 def nav_html(active, link_prefix, home_href, assets_href):
     chips = []
@@ -202,6 +285,7 @@ def build_standalone(e):
     inner = e["content"]
     if e["scope"].startswith("."):  # 拆分出的小板块：补上被切掉的 h2 标题
         inner = f'<h2>{e["title"]}</h2>' + inner
+    ch_head = f'<div class="ch-head"><span class="ch-num">{e["num"]}</span><span class="ch-ttl">{e["title"]}</span></div>'
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -209,6 +293,7 @@ def build_standalone(e):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e['num']} {e['title']} · 云计算复习专栏</title>
 <style>
+{STANDALONE_CSS}
 {e['style']}
 </style>
 {head_link}
@@ -216,6 +301,7 @@ def build_standalone(e):
 <body>
 {nav_bar}
 {cont_open}
+{ch_head}
 {inner}
 {cont_close}
 {bottom}

@@ -5,6 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>4.2 Web 服务与协议 · 云计算复习专栏</title>
 <style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#2563eb;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#eff6ff;color:#1e3a8a;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #2563eb;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+/* 统一标题栏（与 SPA 一致） */
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#1e3a8a,#2563eb 60%,#0ea5e9);color:#fff;box-shadow:0 6px 18px rgba(37,99,235,.22);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
 
   :root{
     --bg:#f7f9fc; --card:#ffffff; --ink:#1f2933; --muted:#5b6775;
@@ -88,15 +111,17 @@
 <a class="chip" href="5-2.html"><span class="num">5.2</span> 数据中心关键服务</a>
 <a class="chip" href="5-3.html"><span class="num">5.3</span> 绿色节能技术</a>
 <a class="chip" href="5-4.html"><span class="num">5.4</span> 容灾备份</a>
-<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全概念与威胁</a>
-<a class="chip" href="6-2.html"><span class="num">6.2</span> 安全防护与策略</a>
-<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份授权与访问管理</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 云安全的概念及重要性</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 常见安全防护措施及相关安全策略</a>
+<a class="chip" href="6-3.html"><span class="num">6.3</span> 身份、授权和访问管理（IAM）</a>
+<a class="chip" href="6-4.html"><span class="num">6.4</span> 数据加密与密钥管理</a>
 <a class="chip" href="7-1.html"><span class="num">7.1</span> 7.1中国云计算产业发展现状</a>
 <a class="chip" href="7-2.html"><span class="num">7.2</span> 7.2云计算的行业应用</a>
 <a class="chip" href="7-3.html"><span class="num">7.3</span> 7.3云计算发展及挑战</a>
 </div>
 </div></nav>
 <div class="wrap">
+<div class="ch-head"><span class="ch-num">4.2</span><span class="ch-ttl">Web 服务与协议</span></div>
 
 
 <header class="hero">
@@ -104,18 +129,7 @@
   <p>核心组件 · 定义与特性 · 工作流程 · SOAP · RESTful · REST 安全性 · REST vs SOAP 比较</p>
 </header>
 
-<div class="toc">
-  <b>目录</b>
-  <ol>
-    <li><a href="#def">Web 服务的定义与基本特性</a></li>
-    <li><a href="#core">Web 服务的核心组件</a></li>
-    <li><a href="#flow">Web 服务的工作流程</a></li>
-    <li><a href="#soap">SOAP（简单对象访问协议）</a></li>
-    <li><a href="#rest">RESTful Web 服务</a></li>
-    <li><a href="#sec">REST 安全性</a></li>
-    <li><a href="#cmp">REST 与 SOAP 异同比较</a></li>
-  </ol>
-</div>
+
 
 <!-- 1. 定义 -->
 <section id="def">
@@ -463,7 +477,7 @@ DELETE /users/1001  →  204 No Content</code></pre>
   <div class="box key"><b>🎯 选型口诀</b>要<strong>严谨契约、事务安全、跨协议</strong>选 <b>SOAP</b>；要<strong>轻量、高性能、易用、面向 Web/移动</strong>选 <b>REST</b>。当今互联网公开 API 绝大多数采用 REST（JSON）。</div>
 </section>
 
-<footer>4.2 Web 服务与协议 · 复习讲义 · 建议结合「核心知识点详解」配套练习</footer>
+
 
 </div>
 <div class="colfoot"><a class="prev" href="4-1.html"><div class="lab">上一篇</div><div class="ttl">4.1 Web 文档服务</div></a><a class="home" href="index.html">☁ 返回专栏首页</a><a class="next" href="4-3.html"><div class="lab">下一篇</div><div class="ttl">4.3 面向服务架构 SOA</div></a></div>
