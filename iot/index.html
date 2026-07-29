@@ -139,7 +139,7 @@ main > section.chapter.active{display:block;animation:fade .25s ease}
 </tbody>
 </table>
 
-<h3>四、纳入物联网的"物"的���本条件</h3>
+<h3>四、纳入物联网的"物"的基本条件</h3>
 
 <div class="card gr">
 <h4>一个物理实体要被纳入物联网范畴，通常需满足以下条件：</h4>
@@ -225,7 +225,7 @@ main > section.chapter.active{display:block;animation:fade .25s ease}
 
 <p><strong>关键技术：</strong>① MEMS传感器（微型化、低功耗、低成本）；② RFID技术（无源/有源标签，LF/HF/UHF/微波多频段）；③ 嵌入式系统（ARM Cortex-M/ RISC-V MCU，FreeRTOS/Zephyr/LiteOS等嵌入式OS）；④ 定位技术（GPS/北斗室外定位，Wi-Fi指纹/BLE信标/UWB室内定位，精度10-30cm）；⑤ 能量采集技术（太阳能、压电、温差发电、RF能量采集，实现无电池IoT终端）。</p>
 
-<h3>���、网络传输层——功能与关键技术</h3>
+<h3>三、网络传输层——功能与关键技术</h3>
 
 <p><strong>功能定位：</strong>物联网的"神经中枢"，负责将感知层数据可靠、高效、安全地传送到平台层，以及下发控制指令。包括接入汇聚、路由转发、传输控制、网络管理等功能。</p>
 
@@ -238,7 +238,7 @@ main > section.chapter.active{display:block;animation:fade .25s ease}
 
 <h3>四、平台处理层——功能与关键技术</h3>
 
-<p><strong>功能定位：</strong>物联网的"大脑和��枢"，将海量、异构的设备数据集中管理、统一处理、智能分析，以标准化API为上层提供服务，是物联网从"连接"走向"智能"的关键。</p>
+<p><strong>功能定位：</strong>物联网的"大脑和中枢"，将海量、异构的设备数据集中管理、统一处理、智能分析，以标准化API为上层提供服务，是物联网从"连接"走向"智能"的关键。</p>
 
 <p><strong>关键技术：</strong>① 设备管理与连接管理（注册/认证/影子/OTA固件升级）；② 数据存储与处理（时序数据库TSDB如TDengine、InfluxDB，消息队列Kafka/RabbitMQ，流处理Flink/Spark Streaming）；③ 规则引擎与复杂事件处理（IF-TTT条件-动作模型，CEP多事件复合模式识别）；④ AI/ML平台（模型训练/部署/MLOps，边缘推理TensorFlow Lite/ONNX Runtime）；⑤ 数字孪生（实时数据同步双向映射，3D可视化+仿真分析+预测性维护）；⑥ API开放（RESTful/WebSocket/gRPC，低代码可视化Dashboard）。</p>
 
@@ -260,7 +260,7 @@ main > section.chapter.active{display:block;animation:fade .25s ease}
 <li><span class="ti-yr">2010年：</span>体系化布局。国家标准委和工信部联合成立国家物联网基础标准工作组，负责基础通用标准。</li>
 <li><span class="ti-yr">2011年：</span>里程碑。中国主导的ISO/IEC 29182传感器网络参考体系架构国际标准成功立项发布。</li>
 <li><span class="ti-yr">2012年：</span>SAC/TC 28/SC 41物联网分技术委员会成立，对口ISO/IEC JTC1/SC41。</li>
-<li><span class="ti-yr">2017年：</span>GB/T 33745-2017《物联网 术语》发布，统一基础术语。GB/T 33474-2016《物联网 参考体系��构》发布。</li>
+<li><span class="ti-yr">2017年：</span>GB/T 33745-2017《物联网 术语》发布，统一基础术语。GB/T 33474-2016《物联网 参考体系架构》发布。</li>
 <li><span class="ti-yr">2021年至今：</span>深化应用。《物联网新型基础设施建设三年行动计划》推进IoT操作系统、边缘计算、AIoT融合、数字孪生等标准。NB-IoT基站超100万个。</li>
 </ul>
 
@@ -387,7 +387,7 @@ main > section.chapter.active{display:block;animation:fade .25s ease}
 
 <p><strong>二维条形码：</strong>水平垂直两个方向存储信息，容量从几十到数千字符。QR码（Quick Response Code，日本Denso Wave公司）最典型：三个"回"字形定位图案+校正图形+格式信息+数据区域。识读原理：CMOS图像传感器采集→图像预处理（灰度化、二值化）→定位图案检测→透视变换校正→按编码规则（Reed-Solomon纠错码）解码。QR码四个纠错等级：L（7%）、M（15%）、Q（25%）、H（30%）。Data Matrix常用于工业零部件标记，PDF417常用于证件（驾照、登机牌）。</p>
 
-<h3>���、IC卡技术与特点</h3>
+<h3>三、IC卡技术与特点</h3>
 
 <p>IC卡（Integrated Circuit Card）内部嵌有集成电路芯片。经历三个阶段演变：<strong>存储卡</strong>（仅存储数据，安全性低，已淘汰）→<strong>逻辑加密卡</strong>（有简单密码保护，如MIFARE Classic S50，广泛用于门禁/公交）→<strong>CPU卡</strong>（内嵌微处理器和操作系统COS，支持DES/AES/RSA加密运算，如金融IC卡EMV标准、第二代居民身份证）。</p>
 
@@ -599,7 +599,7 @@ main > section.chapter.active{display:block;animation:fade .25s ease}
 <tr><td><strong>地址长度</strong></td><td>32位</td><td>128位</td></tr>
 <tr><td><strong>地址数量</strong></td><td>42.9亿</td><td>3.4×10³⁸</td></tr>
 <tr><td><strong>自动配置</strong></td><td>需DHCP服务器</td><td>SLAAC无状态自动配置（根据路由器前缀+MAC地址生成全球唯一IPv6地址），即插即用，零配置部署</td></tr>
-<tr><td><strong>报头简化</strong></td><td>12字段，变长，路由器处理开销大</td><td>8字段，固定40字节，路由器处理效率大幅提升，适���IoT低功耗设备</td></tr>
+<tr><td><strong>报头简化</strong></td><td>12字段，变长，路由器处理开销大</td><td>8字段，固定40字节，路由器处理效率大幅提升，适合IoT低功耗设备</td></tr>
 <tr><td><strong>安全性</strong></td><td>IPSec可选</td><td>IPSec强制支持，端到端加密和认证</td></tr>
 <tr><td><strong>移动性</strong></td><td>移动IP复杂</td><td>Mobile IPv6原生支持，转交地址绑定更新，切换更高效</td></tr>
 <tr><td><strong>多播与任播</strong></td><td>多播支持有限</td><td>多播（1对多）和任播（1对最近）原生增强，适合IoT固件批量分发和服务发现</td></tr>
