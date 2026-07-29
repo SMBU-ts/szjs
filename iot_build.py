@@ -92,6 +92,25 @@ def strip_chrome(html):
     html = re.sub(r"<footer\b[^>]*>.*?</footer>", "", html, flags=re.S | re.I)
     return html
 
+def fix_standalone_css(css):
+    """修复独立分章页 CSS，使其与云计算专栏页面大小和排版一致"""
+    # 1. 完全替换 body 规则，移除源文件的 max-width/margin/padding/line-height
+    css = re.sub(
+        r'body\s*\{[^}]*\}',
+        'body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;'
+        'background:#f7f9fc;color:#1f2937;line-height:1.75;font-size:15px}',
+        css, count=1
+    )
+    # 2. 统一字体大小（从 rem 转为 px，匹配云计算专栏）
+    css = re.sub(r'font-size\s*:\s*1\.5rem', 'font-size:20px', css)
+    css = re.sub(r'font-size\s*:\s*1\.15rem', 'font-size:16px', css)
+    css = re.sub(r'font-size\s*:\s*1\.02rem', 'font-size:15px', css)
+    css = re.sub(r'font-size\s*:\s*\.93rem', 'font-size:14px', css)
+    css = re.sub(r'font-size\s*:\s*\.88rem', 'font-size:13px', css)
+    # 3. 移除 p 的 justify（云计算专栏不用）
+    css = re.sub(r'text-align\s*:\s*justify;?', '', css)
+    return css
+
 def split_by_h2(content):
     ms = list(re.finditer(r"<h2[^>]*>(.*?)</h2>", content, re.S))
     if not ms:
@@ -218,6 +237,7 @@ NAV_CSS = """/* 独立分章页顶部/底部导航（专栏 SPA 不使用） */
 """
 
 STANDALONE_CSS = """/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
 .wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
 .wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
 .wrap h1,.content h1{font-size:24px}
@@ -276,12 +296,14 @@ def build_standalone(e):
     head_link = parts[0] if parts[0].startswith("<link") else ""
     nav_bar = parts[1] if len(parts) > 1 else parts[0]
     bottom = bottom_html(e["slug"], "", "index.html")
-    cont_open = '<div class="wrap">' if e["wrap_based"] else "<main>"
-    cont_close = "</div>" if e["wrap_based"] else "</main>"
+    # 统一使用 .wrap 容器（与云计算专栏一致）
+    cont_open, cont_close = '<div class="wrap">', "</div>"
     inner = e["content"]
     if e["scope"].startswith("."):
         inner = f'<h2>{e["title"]}</h2>' + inner
     ch_head = f'<div class="ch-head"><span class="ch-num">{e["num"]}</span><span class="ch-ttl">{e["title"]}</span></div>'
+    # 修复源码 CSS：移除 body 尺寸、统一字号行高
+    fixed_style = fix_standalone_css(e['style'])
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -290,7 +312,7 @@ def build_standalone(e):
 <title>{e['num']} {e['title']} · 物联网复习专栏</title>
 <style>
 {STANDALONE_CSS}
-{e['style']}
+{fixed_style}
 </style>
 {head_link}
 </head>

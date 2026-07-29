@@ -6,6 +6,7 @@
 <title>3.4 低功耗广域网技术（LPWAN） · 物联网复习专栏</title>
 <style>
 /* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap{max-width:980px;margin:0 auto;padding:32px 22px 70px}
 .wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
 .wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
 .wrap h1,.content h1{font-size:24px}
@@ -29,20 +30,20 @@
 .ch-head .ch-ttl{font-size:18px;font-weight:700}
 
 :root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
-body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
-h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
-h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
-h4{font-size:1.02rem;margin:16px 0 8px}
-p{margin-bottom:12px;text-align:justify}
+body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:#1f2937;line-height:1.75;font-size:15px}
+h2{font-size:20px;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:16px;color:#064e3b;margin:24px 0 10px}
+h4{font-size:15px;margin:16px 0 8px}
+p{margin-bottom:12px;}
 ul,ol{margin:8px 0 8px 22px}
 li{margin-bottom:6px}
-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
 th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
 th{background:var(--pri);color:#fff;font-weight:600}
 tr:nth-child(even){background:var(--card)}
 .card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
 .card.gr{background:var(--pri-l);border-color:#a7f3d0}
-code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px;color:#be123c}
 
 </style>
 <link rel="stylesheet" href="assets/nav.css">
@@ -80,7 +81,7 @@ code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color
 <a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
 </div>
 </div></nav>
-<main>
+<div class="wrap">
 <div class="ch-head"><span class="ch-num">3.4</span><span class="ch-ttl">低功耗广域网技术（LPWAN）</span></div>
 <h2>低功耗广域网技术（LPWAN）</h2>
 
@@ -115,7 +116,7 @@ code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color
 <p>Sigfox由法国同名公司创立，采用超窄带（UNB）技术，每条上行消息仅100bps速率、12字节有效载荷，极致简化。通过全球运营商合作模式部署网络（类似漫游），终端极低功耗。但因速率和带宽极度受限（日上行140条消息、下行4条），应用场景收窄。2022年Sigfox被UnaBiz收购后转开放生态，但其商业模式局限性和NB-IoT/LoRa的竞争使远期前景不确定。</p>
 
 
-</main>
+</div>
 <div class="colfoot"><a class="prev" href="3-3.html"><div class="lab">上一篇</div><div class="ttl">3.3 IPv6技术</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="4-1.html"><div class="lab">下一篇</div><div class="ttl">4.1 物联网中间件</div></a></div>
 </body>
 </html>
