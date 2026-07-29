@@ -91,10 +91,11 @@ def _remove_tag_block(html, tag, cls_sub=None):
     return "".join(out)
 
 def strip_chrome(html):
-    """剥离页面级 chrome：顶部 banner、目录导航、页脚。"""
+    """剥离页面级 chrome：顶部 banner、目录导航、页脚，以及源文件里与 ch-head 重复的小节标题。"""
     html = _remove_tag_block(html, "header", "top")
     html = _remove_tag_block(html, "div", "toc")
     html = _remove_tag_block(html, "nav", "toc")
+    html = _remove_tag_block(html, "div", "sec-hd")  # 源文件里与 ch-head 重复的节标题
     html = re.sub(r"<footer\b[^>]*>.*?</footer>", "", html, flags=re.S | re.I)
     return html
 
