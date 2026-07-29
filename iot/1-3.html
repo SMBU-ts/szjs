@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.3 物联网体系架构 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+.card h4{color:var(--pri);margin-bottom:8px}
+.card.gr h4{color:#064e3b}
+.timeline{position:relative;padding-left:30px;margin:18px 0}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:3px;background:var(--pri);border-radius:2px}
+.timeline li{position:relative;margin-bottom:14px;list-style:none}
+.timeline li::before{content:'';position:absolute;left:-28px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--pri);border:2px solid #fff;box-shadow:0 0 0 2px var(--pri)}
+.ti-yr{font-weight:700;color:var(--pri)}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip active" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">1.3</span><span class="ch-ttl">物联网体系架构</span></div>
+<h2>物联网体系架构</h2>
+
+<h3>一、参考体系架构概述</h3>
+
+<p>物联网体系架构是指导物联网系统设计、开发、部署和互操作的顶层框架。主流参考架构包括ITU-T Y.2060、oneM2M、IoT-A ARM、工业互联网参考架构（IIRA）等。以下介绍最通用的四层经典架构——感知层、网络传输层、平台处理层、应用服务层。</p>
+
+<h3>二、感知层——功能与关键技术</h3>
+
+<p><strong>功能定位：</strong>物联网的"五官和四肢"，负责数据采集、对象标识、协同感知、本地执行和初步数据处理。核心功能包括：通过传感器采集物理世界信息，通过RFID/二维码/NFC给物理实体赋予数字化身份，通过执行器对物理世界作出响应。</p>
+
+<p><strong>关键技术：</strong>① MEMS传感器（微型化、低功耗、低成本）；② RFID技术（无源/有源标签，LF/HF/UHF/微波多频段）；③ 嵌入式系统（ARM Cortex-M/ RISC-V MCU，FreeRTOS/Zephyr/LiteOS等嵌入式OS）；④ 定位技术（GPS/北斗室外定位，Wi-Fi指纹/BLE信标/UWB室内定位，精度10-30cm）；⑤ 能量采集技术（太阳能、压电、温差发电、RF能量采集，实现无电池IoT终端）。</p>
+
+<h3>���、网络传输层——功能与关键技术</h3>
+
+<p><strong>功能定位：</strong>物联网的"神经中枢"，负责将感知层数据可靠、高效、安全地传送到平台层，以及下发控制指令。包括接入汇聚、路由转发、传输控制、网络管理等功能。</p>
+
+<p><strong>关键技术：</strong></p>
+<p>① <strong>短距离无线通信：</strong>Wi-Fi 6/6E/7（高速率）、BLE 5.x（极低功耗）、Zigbee 3.0（智能家居/楼宇）、Thread（IPv6 Mesh）、NFC（极近距离支付/门禁）、UWB（精准定位10-30cm）。</p>
+<p>② <strong>低功耗广域网：</strong>NB-IoT（3GPP授权频谱，10年电池，覆盖增强20dB）；LoRa/LoRaWAN（ISM免授权频段，可自建私有网络）；LTE Cat.1/Cat.1 bis（中速率物联网首选，替代2G/3G）。</p>
+<p>③ <strong>蜂窝移动通信：</strong>5G三大场景（eMBB/mMTC/uRLLC），5G RedCap为中等复杂度IoT设备提供低成本接入。</p>
+<p>④ <strong>IoT网关：</strong>协议转换（非IP→IP）、数据汇聚预处理、本地决策（TinyML推理）、安全隔离。</p>
+<p>⑤ <strong>IoT专用网络协议：</strong>6LoWPAN（IPv6 over 802.15.4）、RPL（低功耗路由）、CoAP（约束应用协议，RESTful/UDP）、MQTT（发布-订阅，IoT消息事实标准）、LwM2M（设备管理）、DDS（实时数据分发，工业控制）。</p>
+
+<h3>四、平台处理层——功能与关键技术</h3>
+
+<p><strong>功能定位：</strong>物联网的"大脑和��枢"，将海量、异构的设备数据集中管理、统一处理、智能分析，以标准化API为上层提供服务，是物联网从"连接"走向"智能"的关键。</p>
+
+<p><strong>关键技术：</strong>① 设备管理与连接管理（注册/认证/影子/OTA固件升级）；② 数据存储与处理（时序数据库TSDB如TDengine、InfluxDB，消息队列Kafka/RabbitMQ，流处理Flink/Spark Streaming）；③ 规则引擎与复杂事件处理（IF-TTT条件-动作模型，CEP多事件复合模式识别）；④ AI/ML平台（模型训练/部署/MLOps，边缘推理TensorFlow Lite/ONNX Runtime）；⑤ 数字孪生（实时数据同步双向映射，3D可视化+仿真分析+预测性维护）；⑥ API开放（RESTful/WebSocket/gRPC，低代码可视化Dashboard）。</p>
+
+<h3>五、应用服务层——功能与关键技术</h3>
+
+<p><strong>功能定位：</strong>物联网的"价值呈现层"，直接面向最终用户和业务场景，将数据和智能转化为可感知的业务价值。关键支撑技术包括数据可视化（数字驾驶舱/GIS热力图/3D渲染）、移动应用开发（原生App/小程序/PWA）、多租户权限管理（RBAC/ABAC/SaaS多租户）、行业应用模板（智慧城市/工业智能制造/智慧农业等预置框架）。</p>
+
+<p>跨层能力：<strong>安全</strong>（设备安全启动→TLS/DTLS→平台访问控制→应用认证授权）和<strong>管理</strong>（设备生命周期→网络连接→平台运维→应用服务）贯穿四层全程。</p>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="1-2.html"><div class="lab">上一篇</div><div class="ttl">1.2 物联网概念</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="1-4.html"><div class="lab">下一篇</div><div class="ttl">1.4 物联网标准</div></a></div>
+</body>
+</html>

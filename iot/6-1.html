@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>6.1 典型物联网系统软件及平台 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip active" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">6.1</span><span class="ch-ttl">典型物联网系统软件及平台</span></div>
+<h2>典型物联网系统软件及平台</h2>
+
+<h3>一、鸿蒙系统（HarmonyOS）</h3>
+
+<p><strong>基本架构：</strong>鸿蒙系统是由华为开发的分布式全场景操作系统，采用"微内核+分布式软总线"的架构。与传统宏内核（Linux）不同，鸿蒙微内核仅包含最基础的线程调度和IPC通信，文件系统/网络协议栈/驱动等作为用户态服务运行，单个模块故障不影响整个系统。鸿蒙系统从下到上分为：</p>
+<ol>
+<li><strong>内核层：</strong>基于微内核架构（LiteOS / Linux双内核），支持资源受限设备（KB级）到高性能设备（GB级）统一调度。</li>
+<li><strong>系统服务层：</strong>分布式软总线是核心——将不同设备（手机/平板/手表/车机/智能屏/IoT设备）的硬件能力（摄像头/屏幕/扬声器/传感器等）虚拟化为一个"超级终端"的资源池，通过Wi-Fi/BLE等近场通信自动发现和组网，实现跨设备的硬件互助和资源共享。</li>
+<li><strong>框架层：</strong>提供多语言统一开发框架（ArkUI/Java/JS/C++），支持一次开发多端部署。</li>
+<li><strong>应用层：</strong>鸿蒙生态应用。</li>
+</ol>
+
+<p><strong>物联网应用：</strong>鸿蒙在智能家居领域具有独特优势：手机碰一碰自动连接家电（免手动配网）、多设备协同（通话在手机/音箱/车机间无缝流转、视频观影在手机和平板间无感切换）、超级终端控制中心一站式管理所有鸿蒙设备。在工业物联网方面，OpenHarmony开源版本支持工业网关、智能表计、矿用设备等场景。</p>
+
+<h3>二、主流物联网平台对比</h3>
+
+<table>
+<thead><tr><th>平台</th><th>厂商</th><th>核心架构</th><th>主要特色</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>OneNET</strong></td>
+<td>中国移动</td>
+<td>设备接入→数据存储→规则引擎→API开放四层</td>
+<td>运营商级IoT平台，支持NB-IoT/Cat.1/5G多种蜂窝接入。提供OneNET Studio（可视化开发）和OneNET View（数据大屏）。国内设备连接数最大之一。</td>
+</tr>
+<tr>
+<td><strong>华为云IoT</strong></td>
+<td>华为</td>
+<td>设备接入IoTDA+数据分析IoTA+边缘IoT Edge</td>
+<td>设备接入支持MQTT/CoAP/LwM2M/HTTP多协议，千万级并发。设备影子+数字孪生。IoT Edge边缘计算，云端模型一键下发。与鸿蒙深度集成。</td>
+</tr>
+<tr>
+<td><strong>百度天工</strong></td>
+<td>百度</td>
+<td>物接入IoTCore+物可视+TSDB+规则引擎+AI</td>
+<td>深度融合百度AI能力（语音/视觉/NLP），时序数据库TSDB专为IoT优化（高性能写入+降采样），物可视低代码Dashboard。在工业视觉检测和智能语音交互IoT方面有独特优势。</td>
+</tr>
+<tr>
+<td><strong>微软Azure IoT</strong></td>
+<td>微软</td>
+<td>IoT Hub+IoT Central+IoT Edge+Digital Twins</td>
+<td>PaaS级最完善IoT平台之一，IoT Hub实现设备双向通信（云到设备指令+C2D消息），支持X.509/TPM/SAS多种认证。Digital Twins定义IoT场景的语义模型（DTDL语言）。IoT Central为SaaS版本降低门槛。边缘方面Azure IoT Edge运行容器化模块。</td>
+</tr>
+<tr>
+<td><strong>AWS IoT Core</strong></td>
+<td>亚马逊</td>
+<td>IoT Core+Greengrass+SiteWise+Analytics+FleetWise(车联网)</td>
+<td>全球云IoT市场份额第一。IoT Core支持MQTT/MQTT over WSS/HTTPS协议，设备影子和规则引擎强大。Greengrass在边缘运行Lambda函数和ML推理。FleetWise是专用车联网数据平台。</td>
+</tr>
+</tbody>
+</table>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="5-4.html"><div class="lab">上一篇</div><div class="ttl">5.4 物联网面临的隐私威胁与保护</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="6-2.html"><div class="lab">下一篇</div><div class="ttl">6.2 物联网综合应用</div></a></div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7.3 毫米波与可见光通信 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip active" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">7.3</span><span class="ch-ttl">毫米波与可见光通信</span></div>
+<h2>毫米波与可见光通信</h2>
+
+<h3>一、毫米波通信（mmWave）</h3>
+
+<p><strong>技术特性：</strong>毫米波是指频率在30-300GHz（波长1-10mm）的电磁波，5G中主要使用24-52GHz频段（FR2）。相比sub-6GHz，毫米波具有以下优势与劣势：</p>
+
+<table>
+<thead><tr><th>维度</th><th>优势</th><th>劣势</th></tr></thead>
+<tbody>
+<tr><td><strong>带宽</strong></td><td>可用频谱资源极为丰富（数GHz连续带宽），实现Gbps以上峰值速率</td><td>—</td></tr>
+<tr><td><strong>传播特性</strong></td><td>波长短→天线尺寸极小→可组成大规模天线阵列（Massive MIMO 64-256根天线），波束赋形（Beamforming）精准定向</td><td>传播衰减极大（自由空间损耗与频率平方正比+氧吸收衰减+雨衰），穿透能力极弱（一张纸/一片树叶即可阻挡信号），基本只能视距（LoS）通信</td></tr>
+<tr><td><strong>空间分辨力</strong></td><td>波长短+大带宽→角度分辨力极高→可以实现厘米至毫米级高精度感知（5G通感一体化ISAC：通信信号同时用于雷达感知）</td><td>—</td></tr>
+</tbody>
+</table>
+
+<p><strong>物联网应用：</strong>毫米波的高带宽和低延迟使其在数据密集型IoT场景中不可替代——工业AI视觉质检中高清图像实时上传、AR远程协作的高速率低延迟需求（远程专家的第一视角高清视频流+标注双向交互）、车联网中车载高精传感器数据共享（毫米波雷达+摄像头原始数据帧级共享，需要Gbps级吞吐）。另外，通过ISAC通感一体化，5G/6G毫米波基站可以同时提供通信覆盖和厘米级环境感知（检测行人/车辆位置和速度），实现"网络即传感器"。</p>
+
+<p><strong>发展趋势：</strong>6G将使用更高的毫米波频段和亚太赫兹（100-300GHz）甚至太赫兹通信，进一步突破峰值速率（>100Gbps），但传播距离更短、波束管理更复杂。RIS（可重构智能表面）作为新兴技术可以反射/调相毫米波信号克服遮挡，将非视距（NLoS）转换为虚拟视距。</p>
+
+<h3>二、可见光通信（Li-Fi）</h3>
+
+<p><strong>技术原理：</strong>Li-Fi（Light Fidelity）利用LED灯的<strong>极高频率闪烁</strong>（>MHz，人眼不可见）来编码和传输数据。发射端将数据调制到LED的驱动电流上（OOK开关键控/OFDM），LED的高速明暗变化（亮=1、灭=0或不同亮度等级）被接收端的光电探测器（PD）捕捉还原为数据。LED兼顾<strong>照明和通信</strong>的双重功能。</p>
+
+<p><strong>技术优缺点：</strong></p>
+<table>
+<thead><tr><th>优点</th><th>缺点</th></tr></thead>
+<tbody>
+<tr><td><strong>超大带宽：</strong>可见光谱（~400THz-800THz）带宽远大于无线电频谱总和，理论速率可达100Gbps+</td><td><strong>严格视距：</strong>光无法穿透墙壁和不透明物体，信号被遮挡即刻中断</td></tr>
+<tr><td><strong>免频谱许可：</strong>可见光谱不受无线电管制，无需频谱授权</td><td><strong>上行链路困难：</strong>LED下行发射功率大，但移动终端的上行光电发射功率和散热受限，常需混合Wi-Fi（Li-Fi下行+Wi-Fi上行）</td></tr>
+<tr><td><strong>无电磁干扰：</strong>光波不干扰电子设备，适合电磁敏感环境（飞机/手术室/核磁共振室/石油化工厂）</td><td><strong>环境光干扰：</strong>日光/环境灯光产生直流和低频干扰</td></tr>
+<tr><td><strong>物理安全：</strong>光无法穿透墙壁→同一房间可重复使用频谱，信号天然物理隔离（隔壁房间无法窃听）</td><td><strong>移动性差：</strong>LED灯具固定，移动终端保持对准和切换复杂</td></tr>
+</tbody>
+</table>
+
+<p><strong>物联网应用前景：</strong>电磁敏感工业环境（化工厂/煤矿井下，射频设备可能引发火花爆炸→Li-Fi安全通信）、机舱/高铁车厢高速联网、水下光通信（蓝绿光在水中有相对低的衰减，"水下Wi-Fi"替代声学通信的高延迟低带宽）、室内高精度定位（LED光ID+定位，精度可达厘米级）。</p>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="7-2.html"><div class="lab">上一篇</div><div class="ttl">7.2 群智计算（群智感知）</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="7-4.html"><div class="lab">下一篇</div><div class="ttl">7.4 空间互联网</div></a></div>
+</body>
+</html>

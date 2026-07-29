@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2.1 传感器与传感网络 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+.card h4{color:var(--pri)}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip active" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">2.1</span><span class="ch-ttl">传感器与传感网络</span></div>
+<h2>传感器与传感网络</h2>
+
+<h3>一、传感器的概念</h3>
+<p>传感器是一种能够感知被测量（物理量、化学量、生物量等），并按照一定规律将其转换为可用输出信号（通常为电信号）的器件或装置。传感器是物联网感知层的核心元件，是实现物理世界到数字世界映射的第一环节。国际标准（IEC 60751等）中对传感器的通用定义为：能感受规定的被测量并按照一定规律转换成可用信号的器件或装置，通常由敏感元件和转换元件组成。</p>
+
+<p><strong>常见传感器分类及应用：</strong></p>
+<table>
+<thead><tr><th>类别</th><th>常见传感器</th><th>测量参数</th><th>典型应用</th></tr></thead>
+<tbody>
+<tr><td>物理传感器</td><td>MEMS加速度计/陀螺仪/磁力计</td><td>加速度、角速度、方向</td><td>智能手机姿态感知、汽车ESP</td></tr>
+<tr><td>温度传感器</td><td>热敏电阻、热电偶、RTD铂电阻</td><td>温度</td><td>智能家居温度控制、工业炉温监测</td></tr>
+<tr><td>压力传感器</td><td>压阻式/电容式/压电式</td><td>压力、液位</td><td>汽车胎压监控（TPMS）、工业管道</td></tr>
+<tr><td>光学传感器</td><td>CMOS/CCD图像传感器、红外传感器</td><td>光强、图像、红外辐射</td><td>智能摄像头、红外人体检测</td></tr>
+<tr><td>气体传感器</td><td>电化学/半导体/催化燃烧</td><td>CO2、PM2.5、甲醛、VOC</td><td>空气质量监测、工业安全</td></tr>
+<tr><td>声学传感器</td><td>MEMS麦克风、超声波传感器</td><td>声音、距离</td><td>语音助手、倒车雷达</td></tr>
+</tbody>
+</table>
+
+<h3>二、主要传感技术分类</h3>
+<ul>
+<li><strong>按工作原理：</strong>电阻式、电容式、电感式、压电式、光电式、热电式、霍尔效应式等。</li>
+<li><strong>按被测量：</strong>温度、压力、流量、位移、速度、加速度、湿度、光照、气体浓度、生物特征等。</li>
+<li><strong>按输出信号：</strong>模拟传感器（连续信号，如0-5V电压输出）和数字传感器（离散信号，I2C/SPI/UART数字接口）。</li>
+<li><strong>按能量关系：</strong>有源传感器（需要外部激励，如电阻应变片需要桥路供电）和无源传感器（自身将物理量转换为电能，如热电偶、压电传感器）。</li>
+</ul>
+
+<h3>三、传感网络（WSN）</h3>
+<p><strong>定义：</strong>传感网络是由大量部署在监测区域内的廉价微型传感器节点组成，通过无线通信方式形成的多跳自组织网络系统。其目的是协作感知、采集和处理网络覆盖区域内被感知对象的信息，并发送给观察者。</p>
+
+<p><strong>传感网络主要构成：</strong></p>
+<table>
+<thead><tr><th>组件</th><th>功能</th><th>典型选型</th></tr></thead>
+<tbody>
+<tr><td><strong>传感器模块</strong></td><td>感知物理量并转换为电信号，含信号调理电路（放大/滤波/ADC）</td><td>MEMS传感器、温度/湿度探头等</td></tr>
+<tr><td><strong>微处理器模块</strong></td><td>数据处理、协议栈运行、功耗管理、任务调度</td><td>ARM Cortex-M系列、RISC-V、TI CC2530等</td></tr>
+<tr><td><strong>通信芯片/射频模块</strong></td><td>无线收发数据，实现节点间通信</td><td>IEEE 802.15.4射频芯片（CC2420、AT86RF230）</td></tr>
+<tr><td><strong>节点操作系统</strong></td><td>轻量级操作系统，管理硬件资源、网络协议栈</td><td>TinyOS（事件驱动，nesC语言）、Contiki（C语言、IPv6支持）、FreeRTOS</td></tr>
+<tr><td><strong>能量供应模块</strong></td><td>电池或能量采集，包含电源管理IC（DC-DC/LDO）</td><td>锂亚电池（高能量密度）、太阳能+超级电容</td></tr>
+</tbody>
+</table>
+
+<p><strong>传感网络设计主要考虑因素：</strong></p>
+<ul>
+<li><strong>能耗效率：</strong>是最核心的设计约束——传感器节点通常靠电池供电且难以更换，需从硬件选型（低功耗MCU）、通信协议（占空比循环/Duty Cycling）、路由算法（能量感知路由）等多层面优化。</li>
+<li><strong>网络拓扑与规模：</strong>决定路由策略和MAC协议选择。星型（简单、中心节点瓶颈）、树型（扩展性好）、Mesh型（自愈能力强）。</li>
+<li><strong>覆盖与连通性：</strong>确保每个监测点至少被k个节点覆盖（k-覆盖），网络不出现分割。</li>
+<li><strong>数据速率与延迟：</strong>根据应用确定——环境监测可容忍秒级延迟，工业控制要求毫秒级。</li>
+<li><strong>鲁棒性与容错：</strong>节点可能因能量耗尽、物理损坏或环境干扰而失效，网络需具备一定的自愈和容错能力。</li>
+<li><strong>成本：</strong>大量部署时单节点成本必须低（理想目标<1美元/节点）。</li>
+<li><strong>安全：</strong>防止窃听、篡改、节点劫持和拒绝服务攻击。</li>
+</ul>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="1-5.html"><div class="lab">上一篇</div><div class="ttl">1.5 物联网发展趋势</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="2-2.html"><div class="lab">下一篇</div><div class="ttl">2.2 自动标识技术</div></a></div>
+</body>
+</html>

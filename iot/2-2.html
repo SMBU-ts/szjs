@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2.2 自动标识技术 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+.card h4{color:var(--pri)}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip active" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">2.2</span><span class="ch-ttl">自动标识技术</span></div>
+<h2>自动标识技术</h2>
+
+<h3>一、常见识别技术概览</h3>
+
+<table>
+<thead><tr><th>技术</th><th>原理</th><th>特点</th><th>典型应用</th></tr></thead>
+<tbody>
+<tr><td><strong>条形码</strong></td><td>光学反射率差异编码信息</td><td>一维（几十字符）、二维（数千字符），成本极低</td><td>零售POS、物流追踪、票据</td></tr>
+<tr><td><strong>RFID</strong></td><td>射频电磁波耦合传输</td><td>非接触、批量读取、穿透性强、可远距离</td><td>仓储出入库、ETC停车、畜牧业</td></tr>
+<tr><td><strong>磁识别</strong></td><td>磁条/磁卡存储信息</td><td>成本低但容量小、易磨损</td><td>银行卡磁条、门禁卡</td></tr>
+<tr><td><strong>IC集成电路卡</strong></td><td>嵌入式芯片（接触/非接触）</td><td>安全性高、可运算（CPU卡）</td><td>银行卡（EMV芯片）、身份证、SIM卡</td></tr>
+</tbody>
+</table>
+
+<h3>二、条形码识读原理与应用</h3>
+
+<p><strong>一维条形码：</strong>由一系列平行排列、宽度不同的黑白条纹组成。基本识读原理：光源照射→条形码反射光（白条反光强、黑条反光弱）→光电传感器将反射光强弱转换为模拟电信号→整形电路转换为数字脉冲信号（宽脉冲=宽条）→译码器按编码规则（如EAN-13、Code-128、UPC-A）解码为字符。常用编码：EAN-13/UPC-A用于零售、Code-128用于物流、Code-39用于工业。纠错能力弱，通常依赖校验位。</p>
+
+<p><strong>二维条形码：</strong>水平垂直两个方向存储信息，容量从几十到数千字符。QR码（Quick Response Code，日本Denso Wave公司）最典型：三个"回"字形定位图案+校正图形+格式信息+数据区域。识读原理：CMOS图像传感器采集→图像预处理（灰度化、二值化）→定位图案检测→透视变换校正→按编码规则（Reed-Solomon纠错码）解码。QR码四个纠错等级：L（7%）、M（15%）、Q（25%）、H（30%）。Data Matrix常用于工业零部件标记，PDF417常用于证件（驾照、登机牌）。</p>
+
+<h3>���、IC卡技术与特点</h3>
+
+<p>IC卡（Integrated Circuit Card）内部嵌有集成电路芯片。经历三个阶段演变：<strong>存储卡</strong>（仅存储数据，安全性低，已淘汰）→<strong>逻辑加密卡</strong>（有简单密码保护，如MIFARE Classic S50，广泛用于门禁/公交）→<strong>CPU卡</strong>（内嵌微处理器和操作系统COS，支持DES/AES/RSA加密运算，如金融IC卡EMV标准、第二代居民身份证）。</p>
+
+<p><strong>接触式IC卡</strong>（ISO/IEC 7816标准，通过金属触点供电通信）vs <strong>非接触式IC卡</strong>（ISO/IEC 14443标准，13.56MHz电磁感应耦合，如Type A MIFARE、Type B身份证）。NFC是IC卡技术的进一步演进，融合阅读器模式+卡模拟模式+点对点模式。</p>
+
+<h3>四、数字图像识别与OCR</h3>
+
+<p><strong>OCR光学字符识别：</strong>将图像中的文字区域（印刷体或手写体）转换为计算机可编辑的文本字符。经典流程：图像预处理（灰度化→二值化→去噪→倾斜校正）→版面分析（文字区域定位分割）→字符分割→特征提取（如HOG特征、CNN特征）→字符分类（传统ML如SVM、现代深度学习如CRNN+CTC损失函数）→后处理（语言模型/词典校验纠错）。应用：车牌识别、证件信息提取、票据数字化。</p>
+
+<h3>五、RFID射频识别技术</h3>
+
+<p><strong>概念与特点：</strong>RFID利用射频信号通过空间耦合（电磁场或电磁波）实现无接触信息传递，达到自动识别目的。核心特点包括：非接触识别（无需光学可见）、批量读取（同时读取数百标签）、穿透性强（可穿过包装/尘土/油污）、数据可更新（相比条码是静态的）、环境适应性强（耐高温潮湿）。</p>
+
+<p><strong>RFID系统组成：</strong></p>
+<ol>
+<li><strong>电子标签（Tag）：</strong>由耦合元件和芯片组成，每个标签有全球唯一的电子编码（TID或EPC）。无源标签靠阅读器电磁场供电，识别距离从几厘米到十几米；有源标签内置电池，识别距离可达百米。</li>
+<li><strong>阅读器（Reader）：</strong>发射射频信号激活标签并接收回传数据，通过有线/无线接口与后端信息系统（中间件、数据库）连接。</li>
+<li><strong>天线（Antenna）：</strong>在标签和阅读器间传递射频信号。</li>
+<li><strong>中间件（Middleware）：</strong>过滤、聚合阅读器原始数据，减少冗余并向上层应用提供标准化接口。</li>
+</ol>
+
+<p><strong>工作原理：</strong>阅读器通过天线发射特定频率的射频信号→标签进入磁场后（电感耦合，近场，适用于LF/HF）或电磁波束范围内（电磁反向散射，远场，适用于UHF/微波）→无源标签从射频信号中获取能量激活芯片→标签将存储的ID/数据调制后反向散射回阅读器→阅读器解调解码后传给后端系统。</p>
+
+<p><strong>RFID分类：</strong>按供电方式（无源/有源/半无源），按工作频率（LF 125kHz动物识别/门禁、HF 13.56MHz支付/图书馆/NFC、UHF 860-960MHz物流/仓储/ETC、微波2.45GHz高速移动识别），按数据读写能力（只读/一次写入多次读/可读写）。</p>
+
+<h3>六、EPC电子产品代码</h3>
+
+<p><strong>概念：</strong>EPC（Electronic Product Code）是由EPCglobal（GS1旗下）制定的基于RFID的全球唯一的物品编码体系，旨在为每一件单品赋予唯一标识，替代UPC/EAN条形码的品类级标识。</p>
+
+<p><strong>EPC系统结构：</strong></p>
+<ol>
+<li><strong>EPC编码：</strong>位长可变（64位/96位/256位），由标头（版本号）+ EPC管理者编号（厂商识别）+ 对象分类编号（产品类型）+ 序列号（单品唯一ID）组成。如典型的SGTIN-96格式可唯一标识每一件零售商品。</li>
+<li><strong>射频识别系统：</strong>RFID标签和阅读器，负责读取EPC编码。</li>
+<li><strong>信息网络系统：</strong>ONS（对象命名服务，类似DNS，将EPC映射到存储该物品信息的PML服务器地址）+ PML（物理标记语言，基于XML，描述物品的属性和状态）+ EPCIS（EPC信息服务，追踪物品流转历史和当前状态的事件仓库）。</li>
+</ol>
+
+<p><strong>工作原理：</strong>阅读器读取RFID标签中的EPC编码→通过本地ONS解析器查询ONS根服务器→逐级解析获取存储该物品PML信息的具体服务器URL→访问EPCIS获取物品的生产/物流/销售等全生命周期信息。</p>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="2-1.html"><div class="lab">上一篇</div><div class="ttl">2.1 传感器与传感网络</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="2-3.html"><div class="lab">下一篇</div><div class="ttl">2.3 位置感知技术</div></a></div>
+</body>
+</html>

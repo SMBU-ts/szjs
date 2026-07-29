@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>6.2 物联网综合应用 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip active" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">6.2</span><span class="ch-ttl">物联网综合应用</span></div>
+<h2>物联网综合应用</h2>
+
+<h3>一、智能家居</h3>
+<p><strong>概念与特点：</strong>以住宅为平台，利用物联网、AI、云计算等技术将家居设备（照明/空调/安防/影音/厨电）互联互通，实现远程控制、自动化场景联动和AI主动服务。特点：设备种类繁多（照明/温控/安防/家电/窗帘/门锁）、通信技术多样（Wi-Fi/BLE/Zigbee/Thread/Matter）、强调用户体验（自然语音交互/AI场景推荐）和生态平台（米家/华为HiLink/Apple HomeKit/Amazon Alexa生态）。</p>
+<p><strong>系统架构：</strong>终端设备→家庭网关/智能音箱（本地控制中枢+互联网桥接）→云平台→手机App+语音助手。Matter标准正推动跨生态互操作。</p>
+<p><strong>关键IoT技术：</strong>多协议网关（Zigbee/BLE→Wi-Fi转换）、语音识别与NLP（远场麦克风阵列+云端NLU）、边缘AI（本地人脸/声音/场景识别）、设备自发现与自动配网。</p>
+
+<h3>二、智能制造</h3>
+<p><strong>概念与特点：</strong>将物联网技术深度融入制造业全流程——从原材料入库、生产加工、质量检测到设备运维和供应链管理。核心是通过生产设备的互联互通和数据驱动，实现柔性生产、质量可追溯、预测性维护和能效优化。特点：高实时性、高可靠性、安全隔离严苛。通信技术：工业以太网（Profinet/EtherCAT/CC-Link IE TSN）+工业无线（5G专网/Wi-Fi 6/WirelessHART）。</p>
+<p><strong>系统架构：</strong>OT层（产线设备PLC/传感器/机器人）→工业网关（协议转换，Modbus→MQTT/OPC UA）→边缘层（MES+边缘AI质检/预测）→云平台（ERP+数字孪生+全局优化）。<strong>关键IoT技术：</strong>OPC UA统一工业数据模型、TSN时间敏感网络保证确定性低延迟、5G专网（uRLLC+网络切片）、工业机器视觉AI质检、数字孪生仿真、预测性维护。</p>
+
+<h3>三、智慧能源</h3>
+<p><strong>概念与特点：</strong>利用IoT对能源生产（发电）、输送（电网）、分配和消费（用电）全链条进行精细化监测和智能优化。核心目标是提高能源效率、促进新能源消纳和实现"双碳"。智能电网+分布式能源（光伏/风电/储能）+需求响应（电力用户根据电价灵活调整用电）是三大支柱。特点：海量感知点（全网数百万智能电表+PMU同步相量测量）、双向功率流和双向信息流。</p>
+<p><strong>关键IoT技术：</strong>智能电表（AMI高级量测体系，NB-IoT/HPLC电力线载波双模通信）、电力物联网（输变电设备在线监测、无人机巡线）、微电网能量管理、虚拟电厂VPP（聚合分布式储能和可调负荷统一调度）、AI负荷预测和发电预测。</p>
+
+<h3>四、智能交通</h3>
+<p><strong>概念与特点：</strong>将人、车、路、环境通过IoT技术连接为一体，实现交通安全提升、拥堵缓解和出行体验优化。覆盖城市交通管理、公共交通、高速公路和停车等场景。V2X车路协同是智能交通的核心——车辆与信号灯/路侧设备/云端平台进行实时信息交互：红绿灯倒计时推送、盲区/异常事件预警、绿波车速引导优先通行。技术路线方面，中国坚定走C-V2X（蜂窝车联网）路线，从LTE-V2X向5G-V2X演进。</p>
+<p><strong>关键IoT技术：</strong>C-V2X PC5直连通信（车车/车路之间不需基站即可通信，延迟<20ms）、5G uRLLC（远程驾驶和协同决策的超可靠通信）、AI自适应交通信号控制、地磁/视频多模车辆检测、路侧RSU+边缘计算节点。</p>
+
+<h3>五、智慧农业</h3>
+<p><strong>概念与特点：</strong>将IoT传感、无人机遥感、AI分析和自动控制技术应用于农林牧渔，实现精准种植、智能灌溉、病虫害预警、畜牧监测和水产养殖管理。特点：环境复杂（室外/大棚/水面/山地）、广域覆盖（大田数百亩到数千亩）、供电难、要求长期无人值守并耐候（防尘防水/耐温）。</p>
+<p><strong>关键IoT技术：</strong>LoRaWAN田间长距离组网（网关覆盖2-15km，配合太阳能供电）、土壤多参数传感器（温湿度/EC电导率/pH值/NPK养分）、无人机多光谱遥感（NDVI植被指数监测长势和病虫害）、NB-IoT畜牧耳标（定位+体温+运动量监测）、智能灌溉控制（电磁阀/水泵自动联动）、AI病虫害图像识别。</p>
+
+<h3>六、智能物流</h3>
+<p><strong>概念与特点：</strong>利用RFID/NFC/条码、GPS/北斗定位、传感器和环境监测等IoT技术对物流全过程（仓储→运输→配送）实现货物的实时追踪、状态监控和流程自动化。特点：全链条可视化（货物从出厂到签收全程可查位置和环境）、多节点接力追踪、需要跨企业（厂商/物流/快递/客户）信息共享。</p>
+<p><strong>关键IoT技术：</strong>UHF RFID批量盘库（叉车/传送带读取、库存自动盘点）、北斗/GPS+LBS多模实时定位（集装箱/冷链车位置追踪）、NB-IoT/LTE Cat.1物流追踪器（温湿度+震动+光感）、AGV/AMR仓储搬运机器人（激光SLAM+二维码导航）、无人配送车/无人机末端配送。</p>
+
+<h3>七、智慧医疗</h3>
+<p><strong>概念与特点：</strong>通过可穿戴设备、医疗传感器和医院IoT系统，将医疗服务从院内延伸到院外，实现从"生病就医"到"全生命周期健康管理"的转变。覆盖远程监护、慢病管理、急救协同、院内资产管理、药品追溯等场景。特点：数据安全与隐私合规要求极高（HIPAA/个人信息保护法）、生命攸关的可靠性要求（医疗设备不能断网或误报）、需要与医院HIS/EMR等系统集成。</p>
+<p><strong>关键IoT技术：</strong>可穿戴健康监测（PPG心率/血氧/ECG心电图/血糖CGM），BLE连接+手机网关上传；院内RTLS实时定位（UWB/Wi-Fi/BLE定位患者/医生/贵重设备）；智能输液泵联网（输液滴速/余量实时监控+用药安全拦截）；远程医疗（5G+AR眼镜远程指导基层医生手术）；药品冷链IoT（温度全程记录+异常追溯）。</p>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="6-1.html"><div class="lab">上一篇</div><div class="ttl">6.1 典型物联网系统软件及平台</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="7-1.html"><div class="lab">下一篇</div><div class="ttl">7.1 无源感知网络</div></a></div>
+</body>
+</html>

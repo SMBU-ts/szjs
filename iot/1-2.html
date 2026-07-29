@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.2 物联网概念 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+.card h4{color:var(--pri);margin-bottom:8px}
+.card.gr h4{color:#064e3b}
+.timeline{position:relative;padding-left:30px;margin:18px 0}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:3px;background:var(--pri);border-radius:2px}
+.timeline li{position:relative;margin-bottom:14px;list-style:none}
+.timeline li::before{content:'';position:absolute;left:-28px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--pri);border:2px solid #fff;box-shadow:0 0 0 2px var(--pri)}
+.ti-yr{font-weight:700;color:var(--pri)}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip active" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">1.2</span><span class="ch-ttl">物联网概念</span></div>
+<h2>物联网概念</h2>
+
+<h3>一、物联网的核心特点</h3>
+
+<table>
+<thead><tr><th style="width:16%">特点</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><strong>全面感知</strong></td><td>利用RFID、传感器、二维码、摄像头等随时随地获取物体信息。感知手段多样化、精度和实时性不断提高。感知是物联网的"数据入口"。</td></tr>
+<tr><td><strong>可靠传输</strong></td><td>通过电信网、互联网、无线传感网等多种网络的融合，将物体信息实时准确地传递。需要处理异构网络的互通和QoS保障问题。</td></tr>
+<tr><td><strong>智能处理</strong></td><td>利用云计算、大数据、AI等技术对海量感知数据进行处理分析，实现智能决策和控制。智能处理是物联网的"价值引擎"。</td></tr>
+<tr><td><strong>万物互联</strong></td><td>连接对象从人-人扩展到人-物、物-物。物联网的核心突破在于将连接边界拓展到物理世界的一切物体。</td></tr>
+<tr><td><strong>实时交互</strong></td><td>对物理世界变化的实时感知和响应。物联网最终要实现对物理过程的闭环控制，实时性是关键。</td></tr>
+<tr><td><strong>泛在化</strong></td><td>物联网服务无处不在、无时不在——任何时间、任何地点、任何物体都能接入。是泛在网络思想的具体体现。</td></tr>
+</tbody>
+</table>
+
+<h3>二、物联网与互联网的关系</h3>
+
+<table>
+<thead><tr><th style="width:16%">维度</th><th>互联网</th><th>物联网</th></tr></thead>
+<tbody>
+<tr><td><strong>连接对象</strong></td><td>计算机/手机/服务器等IT设备</td><td>传感器、执行器、各种物理物体</td></tr>
+<tr><td><strong>数据来源</strong></td><td>人工生成（网页/邮件/文件等）</td><td>自动采集（传感器自动感知物理世界）</td></tr>
+<tr><td><strong>核心功能</strong></td><td>信息共享和通信</td><td>感知、传输、智能处理与控制</td></tr>
+<tr><td><strong>终端数量</strong></td><td>几十亿级</td><td>百亿至千亿级</td></tr>
+<tr><td><strong>实时性要求</strong></td><td>通常较低</td><td>场景差异大：从"分钟级"到"毫秒级"</td></tr>
+<tr><td><strong>功耗要求</strong></td><td>通常有稳定供电</td><td>很多终端需电池供电，要求超低功耗</td></tr>
+<tr><td><strong>数据量</strong></td><td>GB/PB级</td><td>ZB（泽字节）级，海量时序数据</td></tr>
+</tbody>
+</table>
+
+<p>两者的关系可以概括为：物联网是互联网的延伸和应用深化，互联网是物联网的核心网络基础之一。物联网不是在互联网之外另建一个网络，而是在互联网的基础上，向物理世界延伸其感知和控制能力。</p>
+
+<h3>三、物联网与传感网的关系</h3>
+
+<p>传感网（WSN，无线传感器网络）是指由大量具有感知和通信能力的传感器节点组成的自组织网络。二者关系如下：</p>
+
+<p><strong>传感网是物联网的重要感知基础设施之一</strong>，但不是全部。传感网侧重于"感知+短距离组网"，而物联网还包括RFID标识系统、卫星定位系统、图像采集、长距离广域网通信和平台智能处理等多个层面的技术集成。可以将传感网看作物联网感知层的重要组成部分。</p>
+
+<p>从演进路径看：WSN → 传感网+ RFID+互联网 = 物联网。传感网是技术基石，物联网是更广泛的概念框架和应用平台。</p>
+
+<table>
+<thead><tr><th>维度</th><th>传感网（WSN）</th><th>物联网（IoT）</th></tr></thead>
+<tbody>
+<tr><td><strong>核心能力</strong></td><td>感知 + 短距组网</td><td>感知 + 传输 + 处理 + 执行</td></tr>
+<tr><td><strong>网络架构</strong></td><td>多为自组织局域/个域网</td><td>融合多种网络的广域架构</td></tr>
+<tr><td><strong>典型规模</strong></td><td>数百至数万节点</td><td>百亿级终端</td></tr>
+<tr><td><strong>技术焦点</strong></td><td>能耗优化、路由、数据汇聚</td><td>全栈系统：感知→网络→平台→应用</td></tr>
+</tbody>
+</table>
+
+<h3>四、物联网与泛在网络的关系</h3>
+
+<p>泛在网络来源于ITU的5W愿景：任何人在任何时间、任何地点，可以与任何对象进行任何形式的通信。泛在网络是比物联网更高层级的愿景概念，物联网是实现泛在网络的关键一步：物联网将连接从"人"扩展到"物"，是实现无所不在的连接的关键环节。</p>
+
+<p>概念层次关系（从具体到抽象）：传感器网络 → 物联网 → 泛在网络。物联网是泛在网络在"物"维度的实现路径，泛在网络是物联网发展的终极图景。</p>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="1-1.html"><div class="lab">上一篇</div><div class="ttl">1.1 物联网起源与发展</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="1-3.html"><div class="lab">下一篇</div><div class="ttl">1.3 物联网体系架构</div></a></div>
+</body>
+</html>

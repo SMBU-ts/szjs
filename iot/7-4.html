@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7.4 空间互联网 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip active" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">7.4</span><span class="ch-ttl">空间互联网</span></div>
+<h2>空间互联网</h2>
+
+<h3>一、空间互联网的概念</h3>
+
+<p>空间互联网是指利用<strong>卫星星座</strong>（特别是低轨卫星LEO）、高空平台（HAPS，如平流层飞艇/太阳能无人机）和其他空间资产构建的<strong>全球覆盖</strong>的宽带互联网基础设施。与传统仅靠地面网络（光纤+蜂窝基站）不同，空间互联网从"第三维度"（近地轨道-平流层）提供补充或替代的网络接入，实现"地球表面任何位置无盲区"的宽带覆盖。</p>
+
+<p><strong>与物联网的关系：</strong>传统物联网严重依赖地面蜂窝/LPWAN网络，在海洋、沙漠、极地、深山、大范围农村等无信号区域存在"连接空白"。空间互联网为物联网提供了全球无盲区的连接保障——远洋货轮的集装箱追踪、极地科考站的环境监测、跨国输油管线的安保感知、全球航空器的健康监测等，都依赖卫星IoT来实现。</p>
+
+<h3>二、发展现状</h3>
+
+<table>
+<thead><tr><th>项目</th><th>国家/企业</th><th>规模</th><th>特色</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>Starlink（星链）</strong></td><td>SpaceX（美国）</td>
+<td>已在轨5000+颗LEO卫星，规划超4万颗</td>
+<td>最大商用LEO星座。相位阵列天线+激光星间链路。已推出Starlink IoT服务（Direct to Cell计划通过星上eNodeB让普通手机直接连卫星，免专用终端）</td></tr>
+<tr>
+<td><strong>天启星座</strong></td><td>中国</td>
+<td>38颗LEO卫星组网（规划中）</td>
+<td>专门面向物联网的低轨窄带卫星星座。终端极低功耗（百mW级），支持短数据（百字节级）DCS数据采集系统，用于远海/荒漠/无人区的传感器数据回传</td></tr>
+<tr>
+<td><strong>行云工程</strong></td><td>中国航天科工</td>
+<td>80颗LEO卫星（规划）</td>
+<td>中国首个天基物联网星座。窄带双向通信，支持全球覆盖的物联网数据采集和指令下发</td></tr>
+<tr>
+<td><strong>AST SpaceMobile</strong></td><td>美国</td>
+<td>超大相控阵天线LEO卫星</td>
+<td>让普通4G/5G手机无需修改硬件即可直接连接卫星，实现太空"基站"</td></tr>
+<tr>
+<td><strong>OneWeb</strong></td><td>英国/印度</td>
+<td>在轨600+颗LEO卫星</td>
+<td>政府/企业宽带+回传</td></tr>
+</tbody>
+</table>
+
+<h3>三、空间互联网的前景与挑战</h3>
+
+<p><strong>前景：</strong>空间互联网与地面5G/6G的融合将形成"空天地一体化"网络——3GPP NTN（非地面网络）标准（Rel.17起）将卫星通信原生纳入5G协议栈，意味着未来一台5G手机/5G IoT模块可以在地面基站和卫星之间无缝切换。空间互联网将使物联网真正实现"全球、全天候、全地形"覆盖——这是地面网络永远无法单独达成的目标。6G规划中已经将"空天地一体化"列为六大关键能力之一。</p>
+
+<p><strong>挑战：</strong></p>
+<ul>
+<li><strong>容量密度远低于地面：</strong>即使4万颗Starlink卫星，总容量在地球表面的密度远不如一个城市的地面蜂窝网络。卫星IoT主要服务低速率、低数据量的广域广覆盖场景。</li>
+<li><strong>延迟：</strong>LEO的传播延迟（星-地约3-6ms），通过星间激光链路多跳会增加延迟。虽然远好于GEO（250ms），但仍高于地面光纤。</li>
+<li><strong>空间碎片与轨道拥堵：</strong>大规模星座增加轨道拥挤和碰撞风险，引发可持续发展担忧。ITU和国际监管体系面临挑战。</li>
+<li><strong>终端天线和功耗：</strong>低轨卫星高速移动引入多普勒频移，手持终端的相控阵天线或电调天线带来成本和功耗压力。NTN标准中针对这些做了补偿设计。</li>
+<li><strong>频谱协调：</strong>卫星和地面网络共用频谱需要精细的干扰管理。</li>
+</ul>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="7-3.html"><div class="lab">上一篇</div><div class="ttl">7.3 毫米波与可见光通信</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><span></span></div>
+</body>
+</html>

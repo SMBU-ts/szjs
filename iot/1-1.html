@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.1 物联网起源与发展 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+.card h4{color:var(--pri);margin-bottom:8px}
+.card.gr h4{color:#064e3b}
+.timeline{position:relative;padding-left:30px;margin:18px 0}
+.timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:3px;background:var(--pri);border-radius:2px}
+.timeline li{position:relative;margin-bottom:14px;list-style:none}
+.timeline li::before{content:'';position:absolute;left:-28px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--pri);border:2px solid #fff;box-shadow:0 0 0 2px var(--pri)}
+.ti-yr{font-weight:700;color:var(--pri)}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip active" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">1.1</span><span class="ch-ttl">物联网起源与发展</span></div>
+<h2>物联网起源与发展</h2>
+
+<h3>一、物联网概念的起源背景与演进历程</h3>
+
+<p>物联网的思想源头可以追溯到20世纪90年代。1991年，施乐帕洛阿尔托研究中心（Xerox PARC）的马克·魏瑟（Mark Weiser）在《Scientific American》上发表《The Computer for the 21st Century》一文，首次提出"泛在计算"理念，认为最深刻的技术是那些融入日常生活、不为人所察觉的技术。这为后来的物联网奠定了哲学基础。</p>
+
+<p>1995年，比尔·盖茨在《未来之路》中预言了智能家居和互联设备的普及。1998年，英国工程师凯文·艾什顿在麻省理工学院Auto-ID中心提出了用RFID标签实现对物品的自动识别和追踪，成为物联网早期的技术雏形。</p>
+
+<p>"物联网"一词在1999年由凯文·艾什顿正式提出。2005年，国际电信联盟发布《ITU互联网报告2005：物联网》，首次从全球视角系统论述物联网概念。2008-2009年，全球互联设备数量首超人口，标志着物联网的规模化起航。此后，随着云计算、大数据、人工智能、5G等技术成熟，物联网进入快速发展期。</p>
+
+<h3>二、物联网的常见定义及比较</h3>
+
+<table>
+<thead><tr><th>来源</th><th>定义要点</th><th>侧重点</th></tr></thead>
+<tbody>
+<tr><td><strong>ITU-T Y.2060（国际电信联盟）</strong></td><td>物联网是信息社会的全球基础设施，通过物理和虚拟的"物"的互联，实现高级服务。</td><td>顶层视角，强调"全球基础设施"定位</td></tr>
+<tr><td><strong>欧盟委员会</strong></td><td>物联网是互联网从计算机和移动设备向日常物品的延伸，使物品具有数字身份和通信能力。</td><td>互联网延伸视角</td></tr>
+<tr><td><strong>IEEE</strong></td><td>物联网是一个自配置、自适应的复杂网络系统，将"物"通过标准通信协议互联。</td><td>工程技术视角，强调系统性和标准化</td></tr>
+<tr><td><strong>GB/T 33745-2017（中国国家标准）</strong></td><td>通过感知设备，按约定协议将物与网络连接，实现信息交换和通信，以实现智能识别、定位、跟踪、监控和管理的网络。</td><td>应用功能视角，强调感知与管理闭环</td></tr>
+<tr><td><strong>IETF</strong></td><td>物联网是互联网协议套件（TCP/IP）向低功耗、资源受限设备的扩展，关注网络层和应用层协议的适配。</td><td>协议视角，聚焦技术实现路径</td></tr>
+</tbody>
+</table>
+
+<h3>三、主要国家或组织的物联网战略规划</h3>
+
+<table>
+<thead><tr><th style="width:14%">国家/地区</th><th style="width:22%">核心战略/计划</th><th>侧重点</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>美国</strong></td>
+<td>《美国创新战略》、国家制造创新网络（NNMI）、工业互联网联盟（IIC）</td>
+<td>以企业创新为驱动，聚焦工业互联网、国防安全。美国国防部将IoT作为未来战场感知基础设施。NIST制定IoT网络安全框架。企业侧：Amazon AWS IoT、Microsoft Azure IoT占全球云IoT平台主导地位</td>
+</tr>
+<tr>
+<td><strong>中国</strong></td>
+<td>"感知中国"（2009）、《物联网"十二五"发展规划》、物联网新型基础设施建设三年行动计划、"十四五"数字经济规划</td>
+<td>政府主导、政策驱动。从无锡"感知中国"中心起锚，以"新型基础设施"定位物联网，强调标准制定、产业生态和规模应用。NB-IoT基站数全球第一，5G+工业互联网融合应用领先</td>
+</tr>
+<tr>
+<td><strong>欧盟</strong></td>
+<td>欧盟物联网行动计划（2009）、Horizon 2020/Horizon Europe、IoT-EPI、GAIA-X</td>
+<td>强调隐私保护（GDPR约束下的IoT）、绿色可持续、数据主权和互操作。IoT-A项目产出物联网架构参考模型（ARM），oneM2M标准由ETSI推动</td>
+</tr>
+<tr>
+<td><strong>日本</strong></td>
+<td>i-Japan战略、Society 5.0、Connected Industries</td>
+<td>将物联网融入超智能社会愿景，关注老龄化社会应用（智慧养老、远程医疗）。依托机器人技术优势推动IoT与机器人融合。侧重数据驱动和实用主义</td>
+</tr>
+</tbody>
+</table>
+
+<h3>四、纳入物联网的"物"的���本条件</h3>
+
+<div class="card gr">
+<h4>一个物理实体要被纳入物联网范畴，通常需满足以下条件：</h4>
+<ol>
+<li><strong>具备唯一标识：</strong>能够被唯一识别和寻址（如IP地址、RFID标签编码、EID等）。</li>
+<li><strong>具备感知能力：</strong>能够感知自身状态或周围环境信息（温度、位置、运动等），这是区别于传统互联网终端的关键。</li>
+<li><strong>具备通信能力：</strong>能够通过有线或无线方式与其他设备或网络进行数据交换，这是"联"的基础。需要支持相应通信协议。</li>
+<li><strong>具备一定的信息处理能力：</strong>至少包含基本的MCU，能够对采集的数据进行初步处理和协议适配。即使是被动感知端也需要有处理单元协调。</li>
+<li><strong>具备执行能力：</strong>能够对外部指令作出响应或对物理世界施加影响。执行器是物联网区别于单纯监测系统的关键。</li>
+<li><strong>能源供给：</strong>有可靠的能源供应方式（电池、电网、能量采集等），能源问题是物联网规模化部署的核心挑战之一。</li>
+<li><strong>安全能力：</strong>具备基本的安全机制（身份认证、数据加密等），防止被恶意控制和数据泄露。</li>
+</ol>
+</div>
+
+
+</main>
+<div class="colfoot"><span></span><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="1-2.html"><div class="lab">下一篇</div><div class="ttl">1.2 物联网概念</div></a></div>
+</body>
+</html>

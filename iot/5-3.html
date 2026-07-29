@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5.3 物联网面临的安全威胁与管理 · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip active" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">5.3</span><span class="ch-ttl">物联网面临的安全威胁与管理</span></div>
+<h2>物联网面临的安全威胁与管理</h2>
+
+<h3>一、无线通信面临的安全威胁</h3>
+
+<table>
+<thead><tr><th>威胁类型</th><th>攻击描述</th><th>影响的具体通信技术</th></tr></thead>
+<tbody>
+<tr>
+<td><strong>窃听</strong></td>
+<td>攻击者在通信范围内被动截获无线信号，读取未加密传输的明文数据</td>
+<td>所有无线技术。Zigbee无加密模式极脆弱；BLE传统配对可被嗅探</td>
+</tr>
+<tr>
+<td><strong>中间人攻击</strong></td>
+<td>攻击者在通信双方之间透明地拦截和篡改数据，伪装通信对端</td>
+<td>Wi-Fi（邪恶双胞胎）、BLE（地址欺骗）、LoRaWAN（Join过程重放）</td>
+</tr>
+<tr>
+<td><strong>重放攻击</strong></td>
+<td>截获合法通信报文后重新发送，触发设备执行意外操作</td>
+<td>RFID（标签克隆中继攻击，如盗刷ETC）、LoRaWAN（Join Accept重放）</td>
+</tr>
+<tr>
+<td><strong>干扰/拒绝服务</strong></td>
+<td>发射强干扰信号阻断无线信道，使合法设备无法通信</td>
+<td>所有无线技术。ISM频段尤易受干扰（2.4GHz充斥各种信号）</td>
+</tr>
+<tr>
+<td><strong>侧信道攻击</strong></td>
+<td>通过功耗分析、电磁辐射、时间测量等物理旁路推断密钥等敏感信息</td>
+<td>RFID标签和智能卡的功耗分析（SPA/DPA）可恢复加密密钥</td>
+</tr>
+<tr>
+<td><strong>物理克隆/篡改</strong></td>
+<td>物理获取设备，读取/克隆RFID标签UID或固件</td>
+<td>RFID UID可被简单克隆（MIFARE Classic破解）；蓝牙地址易伪装</td>
+</tr>
+</tbody>
+</table>
+
+<h3>二、物联网安全保护机制</h3>
+
+<p><strong>分层防御体系：</strong></p>
+<ol>
+<li><strong>设备层安全：</strong>安全启动（Secure Boot，ROM Bootloader验证固件签名链，防止恶意固件植入）；硬件安全模块（TEE可信执行环境/安全元件SE/hardware root of trust）；防篡改设计（物理外壳防拆开关、调试接口禁用/锁定）；设备标识唯一不可变（出厂烧写的唯一密钥对/证书）。</li>
+<li><strong>网络层安全：</strong>链路加密（TLS/DTLS用于MQTT/CoAP等应用层协议，保障端到端加密，DTLS是UDP版本的TLS，轻量化更适合IoT）；IPSec/VPN（网络层加密隧道）；空口加密（NB-IoT EEA0-2、LoRaWAN AES-128、Wi-Fi WPA3）。</li>
+<li><strong>平台层安全：</strong>身份认证（X.509证书双向认证、PSK预共享密钥）；访问控制（基于角色的最小权限策略RBAC）；API安全（速率限制+Token/OAuth授权+输入验证防注入）；租户隔离（数据/网络/计算资源的严格逻辑/物理隔离）。</li>
+<li><strong>应用层安全：</strong>安全开发生命周期（SDL，在设计阶段纳入安全考量）；输入验证（防止注入攻击）；安全的Web和移动App实践。</li>
+<li><strong>运维安全：</strong>持续的安全态势监控和威胁检测；自动化漏洞扫描和应急补丁推送（OTA通道安全性是前提）。</li>
+</ol>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="5-2.html"><div class="lab">上一篇</div><div class="ttl">5.2 物联网安全基础：密码学</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="5-4.html"><div class="lab">下一篇</div><div class="ttl">5.4 物联网面临的隐私威胁与保护</div></a></div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3.4 低功耗广域网技术（LPWAN） · 物联网复习专栏</title>
+<style>
+/* 独立分章页基础排版（与专栏 SPA 统一） */
+.wrap,.content{font-size:15px;line-height:1.75;color:#1f2937}
+.wrap h1,.content h1,.wrap h2,.content h2,.wrap h3,.content h3,.wrap h4,.content h4{color:#0f172a;line-height:1.35;margin:18px 0 10px}
+.wrap h1,.content h1{font-size:24px}
+.wrap h2,.content h2{font-size:20px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.wrap h3,.content h3{font-size:17px}
+.wrap h4,.content h4{font-size:15px}
+.wrap p,.content p{margin:9px 0;line-height:1.85;color:#334155}
+.wrap ul,.content ul,.wrap ol,.content ol{margin:9px 0;padding-left:22px;color:#334155}
+.wrap li,.content li{margin:5px 0;line-height:1.8}
+.wrap a,.content a{color:#059669;text-decoration:none}.wrap a:hover,.content a:hover{text-decoration:underline}
+.wrap strong,.content strong,.wrap b,.content b{color:#0f172a}
+.wrap table,.content table{border-collapse:collapse;width:100%;margin:12px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(15,23,42,.06)}
+.wrap th,.content th,.wrap td,.content td{border:1px solid #e2e8f0;padding:9px 12px;text-align:left;vertical-align:top}
+.wrap th,.content th{background:#ecfdf5;color:#064e3b;font-weight:700}
+.wrap code,.content code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-size:13px;color:#be123c}
+.wrap pre,.content pre{background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px}
+.wrap blockquote,.content blockquote{border-left:4px solid #059669;background:#f8fafc;margin:12px 0;padding:10px 16px;color:#475569}
+.wrap img,.content img{max-width:100%;border-radius:10px}
+.ch-head{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;background:linear-gradient(120deg,#064e3b,#059669 60%,#10b981);color:#fff;box-shadow:0 6px 18px rgba(5,150,105,.25);margin-bottom:18px}
+.ch-head .ch-num{background:rgba(255,255,255,.22);font-weight:800;font-size:15px;padding:3px 11px;border-radius:8px;flex:0 0 auto}
+.ch-head .ch-ttl{font-size:18px;font-weight:700}
+
+:root{--pri:#059669;--pri-l:#ecfdf5;--txt:#1f2937;--sec:#6b7280;--bg:#fff;--card:#f9fafb;--bd:#e5e7eb}
+body{font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--txt);background:var(--bg);line-height:1.8;max-width:960px;margin:0 auto;padding:20px 24px 60px}
+h2{font-size:1.5rem;color:var(--pri);border-left:4px solid var(--pri);padding-left:14px;margin:36px 0 16px}
+h3{font-size:1.15rem;color:#064e3b;margin:24px 0 10px}
+h4{font-size:1.02rem;margin:16px 0 8px}
+p{margin-bottom:12px;text-align:justify}
+ul,ol{margin:8px 0 8px 22px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.93rem}
+th,td{border:1px solid var(--bd);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--pri);color:#fff;font-weight:600}
+tr:nth-child(even){background:var(--card)}
+.card{border-radius:10px;padding:18px 22px;margin:16px 0;border:1px solid var(--bd);background:var(--card)}
+.card.gr{background:var(--pri-l);border-color:#a7f3d0}
+code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:.88rem;color:#be123c}
+
+</style>
+<link rel="stylesheet" href="assets/nav.css">
+</head>
+<body>
+<nav class="colnav"><div class="inner">
+<a class="chip" href="index.html"><span class="num">🌐</span> 物联网复习专栏</a>
+<div class="chips">
+<a class="chip" href="1-1.html"><span class="num">1.1</span> 物联网起源与发展</a>
+<a class="chip" href="1-2.html"><span class="num">1.2</span> 物联网概念</a>
+<a class="chip" href="1-3.html"><span class="num">1.3</span> 物联网体系架构</a>
+<a class="chip" href="1-4.html"><span class="num">1.4</span> 物联网标准</a>
+<a class="chip" href="1-5.html"><span class="num">1.5</span> 物联网发展趋势</a>
+<a class="chip" href="2-1.html"><span class="num">2.1</span> 传感器与传感网络</a>
+<a class="chip" href="2-2.html"><span class="num">2.2</span> 自动标识技术</a>
+<a class="chip" href="2-3.html"><span class="num">2.3</span> 位置感知技术</a>
+<a class="chip" href="2-4.html"><span class="num">2.4</span> 生物特征识别技术</a>
+<a class="chip" href="2-5.html"><span class="num">2.5</span> 其他感测技术</a>
+<a class="chip" href="3-1.html"><span class="num">3.1</span> 移动通信技术</a>
+<a class="chip" href="3-2.html"><span class="num">3.2</span> 短距离无线通信技术</a>
+<a class="chip" href="3-3.html"><span class="num">3.3</span> IPv6技术</a>
+<a class="chip active" href="3-4.html"><span class="num">3.4</span> 低功耗广域网技术（LPWAN）</a>
+<a class="chip" href="4-1.html"><span class="num">4.1</span> 物联网中间件</a>
+<a class="chip" href="4-2.html"><span class="num">4.2</span> 边缘计算</a>
+<a class="chip" href="4-3.html"><span class="num">4.3</span> 物联网数据融合</a>
+<a class="chip" href="5-1.html"><span class="num">5.1</span> 物联网安全概述</a>
+<a class="chip" href="5-2.html"><span class="num">5.2</span> 物联网安全基础：密码学</a>
+<a class="chip" href="5-3.html"><span class="num">5.3</span> 物联网面临的安全威胁与管理</a>
+<a class="chip" href="5-4.html"><span class="num">5.4</span> 物联网面临的隐私威胁与保护</a>
+<a class="chip" href="6-1.html"><span class="num">6.1</span> 典型物联网系统软件及平台</a>
+<a class="chip" href="6-2.html"><span class="num">6.2</span> 物联网综合应用</a>
+<a class="chip" href="7-1.html"><span class="num">7.1</span> 无源感知网络</a>
+<a class="chip" href="7-2.html"><span class="num">7.2</span> 群智计算（群智感知）</a>
+<a class="chip" href="7-3.html"><span class="num">7.3</span> 毫米波与可见光通信</a>
+<a class="chip" href="7-4.html"><span class="num">7.4</span> 空间互联网</a>
+</div>
+</div></nav>
+<main>
+<div class="ch-head"><span class="ch-num">3.4</span><span class="ch-ttl">低功耗广域网技术（LPWAN）</span></div>
+<h2>低功耗广域网技术（LPWAN）</h2>
+
+<h3>一、LPWAN概念与优势</h3>
+<p>LPWAN是专门为物联网设计的一类无线通信技术，核心特征：<strong>低功耗</strong>（终端电池寿命可达10年以上）、<strong>广覆盖</strong>（单基站覆盖半径2-15km，是传统蜂窝的3-7倍）、<strong>低成本</strong>（模组通常在5-20美元，未来目标<1美元）、<strong>低速率</strong>（通常<250kbps，适配绝大多数IoT传感器场景）。LPWAN填补了短距无线（几十米）和传统蜂窝（高功耗高成本）之间的技术空白，是"万物互联"的关键技术支撑。</p>
+
+<table>
+<thead><tr><th>技术</th><th>频段</th><th>速率</th><th>覆盖</th><th>连接数/小区</th><th>主导模式</th></tr></thead>
+<tbody>
+<tr><td><strong>NB-IoT</strong></td><td>授权频谱（LTE带内/保护带/独立）</td><td>&lt;250kbps</td><td>~15km</td><td>10万+</td><td>运营商网络服务</td></tr>
+<tr><td><strong>LoRa/LoRaWAN</strong></td><td>ISM免授权（433/868/915MHz等）</td><td>0.3-50kbps</td><td>2-15km</td><td>数千</td><td>开放标准，可自建私有网络</td></tr>
+<tr><td><strong>Sigfox</strong></td><td>ISM免授权</td><td>100bps</td><td>3-50km</td><td>百万级</td><td>运营商网络服务</td></tr>
+</tbody>
+</table>
+
+<h3>二、NB-IoT（窄带物联网）</h3>
+<p><strong>发展：</strong>NB-IoT由3GPP在Release 13（2016年）中标准化，后经Rel.14-17持续增强。中国三大运营商2017年起大规模部署，目前已建成全球最大的NB-IoT网络（基站超100万个），连接数超3亿。2020年NB-IoT纳入ITU IMT-2020 5G标准，成为5G mMTC的核心组网技术之一。</p>
+<p><strong>核心特点：</strong>① <strong>超低功耗：</strong>PSM（省电模式，设备休眠期间关闭射频，仅定时TAU周期唤醒）和eDRX（扩展不连续接收，延长寻呼周期）两大机制，可实现10年电池寿命。② <strong>覆盖增强：</strong>通过重复传输（最多2048次）和窄带（180kHz）功率谱密度集中，相较GPRS实现MCL（最大耦合损耗）提升20dB，穿透能力大幅增强——可覆盖地下管道、地下室、电梯井等传统蜂窝信号盲区。③ <strong>海量连接：</strong>每小区可支持10万+终端，基于时频资源灵活调度。④ <strong>低成本：</strong>半双工、单天线、低速基带处理，模组成本从早期100+元降至目前15-25元。</p>
+
+<p><strong>应用场景：</strong>智能抄表（水/电/气/热，全国数亿只表计）、智慧市政（井盖/路灯/垃圾桶/消防栓）、智能停车、农业传感器（大田土壤监测）、资产追踪。</p>
+
+<h3>三、LoRa/LoRaWAN</h3>
+<p><strong>LoRa（Long Range）</strong>是Semtech公司开发的专有物理层调制技术，基于Chirp扩频（CSS），通过对频率线性变化的脉冲信号编码，实现扩频增益和强抗干扰能力。SF（扩频因子）从7到12可调，SF越大→速率越低→灵敏度越高，可实现速率和覆盖的动态权衡（ADR自适应速率）。</p>
+
+<p><strong>LoRaWAN</strong>是LoRa联盟制定的MAC层开放网络协议规范。网络架构为星型拓扑：终端设备→LoRa网关（仅转发射频数据，不做协议处理）→网络服务器（NS，去重、安全校验、自适应速率调节）→应用服务器（AS）。三种终端类型：<strong>Class A</strong>（最低功耗，ALOHA上行+短接收窗口下行，适合传感器）、<strong>Class B</strong>（增加定时Beacon同步的固定下行窗口，适合执行器接收指令）、<strong>Class C</strong>（除发射外持续监听，适合需低延迟的电网设备）。</p>
+
+<p><strong>优势：</strong>无需依赖运营商即可自建私有网络（专属网关+本地网络服务器），适合园区、工厂、农场等封闭场景；全球ISM频段可用；生态成熟、设备种类丰富。局限性：ISM非授权频段有占空比限制（欧洲868MHz为1%），实际单设备日数据包数和上行时长受限。</p>
+
+<p><strong>应用：</strong>智慧农业（大面积农田传感器广覆盖）、工业园区资产追踪、楼宇能耗监测、市政设施管理。</p>
+
+<h3>四、Sigfox</h3>
+<p>Sigfox由法国同名公司创立，采用超窄带（UNB）技术，每条上行消息仅100bps速率、12字节有效载荷，极致简化。通过全球运营商合作模式部署网络（类似漫游），终端极低功耗。但因速率和带宽极度受限（日上行140条消息、下行4条），应用场景收窄。2022年Sigfox被UnaBiz收购后转开放生态，但其商业模式局限性和NB-IoT/LoRa的竞争使远期前景不确定。</p>
+
+
+</main>
+<div class="colfoot"><a class="prev" href="3-3.html"><div class="lab">上一篇</div><div class="ttl">3.3 IPv6技术</div></a><a class="home" href="index.html">🌐 返回专栏首页</a><a class="next" href="4-1.html"><div class="lab">下一篇</div><div class="ttl">4.1 物联网中间件</div></a></div>
+</body>
+</html>
