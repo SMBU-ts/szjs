@@ -33,6 +33,14 @@ nav.tree .toggle{display:inline-block;width:14px;text-align:center;cursor:pointe
 nav.tree li.fold>ul{display:none}
 nav.tree .ctrls{display:flex;gap:6px;margin:6px 0 6px 8px}
 nav.tree .ctrls button{font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid var(--line);background:#f8f9fc;cursor:pointer;color:var(--ink-soft)}
+/* 专栏入口 */
+.col-ents{margin:10px 8px;display:flex;flex-direction:column;gap:6px}
+.col-ents a{display:flex;align-items:center;gap:8px;text-decoration:none;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:700;color:#fff;transition:.15s;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.col-ents a:hover{transform:translateX(3px);box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.col-ents a.col-ai{background:linear-gradient(120deg,#7c3aed,#a855f7)}
+.col-ents a.col-iot{background:linear-gradient(120deg,#0d9488,#14b8a6)}
+.col-ents a.col-cloud{background:linear-gradient(120deg,#1d4ed8,#3b82f6)}
+.col-ents a .ico{font-size:16px}
 
 main{flex:1;min-width:0;padding:20px 28px 80px}
 .sec{margin-bottom:40px;scroll-margin-top:90px}
@@ -99,6 +107,11 @@ table.chlog .v11-row td{background:#fffbeb}
 <div class="container">
 <nav class="tree" id="tree">
 <h3 class="nav-hd">📑 目录（点击▾折叠）</h3>
+<div class="col-ents">
+  <a class="col-ai" href="ai/index.html"><span class="ico">🤖</span>人工智能复习专栏</a>
+  <a class="col-iot" href="iot/index.html"><span class="ico">🌐</span>物联网复习专栏</a>
+  <a class="col-cloud" href="cloud/index.html"><span class="ico">☁</span>云计算复习专栏</a>
+</div>
 <div class="ctrls"><button onclick="foldAll()">全部折叠</button><button onclick="unfoldAll()">全部展开</button></div>
 <ul>
 <li><a class="lv-part lv-ai" href="#ai">Ⅰ 人工智能基础知识及应用</a><ul>
